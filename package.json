@@ -19,6 +19,7 @@
     "react-router-dom": "^6.28.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@tauri-apps/cli": ">=2.0.0",
     "@types/node": "^22.9.0",
     "@types/react": "^18.2.15",
