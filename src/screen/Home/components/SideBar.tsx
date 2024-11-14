@@ -1,13 +1,12 @@
+import { sideBarStyle } from "@/screen/Home/components/styles/SideBar.css.ts";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
-import { sideBarStyle } from "@/screen/Home/components/styles/SideBar.css.ts";
 
 function SideBar() {
   return (
     <Fragment>
       <div className={sideBarStyle.sideContainer}>
         <div className={sideBarStyle.wrapper}>
-
           <div className={sideBarStyle.home}>
             <Link to={"#"}>
               <h3>Home</h3>
