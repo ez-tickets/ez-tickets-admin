@@ -1,13 +1,13 @@
+import Contents from "@/screen/Home/components/Contents.tsx";
+import SideBar from "@/screen/Home/components/SideBar.tsx";
 import { viewStyle } from "@/screen/Home/components/styles/View.css.ts";
 import { Fragment } from "react";
-import SideBar from "@/screen/Home/components/SideBar.tsx";
-import Contents from "@/screen/Home/components/Contents.tsx";
 
 function View() {
   return (
     <Fragment>
       <div className={viewStyle.viewContainer}>
-        <SideBar/>
+        <SideBar />
         <Contents />
       </div>
     </Fragment>

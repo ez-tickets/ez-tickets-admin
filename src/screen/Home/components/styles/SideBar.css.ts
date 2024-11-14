@@ -1,6 +1,6 @@
-import {style} from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 
-export const sideBarStyle = ({
+export const sideBarStyle = {
   sideContainer: style({
     width: "20%",
     height: "100vh",
@@ -9,7 +9,7 @@ export const sideBarStyle = ({
     overflowY: "scroll",
     "::-webkit-scrollbar": {
       display: "none",
-    }
+    },
   }),
 
   wrapper: style({
@@ -36,11 +36,11 @@ export const sideBarStyle = ({
 
   details: style({
     padding: "10px 0",
-    transition: 'background-color 0.3s',
+    transition: "background-color 0.3s",
     ":hover": {
       cursor: "pointer",
       backgroundColor: "#2a5583",
-    }
+    },
   }),
 
   summary: style({
@@ -54,6 +54,6 @@ export const sideBarStyle = ({
     listStyle: "none",
     ":hover": {
       backgroundColor: "rgba(41,255,223,0.71)",
-    }
-  })
-})
+    },
+  }),
+};

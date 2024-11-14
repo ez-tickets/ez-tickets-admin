@@ -1,5 +1,5 @@
-import {Fragment} from "react";
-import {contentsStyle} from "@/screen/Home/components/styles/Contents.css.ts";
+import { contentsStyle } from "@/screen/Home/components/styles/Contents.css.ts";
+import { Fragment } from "react";
 
 function Contents() {
   return (

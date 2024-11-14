@@ -12,4 +12,4 @@ globalStyle("html, body", {
 globalStyle("a", {
   color: "inherit",
   textDecoration: "none",
-})
+});
