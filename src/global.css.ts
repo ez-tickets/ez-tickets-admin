@@ -6,4 +6,10 @@ globalStyle("html, body", {
   backgroundColor: "#F8F8FF",
   userSelect: "none",
   overflow: "hidden",
+  WebkitUserSelect: "none",
 });
+
+globalStyle("a", {
+  color: "inherit",
+  textDecoration: "none",
+})
