@@ -24,7 +24,7 @@ function Login() {
       <div className={loginStyle.backScreen}>
         <div className={loginStyle.container}>
           <h1 className={loginStyle.text}>ログイン</h1>
-          <form className={loginStyle.form}>
+          <div className={loginStyle.form}>
             <p className={loginStyle.error}>{errorMsg}</p>
             <p>
               <label>
@@ -54,7 +54,7 @@ function Login() {
               className={loginStyle.button}
               onClick={(e) => loginHandler(e)}
             />
-          </form>
+          </div>
         </div>
       </div>
     </Fragment>
