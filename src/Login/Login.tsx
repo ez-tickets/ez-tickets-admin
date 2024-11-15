@@ -1,5 +1,5 @@
+import { loginStyle } from "@/Login/Login.css.ts";
 import { user } from "@/mockData.ts";
-import { loginStyle } from "@/screen/Login/Login.css.ts";
 import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -13,7 +13,7 @@ function Login() {
     e.preventDefault();
 
     if (loginId === user.id && loginPass === user.password) {
-      navigate("/Home");
+      navigate("admin");
     } else {
       setErrorMsg("ログインに失敗しました");
     }
@@ -24,7 +24,7 @@ function Login() {
       <div className={loginStyle.backScreen}>
         <div className={loginStyle.container}>
           <h1 className={loginStyle.text}>ログイン</h1>
-          <div className={loginStyle.form}>
+          <form className={loginStyle.form}>
             <p className={loginStyle.error}>{errorMsg}</p>
             <p>
               <label>
@@ -54,7 +54,7 @@ function Login() {
               className={loginStyle.button}
               onClick={(e) => loginHandler(e)}
             />
-          </div>
+          </form>
         </div>
       </div>
     </Fragment>

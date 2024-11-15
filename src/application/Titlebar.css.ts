@@ -9,14 +9,14 @@ export const titleBarStyle = {
     top: 0,
     left: 0,
     boxSizing: "border-box",
-    backgroundColor: "#0055CC",
+    backgroundColor: "rgba(41,255,223,1)",
     justifyContent: "space-between",
     alignItems: "center",
   }),
 
   title: style({
     height: HEIGHT,
-    color: "white",
+    color: "black",
     display: "flex",
     paddingLeft: "10px",
     alignItems: "center",

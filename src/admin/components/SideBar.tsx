@@ -1,4 +1,4 @@
-import { sideBarStyle } from "@/screen/Home/components/styles/SideBar.css.ts";
+import { sideBarStyle } from "@/admin/components/styles/SideBar.css.ts";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
@@ -8,7 +8,7 @@ function SideBar() {
       <div className={sideBarStyle.sideContainer}>
         <div className={sideBarStyle.wrapper}>
           <div className={sideBarStyle.home}>
-            <Link to={"#"}>
+            <Link to="/admin">
               <h3>Home</h3>
             </Link>
           </div>
@@ -17,7 +17,7 @@ function SideBar() {
             <details className={sideBarStyle.details}>
               <summary className={sideBarStyle.summary}>商品管理</summary>
               <ul>
-                <Link to={"#"}>
+                <Link to="productList">
                   <li className={sideBarStyle.li}>一覧</li>
                 </Link>
                 <Link to={"#"}>
@@ -35,7 +35,7 @@ function SideBar() {
             <details className={sideBarStyle.details}>
               <summary className={sideBarStyle.summary}>カテゴリー管理</summary>
               <ul>
-                <Link to={"#"}>
+                <Link to={"categoryList"}>
                   <li className={sideBarStyle.li}>一覧</li>
                 </Link>
                 <Link to={"#"}>

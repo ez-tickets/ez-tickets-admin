@@ -1,7 +1,7 @@
 import { style } from "@vanilla-extract/css";
 
-export const viewStyle = {
-  viewContainer: style({
+export const adminStyle = {
+  adminContainer: style({
     display: "flex",
   }),
 };

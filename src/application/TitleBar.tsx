@@ -1,5 +1,6 @@
 import { titleBarStyle } from "@/application/Titlebar.css.ts";
 import { getCurrentWindow } from "@tauri-apps/api/window";
+import { Link } from "react-router-dom";
 
 function TitleBar() {
   const appWindow = getCurrentWindow();
@@ -18,6 +19,9 @@ function TitleBar() {
   return (
     <div className={titleBarStyle.container} data-tauri-drag-region>
       <span className={titleBarStyle.title}>EZ Tickets Admin</span>
+      <Link to={"/admin"}>admin</Link>
+      <Link to={"/"}>logout</Link>
+
       <div className={titleBarStyle.commonToolBox.container}>
         <button type={"button"} className={titleBarStyle.commonToolBox.button} onClick={appMinimize}>
           <img src="https://api.iconify.design/mdi:window-minimize.svg" alt="minimize"/>

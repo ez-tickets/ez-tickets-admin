@@ -45,6 +45,7 @@ export const sideBarStyle = {
 
   summary: style({
     textIndent: "1rem",
+    padding: "5px 0",
   }),
 
   li: style({

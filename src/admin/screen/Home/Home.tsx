@@ -1,10 +1,9 @@
-import View from "@/screen/Home/components/View.tsx";
 import { Fragment } from "react";
 
 function Home() {
   return (
     <Fragment>
-      <View />
+      <h1>Homeです</h1>
     </Fragment>
   );
 }
