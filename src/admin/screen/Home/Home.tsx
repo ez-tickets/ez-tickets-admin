@@ -1,7 +1,7 @@
-import {homeStyle} from "@/admin/screen/Home/Home.css.ts";
-import {allRegisterCategory, registeredProducts} from "@/mockData.ts";
-import {Fragment} from "react";
-import {Link} from "react-router-dom";
+import { homeStyle } from "@/admin/screen/Home/Home.css.ts";
+import { allRegisterCategory, registeredProducts } from "@/mockData.ts";
+import { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
