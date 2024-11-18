@@ -1,14 +1,14 @@
 import { adminStyle } from "@/admin/Admin.css.ts";
+import Contents from "@/admin/components/Contents.tsx";
 import SideBar from "@/admin/components/SideBar.tsx";
 import { Fragment } from "react";
-import { Outlet } from "react-router-dom";
 
 function Admin() {
   return (
     <Fragment>
       <div className={adminStyle.adminContainer}>
         <SideBar />
-        <Outlet />
+        <Contents />
       </div>
     </Fragment>
   );
