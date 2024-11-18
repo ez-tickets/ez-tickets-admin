@@ -1,18 +1,15 @@
-import { homeStyle } from "@/admin/screen/Home/Home.css.ts";
-import { allRegisterCategory, registeredProducts } from "@/mockData.ts";
-import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import {homeStyle} from "@/admin/screen/Home/Home.css.ts";
+import {allRegisterCategory, registeredProducts} from "@/mockData.ts";
+import {Fragment} from "react";
+import {Link} from "react-router-dom";
 
 function Home() {
-  const getHeaderList = allRegisterCategory;
-  const getRegisterProducts = registeredProducts;
-
   return (
     <Fragment>
       <div className={homeStyle.homeContainer}>
         <div className={homeStyle.headerContainer}>
           <ul className={homeStyle.header}>
-            {getHeaderList.map((list) => (
+            {allRegisterCategory.map((list) => (
               <li className={homeStyle.headerLi} key={list.id}>
                 <Link to={"#"}>{list.categoryName}</Link>
               </li>
@@ -29,7 +26,7 @@ function Home() {
             <div className={homeStyle.optionHead}>オプション</div>
           </div>
 
-          {getRegisterProducts.map((product) => (
+          {registeredProducts.map((product) => (
             <div className={homeStyle.prodDetails} key={product.id}>
               <div className={homeStyle.prodName}>{product.prod.name}</div>
               <div className={homeStyle.prodPrice}>
