@@ -4,14 +4,18 @@ const HEIGHT = "30px";
 
 export const titleBarStyle = {
   container: style({
-    height: HEIGHT,
-    display: "flex",
+    position: "relative",
     top: 0,
     left: 0,
-    boxSizing: "border-box",
-    backgroundColor: "rgba(41,255,223,1)",
+    height: HEIGHT,
+    display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    backgroundColor: "rgba(41,255,223,1)",
+    borderBottom: "1px solid white",
+    boxShadow: "0px 1px 5px white",
+    boxSizing: "border-box",
+    zIndex: 1000,
   }),
 
   title: style({
