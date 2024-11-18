@@ -1,4 +1,5 @@
 import { homeStyle } from "@/admin/screen/Home/Home.css.ts";
+import { allRegisterCategory, registeredProducts } from "@/mockData.ts";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
@@ -8,9 +9,11 @@ function Home() {
       <div className={homeStyle.homeContainer}>
         <div className={homeStyle.headerContainer}>
           <ul className={homeStyle.header}>
-            <li className={homeStyle.headerLi}>
-              <Link to={"#"}>登録商品</Link>
-            </li>
+            {allRegisterCategory.map((list) => (
+              <li className={homeStyle.headerLi} key={list.id}>
+                <Link to={"#"}>{list.categoryName}</Link>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -23,38 +26,27 @@ function Home() {
             <div className={homeStyle.optionHead}>オプション</div>
           </div>
 
-          <div className={homeStyle.prodDetails}>
-            <div className={homeStyle.prodName}>秋刀魚の塩焼き定食</div>
-            <div className={homeStyle.prodPrice}>1,200</div>
-            <div className={homeStyle.prodQuantity}>0</div>
-            <div className={homeStyle.prodOption}>{}</div>
-          </div>
-
-          <div className={homeStyle.prodDetails}>
-            <div className={homeStyle.prodName}>醤油ラーメン</div>
-            <div className={homeStyle.prodPrice}>950</div>
-            <div className={homeStyle.prodQuantity}>10</div>
-            <div className={homeStyle.prodOption}>
-              <p className={homeStyle.option}>
-                チャーシュー<span className={homeStyle.optionPrice}>200</span>
-              </p>
-              <p className={homeStyle.option}>
-                メンマ<span className={homeStyle.optionPrice}>50</span>
-              </p>
-              <p className={homeStyle.option}>
-                もやし<span className={homeStyle.optionPrice}>30</span>
-              </p>
-              <p className={homeStyle.option}>
-                煮卵<span className={homeStyle.optionPrice}>100</span>
-              </p>
-              <p className={homeStyle.option}>
-                ねぎ<span className={homeStyle.optionPrice}>50</span>
-              </p>
-              <p className={homeStyle.option}>
-                のり<span className={homeStyle.optionPrice}>50</span>
-              </p>
+          {registeredProducts.map((product) => (
+            <div className={homeStyle.prodDetails} key={product.id}>
+              <div className={homeStyle.prodName}>{product.prod.name}</div>
+              <div className={homeStyle.prodPrice}>
+                {product.prod.price.toLocaleString()}
+              </div>
+              <div className={homeStyle.prodQuantity}>
+                {product.prod.quantity.toLocaleString()}
+              </div>
+              <div className={homeStyle.prodOption}>
+                {product.options.map((option) => (
+                  <p className={homeStyle.option} key={option.id}>
+                    {option.name}
+                    <span className={homeStyle.optionPrice}>
+                      {option.price.toLocaleString()}
+                    </span>
+                  </p>
+                ))}
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </Fragment>

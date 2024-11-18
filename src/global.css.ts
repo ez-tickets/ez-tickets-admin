@@ -7,6 +7,7 @@ globalStyle("html, body", {
   userSelect: "none",
   overflow: "hidden",
   WebkitUserSelect: "none",
+  fontFamily: "Noto Sans JP",
 });
 
 globalStyle("a", {

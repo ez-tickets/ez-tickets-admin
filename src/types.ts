@@ -1,5 +1,30 @@
-//login
+//login --------------------------------------------------
 export interface User {
   id: string;
   password: string;
+}
+
+//ホームのヘッダー情報 --------------------------------------
+export interface RegistHeaderList {
+  id: string;
+  categoryName: string;
+}
+
+//商品登録情報 ---------------------------------------------
+interface Prod {
+  name: string;
+  price: number;
+  quantity: number;
+}
+
+interface ProdOption {
+  id: string;
+  name: string;
+  price: number;
+}
+
+export interface RegisterProduct {
+  id: string;
+  prod: Prod;
+  options: ProdOption[];
 }
