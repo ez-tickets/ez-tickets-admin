@@ -12,8 +12,6 @@ export const titleBarStyle = {
     justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: "rgba(41,255,223,1)",
-    borderBottom: "1px solid white",
-    boxShadow: "0px 1px 5px white",
     boxSizing: "border-box",
     zIndex: 1000,
   }),

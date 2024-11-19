@@ -7,7 +7,6 @@ export const sideBarStyle = {
     color: "white",
     backgroundColor: "#12263A",
     overflowY: "scroll",
-    boxShadow: "2px 10px 5px gray",
     borderRight: "1px solid white",
     boxSizing: "border-box",
     zIndex: 10,
