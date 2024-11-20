@@ -17,7 +17,7 @@ interface Prod {
   quantity: number;
 }
 
-interface ProdOption {
+export interface ProdOption {
   id: string;
   name: string;
   price: number;

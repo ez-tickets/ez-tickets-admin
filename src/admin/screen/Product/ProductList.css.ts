@@ -57,8 +57,6 @@ export const productListStyle = {
 
   prodName: style({
     width: "35%",
-    display: "flex",
-    alignItems: "center",
     margin: "0 20px",
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
@@ -68,8 +66,6 @@ export const productListStyle = {
   prodPrice: style({
     width: "15%",
     margin: "0 20px",
-    display: "flex",
-    alignItems: "center",
     ":before": {
       content: "¥",
     },
@@ -78,43 +74,16 @@ export const productListStyle = {
   prodQuantity: style({
     width: "15%",
     margin: "0 20px",
-    display: "flex",
-    alignItems: "center",
   }),
 
   prodOption: style({
     width: "35%",
     margin: "0 20px",
-    display: "flex",
-    alignItems: "center",
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    "::-webkit-scrollbar": {
-      height: "2px",
-    },
-    "::-webkit-scrollbar-thumb": {
-      backgroundColor: "skyblue",
-      borderRadius: "5px",
-    },
-    "::-webkit-scrollbar-track": {
-      backgroundColor: "#c9c9c9",
-      borderRadius: "5px",
-    },
+  }),
+
+  optionButton: style({
     ":hover": {
-      overflow: "auto hidden",
-    },
-  }),
-
-  option: style({
-    margin: "0 10px",
-  }),
-
-  optionPrice: style({
-    ":before": {
-      content: " ( ¥",
-    },
-    ":after": {
-      content: " ) ",
+      color: "rgb(35,206,180)",
     },
   }),
 };

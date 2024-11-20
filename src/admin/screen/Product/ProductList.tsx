@@ -1,8 +1,18 @@
 import { productListStyle } from "@/admin/screen/Product/ProductList.css.ts";
+import ProductOption from "@/admin/screen/Product/components/ProductOption.tsx";
 import { registeredProducts } from "@/mockData.ts";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 
 function ProductList() {
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+
+  const optionToggleHandler = (id: string) => {
+    const newSelectedIds = selectedIds.filter((incId) => incId !== id);
+    if (selectedIds.includes(id)) {
+      setSelectedIds(newSelectedIds);
+    }
+  };
+
   return (
     <Fragment>
       <div className={productListStyle.prodListContainer}>
@@ -15,7 +25,12 @@ function ProductList() {
         </div>
 
         {registeredProducts.map((product) => (
-          <div className={productListStyle.prodDetails} key={product.id}>
+          // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+          <div
+            className={productListStyle.prodDetails}
+            key={product.id}
+            onClick={() => optionToggleHandler(product.id)}
+          >
             <div className={productListStyle.prodName}>{product.prod.name}</div>
             <div className={productListStyle.prodPrice}>
               {product.prod.price.toLocaleString()}
@@ -23,15 +38,24 @@ function ProductList() {
             <div className={productListStyle.prodQuantity}>
               {product.prod.quantity.toLocaleString()}
             </div>
+
             <div className={productListStyle.prodOption}>
-              {product.options.map((option) => (
-                <p className={productListStyle.option} key={option.id}>
-                  {option.name}
-                  <span className={productListStyle.optionPrice}>
-                    {option.price.toLocaleString()}
-                  </span>
-                </p>
-              ))}
+              {selectedIds.includes(product.id) ? (
+                <ProductOption
+                  productId={product.id}
+                  options={product.options}
+                />
+              ) : (
+                <button
+                  className={productListStyle.optionButton}
+                  type={"button"}
+                  onClick={() =>
+                    setSelectedIds((prev) => [...prev, product.id])
+                  }
+                >
+                  {product.options.length}件
+                </button>
+              )}
             </div>
           </div>
         ))}
