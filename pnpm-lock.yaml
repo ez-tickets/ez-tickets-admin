@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@tabler/icons-react':
+        specifier: ^3.22.0
+        version: 3.22.0(react@18.3.1)
       '@tauri-apps/api':
         specifier: '>=2.0.0'
         version: 2.1.0
@@ -455,6 +458,14 @@ packages:
     resolution: {integrity: sha512-/RqrIFtLB926frMhZD0a5oDa4eFIbyNEwLLloMTEjmqfwZWXywwVVOVmwTsuyhC9HKkVEZcOOi+KV4U9wmOdlg==}
     cpu: [x64]
     os: [win32]
+
+  '@tabler/icons-react@3.22.0':
+    resolution: {integrity: sha512-pOnn+IqZpnkYsEKRvbXXLXwXhYwg4cy1fEVr5SRrgAYJXkobpDjFTdVHlab0HEBXY5AE1NjsMlVeK6H/8Vv2uQ==}
+    peerDependencies:
+      react: '>= 16'
+
+  '@tabler/icons@3.22.0':
+    resolution: {integrity: sha512-IfgGzhFph5OBr2wTieWL/hyAs0FThnq9O155a6kfGYxqx7h5LQw91wnRswhEaGhXCcfmR7ZVDUr9H+x4b9Pb8g==}
 
   '@tauri-apps/api@2.1.0':
     resolution: {integrity: sha512-1w/JygZOiUtdOU7qart78MaB4/qayZ2heB793KhbZRS7I9q4sxXcXaB7He6uFlprD8w5TI9P8HCuEByCvWRtfw==}
@@ -1156,6 +1167,13 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.25.0':
     optional: true
+
+  '@tabler/icons-react@3.22.0(react@18.3.1)':
+    dependencies:
+      '@tabler/icons': 3.22.0
+      react: 18.3.1
+
+  '@tabler/icons@3.22.0': {}
 
   '@tauri-apps/api@2.1.0': {}
 
