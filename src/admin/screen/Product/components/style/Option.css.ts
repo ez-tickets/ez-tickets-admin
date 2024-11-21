@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
-export const productOptionStyle = {
+export const optionStyle = {
   option: style({
     ":before": {
       content: "⚪︎",
