@@ -3,13 +3,31 @@ import ProductOptions from "@/admin/screen/Product/components/ProductOptions.tsx
 import { productStyle } from "@/admin/screen/Product/components/style/Product.css.ts";
 import type { RegisterProduct } from "@/types.ts";
 import { Fragment, useState } from "react";
+import { create } from "zustand/react";
 
 type ProductProps = {
   product: RegisterProduct;
+  setIsFlag: (isFlag: boolean) => void;
 };
 
-function Product({ product }: ProductProps) {
+type EditProduct = {
+  product: RegisterProduct | null;
+  setProduct: (product: RegisterProduct) => void;
+};
+
+export const useEditProductStore = create<EditProduct>()((set) => ({
+  product: null,
+  setProduct: (prod: RegisterProduct) => set({ product: prod }),
+}));
+
+function Product({ product, setIsFlag }: ProductProps) {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const { setProduct } = useEditProductStore();
+
+  const modalHandler = () => {
+    setProduct(product);
+    setIsFlag(true);
+  };
 
   const optionToggleHandler = (id: string) => {
     const newSelectedIds = selectedIds.filter((incId) => incId !== id);
@@ -26,7 +44,10 @@ function Product({ product }: ProductProps) {
         key={product.id}
         onClick={() => optionToggleHandler(product.id)}
       >
-        <div className={productStyle.prodName}>{product.prod.name}</div>
+        {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
+        <div className={productStyle.prodName} onClick={modalHandler}>
+          {product.prod.name}
+        </div>
         <div className={productStyle.prodPrice}>
           {product.prod.price.toLocaleString()}
         </div>

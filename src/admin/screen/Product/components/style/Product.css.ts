@@ -15,6 +15,10 @@ export const productStyle = {
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
     overflow: "hidden",
+    ":hover": {
+      color: "rgb(35,206,180)",
+      cursor: "pointer",
+    },
   }),
 
   prodPrice: style({
