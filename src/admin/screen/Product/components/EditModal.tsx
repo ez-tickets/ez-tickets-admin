@@ -9,9 +9,9 @@ type EditModalProps = {
 
 function EditModal({ setIsFlag }: EditModalProps) {
   const { product } = useEditProductStore();
-
   if (!product) throw new Error("Product not found.");
 
+  const [copyProduct, setCopyProduct] = useState(structuredClone(product));
   const [editName, setEditName] = useState<string>(product.prod.name);
   const [editPrice, setEditPrice] = useState<number>(product.prod.price);
   const [editQuantity, setEditQuantity] = useState<number>(
@@ -20,14 +20,24 @@ function EditModal({ setIsFlag }: EditModalProps) {
 
   const editPriceHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
-    if (value < 0) return;
+    // biome-ignore lint/suspicious/noGlobalIsNan: <explanation>
+    if (isNaN(value) || value < 0) return;
     setEditPrice(value);
   };
 
   const editQuantityHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
-    if (value < 0) return;
+    // biome-ignore lint/suspicious/noGlobalIsNan: <explanation>
+    if (isNaN(value) || value < 0) return;
     setEditQuantity(value);
+  };
+
+  const deleteOptionHandler = (optId: string) => {
+    const deletedOptions = copyProduct.options.filter(
+      (option) => option.id !== optId,
+    );
+    const newProduct = { ...copyProduct, options: deletedOptions };
+    setCopyProduct(newProduct);
   };
 
   return (
@@ -66,7 +76,8 @@ function EditModal({ setIsFlag }: EditModalProps) {
               <input
                 className={editModalStyle.input}
                 id={"prodPrice"}
-                type="number"
+                type="text"
+                placeholder="数値を入力"
                 value={editPrice}
                 onChange={(e) => editPriceHandler(e)}
               />
@@ -81,20 +92,26 @@ function EditModal({ setIsFlag }: EditModalProps) {
               <input
                 className={editModalStyle.input}
                 id={"prodQuantity"}
-                type="number"
+                type="text"
+                placeholder="数値を入力"
                 value={editQuantity}
                 onChange={(e) => editQuantityHandler(e)}
               />
             </div>
           </div>
 
-          {product.options.map((option, index) => (
+          {copyProduct.options.map((option, index) => (
             <div className={editModalStyle.inputContainer} key={option.id}>
               <div className={editModalStyle.inputOptionTitle}>
                 <label htmlFor={`prodOption${index + 1}`}>
                   オプション{index + 1}
                 </label>
               </div>
+              <IconX
+                className={editModalStyle.optionDeleteIcon}
+                color={"red"}
+                onClick={() => deleteOptionHandler(option.id)}
+              />
               <div className={editModalStyle.inputValue}>
                 <input
                   className={editModalStyle.input}

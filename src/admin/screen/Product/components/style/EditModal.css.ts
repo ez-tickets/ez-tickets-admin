@@ -53,6 +53,11 @@ export const editModalStyle = {
     padding: "5px 20px",
   }),
 
+  optionDeleteIcon: style({
+    position: "absolute",
+    left: "28%",
+  }),
+
   closeIcon: style({
     position: "absolute",
     top: 10,
