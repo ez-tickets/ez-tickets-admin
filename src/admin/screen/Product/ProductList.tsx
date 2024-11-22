@@ -1,9 +1,11 @@
 import { productListStyle } from "@/admin/screen/Product/ProductList.css.ts";
+import EditModal from "@/admin/screen/Product/components/EditModal.tsx";
 import Product from "@/admin/screen/Product/components/Product.tsx";
 import { registeredProducts } from "@/mockData.ts";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 
 function ProductList() {
+  const [isFlag, setIsFlag] = useState<boolean>(false);
   return (
     <Fragment>
       <div className={productListStyle.prodListContainer}>
@@ -16,8 +18,10 @@ function ProductList() {
         </div>
 
         {registeredProducts.map((product) => (
-          <Product key={product.id} product={product} />
+          <Product key={product.id} product={product} setIsFlag={setIsFlag} />
         ))}
+
+        {isFlag ? <EditModal setIsFlag={setIsFlag} /> : ""}
       </div>
     </Fragment>
   );

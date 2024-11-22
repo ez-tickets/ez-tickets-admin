@@ -9,7 +9,7 @@ export const productListStyle = {
 
   prodListContainer: style({
     width: "98%",
-    margin: "20px auto 50px",
+    margin: "auto",
     backgroundColor: "white",
   }),
 
