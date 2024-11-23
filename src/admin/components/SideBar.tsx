@@ -21,13 +21,7 @@ function SideBar() {
                   <li className={sideBarStyle.li}>一覧</li>
                 </Link>
                 <Link to={"#"}>
-                  <li className={sideBarStyle.li}>追加</li>
-                </Link>
-                <Link to={"#"}>
-                  <li className={sideBarStyle.li}>編集</li>
-                </Link>
-                <Link to={"#"}>
-                  <li className={sideBarStyle.li}>削除</li>
+                  <li className={sideBarStyle.li}>登録</li>
                 </Link>
               </ul>
             </details>

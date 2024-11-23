@@ -20,9 +20,8 @@ function ProductList() {
         {registeredProducts.map((product) => (
           <Product key={product.id} product={product} setIsFlag={setIsFlag} />
         ))}
-
-        {isFlag ? <EditModal setIsFlag={setIsFlag} /> : ""}
       </div>
+      {isFlag ? <EditModal setIsFlag={setIsFlag} /> : ""}
     </Fragment>
   );
 }

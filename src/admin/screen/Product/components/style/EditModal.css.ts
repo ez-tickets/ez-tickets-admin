@@ -4,9 +4,7 @@ export const editModalStyle = {
   overlay: style({
     position: "absolute",
     top: 0,
-    left: 0,
     width: "100%",
-    height: "100vh",
     overflow: "scroll",
     backgroundColor: "#ffffff",
     boxShadow: "1px 2px 3px gray",
@@ -28,7 +26,7 @@ export const editModalStyle = {
   }),
 
   editScreen: style({
-    padding: "10px 0",
+    padding: "10px 0 20px",
   }),
 
   inputContainer: style({
@@ -87,6 +85,17 @@ export const editModalStyle = {
     ":hover": {
       cursor: "pointer",
       backgroundColor: "gold",
+    },
+  }),
+
+  addButton: style({
+    padding: "5px 10px",
+    border: "1px solid rgba(0,0,0,0.2)",
+    borderRadius: "5px",
+    boxShadow: "1px 2px 3px rgba(0,0,0,0.4)",
+    ":hover": {
+      backgroundColor: "gold",
+      border: "1px solid rgba(0,0,0,0.5)",
     },
   }),
 };

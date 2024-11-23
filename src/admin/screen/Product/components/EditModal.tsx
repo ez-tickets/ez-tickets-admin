@@ -56,6 +56,14 @@ function EditModal({ setIsFlag }: EditModalProps) {
     setEditOptions(copyProduct.options);
   };
 
+  //未完成
+  const optionAddHandler = () => {
+    setEditOptions(() => [
+      ...editOptions,
+      { id: (editOptions.length + 1).toString(), name: "", price: 0 },
+    ]);
+  };
+
   return (
     <Fragment>
       <div className={editModalStyle.overlay}>
@@ -148,6 +156,18 @@ function EditModal({ setIsFlag }: EditModalProps) {
               </div>
             </div>
           ))}
+
+          <div className={editModalStyle.inputContainer}>
+            <div className={editModalStyle.inputTitle}>
+              <button
+                type={"button"}
+                className={editModalStyle.addButton}
+                onClick={optionAddHandler}
+              >
+                追加 +
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </Fragment>
