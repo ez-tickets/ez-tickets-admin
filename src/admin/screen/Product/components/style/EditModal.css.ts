@@ -12,8 +12,19 @@ export const editModalStyle = {
     boxShadow: "1px 2px 3px gray",
   }),
 
+  header: style({
+    position: "relative",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  }),
+
   title: style({
     textIndent: "2rem",
+  }),
+
+  headerButtonArea: style({
+    marginRight: "60px",
   }),
 
   editScreen: style({
@@ -56,11 +67,26 @@ export const editModalStyle = {
   optionDeleteIcon: style({
     position: "absolute",
     left: "28%",
+    ":hover": {
+      cursor: "pointer",
+    },
   }),
 
   closeIcon: style({
     position: "absolute",
     top: 10,
     right: 10,
+  }),
+
+  resetButton: style({
+    margin: "5px 10px",
+    padding: "10px 40px",
+    border: "1px solid rgba(0,0,0,0.2)",
+    borderRadius: "5px",
+    boxShadow: "2px 2px 3px rgba(0,0,0,0.1)",
+    ":hover": {
+      cursor: "pointer",
+      backgroundColor: "gold",
+    },
   }),
 };
