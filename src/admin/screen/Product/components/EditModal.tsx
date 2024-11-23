@@ -1,5 +1,6 @@
 import { useEditProductStore } from "@/admin/screen/Product/components/Product.tsx";
 import { editModalStyle } from "@/admin/screen/Product/components/style/EditModal.css.ts";
+import type { ProdOption } from "@/types.ts";
 import { IconX } from "@tabler/icons-react";
 import { type ChangeEvent, Fragment, useState } from "react";
 
@@ -11,11 +12,14 @@ function EditModal({ setIsFlag }: EditModalProps) {
   const { product } = useEditProductStore();
   if (!product) throw new Error("Product not found.");
 
-  const [copyProduct, setCopyProduct] = useState(structuredClone(product));
-  const [editName, setEditName] = useState<string>(product.prod.name);
-  const [editPrice, setEditPrice] = useState<number>(product.prod.price);
+  const copyProduct = structuredClone(product);
+  const [editName, setEditName] = useState<string>(copyProduct.prod.name);
+  const [editPrice, setEditPrice] = useState<number>(copyProduct.prod.price);
   const [editQuantity, setEditQuantity] = useState<number>(
-    product.prod.quantity,
+    copyProduct.prod.quantity,
+  );
+  const [editOptions, setEditOptions] = useState<ProdOption[]>(
+    copyProduct.options,
   );
 
   const editPriceHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -32,25 +36,46 @@ function EditModal({ setIsFlag }: EditModalProps) {
     setEditQuantity(value);
   };
 
-  const deleteOptionHandler = (optId: string) => {
-    const deletedOptions = copyProduct.options.filter(
-      (option) => option.id !== optId,
+  const editOptionHandler = (e: ChangeEvent<HTMLInputElement>, id: string) => {
+    const value = e.target.value;
+    const editedOptions = editOptions.map((option) =>
+      option.id === id ? { ...option, name: value } : option,
     );
-    const newProduct = { ...copyProduct, options: deletedOptions };
-    setCopyProduct(newProduct);
+    setEditOptions(editedOptions);
+  };
+
+  const deleteOptionHandler = (optId: string) => {
+    const deletedOptions = editOptions.filter((option) => option.id !== optId);
+    setEditOptions(deletedOptions);
+  };
+
+  const editResetHandler = () => {
+    setEditName(copyProduct.prod.name);
+    setEditPrice(copyProduct.prod.price);
+    setEditQuantity(copyProduct.prod.quantity);
+    setEditOptions(copyProduct.options);
   };
 
   return (
     <Fragment>
       <div className={editModalStyle.overlay}>
-        <div>
+        <div className={editModalStyle.header}>
           <h1 className={editModalStyle.title}>編集モード</h1>
+          <div className={editModalStyle.headerButtonArea}>
+            <button
+              type={"button"}
+              className={editModalStyle.resetButton}
+              onClick={editResetHandler}
+            >
+              リセット
+            </button>
+          </div>
+          <IconX
+            className={editModalStyle.closeIcon}
+            color={"red"}
+            onClick={() => setIsFlag(false)}
+          />
         </div>
-        <IconX
-          className={editModalStyle.closeIcon}
-          color={"red"}
-          onClick={() => setIsFlag(false)}
-        />
 
         <div className={editModalStyle.editScreen}>
           <div className={editModalStyle.inputContainer}>
@@ -100,7 +125,7 @@ function EditModal({ setIsFlag }: EditModalProps) {
             </div>
           </div>
 
-          {copyProduct.options.map((option, index) => (
+          {editOptions.map((option, index) => (
             <div className={editModalStyle.inputContainer} key={option.id}>
               <div className={editModalStyle.inputOptionTitle}>
                 <label htmlFor={`prodOption${index + 1}`}>
@@ -118,6 +143,7 @@ function EditModal({ setIsFlag }: EditModalProps) {
                   id={`prodOption${index + 1}`}
                   type="text"
                   value={option.name}
+                  onChange={(e) => editOptionHandler(e, option.id)}
                 />
               </div>
             </div>
