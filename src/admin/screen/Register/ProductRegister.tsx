@@ -85,6 +85,9 @@ function ProductRegister() {
           </div>
 
           <ActiveButton
+            prodName={prodName}
+            prodPrice={prodPrice}
+            prodImg={prodImg}
             setProdName={setProdName}
             setProdPrice={setProdPrice}
             setProdImg={setProdImg}

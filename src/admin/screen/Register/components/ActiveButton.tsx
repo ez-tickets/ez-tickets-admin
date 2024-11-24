@@ -1,18 +1,40 @@
 import { activeButtonStyle } from "@/admin/screen/Register/components/style/ActiveButton.css.ts";
+import { useProdRegistrationStore } from "@/admin/screen/Register/store/RegistrationStore.ts";
+import { registration } from "@/admin/screen/Register/store/action/ProdRegistrationAction.ts";
 import { Fragment } from "react";
 
 type ActiveButtonProps = {
+  prodName: string;
+  prodPrice: number;
+  prodImg: string;
   setProdName: (name: string) => void;
   setProdPrice: (price: number) => void;
   setProdImg: (img: string) => void;
 };
 
 function ActiveButton({
+  prodName,
+  prodPrice,
+  // prodImg,
   setProdName,
   setProdPrice,
   setProdImg,
 }: ActiveButtonProps) {
-  const registerHandler = () => {};
+  const { prodRegisterDispatcher } = useProdRegistrationStore();
+
+  const registerHandler = () => {
+    if (prodName !== "" && prodPrice >= 0) {
+      const prodRegisterValue = {
+        name: prodName,
+        price: prodPrice,
+      };
+      prodRegisterDispatcher(registration(prodRegisterValue));
+    }
+
+    setProdName("");
+    setProdPrice(0);
+    setProdImg("");
+  };
 
   const resetHandler = () => {
     setProdName("");
