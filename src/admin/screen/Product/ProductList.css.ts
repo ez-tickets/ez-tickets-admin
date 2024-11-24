@@ -10,7 +10,7 @@ export const productListStyle = {
   prodListContainer: style({
     width: "98%",
     margin: "auto",
-    backgroundColor: "white",
+    // backgroundColor: "white",
   }),
 
   title: style({
@@ -45,5 +45,17 @@ export const productListStyle = {
   optionHead: style({
     width: "35%",
     margin: "0 20px",
+  }),
+
+  registerButton: style({
+    margin: "10px 20px",
+    padding: "5px 10px",
+    backgroundColor: "white",
+    border: "1px solid rgba(0,0,0,0.2)",
+    borderRadius: "5px",
+    boxShadow: "1px 1px 2px rgba(0,0,0,0.2)",
+    ":hover": {
+      backgroundColor: "gold",
+    },
   }),
 };

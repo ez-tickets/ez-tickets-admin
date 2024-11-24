@@ -1,5 +1,5 @@
 import { itemStyle } from "@/admin/screen/Home/components/style/Item.css.ts";
-import { IconBox, IconCategory } from "@tabler/icons-react";
+import { IconBox, IconCategory, IconToolsKitchen2 } from "@tabler/icons-react";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
@@ -8,8 +8,21 @@ function Item() {
     <Fragment>
       <Link to={"productList"}>
         <div className={itemStyle.item}>
-          <p className={itemStyle.itemTitle}>商品管理</p>
+          <p className={itemStyle.itemTitle}>商品登録</p>
           <IconBox
+            className={itemStyle.itemIcon}
+            stroke={2}
+            color={"#818181"}
+            width={100}
+            height={100}
+          />
+        </div>
+      </Link>
+
+      <Link to={"productList"}>
+        <div className={itemStyle.item}>
+          <p className={itemStyle.itemTitle}>メニュー管理</p>
+          <IconToolsKitchen2
             className={itemStyle.itemIcon}
             stroke={2}
             color={"#818181"}
