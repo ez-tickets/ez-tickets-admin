@@ -20,7 +20,12 @@ function ProductList() {
         {registeredProducts.map((product) => (
           <Product key={product.id} product={product} setIsFlag={setIsFlag} />
         ))}
+
+        <button type={"button"} className={productListStyle.registerButton}>
+          追加 +
+        </button>
       </div>
+
       {isFlag ? <EditModal setIsFlag={setIsFlag} /> : ""}
     </Fragment>
   );

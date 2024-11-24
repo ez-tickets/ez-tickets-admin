@@ -6,6 +6,7 @@ export const productStyle = {
     marginTop: "2px",
     padding: "15px 0",
     display: "flex",
+    backgroundColor: "white",
     boxShadow: "1px 1px 5px rgba(0,0,0,0.2)",
   }),
 
