@@ -38,7 +38,6 @@ export const sideBarStyle = {
   }),
 
   details: style({
-    padding: "10px 0",
     transition: "background-color 0.3s",
     ":hover": {
       cursor: "pointer",
@@ -47,14 +46,16 @@ export const sideBarStyle = {
   }),
 
   summary: style({
+    fontSize: "14px",
     textIndent: "1rem",
-    padding: "5px 0",
+    padding: "12px 0",
   }),
 
   li: style({
+    fontSize: "14px",
     color: "white",
     textIndent: "2rem",
-    padding: "5px 0",
+    padding: "12px 0",
     listStyle: "none",
     ":hover": {
       backgroundColor: "rgba(41,255,223,0.71)",

@@ -15,19 +15,28 @@ function SideBar() {
 
           <div className={sideBarStyle.contentsContainer}>
             <details className={sideBarStyle.details}>
-              <summary className={sideBarStyle.summary}>商品管理</summary>
+              <summary className={sideBarStyle.summary}>商品登録</summary>
+              <ul>
+                <Link to={"#"}>
+                  <li className={sideBarStyle.li}>商品登録</li>
+                </Link>
+                <Link to={"#"}>
+                  <li className={sideBarStyle.li}>オプション登録</li>
+                </Link>
+                <Link to="productList">
+                  <li className={sideBarStyle.li}>カテゴリー登録</li>
+                </Link>
+              </ul>
+            </details>
+
+            <details className={sideBarStyle.details}>
+              <summary className={sideBarStyle.summary}>メニュー管理</summary>
               <ul>
                 <Link to="productList">
                   <li className={sideBarStyle.li}>一覧</li>
                 </Link>
                 <Link to={"#"}>
-                  <li className={sideBarStyle.li}>追加</li>
-                </Link>
-                <Link to={"#"}>
-                  <li className={sideBarStyle.li}>編集</li>
-                </Link>
-                <Link to={"#"}>
-                  <li className={sideBarStyle.li}>削除</li>
+                  <li className={sideBarStyle.li}>登録</li>
                 </Link>
               </ul>
             </details>

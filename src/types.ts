@@ -11,13 +11,13 @@ export interface RegistHeaderList {
 }
 
 //商品登録情報 ---------------------------------------------
-interface Prod {
+export interface Prod {
   name: string;
   price: number;
   quantity: number;
 }
 
-interface ProdOption {
+export interface ProdOption {
   id: string;
   name: string;
   price: number;

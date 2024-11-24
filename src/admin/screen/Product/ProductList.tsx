@@ -1,8 +1,11 @@
 import { productListStyle } from "@/admin/screen/Product/ProductList.css.ts";
+import EditModal from "@/admin/screen/Product/components/EditModal.tsx";
+import Product from "@/admin/screen/Product/components/Product.tsx";
 import { registeredProducts } from "@/mockData.ts";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 
 function ProductList() {
+  const [isFlag, setIsFlag] = useState<boolean>(false);
   return (
     <Fragment>
       <div className={productListStyle.prodListContainer}>
@@ -15,27 +18,15 @@ function ProductList() {
         </div>
 
         {registeredProducts.map((product) => (
-          <div className={productListStyle.prodDetails} key={product.id}>
-            <div className={productListStyle.prodName}>{product.prod.name}</div>
-            <div className={productListStyle.prodPrice}>
-              {product.prod.price.toLocaleString()}
-            </div>
-            <div className={productListStyle.prodQuantity}>
-              {product.prod.quantity.toLocaleString()}
-            </div>
-            <div className={productListStyle.prodOption}>
-              {product.options.map((option) => (
-                <p className={productListStyle.option} key={option.id}>
-                  {option.name}
-                  <span className={productListStyle.optionPrice}>
-                    {option.price.toLocaleString()}
-                  </span>
-                </p>
-              ))}
-            </div>
-          </div>
+          <Product key={product.id} product={product} setIsFlag={setIsFlag} />
         ))}
+
+        <button type={"button"} className={productListStyle.registerButton}>
+          追加 +
+        </button>
       </div>
+
+      {isFlag ? <EditModal setIsFlag={setIsFlag} /> : ""}
     </Fragment>
   );
 }
