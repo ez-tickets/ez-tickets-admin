@@ -17,13 +17,10 @@ function SideBar() {
             <details className={sideBarStyle.details}>
               <summary className={sideBarStyle.summary}>商品登録</summary>
               <ul>
-                <Link to={"#"}>
+                <Link to={"productRegister"}>
                   <li className={sideBarStyle.li}>商品登録</li>
                 </Link>
-                <Link to={"#"}>
-                  <li className={sideBarStyle.li}>オプション登録</li>
-                </Link>
-                <Link to="productList">
+                <Link to={"categoryRegister"}>
                   <li className={sideBarStyle.li}>カテゴリー登録</li>
                 </Link>
               </ul>
@@ -32,7 +29,7 @@ function SideBar() {
             <details className={sideBarStyle.details}>
               <summary className={sideBarStyle.summary}>メニュー管理</summary>
               <ul>
-                <Link to="productList">
+                <Link to={"productList"}>
                   <li className={sideBarStyle.li}>一覧</li>
                 </Link>
                 <Link to={"#"}>

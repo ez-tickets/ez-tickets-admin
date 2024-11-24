@@ -11,7 +11,16 @@ export const sideBarStyle = {
     boxSizing: "border-box",
     zIndex: 10,
     "::-webkit-scrollbar": {
-      display: "none",
+      width: "4px",
+    },
+    "::-webkit-scrollbar-track": {
+      backgroundColor: "#232E33",
+      borderRadius: "5px",
+    },
+    "::-webkit-scrollbar-thumb": {
+      backgroundColor: "rgba(35,215,189, 0.8)",
+      borderRadius: "5px",
+      border: "0.5px solid #35af98",
     },
   }),
 

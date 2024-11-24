@@ -6,6 +6,7 @@ import Admin from "@/admin/Admin.tsx";
 import CategoryList from "@/admin/screen/Category/CategoryList.tsx";
 import Home from "@/admin/screen/Home/Home.tsx";
 import ProductList from "@/admin/screen/Product/ProductList.tsx";
+import ProductRegister from "@/admin/screen/Register/ProductRegister.tsx";
 import TitleBar from "@/application/TitleBar.tsx";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 
@@ -18,6 +19,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 
         <Route path="admin" element={<Admin />}>
           <Route index element={<Home />} />
+          <Route path="productRegister" element={<ProductRegister />} />
+          <Route path="categoryRegister" element={<CategoryList />} />
           <Route path="productList" element={<ProductList />} />
           <Route path="categoryList" element={<CategoryList />} />
         </Route>
