@@ -12,8 +12,10 @@ export const productRegisterStyle = {
     left: 0,
     width: "100%",
     padding: "0.37rem 1rem",
+    backgroundColor: "#fff",
     borderBottom: "1px solid lightgray",
     boxShadow: "0px 1px 6px rgba(0,0,0,0.5)",
+    zIndex: 100,
   }),
 
   inputContainer: style({
@@ -23,13 +25,14 @@ export const productRegisterStyle = {
 
   title: style({
     width: "40%",
-    padding: "6rem 10rem",
+    padding: "5rem 10rem",
     textAlign: "center",
   }),
 
   input: style({
+    position: "relative",
     width: "60%",
-    padding: "5rem 0rem",
+    padding: "4rem 0rem",
   }),
 
   value: style({
@@ -41,15 +44,29 @@ export const productRegisterStyle = {
     boxShadow: "0px 1px 6px rgba(0,0,0,0.5)",
   }),
 
-  button: style({
-    margin: "10rem auto",
-    padding: "10px 20px",
-    display: "block",
-    border: "1px solid rgba(0,0,0,0.4)",
+  inputImg: style({
+    position: "relative",
+    width: "60%",
+    display: "flex",
+    alignItems: "center",
+  }),
+
+  imgChooseButton: style({
+    padding: "5px",
+    border: "1px solid lightgray",
     borderRadius: "5px",
-    boxShadow: "1px 2px 3px rgba(0,0,0,0.4)",
-    ":hover": {
-      backgroundColor: "gold",
-    },
+    boxShadow: "1px 2px 3px lightgray",
+  }),
+
+  imgText: style({
+    textAlign: "center",
+  }),
+
+  img: style({
+    width: "9rem",
+    height: "6rem",
+    margin: "0 12rem",
+    border: "1px dotted lightgray",
+    boxShadow: "1px 2px 3px lightgray",
   }),
 };
