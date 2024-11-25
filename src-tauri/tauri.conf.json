@@ -10,6 +10,7 @@
     "frontendDist": "../dist"
   },
   "app": {
+
     "windows": [
       {
         "title": "ez-tickets-admin",
@@ -19,6 +20,9 @@
       }
     ],
     "security": {
+      "assetProtocol": {
+        "enable": true
+      },
       "csp": null
     }
   },
