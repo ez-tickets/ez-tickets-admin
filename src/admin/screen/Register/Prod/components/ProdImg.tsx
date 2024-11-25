@@ -1,7 +1,7 @@
 import { prodImgStyle } from "@/admin/screen/Register/Prod/components/style/ProdImg.css.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { open } from "@tauri-apps/plugin-dialog";
-import { Fragment } from "react";
+import {Fragment, useState} from "react";
 
 type ProdImgProps = {
   prodImg: string;
@@ -9,6 +9,7 @@ type ProdImgProps = {
 };
 
 function ProdImg({ prodImg, setProdImg }: ProdImgProps) {
+  const [image, setImage] = useState<string>();
   const selectImgHandler = async () => {
     const path = await open({
       multiple: false,
@@ -22,6 +23,7 @@ function ProdImg({ prodImg, setProdImg }: ProdImgProps) {
     });
     if (path) {
       setProdImg(path);
+      setImage(convertFileSrc(path));
     }
   };
 
@@ -42,7 +44,7 @@ function ProdImg({ prodImg, setProdImg }: ProdImgProps) {
           <div>
             <p className={prodImgStyle.imgText}>プレビュー</p>
             <img
-              src={convertFileSrc(prodImg)}
+              src={image}
               alt={prodImg}
               className={prodImgStyle.img}
             />

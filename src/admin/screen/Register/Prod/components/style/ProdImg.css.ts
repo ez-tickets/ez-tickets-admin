@@ -32,7 +32,7 @@ export const prodImgStyle = {
 
   img: style({
     width: "9rem",
-    height: "6rem",
+    height: "7rem",
     margin: "0 12rem",
     border: "1px dotted lightgray",
     boxShadow: "1px 2px 3px lightgray",
