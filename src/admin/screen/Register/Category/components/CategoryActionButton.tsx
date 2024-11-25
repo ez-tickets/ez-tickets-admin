@@ -2,6 +2,7 @@ import { categoryActionButtonStyle } from "@/admin/screen/Register/Category/comp
 import { useCategoryRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import { registration } from "@/admin/store/action/CategoryRegistrationAction.ts";
 import { Fragment } from "react";
+// import { message } from "@tauri-apps/plugin-dialog";
 
 type CategoryActionButtonProps = {
   categoryName: string;
@@ -13,10 +14,15 @@ function CategoryActionButton({
   setCategoryName,
 }: CategoryActionButtonProps) {
   const { categoryRegisterDispatcher } = useCategoryRegistrationStore();
-  const registerHandler = () => {
-    const categoryRegisterValue = { category: categoryName };
-    categoryRegisterDispatcher(registration(categoryRegisterValue));
-    setCategoryName("");
+
+  const registerHandler = async () => {
+    if (categoryName !== "") {
+      const categoryRegisterValue = { category: categoryName };
+      categoryRegisterDispatcher(registration(categoryRegisterValue));
+      // await message("登録完了しました！", { title: "通知", kind: "info", });
+
+      setCategoryName("");
+    }
   };
 
   return (

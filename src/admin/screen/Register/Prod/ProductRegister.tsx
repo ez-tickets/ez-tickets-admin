@@ -8,7 +8,8 @@ import { Fragment, useState } from "react";
 function ProductRegister() {
   const [prodName, setProdName] = useState<string>("");
   const [prodPrice, setProdPrice] = useState<number>(0);
-  const [prodImg, setProdImg] = useState<string>("");
+  const [prodImgPath, setProdImgPath] = useState<string>("");
+  const [image, setImage] = useState<string>("");
 
   return (
     <Fragment>
@@ -20,15 +21,21 @@ function ProductRegister() {
         <div>
           <ProdName prodName={prodName} setProdName={setProdName} />
           <ProdPrice prodPrice={prodPrice} setProdPrice={setProdPrice} />
-          <ProdImg prodImg={prodImg} setProdImg={setProdImg} />
+          <ProdImg
+            prodImgPath={prodImgPath}
+            setProdImgPath={setProdImgPath}
+            image={image}
+            setImage={setImage}
+          />
 
           <ProdActiveButton
             prodName={prodName}
             prodPrice={prodPrice}
-            prodImg={prodImg}
+            prodImgPath={prodImgPath}
             setProdName={setProdName}
             setProdPrice={setProdPrice}
-            setProdImg={setProdImg}
+            setProdImgPath={setProdImgPath}
+            setImage={setImage}
           />
         </div>
       </div>

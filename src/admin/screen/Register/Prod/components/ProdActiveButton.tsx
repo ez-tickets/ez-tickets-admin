@@ -2,45 +2,51 @@ import { prodActiveButtonStyle } from "@/admin/screen/Register/Prod/components/s
 import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import { registration } from "@/admin/store/action/ProdRegistrationAction.ts";
 import { Fragment } from "react";
+// import { message } from "@tauri-apps/plugin-dialog";
 
 type ProdActiveButtonProps = {
   prodName: string;
   prodPrice: number;
-  prodImg: string;
+  prodImgPath: string;
   setProdName: (name: string) => void;
   setProdPrice: (price: number) => void;
-  setProdImg: (img: string) => void;
+  setProdImgPath: (img: string) => void;
+  setImage: (img: string) => void;
 };
 
 function ProdActiveButton({
   prodName,
   prodPrice,
-  prodImg,
+  prodImgPath,
   setProdName,
   setProdPrice,
-  setProdImg,
+  setProdImgPath,
+  setImage,
 }: ProdActiveButtonProps) {
   const { prodRegisterDispatcher } = useProdRegistrationStore();
 
-  const registerHandler = () => {
-    if (prodName !== "" && prodPrice >= 0) {
+  const registerHandler = async () => {
+    if (prodName !== "" && prodPrice >= 0 && prodImgPath !== "") {
       const prodRegisterValue = {
         name: prodName,
         price: prodPrice,
-        img: prodImg,
+        img: prodImgPath,
       };
       prodRegisterDispatcher(registration(prodRegisterValue));
-    }
+      // await message("登録完了しました！", { title: "通知", kind: "info", });
 
-    setProdName("");
-    setProdPrice(0);
-    setProdImg("");
+      setProdName("");
+      setProdPrice(0);
+      setProdImgPath("");
+      setImage("");
+    }
   };
 
   const resetHandler = () => {
     setProdName("");
     setProdPrice(0);
-    setProdImg("");
+    setProdImgPath("");
+    setImage("");
   };
 
   return (

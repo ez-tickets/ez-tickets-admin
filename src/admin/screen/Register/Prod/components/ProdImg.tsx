@@ -1,15 +1,21 @@
 import { prodImgStyle } from "@/admin/screen/Register/Prod/components/style/ProdImg.css.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { open } from "@tauri-apps/plugin-dialog";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 
 type ProdImgProps = {
-  prodImg: string;
-  setProdImg: (prodImg: string) => void;
+  prodImgPath: string;
+  setProdImgPath: (prodImg: string) => void;
+  image: string;
+  setImage: (image: string) => void;
 };
 
-function ProdImg({ prodImg, setProdImg }: ProdImgProps) {
-  const [image, setImage] = useState<string>();
+function ProdImg({
+  prodImgPath,
+  setProdImgPath,
+  image,
+  setImage,
+}: ProdImgProps) {
   const selectImgHandler = async () => {
     const path = await open({
       multiple: false,
@@ -22,7 +28,7 @@ function ProdImg({ prodImg, setProdImg }: ProdImgProps) {
       ],
     });
     if (path) {
-      setProdImg(path);
+      setProdImgPath(path);
       setImage(convertFileSrc(path));
     }
   };
@@ -43,7 +49,11 @@ function ProdImg({ prodImg, setProdImg }: ProdImgProps) {
           </button>
           <div>
             <p className={prodImgStyle.imgText}>プレビュー</p>
-            <img src={image} alt={prodImg} className={prodImgStyle.img} />
+            {image !== "" ? (
+              <img src={image} alt={prodImgPath} className={prodImgStyle.img} />
+            ) : (
+              <div className={prodImgStyle.img} />
+            )}
           </div>
         </div>
       </div>
