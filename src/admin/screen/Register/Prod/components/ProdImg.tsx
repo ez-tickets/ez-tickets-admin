@@ -1,5 +1,6 @@
 import { prodImgStyle } from "@/admin/screen/Register/Prod/components/style/ProdImg.css.ts";
 import { Fragment } from "react";
+import { open } from "@tauri-apps/plugin-dialog";
 
 type ProdImgProps = {
   prodImg: string;
@@ -7,8 +8,18 @@ type ProdImgProps = {
 };
 
 function ProdImg({ prodImg, setProdImg }: ProdImgProps) {
-  const selectImgHandler = () => {
-    // open().then(files => setProdImg(files));
+  const selectImgHandler = async () => {
+    const path = await open({
+      multiple: false,
+      directory: false,
+      filters: [
+        {
+          name: "Image",
+          extensions: ["png"],
+        },
+      ],
+    });
+    path && setProdImg(path);
   };
 
   return (

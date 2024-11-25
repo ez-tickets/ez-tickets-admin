@@ -8,14 +8,14 @@ export interface User {
 export interface inputProdRegister {
   name: string;
   price: number;
-  // img: string;
+  img: string;
 }
 
 export interface RegisterProd {
   id: string;
   name: string;
   price: number;
-  // img: string;
+  img: string;
 }
 
 //商品登録情報 ---------------------------------------------
