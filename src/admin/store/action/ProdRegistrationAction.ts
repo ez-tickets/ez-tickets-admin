@@ -1,7 +1,7 @@
-import type { inputProdRegister } from "@/types.ts";
+import type { InputProdRegister } from "@/types.ts";
 
 export const REGISTRATION = "registration" as const;
-export const registration = (product: inputProdRegister) => ({
+export const registration = (product: InputProdRegister) => ({
   type: REGISTRATION,
   payload: product,
 });

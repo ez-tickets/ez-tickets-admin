@@ -1,4 +1,6 @@
 import { categoryActionButtonStyle } from "@/admin/screen/Register/Category/components/style/CategoryActionButton.css.ts";
+import { useCategoryRegistrationStore } from "@/admin/store/RegistrationStore.ts";
+import { registration } from "@/admin/store/action/CategoryRegistrationAction.ts";
 import { Fragment } from "react";
 
 type CategoryActionButtonProps = {
@@ -10,9 +12,10 @@ function CategoryActionButton({
   categoryName,
   setCategoryName,
 }: CategoryActionButtonProps) {
+  const { categoryRegisterDispatcher } = useCategoryRegistrationStore();
   const registerHandler = () => {
     const categoryRegisterValue = { category: categoryName };
-    // dispatcher挿入
+    categoryRegisterDispatcher(registration(categoryRegisterValue));
     setCategoryName("");
   };
 
