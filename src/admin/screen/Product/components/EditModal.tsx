@@ -10,7 +10,7 @@ type EditModalProps = {
 
 function EditModal({ setIsFlag }: EditModalProps) {
   const { product } = useEditProductStore();
-  if (!product) throw new Error("Product not found.");
+  if (!product) throw new Error("Prod not found.");
 
   const copyProduct = structuredClone(product);
   const [editName, setEditName] = useState<string>(copyProduct.prod.name);

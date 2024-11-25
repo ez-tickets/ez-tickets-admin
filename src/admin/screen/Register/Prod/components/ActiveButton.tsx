@@ -1,6 +1,6 @@
-import { activeButtonStyle } from "@/admin/screen/Register/components/style/ActiveButton.css.ts";
-import { useProdRegistrationStore } from "@/admin/screen/Register/store/RegistrationStore.ts";
-import { registration } from "@/admin/screen/Register/store/action/ProdRegistrationAction.ts";
+import { activeButtonStyle } from "@/admin/screen/Register/Prod/components/style/ActiveButton.css.ts";
+import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
+import { registration } from "@/admin/store/action/ProdRegistrationAction.ts";
 import { Fragment } from "react";
 
 type ActiveButtonProps = {

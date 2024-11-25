@@ -1,5 +1,5 @@
-import type { ProdRegistrationAction } from "@/admin/screen/Register/store/action/ProdRegistrationAction.ts";
-import { prodRegisterReducer } from "@/admin/screen/Register/store/reducer/ProdRegistrationReducer.ts";
+import type { ProdRegistrationAction } from "@/admin/store/action/ProdRegistrationAction.ts";
+import { prodRegisterReducer } from "@/admin/store/reducer/ProdRegistrationReducer.ts";
 import type { RegisterProd } from "@/types.ts";
 import { create } from "zustand/react";
 

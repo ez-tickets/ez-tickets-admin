@@ -2,7 +2,7 @@ import {
   DELETE_PROD,
   type ProdRegistrationAction,
   REGISTRATION,
-} from "@/admin/screen/Register/store/action/ProdRegistrationAction.ts";
+} from "@/admin/store/action/ProdRegistrationAction.ts";
 import type { RegisterProd } from "@/types.ts";
 
 let prodID = 1;
