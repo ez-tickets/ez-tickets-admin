@@ -5,7 +5,7 @@ export interface User {
 }
 
 //登録商品 ------------------------------------------------
-export interface inputProdRegister {
+export interface InputProdRegister {
   name: string;
   price: number;
   img: string;
@@ -19,14 +19,14 @@ export interface RegisterProd {
 }
 
 //カテゴリー登録 -------------------------------------------
-export interface inputCategoryRegister {
+export type InputCategoryRegister = {
   category: string;
-}
+};
 
-export interface RegisterCategory {
+export type RegisterCategory = {
   id: string;
   category: string;
-}
+};
 
 //商品登録情報 ---------------------------------------------
 export interface Prod {
