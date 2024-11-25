@@ -1,7 +1,7 @@
 import { prodImgStyle } from "@/admin/screen/Register/Prod/components/style/ProdImg.css.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { open } from "@tauri-apps/plugin-dialog";
-import {Fragment, useState} from "react";
+import { Fragment, useState } from "react";
 
 type ProdImgProps = {
   prodImg: string;
@@ -43,11 +43,7 @@ function ProdImg({ prodImg, setProdImg }: ProdImgProps) {
           </button>
           <div>
             <p className={prodImgStyle.imgText}>プレビュー</p>
-            <img
-              src={image}
-              alt={prodImg}
-              className={prodImgStyle.img}
-            />
+            <img src={image} alt={prodImg} className={prodImgStyle.img} />
           </div>
         </div>
       </div>
