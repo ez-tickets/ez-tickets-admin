@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
-export const registeredProductListStyle = {
+export const registeredCategoryListStyle = {
   listContainer: style({
     margin: "2rem 3rem",
   }),
@@ -17,17 +17,7 @@ export const registeredProductListStyle = {
   }),
 
   headerName: style({
-    width: "40%",
-    padding: "1rem",
-  }),
-
-  headerPrice: style({
-    width: "20%",
-    padding: "1rem",
-  }),
-
-  headerPath: style({
-    width: "40%",
+    width: "100%",
     padding: "1rem",
   }),
 };
