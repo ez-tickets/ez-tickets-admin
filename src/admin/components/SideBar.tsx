@@ -23,6 +23,9 @@ function SideBar() {
                 <Link to={"categoryRegister"}>
                   <li className={sideBarStyle.li}>カテゴリー登録</li>
                 </Link>
+                <Link to={"categoryRegister"}>
+                  <li className={sideBarStyle.li}>登録詳細</li>
+                </Link>
               </ul>
             </details>
 

@@ -20,6 +20,7 @@ export const prodRegisterReducer = (
       return state.filter((product) => product.id !== action.payload);
     default: {
       // linting error DO NOT TOUCH!
+      // @ts-ignore
       const _: never = action;
     }
   }

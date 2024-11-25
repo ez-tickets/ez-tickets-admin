@@ -18,6 +18,16 @@ export interface RegisterProd {
   img: string;
 }
 
+//カテゴリー登録 -------------------------------------------
+export interface inputCategoryRegister {
+  category: string;
+}
+
+export interface RegisterCategory {
+  id: string;
+  category: string;
+}
+
 //商品登録情報 ---------------------------------------------
 export interface Prod {
   name: string;

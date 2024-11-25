@@ -1,9 +1,9 @@
-import { activeButtonStyle } from "@/admin/screen/Register/Prod/components/style/ActiveButton.css.ts";
+import { prodActiveButtonStyle } from "@/admin/screen/Register/Prod/components/style/ProdActiveButton.css.ts";
 import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import { registration } from "@/admin/store/action/ProdRegistrationAction.ts";
 import { Fragment } from "react";
 
-type ActiveButtonProps = {
+type ProdActiveButtonProps = {
   prodName: string;
   prodPrice: number;
   prodImg: string;
@@ -12,14 +12,14 @@ type ActiveButtonProps = {
   setProdImg: (img: string) => void;
 };
 
-function ActiveButton({
+function ProdActiveButton({
   prodName,
   prodPrice,
-  // prodImg,
+  prodImg,
   setProdName,
   setProdPrice,
   setProdImg,
-}: ActiveButtonProps) {
+}: ProdActiveButtonProps) {
   const { prodRegisterDispatcher } = useProdRegistrationStore();
 
   const registerHandler = () => {
@@ -27,6 +27,7 @@ function ActiveButton({
       const prodRegisterValue = {
         name: prodName,
         price: prodPrice,
+        img: prodImg,
       };
       prodRegisterDispatcher(registration(prodRegisterValue));
     }
@@ -44,10 +45,10 @@ function ActiveButton({
 
   return (
     <Fragment>
-      <div className={activeButtonStyle.buttonContainer}>
+      <div className={prodActiveButtonStyle.buttonContainer}>
         <button
           type={"button"}
-          className={activeButtonStyle.resetButton}
+          className={prodActiveButtonStyle.resetButton}
           onClick={resetHandler}
         >
           リセット
@@ -55,7 +56,7 @@ function ActiveButton({
 
         <button
           type={"button"}
-          className={activeButtonStyle.registerButton}
+          className={prodActiveButtonStyle.registerButton}
           onClick={registerHandler}
         >
           登録する
@@ -65,4 +66,4 @@ function ActiveButton({
   );
 }
 
-export default ActiveButton;
+export default ProdActiveButton;

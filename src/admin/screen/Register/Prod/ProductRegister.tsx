@@ -1,5 +1,5 @@
 import { productRegisterStyle } from "@/admin/screen/Register/Prod/ProductRegister.css.ts";
-import ActiveButton from "@/admin/screen/Register/Prod/components/ActiveButton.tsx";
+import ProdActiveButton from "@/admin/screen/Register/Prod/components/ProdActiveButton.tsx";
 import ProdImg from "@/admin/screen/Register/Prod/components/ProdImg.tsx";
 import ProdName from "@/admin/screen/Register/Prod/components/ProdName.tsx";
 import ProdPrice from "@/admin/screen/Register/Prod/components/ProdPrice.tsx";
@@ -22,7 +22,7 @@ function ProductRegister() {
           <ProdPrice prodPrice={prodPrice} setProdPrice={setProdPrice} />
           <ProdImg prodImg={prodImg} setProdImg={setProdImg} />
 
-          <ActiveButton
+          <ProdActiveButton
             prodName={prodName}
             prodPrice={prodPrice}
             prodImg={prodImg}

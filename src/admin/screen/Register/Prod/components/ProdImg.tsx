@@ -1,6 +1,6 @@
 import { prodImgStyle } from "@/admin/screen/Register/Prod/components/style/ProdImg.css.ts";
-import { Fragment } from "react";
 import { open } from "@tauri-apps/plugin-dialog";
+import { Fragment } from "react";
 
 type ProdImgProps = {
   prodImg: string;

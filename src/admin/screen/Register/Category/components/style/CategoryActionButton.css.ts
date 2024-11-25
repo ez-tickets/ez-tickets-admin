@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
-export const activeButtonStyle = {
+export const categoryActionButtonStyle = {
   buttonContainer: style({
     display: "flex",
     justifyContent: "center",
