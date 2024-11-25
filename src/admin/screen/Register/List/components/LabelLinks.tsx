@@ -9,7 +9,10 @@ function LabelLinks() {
         <Link className={labelLinksStyle.link} to={"/admin/registerList"}>
           登録商品
         </Link>
-        <Link className={labelLinksStyle.link} to={"/admin/registerList"}>
+        <Link
+          className={labelLinksStyle.link}
+          to={"/admin/registerList/registeredCategoryList"}
+        >
           登録カテゴリー
         </Link>
       </div>
