@@ -1,22 +1,10 @@
-import type { RegistHeaderList, RegisterProduct, User } from "@/types.ts";
+import type { RegisterProduct, User } from "@/types.ts";
 
 //ログインユーザー --------------------------------------------------------
 export const user: User = {
   id: "1234",
   password: "pass",
 };
-
-//ホームのヘッダー情報 ----------------------------------------------------
-export const allRegisterCategory: RegistHeaderList[] = [
-  {
-    id: "1",
-    categoryName: "登録商品",
-  },
-  {
-    id: "2",
-    categoryName: "登録カテゴリー",
-  },
-];
 
 //商品登録情報 ----------------------------------------------------------
 export const registeredProducts: RegisterProduct[] = [

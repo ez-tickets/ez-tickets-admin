@@ -15,16 +15,16 @@ function SideBar() {
 
           <div className={sideBarStyle.contentsContainer}>
             <details className={sideBarStyle.details}>
-              <summary className={sideBarStyle.summary}>商品登録</summary>
+              <summary className={sideBarStyle.summary}>登録管理</summary>
               <ul>
-                <Link to={"#"}>
+                <Link to={"productRegister"}>
                   <li className={sideBarStyle.li}>商品登録</li>
                 </Link>
-                <Link to={"#"}>
-                  <li className={sideBarStyle.li}>オプション登録</li>
-                </Link>
-                <Link to="productList">
+                <Link to={"categoryRegister"}>
                   <li className={sideBarStyle.li}>カテゴリー登録</li>
+                </Link>
+                <Link to={"registerList"}>
+                  <li className={sideBarStyle.li}>登録詳細</li>
                 </Link>
               </ul>
             </details>
@@ -32,29 +32,11 @@ function SideBar() {
             <details className={sideBarStyle.details}>
               <summary className={sideBarStyle.summary}>メニュー管理</summary>
               <ul>
-                <Link to="productList">
-                  <li className={sideBarStyle.li}>一覧</li>
+                <Link to={"productList"}>
+                  <li className={sideBarStyle.li}>メニュー作成</li>
                 </Link>
                 <Link to={"#"}>
-                  <li className={sideBarStyle.li}>登録</li>
-                </Link>
-              </ul>
-            </details>
-
-            <details className={sideBarStyle.details}>
-              <summary className={sideBarStyle.summary}>カテゴリー管理</summary>
-              <ul>
-                <Link to={"categoryList"}>
-                  <li className={sideBarStyle.li}>一覧</li>
-                </Link>
-                <Link to={"#"}>
-                  <li className={sideBarStyle.li}>追加</li>
-                </Link>
-                <Link to={"#"}>
-                  <li className={sideBarStyle.li}>編集</li>
-                </Link>
-                <Link to={"#"}>
-                  <li className={sideBarStyle.li}>削除</li>
+                  <li className={sideBarStyle.li}>メニュー詳細</li>
                 </Link>
               </ul>
             </details>

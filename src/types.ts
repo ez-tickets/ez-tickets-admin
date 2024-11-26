@@ -4,11 +4,29 @@ export interface User {
   password: string;
 }
 
-//ホームのヘッダー情報 --------------------------------------
-export interface RegistHeaderList {
-  id: string;
-  categoryName: string;
+//登録商品 ------------------------------------------------
+export interface InputProdRegister {
+  name: string;
+  price: number;
+  img: string;
 }
+
+export interface RegisterProd {
+  id: string;
+  name: string;
+  price: number;
+  img: string;
+}
+
+//カテゴリー登録 -------------------------------------------
+export type InputCategoryRegister = {
+  category: string;
+};
+
+export type RegisterCategory = {
+  id: string;
+  category: string;
+};
 
 //商品登録情報 ---------------------------------------------
 export interface Prod {
