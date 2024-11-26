@@ -1,5 +1,5 @@
 import { categoryModalStyle } from "@/admin/screen/Register/Category/components/style/CategoryModal.css.ts";
-import { modalStyle } from "@/admin/screen/Register/Prod/ProductRegister.css.ts";
+import { registerModalStyle } from "@/admin/screen/Register/Prod/ProductRegister.css.ts";
 import { useCategoryRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import { registration } from "@/admin/store/action/CategoryRegistrationAction.ts";
 import { Fragment } from "react";
@@ -31,7 +31,7 @@ function CategoryModal({
   return (
     <Fragment>
       {/*@ts-ignore react version incompatible*/}
-      <Modal isOpen={modalView} style={modalStyle}>
+      <Modal isOpen={modalView} style={registerModalStyle}>
         <p className={categoryModalStyle.text}>登録してもよろしいですか？</p>
         <div className={categoryModalStyle.buttonContainer}>
           <button

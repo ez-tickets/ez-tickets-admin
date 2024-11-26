@@ -18,7 +18,7 @@ export const productRegisterStyle = {
   }),
 };
 
-export const modalStyle = {
+export const registerModalStyle = {
   overlay: {
     position: "absolute",
     top: 0,

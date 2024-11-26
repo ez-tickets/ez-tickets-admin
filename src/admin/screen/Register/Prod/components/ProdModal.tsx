@@ -1,4 +1,4 @@
-import { modalStyle } from "@/admin/screen/Register/Prod/ProductRegister.css.ts";
+import { registerModalStyle } from "@/admin/screen/Register/Prod/ProductRegister.css.ts";
 import { prodModalStyle } from "@/admin/screen/Register/Prod/components/style/ProdModal.css.ts";
 import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import { registration } from "@/admin/store/action/ProdRegistrationAction.ts";
@@ -48,7 +48,7 @@ function ProdModal({
   return (
     <Fragment>
       {/*@ts-ignore react version incompatible*/}
-      <Modal isOpen={modalView} style={modalStyle}>
+      <Modal isOpen={modalView} style={registerModalStyle}>
         <p className={prodModalStyle.text}>登録してもよろしいですか？</p>
         <div className={prodModalStyle.buttonContainer}>
           <button

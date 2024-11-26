@@ -1,27 +1,43 @@
+import ProdEditModal from "@/admin/screen/Register/List/components/ProdEditModal.tsx";
 import { registeredProductStyle } from "@/admin/screen/Register/List/components/style/RegisteredProduct.css.ts";
-import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { useEditProductStore } from "@/admin/store/RegisteredEditStore.ts";
+import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
+import { Fragment, useState } from "react";
 
 type RegisteredProductProps = {
+  id: string;
   name: string;
   price: number;
   path: string;
 };
 
-function RegisteredProduct({ name, price, path }: RegisteredProductProps) {
+function RegisteredProduct({ id, name, price, path }: RegisteredProductProps) {
+  const { prodRegisterQuery } = useProdRegistrationStore();
+  const { setEditProd } = useEditProductStore();
+  const [editModal, setEditModal] = useState<boolean>(false);
+
+  const openEditModalHandler = (id: string) => {
+    prodRegisterQuery.map((prod) => (prod.id === id ? setEditProd(prod) : ""));
+    setEditModal(true);
+  };
+
   return (
     <Fragment>
-      <div className={registeredProductStyle.prodItem}>
+      {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
+      <div
+        className={registeredProductStyle.prodItem}
+        onClick={() => openEditModalHandler(id)}
+      >
         <div className={registeredProductStyle.prodPath}>
           <img src="" alt="" className={registeredProductStyle.img} />
         </div>
-        <div className={registeredProductStyle.prodName}>
-          <Link to={"#"}>{name}</Link>
-        </div>
+        <div className={registeredProductStyle.prodName}>{name}</div>
         <div className={registeredProductStyle.prodPrice}>
           {price.toLocaleString()}
         </div>
       </div>
+
+      <ProdEditModal editModal={editModal} setEditModal={setEditModal} />
     </Fragment>
   );
 }
