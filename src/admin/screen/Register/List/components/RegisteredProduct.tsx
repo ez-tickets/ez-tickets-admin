@@ -12,13 +12,15 @@ function RegisteredProduct({ name, price, path }: RegisteredProductProps) {
   return (
     <Fragment>
       <div className={registeredProductStyle.prodItem}>
+        <div className={registeredProductStyle.prodPath}>
+          <img src="" alt="" className={registeredProductStyle.img} />
+        </div>
         <div className={registeredProductStyle.prodName}>
           <Link to={"#"}>{name}</Link>
         </div>
         <div className={registeredProductStyle.prodPrice}>
           {price.toLocaleString()}
         </div>
-        <div className={registeredProductStyle.prodPath}>{path}</div>
       </div>
     </Fragment>
   );

@@ -1,8 +1,6 @@
+import CategoryModal from "@/admin/screen/Register/Category/components/CategoryModal.tsx";
 import { categoryActionButtonStyle } from "@/admin/screen/Register/Category/components/style/CategoryActionButton.css.ts";
-import { useCategoryRegistrationStore } from "@/admin/store/RegistrationStore.ts";
-import { registration } from "@/admin/store/action/CategoryRegistrationAction.ts";
-import { Fragment } from "react";
-// import { message } from "@tauri-apps/plugin-dialog";
+import { Fragment, useState } from "react";
 
 type CategoryActionButtonProps = {
   categoryName: string;
@@ -13,15 +11,11 @@ function CategoryActionButton({
   categoryName,
   setCategoryName,
 }: CategoryActionButtonProps) {
-  const { categoryRegisterDispatcher } = useCategoryRegistrationStore();
+  const [modalView, setModalView] = useState<boolean>(false);
 
-  const registerHandler = async () => {
+  const openModalHandler = () => {
     if (categoryName !== "") {
-      const categoryRegisterValue = { category: categoryName };
-      categoryRegisterDispatcher(registration(categoryRegisterValue));
-      // await message("登録完了しました！", { title: "通知", kind: "info", });
-
-      setCategoryName("");
+      setModalView(true);
     }
   };
 
@@ -39,11 +33,18 @@ function CategoryActionButton({
         <button
           type={"button"}
           className={categoryActionButtonStyle.registerButton}
-          onClick={registerHandler}
+          onClick={openModalHandler}
         >
           登録する
         </button>
       </div>
+
+      <CategoryModal
+        categoryName={categoryName}
+        setCategoryName={setCategoryName}
+        modalView={modalView}
+        setModalView={setModalView}
+      />
     </Fragment>
   );
 }

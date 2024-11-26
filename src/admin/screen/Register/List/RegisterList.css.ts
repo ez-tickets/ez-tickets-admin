@@ -3,7 +3,6 @@ import { style } from "@vanilla-extract/css";
 export const registerListStyle = {
   registerListContainer: style({
     height: "100vh",
-    backgroundColor: "#fff",
   }),
 
   header: style({

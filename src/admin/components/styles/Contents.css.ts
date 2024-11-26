@@ -10,7 +10,7 @@ export const contentsStyle = {
       width: "4px",
     },
     "::-webkit-scrollbar-track": {
-      backgroundColor: "#232E33",
+      backgroundColor: "#c3c5c5",
       borderRadius: "5px",
     },
     "::-webkit-scrollbar-thumb": {
