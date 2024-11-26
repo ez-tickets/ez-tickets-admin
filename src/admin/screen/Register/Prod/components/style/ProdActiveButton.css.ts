@@ -29,4 +29,10 @@ export const prodActiveButtonStyle = {
       backgroundColor: "rgba(79,255,165,0.84)",
     },
   }),
+
+  modal: style({
+    width: "100px",
+    height: "100px",
+    backgroundColor: "red",
+  }),
 };

@@ -26,4 +26,11 @@ export const registeredProductStyle = {
     padding: "1rem",
     fontSize: "0.85rem",
   }),
+
+  img: style({
+    width: "9rem",
+    height: "7rem",
+    border: "1px dotted lightgray",
+    boxShadow: "1px 2px 3px lightgray",
+  }),
 };

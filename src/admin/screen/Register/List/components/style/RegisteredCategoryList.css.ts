@@ -3,6 +3,7 @@ import { style } from "@vanilla-extract/css";
 export const registeredCategoryListStyle = {
   listContainer: style({
     margin: "2rem 3rem",
+    paddingBottom: "4rem",
   }),
 
   listTitle: style({

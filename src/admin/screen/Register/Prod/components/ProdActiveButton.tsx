@@ -1,8 +1,6 @@
+import ProdModal from "@/admin/screen/Register/Prod/components/ProdModal.tsx";
 import { prodActiveButtonStyle } from "@/admin/screen/Register/Prod/components/style/ProdActiveButton.css.ts";
-import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
-import { registration } from "@/admin/store/action/ProdRegistrationAction.ts";
-import { Fragment } from "react";
-// import { message } from "@tauri-apps/plugin-dialog";
+import { Fragment, useState } from "react";
 
 type ProdActiveButtonProps = {
   prodName: string;
@@ -23,30 +21,19 @@ function ProdActiveButton({
   setProdImgPath,
   setImage,
 }: ProdActiveButtonProps) {
-  const { prodRegisterDispatcher } = useProdRegistrationStore();
-
-  const registerHandler = async () => {
-    if (prodName !== "" && prodPrice >= 0 && prodImgPath !== "") {
-      const prodRegisterValue = {
-        name: prodName,
-        price: prodPrice,
-        img: prodImgPath,
-      };
-      prodRegisterDispatcher(registration(prodRegisterValue));
-      // await message("登録完了しました！", { title: "通知", kind: "info", });
-
-      setProdName("");
-      setProdPrice(0);
-      setProdImgPath("");
-      setImage("");
-    }
-  };
+  const [modalView, setModalView] = useState<boolean>(false);
 
   const resetHandler = () => {
     setProdName("");
     setProdPrice(0);
     setProdImgPath("");
     setImage("");
+  };
+
+  const openModalHandler = () => {
+    if (prodName !== "" && prodPrice >= 0 && prodImgPath !== "") {
+      setModalView(true);
+    }
   };
 
   return (
@@ -63,11 +50,23 @@ function ProdActiveButton({
         <button
           type={"button"}
           className={prodActiveButtonStyle.registerButton}
-          onClick={registerHandler}
+          onClick={openModalHandler}
         >
           登録する
         </button>
       </div>
+
+      <ProdModal
+        prodName={prodName}
+        prodPrice={prodPrice}
+        prodImgPath={prodImgPath}
+        setProdName={setProdName}
+        setProdPrice={setProdPrice}
+        setProdImgPath={setProdImgPath}
+        setImage={setImage}
+        modalView={modalView}
+        setModalView={setModalView}
+      />
     </Fragment>
   );
 }
