@@ -18,7 +18,13 @@ export const deleteProduct = (id: string) => ({
   payload: id,
 });
 
+export const DEBUG = "debug" as const;
+export const debug = () => ({
+  type: DEBUG,
+});
+
 export type ProdRegistrationAction =
   | ReturnType<typeof registration>
   | ReturnType<typeof replaceEditedProduct>
-  | ReturnType<typeof deleteProduct>;
+  | ReturnType<typeof deleteProduct>
+  | ReturnType<typeof debug>;

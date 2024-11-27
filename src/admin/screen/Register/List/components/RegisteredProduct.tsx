@@ -30,11 +30,15 @@ function RegisteredProduct({ id, name, price, path }: RegisteredProductProps) {
         onClick={() => openEditModalHandler(id)}
       >
         <div className={registeredProductStyle.prodPath}>
-          <img
-            src={convertFileSrc(path)}
-            alt=""
-            className={registeredProductStyle.img}
-          />
+          {path !== "" ? (
+            <img
+              src={convertFileSrc(path)}
+              alt={path}
+              className={registeredProductStyle.img}
+            />
+          ) : (
+            <div className={registeredProductStyle.img} />
+          )}
         </div>
         <div className={registeredProductStyle.prodName}>{name}</div>
         <div className={registeredProductStyle.prodPrice}>

@@ -1,11 +1,13 @@
+import ConfirmModal from "@/admin/screen/ConfirmModal/ConfirmModal.tsx";
 import { prodEditActionButtonStyle } from "@/admin/screen/Register/List/components/style/ProdEditActionButton.css.ts";
 import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import {
   deleteProduct,
   replaceEditedProduct,
 } from "@/admin/store/action/ProdRegistrationAction.ts";
+import { confirmAction } from "@/mockData.ts";
 import type { RegisterProd } from "@/types.ts";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 
 type ProdEditActionButtonProps = {
   editProd: RegisterProd;
@@ -15,6 +17,7 @@ type ProdEditActionButtonProps = {
   setEditName: (name: string) => void;
   setEditPrice: (price: number) => void;
   setEditImgPath: (path: string) => void;
+  setEditModal: (flag: boolean) => void;
 };
 
 function ProdEditActionButton({
@@ -25,8 +28,13 @@ function ProdEditActionButton({
   setEditName,
   setEditPrice,
   setEditImgPath,
+  setEditModal,
 }: ProdEditActionButtonProps) {
   const { prodRegisterDispatcher } = useProdRegistrationStore();
+  const [modalView, setModalView] = useState<boolean>(false);
+  const [taskType, setTaskType] = useState<string>("");
+  const [executeHandler, setExecuteHandler] = useState<() => void>();
+
   const resetHandler = () => {
     setEditName(editProd.name);
     setEditPrice(editProd.price);
@@ -43,6 +51,26 @@ function ProdEditActionButton({
     prodRegisterDispatcher(replaceEditedProduct(editedProd));
   };
 
+  const deleteHandler = () => {
+    prodRegisterDispatcher(deleteProduct(editProd.id));
+  };
+
+  const openModalHandler = (type: string) => {
+    if (editName !== "" && editPrice >= 0 && editImgPath !== "") {
+      switch (type) {
+        case confirmAction.UPDATE:
+          setTaskType(confirmAction.UPDATE);
+          setExecuteHandler(() => updateHandler);
+          break;
+        case confirmAction.DELETE:
+          setTaskType(confirmAction.DELETE);
+          setExecuteHandler(() => deleteHandler);
+          break;
+      }
+      setModalView(true);
+    }
+  };
+
   return (
     <Fragment>
       <div className={prodEditActionButtonStyle.buttonContainer}>
@@ -57,7 +85,7 @@ function ProdEditActionButton({
         <button
           type={"button"}
           className={prodEditActionButtonStyle.registerButton}
-          onClick={updateHandler}
+          onClick={() => openModalHandler(confirmAction.UPDATE)}
         >
           更新する
         </button>
@@ -65,11 +93,19 @@ function ProdEditActionButton({
         <button
           type={"button"}
           className={prodEditActionButtonStyle.deleteButton}
-          onClick={() => prodRegisterDispatcher(deleteProduct(editProd.id))}
+          onClick={() => openModalHandler(confirmAction.DELETE)}
         >
           削除する
         </button>
       </div>
+
+      <ConfirmModal
+        taskType={taskType}
+        executeHandler={executeHandler}
+        modalView={modalView}
+        setModalView={setModalView}
+        setEditModal={setEditModal}
+      />
     </Fragment>
   );
 }

@@ -1,4 +1,5 @@
 import {
+  DEBUG,
   DELETE_PRODUCT,
   type ProdRegistrationAction,
   REGISTRATION,
@@ -23,6 +24,16 @@ export const prodRegisterReducer = (
       );
     case DELETE_PRODUCT:
       return state.filter((product) => product.id !== action.payload);
+    case DEBUG:
+      return [
+        ...state,
+        {
+          id: (prodID++).toString(),
+          name: "sample product",
+          price: 100,
+          img: "",
+        },
+      ];
     default: {
       // linting error DO NOT TOUCH!
       // @ts-ignore

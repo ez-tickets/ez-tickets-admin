@@ -1,5 +1,8 @@
-import CategoryModal from "@/admin/screen/Register/Category/components/CategoryModal.tsx";
+import ConfirmModal from "@/admin/screen/ConfirmModal/ConfirmModal.tsx";
 import { categoryActionButtonStyle } from "@/admin/screen/Register/Category/components/style/CategoryActionButton.css.ts";
+import { useCategoryRegistrationStore } from "@/admin/store/RegistrationStore.ts";
+import { registration } from "@/admin/store/action/CategoryRegistrationAction.ts";
+import { confirmAction } from "@/mockData.ts";
 import { Fragment, useState } from "react";
 
 type CategoryActionButtonProps = {
@@ -11,12 +14,21 @@ function CategoryActionButton({
   categoryName,
   setCategoryName,
 }: CategoryActionButtonProps) {
+  const { categoryRegisterDispatcher } = useCategoryRegistrationStore();
   const [modalView, setModalView] = useState<boolean>(false);
 
   const openModalHandler = () => {
     if (categoryName !== "") {
       setModalView(true);
     }
+  };
+
+  const executeHandler = () => {
+    const categoryRegisterValue = { category: categoryName };
+    categoryRegisterDispatcher(registration(categoryRegisterValue));
+
+    setCategoryName("");
+    setModalView(false);
   };
 
   return (
@@ -39,9 +51,9 @@ function CategoryActionButton({
         </button>
       </div>
 
-      <CategoryModal
-        categoryName={categoryName}
-        setCategoryName={setCategoryName}
+      <ConfirmModal
+        taskType={confirmAction.REGISTRATION}
+        executeHandler={executeHandler}
         modalView={modalView}
         setModalView={setModalView}
       />

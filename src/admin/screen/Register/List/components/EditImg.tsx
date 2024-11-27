@@ -1,20 +1,21 @@
 import { editImgStyle } from "@/admin/screen/Register/List/components/style/EditImg.css.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { open } from "@tauri-apps/plugin-dialog";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 
 type EditImageProps = {
   editImgPath: string;
   setEditImgPath: (path: string) => void;
+  image: string;
+  setImage: (image: string) => void;
 };
 
-function EditImg({ editImgPath, setEditImgPath }: EditImageProps) {
-  const [image, setImage] = useState<string>("");
-
-  useEffect(() => {
-    setImage(convertFileSrc(editImgPath));
-  }, [editImgPath]);
-
+function EditImg({
+  editImgPath,
+  setEditImgPath,
+  image,
+  setImage,
+}: EditImageProps) {
   const selectImgHandler = async () => {
     const path = await open({
       multiple: false,
@@ -22,12 +23,13 @@ function EditImg({ editImgPath, setEditImgPath }: EditImageProps) {
       filters: [
         {
           name: "Image",
-          extensions: ["png"],
+          extensions: ["png", "jpeg"],
         },
       ],
     });
     if (path) {
       setEditImgPath(path);
+      setImage(convertFileSrc(path));
     }
   };
 
@@ -47,7 +49,7 @@ function EditImg({ editImgPath, setEditImgPath }: EditImageProps) {
           </button>
           <div>
             <p className={editImgStyle.imgText}>プレビュー</p>
-            {image !== "" ? (
+            {editImgPath !== "" ? (
               <img src={image} alt={editImgPath} className={editImgStyle.img} />
             ) : (
               <div className={editImgStyle.img} />

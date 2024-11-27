@@ -1,5 +1,8 @@
-import ProdModal from "@/admin/screen/Register/Prod/components/ProdModal.tsx";
+import ConfirmModal from "@/admin/screen/ConfirmModal/ConfirmModal.tsx";
 import { prodActiveButtonStyle } from "@/admin/screen/Register/Prod/components/style/ProdActiveButton.css.ts";
+import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
+import { registration } from "@/admin/store/action/ProdRegistrationAction.ts";
+import { confirmAction } from "@/mockData.ts";
 import { Fragment, useState } from "react";
 
 type ProdActiveButtonProps = {
@@ -21,6 +24,7 @@ function ProdActiveButton({
   setProdImgPath,
   setImage,
 }: ProdActiveButtonProps) {
+  const { prodRegisterDispatcher } = useProdRegistrationStore();
   const [modalView, setModalView] = useState<boolean>(false);
 
   const resetHandler = () => {
@@ -34,6 +38,21 @@ function ProdActiveButton({
     if (prodName !== "" && prodPrice >= 0 && prodImgPath !== "") {
       setModalView(true);
     }
+  };
+
+  const executeHandler = () => {
+    const prodRegisterValue = {
+      name: prodName,
+      price: prodPrice,
+      img: prodImgPath,
+    };
+    prodRegisterDispatcher(registration(prodRegisterValue));
+
+    setProdName("");
+    setProdPrice(0);
+    setProdImgPath("");
+    setImage("");
+    setModalView(false);
   };
 
   return (
@@ -56,16 +75,11 @@ function ProdActiveButton({
         </button>
       </div>
 
-      <ProdModal
-        prodName={prodName}
-        prodPrice={prodPrice}
-        prodImgPath={prodImgPath}
-        setProdName={setProdName}
-        setProdPrice={setProdPrice}
-        setProdImgPath={setProdImgPath}
-        setImage={setImage}
-        modalView={modalView}
-        setModalView={setModalView}
+      <ConfirmModal
+        taskType={confirmAction.REGISTRATION} //タイプ
+        executeHandler={executeHandler} //はい　handler()
+        modalView={modalView} //モーダルvisibility
+        setModalView={setModalView} //モーダル切り替え
       />
     </Fragment>
   );
