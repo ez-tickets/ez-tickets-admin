@@ -49,7 +49,7 @@ function ProdImg({
           </button>
           <div>
             <p className={prodImgStyle.imgText}>プレビュー</p>
-            {image !== "" ? (
+            {prodImgPath !== "" ? (
               <img src={image} alt={prodImgPath} className={prodImgStyle.img} />
             ) : (
               <div className={prodImgStyle.img} />

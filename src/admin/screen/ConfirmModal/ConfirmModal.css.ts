@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
-export const prodModalStyle = {
+export const confirmModalStyle = {
   text: style({
     margin: "3.5rem 0",
     fontSize: "1.25rem",

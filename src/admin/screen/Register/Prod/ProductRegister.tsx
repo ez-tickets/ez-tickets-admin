@@ -3,6 +3,8 @@ import ProdActiveButton from "@/admin/screen/Register/Prod/components/ProdActive
 import ProdImg from "@/admin/screen/Register/Prod/components/ProdImg.tsx";
 import ProdName from "@/admin/screen/Register/Prod/components/ProdName.tsx";
 import ProdPrice from "@/admin/screen/Register/Prod/components/ProdPrice.tsx";
+import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
+import { debug } from "@/admin/store/action/ProdRegistrationAction.ts";
 import { Fragment, useState } from "react";
 
 function ProductRegister() {
@@ -11,11 +13,21 @@ function ProductRegister() {
   const [prodImgPath, setProdImgPath] = useState<string>("");
   const [image, setImage] = useState<string>("");
 
+  // debug用
+  const { prodRegisterDispatcher } = useProdRegistrationStore();
+
   return (
     <Fragment>
       <div className={productRegisterStyle.productRegisterContainer}>
         <div className={productRegisterStyle.header}>
           <h1>商品登録</h1>
+          {/* debug */}
+          <button
+            type={"button"}
+            onClick={() => prodRegisterDispatcher(debug())}
+          >
+            登録
+          </button>
         </div>
 
         <div>

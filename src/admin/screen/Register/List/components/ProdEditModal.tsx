@@ -8,6 +8,7 @@ import {
 } from "@/admin/screen/Register/List/components/style/ProdEditModal.css.ts";
 import { useEditProductStore } from "@/admin/store/RegisteredEditStore.ts";
 import { IconX } from "@tabler/icons-react";
+import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment, useState } from "react";
 import Modal from "react-modal";
 
@@ -23,6 +24,7 @@ function ProdEditModal({ editModal, setEditModal }: ProdEditModalProps) {
   const [editName, setEditName] = useState<string>(editProd.name);
   const [editPrice, setEditPrice] = useState<number>(editProd.price);
   const [editImgPath, setEditImgPath] = useState<string>(editProd.img);
+  const [image, setImage] = useState<string>(convertFileSrc(editImgPath));
 
   const closeHandler = () => {
     setEditModal(false);
@@ -43,7 +45,12 @@ function ProdEditModal({ editModal, setEditModal }: ProdEditModalProps) {
         <div>
           <EditName editName={editName} setEditName={setEditName} />
           <EditPrice editPrice={editPrice} setEditPrice={setEditPrice} />
-          <EditImg editImgPath={editImgPath} setEditImgPath={setEditImgPath} />
+          <EditImg
+            editImgPath={editImgPath}
+            setEditImgPath={setEditImgPath}
+            image={image}
+            setImage={setImage}
+          />
 
           <ProdEditActionButton
             editProd={editProd}
@@ -53,6 +60,7 @@ function ProdEditModal({ editModal, setEditModal }: ProdEditModalProps) {
             setEditName={setEditName}
             setEditPrice={setEditPrice}
             setEditImgPath={setEditImgPath}
+            setEditModal={setEditModal}
           />
         </div>
       </Modal>
