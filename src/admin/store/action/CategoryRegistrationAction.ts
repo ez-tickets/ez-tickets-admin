@@ -7,11 +7,11 @@ export const registration = (category: InputCategoryRegister) => ({
 });
 
 export const DELETE_CATEGORY = "delete-category";
-export const delete_category = (id: string) => ({
+export const deleteCategory = (id: string) => ({
   type: DELETE_CATEGORY,
   payload: id,
 });
 
 export type CategoryRegistrationAction =
   | ReturnType<typeof registration>
-  | ReturnType<typeof delete_category>;
+  | ReturnType<typeof deleteCategory>;

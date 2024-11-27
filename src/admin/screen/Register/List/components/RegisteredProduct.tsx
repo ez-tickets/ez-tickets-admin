@@ -2,6 +2,7 @@ import ProdEditModal from "@/admin/screen/Register/List/components/ProdEditModal
 import { registeredProductStyle } from "@/admin/screen/Register/List/components/style/RegisteredProduct.css.ts";
 import { useEditProductStore } from "@/admin/store/RegisteredEditStore.ts";
 import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
+import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment, useState } from "react";
 
 type RegisteredProductProps = {
@@ -29,7 +30,11 @@ function RegisteredProduct({ id, name, price, path }: RegisteredProductProps) {
         onClick={() => openEditModalHandler(id)}
       >
         <div className={registeredProductStyle.prodPath}>
-          <img src="" alt="" className={registeredProductStyle.img} />
+          <img
+            src={convertFileSrc(path)}
+            alt=""
+            className={registeredProductStyle.img}
+          />
         </div>
         <div className={registeredProductStyle.prodName}>{name}</div>
         <div className={registeredProductStyle.prodPrice}>
@@ -37,7 +42,11 @@ function RegisteredProduct({ id, name, price, path }: RegisteredProductProps) {
         </div>
       </div>
 
-      <ProdEditModal editModal={editModal} setEditModal={setEditModal} />
+      {editModal ? (
+        <ProdEditModal editModal={editModal} setEditModal={setEditModal} />
+      ) : (
+        ""
+      )}
     </Fragment>
   );
 }

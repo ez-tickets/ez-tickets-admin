@@ -1,7 +1,8 @@
 import {
-  DELETE_PROD,
+  DELETE_PRODUCT,
   type ProdRegistrationAction,
   REGISTRATION,
+  REPLACE_EDITED_PRODUCT,
 } from "@/admin/store/action/ProdRegistrationAction.ts";
 import type { RegisterProd } from "@/types.ts";
 
@@ -16,7 +17,11 @@ export const prodRegisterReducer = (
   switch (action.type) {
     case REGISTRATION:
       return [...state, { id: (prodID++).toString(), ...action.payload }];
-    case DELETE_PROD:
+    case REPLACE_EDITED_PRODUCT:
+      return state.map((prod) =>
+        prod.id === action.payload.id ? { ...prod, ...action.payload } : prod,
+      );
+    case DELETE_PRODUCT:
       return state.filter((product) => product.id !== action.payload);
     default: {
       // linting error DO NOT TOUCH!

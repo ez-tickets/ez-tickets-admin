@@ -1,13 +1,13 @@
 import { style } from "@vanilla-extract/css";
 
-export const prodActiveButtonStyle = {
+export const prodEditActionButtonStyle = {
   buttonContainer: style({
     display: "flex",
     justifyContent: "center",
   }),
 
   registerButton: style({
-    margin: "7rem 1rem",
+    margin: "5rem 1rem 0",
     padding: "10px 20px",
     display: "block",
     border: "1px solid rgba(0,0,0,0.4)",
@@ -19,7 +19,7 @@ export const prodActiveButtonStyle = {
   }),
 
   resetButton: style({
-    margin: "7rem 1rem",
+    margin: "5rem 1rem 0",
     padding: "10px 20px",
     display: "block",
     border: "1px solid rgba(0,0,0,0.4)",
@@ -27,6 +27,18 @@ export const prodActiveButtonStyle = {
     boxShadow: "1px 2px 3px rgba(0,0,0,0.4)",
     ":hover": {
       backgroundColor: "rgba(79,255,165,0.84)",
+    },
+  }),
+
+  deleteButton: style({
+    margin: "5rem 1rem 0",
+    padding: "10px 20px",
+    display: "block",
+    border: "1px solid rgba(0,0,0,0.4)",
+    borderRadius: "5px",
+    boxShadow: "1px 2px 3px rgba(0,0,0,0.4)",
+    ":hover": {
+      backgroundColor: "red",
     },
   }),
 };
