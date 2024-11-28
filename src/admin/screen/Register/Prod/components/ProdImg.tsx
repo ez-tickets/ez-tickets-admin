@@ -1,6 +1,5 @@
-import { prodImgStyle } from "@/admin/screen/Register/Prod/components/style/ProdImg.css.ts";
-import { convertFileSrc } from "@tauri-apps/api/core";
-import { open } from "@tauri-apps/plugin-dialog";
+import InputContainer from "@/admin/components/InputContainer.tsx";
+import InputImg from "@/admin/components/InputImg.tsx";
 import { Fragment } from "react";
 
 type ProdImgProps = {
@@ -16,47 +15,19 @@ function ProdImg({
   image,
   setImage,
 }: ProdImgProps) {
-  const selectImgHandler = async () => {
-    const path = await open({
-      multiple: false,
-      directory: false,
-      filters: [
-        {
-          name: "Image",
-          extensions: ["png"],
-        },
-      ],
-    });
-    if (path) {
-      setProdImgPath(path);
-      setImage(convertFileSrc(path));
-    }
-  };
-
   return (
     <Fragment>
-      <div className={prodImgStyle.inputContainer}>
-        <div className={prodImgStyle.title}>
-          <p>画像</p>
-        </div>
-        <div className={prodImgStyle.inputImg}>
-          <button
-            type={"button"}
-            className={prodImgStyle.imgChooseButton}
-            onClick={selectImgHandler}
-          >
-            choose file
-          </button>
-          <div>
-            <p className={prodImgStyle.imgText}>プレビュー</p>
-            {prodImgPath !== "" ? (
-              <img src={image} alt={prodImgPath} className={prodImgStyle.img} />
-            ) : (
-              <div className={prodImgStyle.img} />
-            )}
-          </div>
-        </div>
-      </div>
+      <InputContainer
+        title={"画像"}
+        inputElement={
+          <InputImg
+            imgPath={prodImgPath}
+            setImgPath={setProdImgPath}
+            image={image}
+            setImage={setImage}
+          />
+        }
+      />
     </Fragment>
   );
 }

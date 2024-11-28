@@ -1,4 +1,5 @@
-import { editNameStyle } from "@/admin/screen/Register/List/components/style/EditName.css.ts";
+import Input from "@/admin/components/Input.tsx";
+import InputContainer from "@/admin/components/InputContainer.tsx";
 import { Fragment } from "react";
 
 type EditNameProps = {
@@ -9,21 +10,19 @@ type EditNameProps = {
 function EditName({ editName, setEditName }: EditNameProps) {
   return (
     <Fragment>
-      <div className={editNameStyle.inputContainer}>
-        <div className={editNameStyle.title}>
-          <label htmlFor="name">商品名</label>
-        </div>
-        <div className={editNameStyle.input}>
-          <input
+      <InputContainer
+        label={"name"}
+        title={"商品名"}
+        inputElement={
+          <Input
+            guide={"商品名を編集"}
             type={"text"}
-            id={"name"}
+            label={"name"}
             value={editName}
-            className={editNameStyle.value}
-            placeholder={"商品名を編集"}
-            onChange={(e) => setEditName(e.target.value)}
+            executeHandler={setEditName}
           />
-        </div>
-      </div>
+        }
+      />
     </Fragment>
   );
 }

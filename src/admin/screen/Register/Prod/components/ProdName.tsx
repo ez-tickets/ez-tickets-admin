@@ -1,4 +1,5 @@
-import { prodNameStyle } from "@/admin/screen/Register/Prod/components/style/ProdName.css.ts";
+import Input from "@/admin/components/Input.tsx";
+import InputContainer from "@/admin/components/InputContainer.tsx";
 import { Fragment } from "react";
 
 type ProdNameProps = {
@@ -9,21 +10,19 @@ type ProdNameProps = {
 function ProdName({ prodName, setProdName }: ProdNameProps) {
   return (
     <Fragment>
-      <div className={prodNameStyle.inputContainer}>
-        <div className={prodNameStyle.title}>
-          <label htmlFor="name">商品名</label>
-        </div>
-        <div className={prodNameStyle.input}>
-          <input
+      <InputContainer
+        label={"name"}
+        title={"商品名"}
+        inputElement={
+          <Input
+            guide={"登録する商品名を入力"}
             type={"text"}
-            id={"name"}
+            label={"name"}
             value={prodName}
-            className={prodNameStyle.value}
-            placeholder={"登録する商品名を入力"}
-            onChange={(e) => setProdName(e.target.value)}
+            executeHandler={setProdName}
           />
-        </div>
-      </div>
+        }
+      />
     </Fragment>
   );
 }

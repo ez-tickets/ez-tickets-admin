@@ -1,5 +1,6 @@
 import { loginStyle } from "@/Login/Login.css.ts";
 import { user } from "@/mockData.ts";
+import type React from "react";
 import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +10,7 @@ function Login() {
   const [errorMsg, setErrorMsg] = useState<string>();
   const navigate = useNavigate();
 
-  const loginHandler = (e: React.MouseEvent<HTMLInputElement>) => {
+  const loginHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (loginId === user.id && loginPass === user.password) {
@@ -48,12 +49,14 @@ function Login() {
                 />
               </label>
             </p>
-            <input
+            <button
               type="submit"
               value="ログイン"
               className={loginStyle.button}
               onClick={(e) => loginHandler(e)}
-            />
+            >
+              ログイン
+            </button>
           </form>
         </div>
       </div>

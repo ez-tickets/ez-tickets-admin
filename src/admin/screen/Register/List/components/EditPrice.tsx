@@ -1,5 +1,6 @@
-import { editPriceStyle } from "@/admin/screen/Register/List/components/style/EditPrice.css.ts";
-import { type ChangeEvent, Fragment } from "react";
+import Input from "@/admin/components/Input.tsx";
+import InputContainer from "@/admin/components/InputContainer.tsx";
+import { Fragment } from "react";
 
 type EditPriceProps = {
   editPrice: number;
@@ -7,8 +8,8 @@ type EditPriceProps = {
 };
 
 function EditPrice({ editPrice, setEditPrice }: EditPriceProps) {
-  const inputPriceHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value);
+  const inputPriceHandler = (input: string) => {
+    const value = Number(input);
     // biome-ignore lint/suspicious/noGlobalIsNan: <explanation>
     if (isNaN(value) || value < 0) return;
     setEditPrice(value);
@@ -16,20 +17,19 @@ function EditPrice({ editPrice, setEditPrice }: EditPriceProps) {
 
   return (
     <Fragment>
-      <div className={editPriceStyle.inputContainer}>
-        <div className={editPriceStyle.title}>
-          <label htmlFor="price">価格</label>
-        </div>
-        <div className={editPriceStyle.input}>
-          <input
+      <InputContainer
+        label={"price"}
+        title={"価格"}
+        inputElement={
+          <Input
+            guide={"商品価格を編集 (半角）"}
             type={"text"}
-            id={"price"}
+            label={"price"}
             value={editPrice}
-            className={editPriceStyle.value}
-            onChange={(e) => inputPriceHandler(e)}
+            executeHandler={inputPriceHandler}
           />
-        </div>
-      </div>
+        }
+      />
     </Fragment>
   );
 }

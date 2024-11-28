@@ -1,4 +1,5 @@
-import { categoryNameStyle } from "@/admin/screen/Register/Category/components/style/CategoryName.css.ts";
+import Input from "@/admin/components/Input.tsx";
+import InputContainer from "@/admin/components/InputContainer.tsx";
 import { Fragment } from "react";
 
 type CategoryNameProps = {
@@ -9,21 +10,19 @@ type CategoryNameProps = {
 function CategoryName({ categoryName, setCategoryName }: CategoryNameProps) {
   return (
     <Fragment>
-      <div className={categoryNameStyle.inputContainer}>
-        <div className={categoryNameStyle.title}>
-          <label htmlFor="category">カテゴリー名</label>
-        </div>
-        <div className={categoryNameStyle.input}>
-          <input
+      <InputContainer
+        label={"category"}
+        title={"カテゴリー名"}
+        inputElement={
+          <Input
+            guide={"カテゴリー名を入力"}
             type={"text"}
-            id={"category"}
+            label={"category"}
             value={categoryName}
-            className={categoryNameStyle.value}
-            placeholder={"登録するカテゴリー名を入力"}
-            onChange={(e) => setCategoryName(e.target.value)}
+            executeHandler={setCategoryName}
           />
-        </div>
-      </div>
+        }
+      />
     </Fragment>
   );
 }
