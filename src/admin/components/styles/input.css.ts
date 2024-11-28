@@ -1,21 +1,14 @@
 import { style } from "@vanilla-extract/css";
 
-export const prodPriceStyle = {
-  inputContainer: style({
-    display: "flex",
-    borderBottom: "1px solid lightgray",
-  }),
-
-  title: style({
-    width: "40%",
-    padding: "5rem 10rem",
-    textAlign: "center",
-  }),
-
+export const inputStyle = {
   input: style({
     position: "relative",
     width: "60%",
-    padding: "4rem 0rem",
+    padding: "2.5rem 0rem",
+  }),
+
+  guide: style({
+    color: "gray",
   }),
 
   value: style({

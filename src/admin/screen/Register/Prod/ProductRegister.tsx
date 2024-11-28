@@ -21,6 +21,7 @@ function ProductRegister() {
       <div className={productRegisterStyle.productRegisterContainer}>
         <div className={productRegisterStyle.header}>
           <h1>商品登録</h1>
+
           {/* debug */}
           <button
             type={"button"}
@@ -30,26 +31,24 @@ function ProductRegister() {
           </button>
         </div>
 
-        <div>
-          <ProdName prodName={prodName} setProdName={setProdName} />
-          <ProdPrice prodPrice={prodPrice} setProdPrice={setProdPrice} />
-          <ProdImg
-            prodImgPath={prodImgPath}
-            setProdImgPath={setProdImgPath}
-            image={image}
-            setImage={setImage}
-          />
+        <ProdName prodName={prodName} setProdName={setProdName} />
+        <ProdPrice prodPrice={prodPrice} setProdPrice={setProdPrice} />
+        <ProdImg
+          prodImgPath={prodImgPath}
+          setProdImgPath={setProdImgPath}
+          image={image}
+          setImage={setImage}
+        />
 
-          <ProdActiveButton
-            prodName={prodName}
-            prodPrice={prodPrice}
-            prodImgPath={prodImgPath}
-            setProdName={setProdName}
-            setProdPrice={setProdPrice}
-            setProdImgPath={setProdImgPath}
-            setImage={setImage}
-          />
-        </div>
+        <ProdActiveButton
+          prodName={prodName}
+          prodPrice={prodPrice}
+          prodImgPath={prodImgPath}
+          setProdName={setProdName}
+          setProdPrice={setProdPrice}
+          setProdImgPath={setProdImgPath}
+          setImage={setImage}
+        />
       </div>
     </Fragment>
   );

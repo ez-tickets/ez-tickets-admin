@@ -13,16 +13,14 @@ function CategoryRegister() {
           <h1>カテゴリー登録</h1>
         </div>
 
-        <div>
-          <CategoryName
-            categoryName={categoryName}
-            setCategoryName={setCategoryName}
-          />
-          <CategoryActionButton
-            categoryName={categoryName}
-            setCategoryName={setCategoryName}
-          />
-        </div>
+        <CategoryName
+          categoryName={categoryName}
+          setCategoryName={setCategoryName}
+        />
+        <CategoryActionButton
+          categoryName={categoryName}
+          setCategoryName={setCategoryName}
+        />
       </div>
     </Fragment>
   );

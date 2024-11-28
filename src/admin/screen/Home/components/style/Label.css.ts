@@ -1,7 +1,7 @@
 import { style } from "@vanilla-extract/css";
 
-export const itemStyle = {
-  item: style({
+export const labelStyle = {
+  label: style({
     position: "relative",
     display: "flex",
     flexDirection: "column",
@@ -15,17 +15,10 @@ export const itemStyle = {
     },
   }),
 
-  itemTitle: style({
+  labelTitle: style({
     textAlign: "center",
     fontSize: "2rem",
     margin: "30px 0",
     color: "#3b3b3b",
-  }),
-
-  itemIcon: style({
-    position: "absolute",
-    top: "60%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
   }),
 };

@@ -1,17 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
-export const prodImgStyle = {
-  inputContainer: style({
-    display: "flex",
-    borderBottom: "1px solid lightgray",
-  }),
-
-  title: style({
-    width: "40%",
-    padding: "5rem 10rem",
-    textAlign: "center",
-  }),
-
+export const inputImgStyle = {
   inputImg: style({
     position: "relative",
     width: "60%",
