@@ -1,4 +1,4 @@
-import { inputStyle } from "@/components/style/input.css.ts";
+import { inputStyle } from "@/parts/style/input.css.ts";
 import { Fragment } from "react";
 
 type InputProps = {

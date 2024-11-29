@@ -1,8 +1,10 @@
 import ConfirmModal from "@/admin/screen/confirmModal/ConfirmModal.tsx";
-import { categoryActionButtonStyle } from "@/admin/screen/register/category/components/style/CategoryActionButton.css.ts";
 import { useCategoryRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import { registration } from "@/admin/store/action/CategoryRegistrationAction.ts";
 import { confirmAction } from "@/mockData.ts";
+import ExecuteButton from "@/parts/ExecuteButton.tsx";
+import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
+import { executeButtonStyle } from "@/parts/style/executeButton.css.ts";
 import { Fragment, useState } from "react";
 
 type CategoryActionButtonProps = {
@@ -33,23 +35,23 @@ function CategoryActionButton({
 
   return (
     <Fragment>
-      <div className={categoryActionButtonStyle.buttonContainer}>
-        <button
-          type={"button"}
-          className={categoryActionButtonStyle.resetButton}
-          onClick={() => setCategoryName("")}
-        >
-          リセット
-        </button>
+      <ExecuteButtonContainer
+        button={
+          <Fragment>
+            <ExecuteButton
+              name={"リセット"}
+              style={executeButtonStyle.reset}
+              executeHandler={() => setCategoryName("")}
+            />
 
-        <button
-          type={"button"}
-          className={categoryActionButtonStyle.registerButton}
-          onClick={openModalHandler}
-        >
-          登録する
-        </button>
-      </div>
+            <ExecuteButton
+              name={"登録する"}
+              style={executeButtonStyle.run}
+              executeHandler={openModalHandler}
+            />
+          </Fragment>
+        }
+      />
 
       <ConfirmModal
         taskType={confirmAction.REGISTRATION}

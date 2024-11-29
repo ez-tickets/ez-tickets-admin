@@ -1,8 +1,10 @@
 import ConfirmModal from "@/admin/screen/confirmModal/ConfirmModal.tsx";
-import { prodActiveButtonStyle } from "@/admin/screen/register/prod/components/style/ProdActiveButton.css.ts";
 import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import { registration } from "@/admin/store/action/ProdRegistrationAction.ts";
 import { confirmAction } from "@/mockData.ts";
+import ExecuteButton from "@/parts/ExecuteButton.tsx";
+import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
+import { executeButtonStyle } from "@/parts/style/executeButton.css.ts";
 import { Fragment, useState } from "react";
 
 type ProdActiveButtonProps = {
@@ -57,23 +59,23 @@ function ProdActiveButton({
 
   return (
     <Fragment>
-      <div className={prodActiveButtonStyle.buttonContainer}>
-        <button
-          type={"button"}
-          className={prodActiveButtonStyle.resetButton}
-          onClick={resetHandler}
-        >
-          リセット
-        </button>
+      <ExecuteButtonContainer
+        button={
+          <Fragment>
+            <ExecuteButton
+              name={"リセット"}
+              style={executeButtonStyle.reset}
+              executeHandler={resetHandler}
+            />
 
-        <button
-          type={"button"}
-          className={prodActiveButtonStyle.registerButton}
-          onClick={openModalHandler}
-        >
-          登録する
-        </button>
-      </div>
+            <ExecuteButton
+              name={"登録する"}
+              style={executeButtonStyle.run}
+              executeHandler={openModalHandler}
+            />
+          </Fragment>
+        }
+      />
 
       <ConfirmModal
         taskType={confirmAction.REGISTRATION} //タイプ

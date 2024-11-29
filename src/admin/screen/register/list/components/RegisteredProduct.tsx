@@ -26,10 +26,10 @@ function RegisteredProduct({ id, name, price, path }: RegisteredProductProps) {
     <Fragment>
       {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
       <div
-        className={registeredProductStyle.prodItem}
+        className={registeredProductStyle.item}
         onClick={() => openEditModalHandler(id)}
       >
-        <div className={registeredProductStyle.prodPath}>
+        <div className={registeredProductStyle.path}>
           {path !== "" ? (
             <img
               src={convertFileSrc(path)}
@@ -40,8 +40,8 @@ function RegisteredProduct({ id, name, price, path }: RegisteredProductProps) {
             <div className={registeredProductStyle.img} />
           )}
         </div>
-        <div className={registeredProductStyle.prodName}>{name}</div>
-        <div className={registeredProductStyle.prodPrice}>
+        <div className={registeredProductStyle.name}>{name}</div>
+        <div className={registeredProductStyle.price}>
           {price.toLocaleString()}
         </div>
       </div>

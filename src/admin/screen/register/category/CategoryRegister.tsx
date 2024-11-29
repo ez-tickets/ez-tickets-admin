@@ -1,7 +1,6 @@
-import { categoryRegisterStyle } from "@/admin/screen/register/category/CategoryRegister.css.ts";
 import CategoryActionButton from "@/admin/screen/register/category/components/CategoryActionButton.tsx";
 import CategoryName from "@/admin/screen/register/category/components/CategoryName.tsx";
-import Header from "@/components/Header.tsx";
+import Header from "@/parts/Header.tsx";
 import { Fragment, useState } from "react";
 
 function CategoryRegister() {
@@ -9,17 +8,15 @@ function CategoryRegister() {
 
   return (
     <Fragment>
-      <div className={categoryRegisterStyle.categoryRegisterContainer}>
-        <Header title={"カテゴリー登録"} />
-        <CategoryName
-          categoryName={categoryName}
-          setCategoryName={setCategoryName}
-        />
-        <CategoryActionButton
-          categoryName={categoryName}
-          setCategoryName={setCategoryName}
-        />
-      </div>
+      <Header title={"カテゴリー登録"} />
+      <CategoryName
+        categoryName={categoryName}
+        setCategoryName={setCategoryName}
+      />
+      <CategoryActionButton
+        categoryName={categoryName}
+        setCategoryName={setCategoryName}
+      />
     </Fragment>
   );
 }
