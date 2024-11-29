@@ -1,3 +1,4 @@
+import SideBarLabel from "@/admin/components/SideBarLabel.tsx";
 import { sideBarStyle } from "@/admin/components/styles/SideBar.css.ts";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
@@ -14,32 +15,26 @@ function SideBar() {
           </div>
 
           <div className={sideBarStyle.contentsContainer}>
-            <details className={sideBarStyle.details}>
-              <summary className={sideBarStyle.summary}>登録管理</summary>
-              <ul>
-                <Link to={"productRegister"}>
-                  <li className={sideBarStyle.li}>商品登録</li>
-                </Link>
-                <Link to={"categoryRegister"}>
-                  <li className={sideBarStyle.li}>カテゴリー登録</li>
-                </Link>
-                <Link to={"registerList"}>
-                  <li className={sideBarStyle.li}>登録詳細</li>
-                </Link>
-              </ul>
-            </details>
+            <SideBarLabel
+              title={"登録商品"}
+              element={
+                <Fragment>
+                  <Link to={"productRegister"}>商品登録</Link>
+                  <Link to={"categoryRegister"}>カテゴリー登録</Link>
+                  <Link to={"registerList"}>登録詳細</Link>
+                </Fragment>
+              }
+            />
 
-            <details className={sideBarStyle.details}>
-              <summary className={sideBarStyle.summary}>メニュー管理</summary>
-              <ul>
-                <Link to={"productList"}>
-                  <li className={sideBarStyle.li}>メニュー作成</li>
-                </Link>
-                <Link to={"#"}>
-                  <li className={sideBarStyle.li}>メニュー詳細</li>
-                </Link>
-              </ul>
-            </details>
+            <SideBarLabel
+              title={"メニュー管理"}
+              element={
+                <Fragment>
+                  <Link to={"productList"}>メニュー作成</Link>
+                  <Link to={"#"}>メニュー詳細</Link>
+                </Fragment>
+              }
+            />
           </div>
         </div>
       </div>

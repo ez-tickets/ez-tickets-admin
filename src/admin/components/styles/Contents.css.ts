@@ -19,9 +19,4 @@ export const contentsStyle = {
       border: "0.5px solid #35af98",
     },
   }),
-
-  wrapper: style({
-    position: "relative",
-    width: "100%",
-  }),
 };
