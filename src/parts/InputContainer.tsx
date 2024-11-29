@@ -1,4 +1,4 @@
-import { inputContainerStyle } from "@/components/style/InputContainer.css.ts";
+import { inputContainerStyle } from "@/parts/style/InputContainer.css.ts";
 import { Fragment, type JSX } from "react";
 
 type InputTextProps = {

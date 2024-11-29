@@ -1,5 +1,5 @@
-import Input from "@/components/Input.tsx";
-import InputContainer from "@/components/InputContainer.tsx";
+import Input from "@/parts/Input.tsx";
+import InputContainer from "@/parts/InputContainer.tsx";
 import { Fragment } from "react";
 
 type EditNameProps = {

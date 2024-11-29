@@ -1,11 +1,13 @@
 import ConfirmModal from "@/admin/screen/confirmModal/ConfirmModal.tsx";
-import { prodEditActionButtonStyle } from "@/admin/screen/register/list/components/style/ProdEditActionButton.css.ts";
 import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import {
   deleteProduct,
   replaceEditedProduct,
 } from "@/admin/store/action/ProdRegistrationAction.ts";
 import { confirmAction } from "@/mockData.ts";
+import ExecuteButton from "@/parts/ExecuteButton.tsx";
+import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
+import { executeButtonStyle } from "@/parts/style/executeButton.css.ts";
 import type { RegisterProd } from "@/types.ts";
 import { Fragment, useState } from "react";
 
@@ -60,11 +62,11 @@ function ProdEditActionButton({
       switch (type) {
         case confirmAction.UPDATE:
           setTaskType(confirmAction.UPDATE);
-          setExecuteHandler(() => updateHandler);
+          setExecuteHandler(updateHandler);
           break;
         case confirmAction.DELETE:
           setTaskType(confirmAction.DELETE);
-          setExecuteHandler(() => deleteHandler);
+          setExecuteHandler(deleteHandler);
           break;
       }
       setModalView(true);
@@ -73,31 +75,27 @@ function ProdEditActionButton({
 
   return (
     <Fragment>
-      <div className={prodEditActionButtonStyle.buttonContainer}>
-        <button
-          type={"button"}
-          className={prodEditActionButtonStyle.resetButton}
-          onClick={resetHandler}
-        >
-          リセット
-        </button>
-
-        <button
-          type={"button"}
-          className={prodEditActionButtonStyle.registerButton}
-          onClick={() => openModalHandler(confirmAction.UPDATE)}
-        >
-          更新する
-        </button>
-
-        <button
-          type={"button"}
-          className={prodEditActionButtonStyle.deleteButton}
-          onClick={() => openModalHandler(confirmAction.DELETE)}
-        >
-          削除する
-        </button>
-      </div>
+      <ExecuteButtonContainer
+        button={
+          <Fragment>
+            <ExecuteButton
+              name={"リセット"}
+              style={executeButtonStyle.editModalReset}
+              executeHandler={resetHandler}
+            />
+            <ExecuteButton
+              name={"更新する"}
+              style={executeButtonStyle.editModalUpdate}
+              executeHandler={() => openModalHandler(confirmAction.UPDATE)}
+            />
+            <ExecuteButton
+              name={"削除する"}
+              style={executeButtonStyle.editModalDelete}
+              executeHandler={() => openModalHandler(confirmAction.DELETE)}
+            />
+          </Fragment>
+        }
+      />
 
       <ConfirmModal
         taskType={taskType}

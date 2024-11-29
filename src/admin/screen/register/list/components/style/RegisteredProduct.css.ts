@@ -1,7 +1,7 @@
 import { style } from "@vanilla-extract/css";
 
 export const registeredProductStyle = {
-  prodItem: style({
+  item: style({
     marginTop: "1px",
     display: "flex",
     justifyContent: "space-around",
@@ -15,19 +15,19 @@ export const registeredProductStyle = {
     },
   }),
 
-  prodName: style({
+  name: style({
     width: "40%",
     padding: "1rem",
     fontSize: "0.85rem",
   }),
 
-  prodPrice: style({
+  price: style({
     width: "20%",
     padding: "1rem",
     fontSize: "0.85rem",
   }),
 
-  prodPath: style({
+  path: style({
     width: "40%",
     padding: "1rem",
     fontSize: "0.85rem",

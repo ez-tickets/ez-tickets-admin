@@ -1,4 +1,4 @@
-import { headerStyle } from "@/components/style/Header.css.ts";
+import { headerStyle } from "@/parts/style/Header.css.ts";
 import { Fragment, type JSX } from "react";
 
 type HeaderProps = {

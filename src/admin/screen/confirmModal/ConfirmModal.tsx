@@ -1,5 +1,9 @@
-import { confirmModalStyle } from "@/admin/screen/confirmModal/ConfirmModal.css.ts";
-import { registerModalStyle } from "@/admin/screen/register/prod/ProductRegister.css.ts";
+import {
+  confirmModalStyle,
+  registerModalStyle,
+} from "@/admin/screen/confirmModal/ConfirmModal.css.ts";
+import ExecuteButton from "@/parts/ExecuteButton.tsx";
+import { executeButtonStyle } from "@/parts/style/executeButton.css.ts";
 import { Fragment } from "react";
 import Modal from "react-modal";
 
@@ -38,20 +42,17 @@ function ConfirmModal({
           {taskType}してもよろしいですか？
         </p>
         <div className={confirmModalStyle.buttonContainer}>
-          <button
-            type={"button"}
-            className={confirmModalStyle.buttonNo}
-            onClick={cancelHandler}
-          >
-            キャンセル
-          </button>
-          <button
-            type={"button"}
-            className={confirmModalStyle.buttonYes}
-            onClick={yesHandler}
-          >
-            はい
-          </button>
+          <ExecuteButton
+            name={"キャンセル"}
+            style={executeButtonStyle.confirmModalCancel}
+            executeHandler={cancelHandler}
+          />
+
+          <ExecuteButton
+            name={"はい"}
+            style={executeButtonStyle.confirmModalYes}
+            executeHandler={yesHandler}
+          />
         </div>
       </Modal>
     </Fragment>

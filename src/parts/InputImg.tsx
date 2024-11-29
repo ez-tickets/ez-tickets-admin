@@ -1,4 +1,4 @@
-import { inputImgStyle } from "@/components/style/InputImg.css.ts";
+import { inputImgStyle } from "@/parts/style/InputImg.css.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { open } from "@tauri-apps/plugin-dialog";
 import { Fragment } from "react";
@@ -38,9 +38,9 @@ function InputImg({ imgPath, image, setImgPath, setImage }: InputImgProps) {
         <div>
           <p>プレビュー</p>
           {imgPath !== "" ? (
-            <img src={image} alt={imgPath} />
+            <img src={image} alt={imgPath} className={inputImgStyle.img} />
           ) : (
-            <img src={""} alt={""} />
+            <div className={inputImgStyle.img} />
           )}
         </div>
       </div>

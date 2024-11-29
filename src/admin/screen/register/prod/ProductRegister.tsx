@@ -4,7 +4,7 @@ import ProdName from "@/admin/screen/register/prod/components/ProdName.tsx";
 import ProdPrice from "@/admin/screen/register/prod/components/ProdPrice.tsx";
 import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import { debug } from "@/admin/store/action/ProdRegistrationAction.ts";
-import Header from "@/components/Header.tsx";
+import Header from "@/parts/Header.tsx";
 import { Fragment, useState } from "react";
 
 function ProductRegister() {

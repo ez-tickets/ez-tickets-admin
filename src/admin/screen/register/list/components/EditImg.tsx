@@ -1,5 +1,5 @@
-import InputContainer from "@/components/InputContainer.tsx";
-import InputImg from "@/components/InputImg.tsx";
+import InputContainer from "@/parts/InputContainer.tsx";
+import InputImg from "@/parts/InputImg.tsx";
 import { Fragment } from "react";
 
 type EditImageProps = {

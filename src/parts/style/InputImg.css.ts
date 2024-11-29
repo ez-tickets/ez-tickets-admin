@@ -7,6 +7,14 @@ export const inputImgStyle = {
     display: "flex",
     alignItems: "center",
   }),
+
+  img: style({
+    width: "9rem",
+    height: "7rem",
+    margin: "0 10rem",
+    border: "1px dotted lightgray",
+    boxShadow: "1px 2px 3px lightgray",
+  }),
 };
 
 globalStyle(`${inputImgStyle.inputImg} button`, {
@@ -18,12 +26,4 @@ globalStyle(`${inputImgStyle.inputImg} button`, {
 
 globalStyle(`${inputImgStyle.inputImg} div p`, {
   textAlign: "center",
-});
-
-globalStyle(`${inputImgStyle.inputImg} div img`, {
-  width: "9rem",
-  height: "7rem",
-  margin: "0 10rem",
-  border: "1px dotted lightgray",
-  boxShadow: "1px 2px 3px lightgray",
 });

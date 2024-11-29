@@ -12,26 +12,24 @@ export const confirmModalStyle = {
     justifyContent: "center",
     alignItems: "center",
   }),
+};
 
-  buttonYes: style({
-    width: "12rem",
-    margin: "1rem",
-    padding: "1rem",
-    borderRadius: "5px",
-    boxShadow: "2px 2px 8px lightgray",
-    ":hover": {
-      backgroundColor: "gold",
-    },
-  }),
-
-  buttonNo: style({
-    width: "12rem",
-    margin: "1rem",
-    padding: "1rem",
-    borderRadius: "5px",
-    boxShadow: "2px 2px 8px lightgray",
-    ":hover": {
-      backgroundColor: "lightgray",
-    },
-  }),
+export const registerModalStyle = {
+  overlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    backgroundColor: "rgba(0,0,0,0.4)",
+    zIndex: 100,
+  },
+  content: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "40rem",
+    height: "20rem",
+    backgroundColor: "#fff",
+    borderRadius: "1rem",
+  },
 };
