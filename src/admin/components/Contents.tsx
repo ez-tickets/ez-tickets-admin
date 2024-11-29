@@ -6,9 +6,7 @@ function Contents() {
   return (
     <Fragment>
       <div className={contentsStyle.mainContainer}>
-        <div className={contentsStyle.wrapper}>
-          <Outlet />
-        </div>
+        <Outlet />
       </div>
     </Fragment>
   );

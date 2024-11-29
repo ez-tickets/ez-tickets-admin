@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "@/global.css";
-import Login from "@/Login/Login.tsx";
 import Admin from "@/admin/Admin.tsx";
-import Home from "@/admin/screen/Home/Home.tsx";
 import ProductList from "@/admin/screen/Product/ProductList.tsx";
-import CategoryRegister from "@/admin/screen/Register/Category/CategoryRegister.tsx";
-import RegisterList from "@/admin/screen/Register/List/RegisterList.tsx";
-import RegisteredCategoryList from "@/admin/screen/Register/List/components/RegisteredCategoryList.tsx";
-import RegisteredProductList from "@/admin/screen/Register/List/components/RegisteredProductList.tsx";
-import ProductRegister from "@/admin/screen/Register/Prod/ProductRegister.tsx";
+import Home from "@/admin/screen/home/Home.tsx";
+import CategoryRegister from "@/admin/screen/register/category/CategoryRegister.tsx";
+import RegisterList from "@/admin/screen/register/list/RegisterList.tsx";
+import RegisteredCategoryList from "@/admin/screen/register/list/components/RegisteredCategoryList.tsx";
+import RegisteredProductList from "@/admin/screen/register/list/components/RegisteredProductList.tsx";
+import ProductRegister from "@/admin/screen/register/prod/ProductRegister.tsx";
 import TitleBar from "@/application/TitleBar.tsx";
+import Login from "@/login/Login.tsx";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

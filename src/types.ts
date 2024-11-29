@@ -4,7 +4,7 @@ export interface User {
   password: string;
 }
 
-//ConfirmModal ActionType --------------------------------------
+//confirmModal ActionType --------------------------------------
 export interface ConfirmActionType {
   REGISTRATION: string;
   UPDATE: string;
