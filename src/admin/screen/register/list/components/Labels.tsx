@@ -6,8 +6,10 @@ function Labels() {
   return (
     <Fragment>
       <div className={labelsStyle.labelContainer}>
-        <Link to={"/admin/registerList"}>商品登録</Link>
-        <Link to={"/admin/registerList/registeredCategoryList"}>商品登録</Link>
+        <Link to={"/admin/registerList"}>商品</Link>
+        <Link to={"/admin/registerList/registeredCategoryList"}>
+          カテゴリー
+        </Link>
       </div>
     </Fragment>
   );

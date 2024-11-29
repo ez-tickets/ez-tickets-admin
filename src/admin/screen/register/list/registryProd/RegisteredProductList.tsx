@@ -1,5 +1,5 @@
-import RegisteredProducts from "@/admin/screen/register/list/components/RegisteredProducts.tsx";
-import { registeredProductListStyle } from "@/admin/screen/register/list/components/style/RegisteredProductList.css.ts";
+import RegisteredProducts from "@/admin/screen/register/list/registryProd/components/RegisteredProducts.tsx";
+import { registeredProductListStyle } from "@/admin/screen/register/list/registryProd/components/style/RegisteredProductList.css.ts";
 import ListContainer from "@/parts/ListContainer.tsx";
 import ListHeader from "@/parts/ListHeader.tsx";
 import { Fragment } from "react";

@@ -67,6 +67,7 @@ export const executeButtonStyle = {
     width: "12rem",
     margin: "1rem",
     padding: "1rem",
+    border: "1px solid rgba(0,0,0,0.4)",
     borderRadius: "5px",
     boxShadow: "2px 2px 8px lightgray",
     ":hover": {
@@ -78,6 +79,7 @@ export const executeButtonStyle = {
     width: "12rem",
     margin: "1rem",
     padding: "1rem",
+    border: "1px solid rgba(0,0,0,0.4)",
     borderRadius: "5px",
     boxShadow: "2px 2px 8px lightgray",
     ":hover": {

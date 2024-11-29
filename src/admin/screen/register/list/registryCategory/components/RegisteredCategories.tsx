@@ -1,4 +1,4 @@
-import RegisteredCategory from "@/admin/screen/register/list/components/RegisteredCategory.tsx";
+import RegisteredCategory from "@/admin/screen/register/list/registryCategory/components/RegisteredCategory.tsx";
 import { useCategoryRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import { Fragment } from "react";
 
@@ -8,7 +8,11 @@ function RegisteredCategories() {
   return (
     <Fragment>
       {categoryRegisterQuery.map((category) => (
-        <RegisteredCategory key={category.id} category={category.category} />
+        <RegisteredCategory
+          key={category.id}
+          id={category.id}
+          category={category.category}
+        />
       ))}
     </Fragment>
   );

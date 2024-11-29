@@ -1,5 +1,5 @@
-import RegisteredCategories from "@/admin/screen/register/list/components/RegisteredCategories.tsx";
-import { registeredCategoryListStyle } from "@/admin/screen/register/list/components/style/RegisteredCategoryList.css.ts";
+import RegisteredCategories from "@/admin/screen/register/list/registryCategory/components/RegisteredCategories.tsx";
+import { registeredCategoryListStyle } from "@/admin/screen/register/list/registryCategory/components/style/RegisteredCategoryList.css.ts";
 import ListContainer from "@/parts/ListContainer.tsx";
 import ListHeader from "@/parts/ListHeader.tsx";
 import { Fragment } from "react";
