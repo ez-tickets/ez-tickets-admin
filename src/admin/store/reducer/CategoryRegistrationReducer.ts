@@ -1,7 +1,9 @@
 import {
   type CategoryRegistrationAction,
+  DEBUG,
   DELETE_CATEGORY,
   REGISTRATION,
+  REPLACE_EDIT_CATEGORY,
 } from "@/admin/store/action/CategoryRegistrationAction.ts";
 import type { RegisterCategory } from "@/types.ts";
 
@@ -17,8 +19,19 @@ export const categoryReducer = (
     case REGISTRATION:
       // @ts-ignore wtf
       return [...state, { id: (categoryID++).toString(), ...action.payload }];
+    case REPLACE_EDIT_CATEGORY:
+      return state.map((category) =>
+        category.id === action.payload.id
+          ? { ...category, ...action.payload }
+          : category,
+      );
     case DELETE_CATEGORY:
       return state.filter((category) => category.id !== action.payload);
+    case DEBUG:
+      return [
+        ...state,
+        { id: (categoryID++).toString(), category: "category" },
+      ];
     default: {
       // linting error DO NOT TOUCH!
       // @ts-ignore

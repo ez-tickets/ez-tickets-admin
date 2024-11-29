@@ -1,6 +1,6 @@
 import {
+  confirmModalContainer,
   confirmModalStyle,
-  registerModalStyle,
 } from "@/admin/screen/confirmModal/ConfirmModal.css.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import { executeButtonStyle } from "@/parts/style/executeButton.css.ts";
@@ -37,7 +37,7 @@ function ConfirmModal({
   return (
     <Fragment>
       {/*@ts-ignore react version incompatible*/}
-      <Modal isOpen={modalView} style={registerModalStyle}>
+      <Modal isOpen={modalView} style={confirmModalContainer}>
         <p className={confirmModalStyle.text}>
           {taskType}してもよろしいですか？
         </p>

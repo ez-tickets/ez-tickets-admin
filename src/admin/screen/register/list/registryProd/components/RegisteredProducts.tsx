@@ -1,4 +1,4 @@
-import RegisteredProduct from "@/admin/screen/register/list/components/RegisteredProduct.tsx";
+import RegisteredProduct from "@/admin/screen/register/list/registryProd/components/RegisteredProduct.tsx";
 import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import { Fragment } from "react";
 

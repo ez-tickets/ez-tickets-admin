@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
-export const prodEditModalStyle = {
+export const editModalStyle = {
   closeIcon: style({
     position: "absolute",
     top: "0.5rem",
@@ -9,7 +9,7 @@ export const prodEditModalStyle = {
   }),
 };
 
-export const editModalStyle = {
+export const editModalContainer = {
   overlay: {
     position: "absolute",
     top: 0,

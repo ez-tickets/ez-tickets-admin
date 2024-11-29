@@ -14,7 +14,7 @@ export const confirmModalStyle = {
   }),
 };
 
-export const registerModalStyle = {
+export const confirmModalContainer = {
   overlay: {
     position: "absolute",
     top: 0,

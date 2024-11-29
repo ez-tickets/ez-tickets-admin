@@ -9,6 +9,7 @@ import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
 import { executeButtonStyle } from "@/parts/style/executeButton.css.ts";
 import type { RegisterProd } from "@/types.ts";
+import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment, useState } from "react";
 
 type ProdEditActionButtonProps = {
@@ -19,6 +20,7 @@ type ProdEditActionButtonProps = {
   setEditName: (name: string) => void;
   setEditPrice: (price: number) => void;
   setEditImgPath: (path: string) => void;
+  setImage: (image: string) => void;
   setEditModal: (flag: boolean) => void;
 };
 
@@ -30,6 +32,7 @@ function ProdEditActionButton({
   setEditName,
   setEditPrice,
   setEditImgPath,
+  setImage,
   setEditModal,
 }: ProdEditActionButtonProps) {
   const { prodRegisterDispatcher } = useProdRegistrationStore();
@@ -41,6 +44,7 @@ function ProdEditActionButton({
     setEditName(editProd.name);
     setEditPrice(editProd.price);
     setEditImgPath(editProd.img);
+    setImage(convertFileSrc(editProd.img));
   };
 
   const updateHandler = () => {
@@ -62,11 +66,11 @@ function ProdEditActionButton({
       switch (type) {
         case confirmAction.UPDATE:
           setTaskType(confirmAction.UPDATE);
-          setExecuteHandler(updateHandler);
+          setExecuteHandler(() => updateHandler);
           break;
         case confirmAction.DELETE:
           setTaskType(confirmAction.DELETE);
-          setExecuteHandler(deleteHandler);
+          setExecuteHandler(() => deleteHandler);
           break;
       }
       setModalView(true);
