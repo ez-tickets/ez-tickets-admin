@@ -17,6 +17,6 @@ export const listItemStyle = {
 
   dragStart: style({
     backgroundColor: "red",
-    display: "none"
+    display: "none",
   }),
 };

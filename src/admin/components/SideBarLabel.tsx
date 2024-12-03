@@ -1,5 +1,5 @@
-import { Fragment, type JSX, useState } from "react";
 import { sideBarStyle } from "@/admin/components/styles/SideBar.css.ts";
+import { Fragment, type JSX, useState } from "react";
 
 type SideBarLabelProps = {
   title: string;

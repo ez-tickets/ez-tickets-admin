@@ -65,7 +65,7 @@ export const sideBarStyle = {
     alignItems: "center",
     ":hover": {
       backgroundColor: "rgba(255,255,255,0.46)",
-    }
+    },
   }),
 };
 
@@ -86,9 +86,12 @@ globalStyle(`${sideBarStyle.contentsContainer} summary`, {
   alignItems: "center",
 });
 
-globalStyle(`${sideBarStyle.contentsContainer} summary::-webkit-details-marker`, {
-  display: "none"
-});
+globalStyle(
+  `${sideBarStyle.contentsContainer} summary::-webkit-details-marker`,
+  {
+    display: "none",
+  },
+);
 
 globalStyle(`${sideBarStyle.contentsContainer} a`, {
   display: "block",
