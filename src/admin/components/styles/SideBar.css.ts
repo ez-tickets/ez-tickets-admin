@@ -45,6 +45,28 @@ export const sideBarStyle = {
     position: "relative",
     paddingBottom: "30px",
   }),
+
+  textContainer: style({
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    padding: "12px 0",
+  }),
+
+  arrow: style({
+    marginRight: "10px",
+  }),
+
+  addButton: style({
+    width: "1.5rem",
+    padding: "10px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    ":hover": {
+      backgroundColor: "rgba(255,255,255,0.46)",
+    },
+  }),
 };
 
 globalStyle(`${sideBarStyle.contentsContainer} details`, {
@@ -59,14 +81,23 @@ globalStyle(`${sideBarStyle.contentsContainer} details:hover`, {
 globalStyle(`${sideBarStyle.contentsContainer} summary`, {
   fontSize: "14px",
   textIndent: "1rem",
-  padding: "12px 0",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
 });
+
+globalStyle(
+  `${sideBarStyle.contentsContainer} summary::-webkit-details-marker`,
+  {
+    display: "none",
+  },
+);
 
 globalStyle(`${sideBarStyle.contentsContainer} a`, {
   display: "block",
   fontSize: "14px",
   color: "white",
-  textIndent: "2rem",
+  textIndent: "2.5rem",
   padding: "12px 0",
   listStyle: "none",
 });

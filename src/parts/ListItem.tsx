@@ -10,7 +10,11 @@ function ListItem({ block, executeHandler }: ListItemProps) {
   return (
     <Fragment>
       {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
-      <div className={listItemStyle.item} onClick={executeHandler}>
+      <div
+        className={listItemStyle.item}
+        onClick={executeHandler}
+        draggable={true}
+      >
         {block}
       </div>
     </Fragment>
