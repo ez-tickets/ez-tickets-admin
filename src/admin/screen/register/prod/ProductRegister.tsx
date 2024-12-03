@@ -1,7 +1,6 @@
 import ProdActiveButton from "@/admin/screen/register/prod/components/ProdActiveButton.tsx";
 import ProdImg from "@/admin/screen/register/prod/components/ProdImg.tsx";
 import ProdName from "@/admin/screen/register/prod/components/ProdName.tsx";
-import ProdPrice from "@/admin/screen/register/prod/components/ProdPrice.tsx";
 import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import { debug } from "@/admin/store/action/ProdRegistrationAction.ts";
 import Header from "@/parts/Header.tsx";
@@ -34,7 +33,6 @@ function ProductRegister() {
       />
 
       <ProdName prodName={prodName} setProdName={setProdName} />
-      <ProdPrice prodPrice={prodPrice} setProdPrice={setProdPrice} />
       <ProdImg
         prodImgPath={prodImgPath}
         setProdImgPath={setProdImgPath}

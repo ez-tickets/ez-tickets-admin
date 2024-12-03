@@ -14,4 +14,9 @@ export const listItemStyle = {
         "1px 1px 1px rgba(41,255,223,1) inset, -1px -1px 1px rgba(41,255,223,1) inset",
     },
   }),
+
+  dragStart: style({
+    backgroundColor: "red",
+    display: "none"
+  }),
 };

@@ -24,16 +24,18 @@ function SideBar() {
                   <Link to={"registerList"}>登録詳細</Link>
                 </Fragment>
               }
+              addButton={false}
             />
 
             <SideBarLabel
-              title={"メニュー管理"}
+              title={"カタログ管理"}
               element={
                 <Fragment>
-                  <Link to={"productList"}>メニュー作成</Link>
-                  <Link to={"#"}>メニュー詳細</Link>
+                  <Link to={"productList"}>カタログ作成</Link>
+                  <Link to={"#"}>カタログ詳細</Link>
                 </Fragment>
               }
+              addButton={true}
             />
           </div>
         </div>
