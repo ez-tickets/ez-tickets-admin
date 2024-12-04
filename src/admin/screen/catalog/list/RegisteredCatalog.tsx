@@ -19,7 +19,7 @@ function RegisteredCatalog() {
         title={title}
         element={
           <ExecuteButton
-            name={`${title}登録`}
+            name={"新規登録"}
             style={executeButtonStyle.default}
             executeHandler={() =>
               navigate("/admin/catalogRegister", { state: { title } })
