@@ -4,6 +4,13 @@ export interface User {
   password: string;
 }
 
+//confirmModal ActionType --------------------------------------
+export interface ConfirmActionType {
+  REGISTRATION: string;
+  UPDATE: string;
+  DELETE: string;
+}
+
 //登録商品 ------------------------------------------------
 export interface InputProdRegister {
   name: string;

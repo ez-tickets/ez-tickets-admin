@@ -1,4 +1,4 @@
-import { style } from "@vanilla-extract/css";
+import { globalStyle, style } from "@vanilla-extract/css";
 
 export const sideBarStyle = {
   sideContainer: style({
@@ -46,28 +46,63 @@ export const sideBarStyle = {
     paddingBottom: "30px",
   }),
 
-  details: style({
-    transition: "background-color 0.3s",
-    ":hover": {
-      cursor: "pointer",
-      backgroundColor: "#2a5583",
-    },
-  }),
-
-  summary: style({
-    fontSize: "14px",
-    textIndent: "1rem",
+  textContainer: style({
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
     padding: "12px 0",
   }),
 
-  li: style({
-    fontSize: "14px",
-    color: "white",
-    textIndent: "2rem",
-    padding: "12px 0",
-    listStyle: "none",
+  arrow: style({
+    marginRight: "10px",
+  }),
+
+  addButton: style({
+    width: "1.5rem",
+    padding: "10px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: "5px",
     ":hover": {
-      backgroundColor: "rgba(41,255,223,0.71)",
+      backgroundColor: "rgba(255,255,255,0.46)",
     },
   }),
 };
+
+globalStyle(`${sideBarStyle.contentsContainer} details`, {
+  transition: "background-color 0.3s",
+});
+
+globalStyle(`${sideBarStyle.contentsContainer} details:hover`, {
+  cursor: "pointer",
+  backgroundColor: "#2a5583",
+});
+
+globalStyle(`${sideBarStyle.contentsContainer} summary`, {
+  fontSize: "14px",
+  textIndent: "1rem",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+});
+
+globalStyle(
+  `${sideBarStyle.contentsContainer} summary::-webkit-details-marker`,
+  {
+    display: "none",
+  },
+);
+
+globalStyle(`${sideBarStyle.contentsContainer} a`, {
+  display: "block",
+  fontSize: "14px",
+  color: "white",
+  textIndent: "2.5rem",
+  padding: "12px 0",
+  listStyle: "none",
+});
+
+globalStyle(`${sideBarStyle.contentsContainer} a:hover`, {
+  backgroundColor: "rgba(41,255,223,0.71)",
+});

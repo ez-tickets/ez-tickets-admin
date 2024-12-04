@@ -1,4 +1,4 @@
-import type { InputCategoryRegister } from "@/types.ts";
+import type { InputCategoryRegister, RegisterCategory } from "@/types.ts";
 
 export const REGISTRATION = "registration" as const;
 export const registration = (category: InputCategoryRegister) => ({
@@ -6,12 +6,25 @@ export const registration = (category: InputCategoryRegister) => ({
   payload: category,
 });
 
+export const REPLACE_EDIT_CATEGORY = "replace-edit-category" as const;
+export const replaceEditCategory = (category: RegisterCategory) => ({
+  type: REPLACE_EDIT_CATEGORY,
+  payload: category,
+});
+
 export const DELETE_CATEGORY = "delete-category";
-export const delete_category = (id: string) => ({
+export const deleteCategory = (id: string) => ({
   type: DELETE_CATEGORY,
   payload: id,
 });
 
+export const DEBUG = "debug" as const;
+export const debug = () => ({
+  type: DEBUG,
+});
+
 export type CategoryRegistrationAction =
   | ReturnType<typeof registration>
-  | ReturnType<typeof delete_category>;
+  | ReturnType<typeof replaceEditCategory>
+  | ReturnType<typeof deleteCategory>
+  | ReturnType<typeof debug>;
