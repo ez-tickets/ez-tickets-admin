@@ -63,6 +63,7 @@ export const sideBarStyle = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: "5px",
     ":hover": {
       backgroundColor: "rgba(255,255,255,0.46)",
     },

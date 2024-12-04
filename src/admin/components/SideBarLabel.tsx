@@ -5,9 +5,15 @@ type SideBarLabelProps = {
   title: string;
   element: JSX.Element;
   addButton: boolean;
+  executeHandler?: () => void;
 };
 
-function SideBarLabel({ title, element, addButton }: SideBarLabelProps) {
+function SideBarLabel({
+  title,
+  element,
+  addButton,
+  executeHandler,
+}: SideBarLabelProps) {
   const [expand, setExpand] = useState<boolean>(false);
 
   return (
@@ -23,7 +29,11 @@ function SideBarLabel({ title, element, addButton }: SideBarLabelProps) {
             {title}
           </div>
           {addButton && (
-            <button type={"button"} className={sideBarStyle.addButton}>
+            <button
+              type={"button"}
+              className={sideBarStyle.addButton}
+              onClick={executeHandler}
+            >
               +
             </button>
           )}

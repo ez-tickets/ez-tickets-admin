@@ -1,9 +1,13 @@
 import SideBarLabel from "@/admin/components/SideBarLabel.tsx";
 import { sideBarStyle } from "@/admin/components/styles/SideBar.css.ts";
+import { useCategoryRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SideBar() {
+  const { categoryRegisterQuery } = useCategoryRegistrationStore();
+  const navigate = useNavigate();
+
   return (
     <Fragment>
       <div className={sideBarStyle.sideContainer}>
@@ -20,22 +24,30 @@ function SideBar() {
               element={
                 <Fragment>
                   <Link to={"productRegister"}>商品登録</Link>
-                  <Link to={"categoryRegister"}>カテゴリー登録</Link>
-                  <Link to={"registerList"}>登録詳細</Link>
+                  <Link to={"registeredProd"}>登録詳細</Link>
                 </Fragment>
               }
               addButton={false}
             />
 
             <SideBarLabel
-              title={"カタログ管理"}
+              title={"カタログ"}
               element={
                 <Fragment>
-                  <Link to={"productList"}>カタログ作成</Link>
-                  <Link to={"#"}>カタログ詳細</Link>
+                  <Link to={"registeredCategory"}>カタログ管理</Link>
+                  {categoryRegisterQuery.map((category) => (
+                    <Link
+                      to="registeredCatalog"
+                      key={category.id}
+                      state={{ title: category.category }}
+                    >
+                      {category.category}
+                    </Link>
+                  ))}
                 </Fragment>
               }
               addButton={true}
+              executeHandler={() => navigate("categoryRegister")}
             />
           </div>
         </div>

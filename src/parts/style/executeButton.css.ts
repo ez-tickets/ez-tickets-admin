@@ -1,6 +1,16 @@
 import { style } from "@vanilla-extract/css";
 
 export const executeButtonStyle = {
+  default: style({
+    padding: "10px 20px",
+    display: "block",
+    border: "1px solid rgba(0,0,0,0.4)",
+    borderRadius: "5px",
+    ":hover": {
+      backgroundColor: "gold",
+    },
+  }),
+
   run: style({
     margin: "7rem 1rem",
     padding: "10px 20px",

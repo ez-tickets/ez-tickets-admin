@@ -15,6 +15,11 @@ export const inputImgStyle = {
     border: "1px dotted lightgray",
     boxShadow: "1px 2px 3px lightgray",
   }),
+
+  selectContainer: style({
+    display: "flex",
+    flexDirection: "column",
+  }),
 };
 
 globalStyle(`${inputImgStyle.inputImg} button`, {
@@ -25,5 +30,10 @@ globalStyle(`${inputImgStyle.inputImg} button`, {
 });
 
 globalStyle(`${inputImgStyle.inputImg} div p`, {
+  textAlign: "center",
+});
+
+globalStyle(`${inputImgStyle.selectContainer} span`, {
+  color: "red",
   textAlign: "center",
 });
