@@ -5,15 +5,26 @@ type InputProps = {
   guide: string;
   type: string;
   label: string;
+  required?: boolean;
   value: string | number;
   executeHandler: (input: string) => void;
 };
 
-function Input({ guide, type, label, value, executeHandler }: InputProps) {
+function Input({
+  guide,
+  type,
+  label,
+  required,
+  value,
+  executeHandler,
+}: InputProps) {
   return (
     <Fragment>
       <div className={inputStyle.input}>
-        <p>{guide}</p>
+        <p>
+          {guide}
+          <span>{required && "(必須)"}</span>
+        </p>
         <input
           type={type}
           id={label}

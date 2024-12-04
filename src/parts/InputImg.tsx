@@ -8,9 +8,16 @@ type InputImgProps = {
   image: string;
   setImgPath: (path: string) => void;
   setImage: (image: string) => void;
+  required?: boolean;
 };
 
-function InputImg({ imgPath, image, setImgPath, setImage }: InputImgProps) {
+function InputImg({
+  imgPath,
+  image,
+  setImgPath,
+  setImage,
+  required,
+}: InputImgProps) {
   const selectImgHandler = async () => {
     const path = await open({
       multiple: false,
@@ -31,9 +38,12 @@ function InputImg({ imgPath, image, setImgPath, setImage }: InputImgProps) {
   return (
     <Fragment>
       <div className={inputImgStyle.inputImg}>
-        <button type={"button"} onClick={selectImgHandler}>
-          ファイルを選択
-        </button>
+        <div className={inputImgStyle.selectContainer}>
+          <span>{required ? "(必須)" : ""}</span>
+          <button type={"button"} onClick={selectImgHandler}>
+            ファイルを選択
+          </button>
+        </div>
 
         <div>
           <p>プレビュー</p>
