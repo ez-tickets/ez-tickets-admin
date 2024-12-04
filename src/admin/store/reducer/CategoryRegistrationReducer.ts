@@ -30,7 +30,10 @@ export const categoryReducer = (
     case DEBUG:
       return [
         ...state,
-        { id: (categoryID++).toString(), category: `カタログ${(categoryID).toString()}` },
+        {
+          id: (categoryID++).toString(),
+          category: `カタログ${(categoryID).toString()}`,
+        },
       ];
     default: {
       // linting error DO NOT TOUCH!
