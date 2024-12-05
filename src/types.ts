@@ -35,21 +35,14 @@ export type RegisterCategory = {
   category: string;
 };
 
-//商品登録情報 ---------------------------------------------
-export interface Prod {
-  name: string;
-  price: number;
-  quantity: number;
-}
-
-export interface ProdOption {
+//カタログ登録情報 ---------------------------------------------
+export interface Catalog {
   id: string;
   name: string;
+  desc: string;
   price: number;
-}
-
-export interface RegisterProduct {
-  id: string;
-  prod: Prod;
-  options: ProdOption[];
+  img: string;
+  main: RegisterProd[];
+  sub: RegisterProd[];
+  options: RegisterProd[];
 }
