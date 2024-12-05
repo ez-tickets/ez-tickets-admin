@@ -17,14 +17,17 @@ export const catalogReducer = (
 
   switch (action.type) {
     case REGISTRATION:
-      // @ts-ignore wtf
-      return [...prev, { id: (catalogID++).toString(), ...action.payload }];
-    case REPLACE_EDIT_CATALOG:
+      return [
+        ...prev,
+        // @ts-ignore wtf
+        { id: (catalogID++).toString(), ...(<Catalog>action.payload) },
+      ];
+    case REPLACE_EDIT_CATALOG: {
+      const payload = <Catalog>action.payload;
       return state.map((catalog) =>
-        catalog.id === action.payload.id
-          ? { catalog, ...action.payload }
-          : catalog,
+        catalog.id === payload.id ? { catalog, ...payload } : catalog,
       );
+    }
     case DELETE_CATALOG:
       return state.filter((catalog) => catalog.id !== action.payload);
     case DEBUG:

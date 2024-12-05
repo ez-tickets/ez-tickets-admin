@@ -19,12 +19,12 @@ export const categoryReducer = (
     case REGISTRATION:
       // @ts-ignore wtf
       return [...state, { id: (categoryID++).toString(), ...action.payload }];
-    case REPLACE_EDIT_CATEGORY:
+    case REPLACE_EDIT_CATEGORY: {
+      const payload = <RegisterCategory>action.payload;
       return state.map((category) =>
-        category.id === action.payload.id
-          ? { ...category, ...action.payload }
-          : category,
+        category.id === payload.id ? { ...category, ...payload } : category,
       );
+    }
     case DELETE_CATEGORY:
       return state.filter((category) => category.id !== action.payload);
     case DEBUG:
