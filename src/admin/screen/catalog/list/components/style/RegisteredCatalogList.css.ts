@@ -6,6 +6,12 @@ export const registeredCatalogListStyle = {
     padding: "1rem",
     borderRight: "1px solid lightgray",
     fontSize: "0.9rem",
+
+    // width: "9rem",
+    // height: "7rem",
+    // margin: "0 10rem",
+    // border: "1px dotted lightgray",
+    // boxShadow: "1px 2px 3px lightgray",
   }),
 
   name: style({

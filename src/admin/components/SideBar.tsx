@@ -34,7 +34,7 @@ function SideBar() {
               title={"カタログ"}
               element={
                 <Fragment>
-                  <Link to={"registeredCategory"}>カタログ管理</Link>
+                  <Link to={"registeredCategory"}>カテゴリー管理</Link>
                   {categoryRegisterQuery.map((category) => (
                     <Link
                       to="registeredCatalog"

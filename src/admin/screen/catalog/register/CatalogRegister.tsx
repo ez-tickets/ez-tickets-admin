@@ -6,6 +6,8 @@ import CatalogName from "@/admin/screen/catalog/register/components/CatalogName.
 import CatalogOption from "@/admin/screen/catalog/register/components/CatalogOption.tsx";
 import CatalogPrice from "@/admin/screen/catalog/register/components/CatalogPrice.tsx";
 import CatalogSub from "@/admin/screen/catalog/register/components/CatalogSub.tsx";
+import { useCatalogRegistrationStore } from "@/admin/store/RegistrationStore.ts";
+import { debug } from "@/admin/store/action/CatalogRegistrationAction.ts";
 import Header from "@/parts/Header.tsx";
 import { Fragment, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -23,9 +25,24 @@ function CatalogRegister() {
   const [imgPath, setImgPath] = useState<string>("");
   const [image, setImage] = useState<string>("");
 
+  //debug
+  const { catalogRegisterDispatcher } = useCatalogRegistrationStore();
+
   return (
     <Fragment>
-      <Header title={title} />
+      <Header
+        title={title}
+        element={
+          <Fragment>
+            <button
+              type={"button"}
+              onClick={() => catalogRegisterDispatcher(debug())}
+            >
+              登録
+            </button>
+          </Fragment>
+        }
+      />
       <CatalogName name={name} setName={setName} />
       <CatalogDesc desc={desc} setDesc={setDesc} />
       <CatalogPrice price={price} setPrice={setPrice} />

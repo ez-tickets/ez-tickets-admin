@@ -4,7 +4,7 @@ import "@/global.css";
 import Admin from "@/admin/Admin.tsx";
 import RegisteredCat from "@/admin/screen/catalog/category/list/RegisteredCat.tsx";
 import CategoryRegister from "@/admin/screen/catalog/category/register/CategoryRegister.tsx";
-import RegisteredCatalog from "@/admin/screen/catalog/list/RegisteredCatalog.tsx";
+import RegisteredCtlg from "@/admin/screen/catalog/list/RegisteredCtlg.tsx";
 import CatalogRegister from "@/admin/screen/catalog/register/CatalogRegister.tsx";
 import Home from "@/admin/screen/home/Home.tsx";
 import RegisteredProd from "@/admin/screen/product/list/RegisteredProd.tsx";
@@ -31,7 +31,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           {/* list */}
           <Route path="registeredProd" element={<RegisteredProd />} />
           <Route path="registeredCategory" element={<RegisteredCat />} />
-          <Route path="registeredCatalog" element={<RegisteredCatalog />} />
+          <Route path="registeredCatalog" element={<RegisteredCtlg />} />
         </Route>
       </Routes>
     </MemoryRouter>

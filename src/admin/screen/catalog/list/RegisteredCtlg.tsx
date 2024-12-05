@@ -9,7 +9,7 @@ type State = {
   title: string;
 };
 
-function RegisteredCatalog() {
+function RegisteredCtlg() {
   const { title } = useLocation().state as State;
   const navigate = useNavigate();
 
@@ -32,4 +32,4 @@ function RegisteredCatalog() {
   );
 }
 
-export default RegisteredCatalog;
+export default RegisteredCtlg;
