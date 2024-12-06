@@ -1,3 +1,4 @@
+import { registeredCatalogStyle } from "@/admin/screen/catalog/list/components/style/RegisteredCatalog.css.ts";
 import { registeredCatalogListStyle } from "@/admin/screen/catalog/list/components/style/RegisteredCatalogList.css.ts";
 import ListItem from "@/parts/ListItem.tsx";
 import type { RegisterProd } from "@/types.ts";
@@ -28,15 +29,15 @@ function RegisteredCatalog({
       <ListItem
         block={
           <Fragment>
-            <div className={registeredCatalogListStyle.img}>
+            <div className={registeredCatalogStyle.imgContainer}>
               {img !== "" ? (
                 <img
                   src={convertFileSrc(img)}
                   alt={img}
-                  className={registeredCatalogListStyle.img}
+                  className={registeredCatalogStyle.img}
                 />
               ) : (
-                <div className={registeredCatalogListStyle.img} />
+                <div className={registeredCatalogStyle.img} />
               )}
             </div>
             <div className={registeredCatalogListStyle.name}>{name}</div>

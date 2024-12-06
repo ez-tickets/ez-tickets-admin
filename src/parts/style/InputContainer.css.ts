@@ -8,7 +8,7 @@ export const inputContainerStyle = {
 
   title: style({
     width: "40%",
-    padding: "5rem 10rem",
+    padding: "4rem 0",
     textAlign: "center",
   }),
 };

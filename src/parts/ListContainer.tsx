@@ -3,15 +3,24 @@ import { Fragment, type JSX } from "react";
 
 type ListContainerProps = {
   title: string;
+  buttonElement?: JSX.Element;
   headerContainer: JSX.Element;
   lists: JSX.Element;
 };
 
-function ListContainer({ title, headerContainer, lists }: ListContainerProps) {
+function ListContainer({
+  title,
+  buttonElement,
+  headerContainer,
+  lists,
+}: ListContainerProps) {
   return (
     <Fragment>
       <div className={listContainerStyle.container}>
-        <h2 className={listContainerStyle.title}>{title}</h2>
+        <div className={listContainerStyle.topContainer}>
+          <h2 className={listContainerStyle.title}>{title}</h2>
+          <div>{buttonElement}</div>
+        </div>
         {headerContainer}
         {lists}
       </div>
