@@ -30,7 +30,6 @@ export const prodRegisterReducer = (
         {
           id: (prodID++).toString(),
           name: "sample product",
-          price: 100,
           img: "",
         },
       ];

@@ -4,7 +4,7 @@ import { Fragment, type JSX, useState } from "react";
 type SideBarLabelProps = {
   title: string;
   element: JSX.Element;
-  addButton: boolean;
+  addButton?: boolean;
   executeHandler?: () => void;
 };
 

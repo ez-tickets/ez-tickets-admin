@@ -35,7 +35,7 @@ export const executeButtonStyle = {
     },
   }),
 
-  //edit Modal --------------------------------------------
+  //edit ManageEntryModal --------------------------------------------
   editModalUpdate: style({
     margin: "5rem 1rem 0",
     padding: "10px 20px",
@@ -72,7 +72,7 @@ export const executeButtonStyle = {
     },
   }),
 
-  //confirm Modal ---------------------------------------
+  //confirm ManageEntryModal ---------------------------------------
   confirmModalYes: style({
     width: "12rem",
     margin: "1rem",
