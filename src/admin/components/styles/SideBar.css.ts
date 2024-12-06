@@ -24,11 +24,6 @@ export const sideBarStyle = {
     },
   }),
 
-  wrapper: style({
-    position: "relative",
-    width: "100%",
-  }),
-
   home: style({
     position: "sticky",
     top: 0,

@@ -14,14 +14,12 @@ export interface ConfirmActionType {
 //登録商品 ------------------------------------------------
 export interface InputProdRegister {
   name: string;
-  price: number;
   img: string;
 }
 
 export interface RegisterProd {
   id: string;
   name: string;
-  price: number;
   img: string;
 }
 
@@ -36,7 +34,17 @@ export type RegisterCategory = {
 };
 
 //カタログ登録情報 ---------------------------------------------
-export interface Catalog {
+export interface InputCatalog {
+  name: string;
+  desc: string;
+  price: number;
+  img: string;
+  main: RegisterProd[];
+  sub: RegisterProd[];
+  options: RegisterProd[];
+}
+
+export interface RegisterCatalog {
   id: string;
   name: string;
   desc: string;

@@ -5,10 +5,10 @@ import { Fragment } from "react";
 function Items() {
   return (
     <Fragment>
-      <Item path={"registerList"} labelName={"登録管理"} icon={<IconBox />} />
+      <Item path={"registeredProd"} labelName={"商品管理"} icon={<IconBox />} />
       <Item
-        path={"productList"}
-        labelName={"メニュー管理"}
+        path={"registeredCategory"}
+        labelName={"カテゴリー管理"}
         icon={<IconToolsKitchen2 />}
       />
     </Fragment>

@@ -4,7 +4,11 @@ import type { ProdRegistrationAction } from "@/admin/store/action/ProdRegistrati
 import { catalogReducer } from "@/admin/store/reducer/CatalogRegistrationReducer.ts";
 import { categoryReducer } from "@/admin/store/reducer/CategoryRegistrationReducer.ts";
 import { prodRegisterReducer } from "@/admin/store/reducer/ProdRegistrationReducer.ts";
-import type { Catalog, RegisterCategory, RegisterProd } from "@/types.ts";
+import type {
+  RegisterCatalog,
+  RegisterCategory,
+  RegisterProd,
+} from "@/types.ts";
 import { create } from "zustand/react";
 
 interface ProdRegisterQueryDispatcher {
@@ -47,7 +51,7 @@ export const useCategoryRegistrationStore =
   }));
 
 interface CatalogRegisterQueryDispatcher {
-  catalogRegisterQuery: Catalog[];
+  catalogRegisterQuery: RegisterCatalog[];
   catalogRegisterDispatcher: (action: CatalogRegistrationAction) => void;
 }
 

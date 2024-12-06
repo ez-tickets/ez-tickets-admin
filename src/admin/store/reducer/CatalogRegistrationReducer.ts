@@ -5,13 +5,13 @@ import {
   REGISTRATION,
   REPLACE_EDIT_CATALOG,
 } from "@/admin/store/action/CatalogRegistrationAction.ts";
-import type { Catalog } from "@/types.ts";
+import type { RegisterCatalog } from "@/types.ts";
 
 let catalogID = 1;
 
 export const catalogReducer = (
   action: CatalogRegistrationAction,
-  prev: Catalog[],
+  prev: RegisterCatalog[],
 ) => {
   const state = prev;
 
@@ -20,10 +20,10 @@ export const catalogReducer = (
       return [
         ...prev,
         // @ts-ignore wtf
-        { id: (catalogID++).toString(), ...(<Catalog>action.payload) },
+        { id: (catalogID++).toString(), ...action.payload },
       ];
     case REPLACE_EDIT_CATALOG: {
-      const payload = <Catalog>action.payload;
+      const payload = <RegisterCatalog>action.payload;
       return state.map((catalog) =>
         catalog.id === payload.id ? { catalog, ...payload } : catalog,
       );
@@ -39,9 +39,17 @@ export const catalogReducer = (
           desc: "厳選された素材と伝統の技法で作り上げた、心温まる一杯。醤油の深い旨味と香りが際立つ、懐かしさと新しさを融合させたラーメンです。",
           price: 950,
           img: "",
-          main: ["醤油ラーメン"],
-          sub: ["餃子", "唐揚げ", "チャーハン"],
-          options: ["チャーシュー", "メンマ", "煮卵", "もやし", "ねぎ"],
+          main: [{ id: "1", name: "醤油ラーメン", price: 950 }],
+          sub: [
+            { id: "1", name: "餃子", price: 400 },
+            { id: "2", name: "唐揚げ", price: 300 },
+            { id: "3", name: "チャーハン", price: 400 },
+          ],
+          options: [
+            { id: "1", name: "チャーシュー", price: 200 },
+            { id: "2", name: "煮卵", price: 100 },
+            { id: "3", name: "メンマ", price: 50 },
+          ],
         },
       ];
     default: {
