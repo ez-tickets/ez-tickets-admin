@@ -3,7 +3,12 @@ import InputContainer from "@/parts/InputContainer.tsx";
 import PullDown from "@/parts/PullDown.tsx";
 import { Fragment } from "react";
 
-function CatalogSub() {
+type CatalogSubProps = {
+  sub: string;
+  setSub: (sub: string) => void;
+};
+
+function CatalogSub({ sub, setSub }: CatalogSubProps) {
   const { prodRegisterQuery } = useProdRegistrationStore();
 
   return (
@@ -14,7 +19,8 @@ function CatalogSub() {
         inputElement={
           <PullDown
             label={"sub"}
-            guide={"サブ商品を選択"}
+            guide={"サブ商品を1つ選択"}
+            value={sub}
             options={
               <Fragment>
                 {prodRegisterQuery.map((prod) => (
@@ -24,6 +30,7 @@ function CatalogSub() {
                 ))}
               </Fragment>
             }
+            executeHandler={setSub}
           />
         }
       />

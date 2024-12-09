@@ -3,7 +3,12 @@ import InputContainer from "@/parts/InputContainer.tsx";
 import PullDown from "@/parts/PullDown.tsx";
 import { Fragment } from "react";
 
-function CatalogOption() {
+type CatalogOption = {
+  options: string;
+  setOptions: (option: string) => void;
+};
+
+function CatalogOption({ options, setOptions }: CatalogOption) {
   const { prodRegisterQuery } = useProdRegistrationStore();
 
   return (
@@ -14,7 +19,8 @@ function CatalogOption() {
         inputElement={
           <PullDown
             label={"option"}
-            guide={"オプションを選択"}
+            guide={"推奨オプションを複数選択"}
+            value={options}
             options={
               <Fragment>
                 {prodRegisterQuery.map((prod) => (
@@ -24,6 +30,7 @@ function CatalogOption() {
                 ))}
               </Fragment>
             }
+            executeHandler={setOptions}
           />
         }
       />

@@ -1,24 +1,24 @@
 import { globalStyle, style } from "@vanilla-extract/css";
 
-export const pullDownStyle = {
-  selectBox: style({
+export const inputStyle = {
+  input: style({
     position: "relative",
     width: "60%",
-    padding: "1.5rem 0rem",
+    padding: "1.75rem 0rem",
   }),
 };
 
-globalStyle(`${pullDownStyle.selectBox} p`, {
-  color: "gray",
-  textIndent: "0.5rem",
-});
-
-globalStyle(`${pullDownStyle.selectBox} span`, {
+globalStyle(`${inputStyle.input} span`, {
   padding: "0 0.5rem",
   color: "red",
 });
 
-globalStyle(`${pullDownStyle.selectBox} select`, {
+globalStyle(`${inputStyle.input} p`, {
+  color: "gray",
+  textIndent: "0.5rem",
+});
+
+globalStyle(`${inputStyle.input} input`, {
   width: "80%",
   padding: "1rem",
   backgroundColor: "#fff",

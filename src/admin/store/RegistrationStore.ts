@@ -1,8 +1,14 @@
+import type { CatalogRegistrationAction } from "@/admin/store/action/CatalogRegistrationAction.ts";
 import type { CategoryRegistrationAction } from "@/admin/store/action/CategoryRegistrationAction.ts";
 import type { ProdRegistrationAction } from "@/admin/store/action/ProdRegistrationAction.ts";
+import { catalogReducer } from "@/admin/store/reducer/CatalogRegistrationReducer.ts";
 import { categoryReducer } from "@/admin/store/reducer/CategoryRegistrationReducer.ts";
 import { prodRegisterReducer } from "@/admin/store/reducer/ProdRegistrationReducer.ts";
-import type { RegisterCategory, RegisterProd } from "@/types.ts";
+import type {
+  RegisterCatalog,
+  RegisterCategory,
+  RegisterProd,
+} from "@/types.ts";
 import { create } from "zustand/react";
 
 interface ProdRegisterQueryDispatcher {
@@ -39,6 +45,25 @@ export const useCategoryRegistrationStore =
           categoryRegisterQuery: categoryReducer(
             action,
             state.categoryRegisterQuery,
+          ),
+        };
+      }),
+  }));
+
+interface CatalogRegisterQueryDispatcher {
+  catalogRegisterQuery: RegisterCatalog[];
+  catalogRegisterDispatcher: (action: CatalogRegistrationAction) => void;
+}
+
+export const useCatalogRegistrationStore =
+  create<CatalogRegisterQueryDispatcher>((set) => ({
+    catalogRegisterQuery: [],
+    catalogRegisterDispatcher: (action) =>
+      set((state) => {
+        return {
+          catalogRegisterQuery: catalogReducer(
+            action,
+            state.catalogRegisterQuery,
           ),
         };
       }),
