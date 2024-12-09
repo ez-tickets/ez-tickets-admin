@@ -3,10 +3,7 @@ import CatalogDesc from "@/admin/screen/catalog/register/components/CatalogDesc.
 import CatalogImg from "@/admin/screen/catalog/register/components/CatalogImg.tsx";
 import CatalogMain from "@/admin/screen/catalog/register/components/CatalogMain.tsx";
 import CatalogName from "@/admin/screen/catalog/register/components/CatalogName.tsx";
-import CatalogOption from "@/admin/screen/catalog/register/components/CatalogOption.tsx";
 import CatalogPrice from "@/admin/screen/catalog/register/components/CatalogPrice.tsx";
-import CatalogSub from "@/admin/screen/catalog/register/components/CatalogSub.tsx";
-import { registerCtlgModalStyle } from "@/admin/screen/catalog/register/components/style/RegisterCtlgModal.css.ts";
 import ManageEntryModal from "@/admin/screen/modal/manageEntryModal/ManageEntryModal.tsx";
 import type { RegisterItem } from "@/types.ts";
 import { Fragment, useState } from "react";
@@ -25,33 +22,12 @@ function RegisterCtlgModal({
   const [price, setPrice] = useState<number>(0);
   const [imgPath, setImgPath] = useState<string>("");
   const [image, setImage] = useState<string>("");
-  const [main, setMain] = useState<RegisterItem[]>([]);
-  const [sub, setSub] = useState<RegisterItem[]>([]);
-  const [options, setOptions] = useState<RegisterItem[]>([]);
-  const [item, setItem] = useState<boolean>(false);
+  const [main, setMain] = useState<RegisterItem>({ id: "", name: "" });
 
   return (
     <Fragment>
       <ManageEntryModal
         modalTitle={"新規登録"}
-        headerElement={
-          <div className={registerCtlgModalStyle.buttonContainer}>
-            <button
-              type={"button"}
-              className={registerCtlgModalStyle.button}
-              onClick={() => setItem(false)}
-            >
-              単品
-            </button>
-            <button
-              type={"button"}
-              className={registerCtlgModalStyle.button}
-              onClick={() => setItem(true)}
-            >
-              セット
-            </button>
-          </div>
-        }
         toggleModal={toggleModal}
         closeHandler={() => setToggleModal(false)}
         parts={
@@ -65,27 +41,24 @@ function RegisterCtlgModal({
               image={image}
               setImage={setImage}
             />
-            <CatalogMain main={main} setMain={setMain} />
-            {item ? <CatalogSub sub={sub} setSub={setSub} /> : ""}
-            <CatalogOption options={options} setOptions={setOptions} />
+            <CatalogMain
+              main={main}
+              setMain={setMain}
+              setImgPath={setImgPath}
+            />
 
             <CatalogActionButton
               name={name}
               desc={desc}
               price={price}
               imgPath={imgPath}
-              image={image}
               main={main}
-              sub={sub}
-              options={options}
               setName={setName}
               setDesc={setDesc}
               setPrice={setPrice}
               setImgPath={setImgPath}
               setImage={setImage}
               setMain={setMain}
-              setSub={setSub}
-              setOptions={setOptions}
             />
           </Fragment>
         }
