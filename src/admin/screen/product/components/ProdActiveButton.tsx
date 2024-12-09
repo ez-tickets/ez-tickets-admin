@@ -44,6 +44,7 @@ function ProdActiveButton({
       name: prodName,
       img: prodImgPath,
     };
+
     prodRegisterDispatcher(registration(prodRegisterValue));
 
     setProdName("");

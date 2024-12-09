@@ -2,13 +2,13 @@ import { style } from "@vanilla-extract/css";
 
 export const registeredCatalogListStyle = {
   img: style({
-    width: "15%",
+    width: "20%",
     padding: "1rem",
     fontSize: "0.9rem",
   }),
 
   name: style({
-    width: "20%",
+    width: "30%",
     padding: "1rem",
     fontSize: "0.9rem",
   }),
@@ -19,20 +19,8 @@ export const registeredCatalogListStyle = {
     fontSize: "0.9rem",
   }),
 
-  sub: style({
-    width: "10%",
-    padding: "1rem",
-    fontSize: "0.9rem",
-  }),
-
-  option: style({
-    width: "10%",
-    padding: "1rem",
-    fontSize: "0.9rem",
-  }),
-
   desc: style({
-    width: "15%",
+    width: "20%",
     padding: "1rem",
     fontSize: "0.9rem",
     textOverflow: "ellipsis",

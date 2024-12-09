@@ -15,8 +15,6 @@ function RegisteredCatalogs() {
           price={catalog.price}
           img={catalog.img}
           main={catalog.main}
-          sub={catalog.sub}
-          options={catalog.options}
         />
       ))}
     </Fragment>
