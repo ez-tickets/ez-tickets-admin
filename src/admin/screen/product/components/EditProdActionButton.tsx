@@ -1,4 +1,4 @@
-import ConfirmModal from "@/admin/screen/confirmModal/ConfirmModal.tsx";
+import ConfirmModal from "@/admin/screen/modal/confirmModal/ConfirmModal.tsx";
 import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import {
   deleteProduct,
@@ -7,7 +7,7 @@ import {
 import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
-import { executeButtonStyle } from "@/parts/style/executeButton.css.ts";
+import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
 import type { RegisterProd } from "@/types.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment, useState } from "react";

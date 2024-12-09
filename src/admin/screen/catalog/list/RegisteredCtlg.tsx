@@ -1,9 +1,9 @@
 import RegisteredCatalogList from "@/admin/screen/catalog/list/components/RegisteredCatalogList.tsx";
-import ExecuteButton from "@/parts/ExecuteButton.tsx";
+import { useCatalogRegistrationStore } from "@/admin/store/RegistrationStore.ts";
+import { debug } from "@/admin/store/action/ProdRegistrationAction.ts";
 import Header from "@/parts/Header.tsx";
-import { executeButtonStyle } from "@/parts/style/executeButton.css.ts";
 import { Fragment } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 type State = {
   title: string;
@@ -11,20 +11,20 @@ type State = {
 
 function RegisteredCtlg() {
   const { title } = useLocation().state as State;
-  const navigate = useNavigate();
+  const { catalogRegisterDispatcher } = useCatalogRegistrationStore();
 
   return (
     <Fragment>
       <Header
         title={title}
         element={
-          <ExecuteButton
-            name={"新規登録"}
-            style={executeButtonStyle.default}
-            executeHandler={() =>
-              navigate("/admin/catalogRegister", { state: { title } })
-            }
-          />
+          <button
+            style={{ border: "1px solid lightgray", borderRadius: "5px" }}
+            type={"button"}
+            onClick={() => catalogRegisterDispatcher(debug())}
+          >
+            debug
+          </button>
         }
       />
       <RegisteredCatalogList />

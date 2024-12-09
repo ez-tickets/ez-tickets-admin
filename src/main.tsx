@@ -4,7 +4,6 @@ import "@/global.css";
 import Admin from "@/admin/Admin.tsx";
 import RegisteredCat from "@/admin/screen/catalog/category/RegisteredCat.tsx";
 import RegisteredCtlg from "@/admin/screen/catalog/list/RegisteredCtlg.tsx";
-import CatalogRegister from "@/admin/screen/catalog/register/CatalogRegister.tsx";
 import Home from "@/admin/screen/home/Home.tsx";
 import RegisteredProd from "@/admin/screen/product/RegisteredProd.tsx";
 import TitleBar from "@/application/TitleBar.tsx";
@@ -20,11 +19,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 
         <Route path="admin" element={<Admin />}>
           <Route index element={<Home />} />
-
-          {/* register */}
-          <Route path="catalogRegister" element={<CatalogRegister />} />
-
-          {/* list */}
           <Route path="registeredProd" element={<RegisteredProd />} />
           <Route path="registeredCategory" element={<RegisteredCat />} />
           <Route path="registeredCatalog" element={<RegisteredCtlg />} />

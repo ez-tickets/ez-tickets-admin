@@ -1,6 +1,6 @@
-import ManageEntryModal from "@/admin/screen/ManageEntryModal/ManageEntryModal.tsx";
 import EditCategoryActionButton from "@/admin/screen/catalog/category/components/EditCategoryActionButton.tsx";
 import EditCategoryName from "@/admin/screen/catalog/category/components/EditCategoryName.tsx";
+import ManageEntryModal from "@/admin/screen/modal/manageEntryModal/ManageEntryModal.tsx";
 import { useEditCategoryStore } from "@/admin/store/RegisteredEditStore.ts";
 import { Fragment, useState } from "react";
 
@@ -28,7 +28,7 @@ function EditCategoryModal({ editModal, setEditModal }: CategoryModalProps) {
         modalTitle={"編集モード"}
         toggleModal={editModal}
         closeHandler={closeHandler}
-        editParts={
+        parts={
           <Fragment>
             <EditCategoryName
               editCategorise={editCategorise}

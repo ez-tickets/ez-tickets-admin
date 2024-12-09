@@ -1,20 +1,87 @@
-import ConfirmModal from "@/admin/screen/confirmModal/ConfirmModal.tsx";
+import ConfirmModal from "@/admin/screen/modal/confirmModal/ConfirmModal.tsx";
+import { useCatalogRegistrationStore } from "@/admin/store/RegistrationStore.ts";
+import { registration } from "@/admin/store/action/CatalogRegistrationAction.ts";
 import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
-import { executeButtonStyle } from "@/parts/style/executeButton.css.ts";
+import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
 import { Fragment, useState } from "react";
 
-function CatalogActionButton() {
+type CatalogActionButtonProps = {
+  name: string;
+  desc: string;
+  price: number;
+  imgPath: string;
+  image: string;
+  main: string;
+  sub: string;
+  options: string;
+  setName: (name: string) => void;
+  setDesc: (desc: string) => void;
+  setPrice: (price: number) => void;
+  setImgPath: (path: string) => void;
+  setImage: (image: string) => void;
+  setMain: (main: string) => void;
+  setSub: (sub: string) => void;
+  setOptions: (options: string) => void;
+};
+
+function CatalogActionButton({
+  name,
+  desc,
+  price,
+  imgPath,
+  image,
+  main,
+  sub,
+  options,
+  setName,
+  setDesc,
+  setPrice,
+  setImgPath,
+  setImage,
+  setMain,
+  setSub,
+  setOptions,
+}: CatalogActionButtonProps) {
+  const { catalogRegisterDispatcher } = useCatalogRegistrationStore();
   const [modalView, setModalView] = useState<boolean>(false);
 
-  const resetHandler = () => {};
+  const resetHandler = () => {
+    setName("");
+    setDesc("");
+    setPrice(0);
+    setImgPath("");
+    setImage("");
+    setMain("");
+    setSub("");
+    setOptions("");
+  };
 
   const openModalHandler = () => {
     setModalView(true);
   };
 
   const executeHandler = () => {
+    const registerCatalogValue = {
+      name: name,
+      desc: desc,
+      price: price,
+      imgPath: imgPath,
+      main: main,
+      sub: sub,
+      options: options,
+    };
+    catalogRegisterDispatcher(registration(registerCatalogValue));
+
+    setName("");
+    setDesc("");
+    setPrice(0);
+    setImgPath("");
+    setImage("");
+    setMain("");
+    setSub("");
+    setOptions("");
     setModalView(false);
   };
 

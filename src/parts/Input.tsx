@@ -1,10 +1,10 @@
-import { inputStyle } from "@/parts/style/input.css.ts";
+import { inputStyle } from "@/parts/style/Input.css.ts";
 import { Fragment } from "react";
 
 type InputProps = {
   guide: string;
   type: string;
-  label: string;
+  label?: string;
   required?: boolean;
   value: string | number;
   executeHandler: (input: string) => void;

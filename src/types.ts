@@ -34,14 +34,20 @@ export type RegisterCategory = {
 };
 
 //カタログ登録情報 ---------------------------------------------
+export interface RegisterItem {
+  id: string;
+  name: string;
+  price: number;
+}
+
 export interface InputCatalog {
   name: string;
   desc: string;
   price: number;
   img: string;
-  main: RegisterProd[];
-  sub: RegisterProd[];
-  options: RegisterProd[];
+  main: RegisterItem[];
+  sub: RegisterItem[];
+  options: RegisterItem[];
 }
 
 export interface RegisterCatalog {
@@ -50,7 +56,7 @@ export interface RegisterCatalog {
   desc: string;
   price: number;
   img: string;
-  main: RegisterProd[];
-  sub: RegisterProd[];
-  options: RegisterProd[];
+  main: RegisterItem[];
+  sub: RegisterItem[];
+  options: RegisterItem[];
 }
