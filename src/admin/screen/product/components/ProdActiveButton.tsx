@@ -1,6 +1,5 @@
 import ConfirmModal from "@/admin/screen/modal/confirmModal/ConfirmModal.tsx";
-import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
-import { registration } from "@/admin/store/action/ProdRegistrationAction.ts";
+import { registerProduct } from "@/cmds/products.ts";
 import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
@@ -24,7 +23,6 @@ function ProdActiveButton({
   setImage,
   setToggleModal,
 }: ProdActiveButtonProps) {
-  const { prodRegisterDispatcher } = useProdRegistrationStore();
   const [modalView, setModalView] = useState<boolean>(false);
 
   const resetHandler = () => {
@@ -39,12 +37,8 @@ function ProdActiveButton({
     }
   };
 
-  const executeHandler = () => {
-    const prodRegisterValue = {
-      name: prodName,
-      img: prodImgPath,
-    };
-    prodRegisterDispatcher(registration(prodRegisterValue));
+  const executeHandler = async () => {
+    await registerProduct({ name: prodName, path: prodImgPath });
 
     setProdName("");
     setProdImgPath("");
