@@ -1,22 +1,29 @@
 import RegisteredProduct from "@/admin/screen/product/components/RegisteredProduct.tsx";
-import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
-import { Fragment } from "react";
+import { type Product, fetchProducts } from "@/cmds/products.ts";
+import { Fragment, useEffect, useState } from "react";
 
 type RegisteredProductsProps = {
   setEditModal: (flag: boolean) => void;
 };
 
 function RegisteredProducts({ setEditModal }: RegisteredProductsProps) {
-  const { prodRegisterQuery } = useProdRegistrationStore();
+  const [products, setProducts] = useState<Product[] | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const fetched = await fetchProducts();
+      setProducts(fetched);
+    })();
+  }, []);
 
   return (
     <Fragment>
-      {prodRegisterQuery.map((product) => (
+      {products?.map((product) => (
         <RegisteredProduct
           key={product.id}
           id={product.id}
           name={product.name}
-          path={product.img}
+          path={`http://localhost:3650/contents?id=${product.id}`}
           setEditModal={setEditModal}
         />
       ))}

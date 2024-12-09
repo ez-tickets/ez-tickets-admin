@@ -2,7 +2,6 @@ import { registeredProductStyle } from "@/admin/screen/product/components/style/
 import { useEditProductStore } from "@/admin/store/RegisteredEditStore.ts";
 import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import ListItem from "@/parts/ListItem.tsx";
-import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment } from "react";
 
 type RegisteredProductProps = {
@@ -37,7 +36,7 @@ function RegisteredProduct({
           <div className={registeredProductStyle.imgContainer}>
             {path !== "" ? (
               <img
-                src={convertFileSrc(path)}
+                src={path}
                 alt={path}
                 className={registeredProductStyle.img}
               />
