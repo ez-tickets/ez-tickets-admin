@@ -47,6 +47,7 @@ function CatalogMain({ main, setMain }: CatalogMainProps) {
   const cancelHandler = (id: string) => {
     const cancelMain = registArray.filter((item) => item.id !== id);
     setRegistArray(cancelMain);
+    setSelectItemId("");
   };
 
   return (
@@ -55,20 +56,47 @@ function CatalogMain({ main, setMain }: CatalogMainProps) {
         title={"メイン商品"}
         inputElement={
           <Fragment>
-            <ExecuteButton
-              name={"メイン商品選択"}
-              style={executeButtonStyle.default}
-              executeHandler={() => {
-                setToggleModal(true);
-                setRegistArray(main);
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: "3rem 0",
               }}
-            />
+            >
+              <ExecuteButton
+                name={"メイン商品選択"}
+                style={executeButtonStyle.default}
+                executeHandler={() => {
+                  setToggleModal(true);
+                  setRegistArray(main);
+                }}
+              />
+            </div>
 
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div
+              style={{
+                margin: "auto",
+                width: "300px",
+                maxHeight: "8.75rem",
+                overflowY: "scroll",
+                boxShadow: "2px 2px 3px lightgray",
+              }}
+            >
               {main.map((item) => (
-                <p key={item.id}>
-                  {item.name}　{item.price}
-                </p>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: "0.5rem",
+                    border: "1px solid lightgray",
+                  }}
+                  key={item.id}
+                >
+                  <p>{item.name}</p>
+                  <p>{item.price}円</p>
+                </div>
               ))}
             </div>
           </Fragment>
@@ -90,13 +118,14 @@ function CatalogMain({ main, setMain }: CatalogMainProps) {
               );
 
               return (
-                // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-                <div
-                  key={prod.id}
-                  className={catalogMainStyle.item}
-                  onClick={() => setSelectItemId(prod.id)}
-                >
-                  <span className={catalogMainStyle.itemName}>{prod.name}</span>
+                <div key={prod.id} className={catalogMainStyle.item}>
+                  {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
+                  <p
+                    className={catalogMainStyle.itemName}
+                    onClick={() => setSelectItemId(prod.id)}
+                  >
+                    {prod.name}
+                  </p>
 
                   {prod.id === selectItemId && !registeredMain ? (
                     <div className={catalogMainStyle.addContent}>
@@ -122,7 +151,7 @@ function CatalogMain({ main, setMain }: CatalogMainProps) {
 
                   {registeredMain && (
                     <Fragment>
-                      <span style={{ marginLeft: "3rem" }}>
+                      <span style={{ marginLeft: "0.4rem" }}>
                         {registeredMain.price}円
                       </span>
                       <button
@@ -156,6 +185,8 @@ function CatalogMain({ main, setMain }: CatalogMainProps) {
                     executeHandler={() => {
                       setMain(registArray);
                       setToggleModal(false);
+                      setSelectItemId("");
+                      setMainPrice(0);
                     }}
                   />
                 </Fragment>
