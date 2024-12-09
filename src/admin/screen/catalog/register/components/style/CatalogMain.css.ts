@@ -7,7 +7,6 @@ export const catalogMainStyle = {
 
   item: style({
     position: "relative",
-    width: "100%",
     padding: "10px",
     borderTop: "1px dotted lightgray",
     cursor: "pointer",
@@ -17,7 +16,6 @@ export const catalogMainStyle = {
   }),
 
   itemName: style({
-    width: "60%",
     padding: " 5px",
   }),
 

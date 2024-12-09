@@ -3,6 +3,7 @@ import { style } from "@vanilla-extract/css";
 export const inputContainerStyle = {
   inputContainer: style({
     display: "flex",
+    alignItems: "center",
     borderBottom: "1px solid lightgray",
   }),
 
