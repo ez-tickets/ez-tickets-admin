@@ -1,10 +1,10 @@
-import ConfirmModal from "@/admin/screen/confirmModal/ConfirmModal.tsx";
+import ConfirmModal from "@/admin/screen/modal/confirmModal/ConfirmModal.tsx";
 import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import { registration } from "@/admin/store/action/ProdRegistrationAction.ts";
 import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
-import { executeButtonStyle } from "@/parts/style/executeButton.css.ts";
+import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
 import { Fragment, useState } from "react";
 
 type ProdActiveButtonProps = {

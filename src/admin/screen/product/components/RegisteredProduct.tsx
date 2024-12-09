@@ -31,27 +31,25 @@ function RegisteredProduct({
   };
 
   return (
-    <Fragment>
-      <ListItem
-        block={
-          <Fragment>
-            <div className={registeredProductStyle.imgContainer}>
-              {path !== "" ? (
-                <img
-                  src={convertFileSrc(path)}
-                  alt={path}
-                  className={registeredProductStyle.img}
-                />
-              ) : (
-                <div className={registeredProductStyle.img} />
-              )}
-            </div>
-            <div className={registeredProductStyle.name}>{name}</div>
-          </Fragment>
-        }
-        executeHandler={() => openEditModalHandler(id)}
-      />
-    </Fragment>
+    <ListItem
+      block={
+        <Fragment>
+          <div className={registeredProductStyle.imgContainer}>
+            {path !== "" ? (
+              <img
+                src={convertFileSrc(path)}
+                alt={path}
+                className={registeredProductStyle.img}
+              />
+            ) : (
+              <div className={registeredProductStyle.img} />
+            )}
+          </div>
+          <div className={registeredProductStyle.name}>{name}</div>
+        </Fragment>
+      }
+      executeHandler={() => openEditModalHandler(id)}
+    />
   );
 }
 

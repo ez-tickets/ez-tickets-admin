@@ -1,4 +1,4 @@
-import ConfirmModal from "@/admin/screen/confirmModal/ConfirmModal.tsx";
+import ConfirmModal from "@/admin/screen/modal/confirmModal/ConfirmModal.tsx";
 import { useCategoryRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import {
   deleteCategory,
@@ -7,7 +7,7 @@ import {
 import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
-import { executeButtonStyle } from "@/parts/style/executeButton.css.ts";
+import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
 import type { RegisterCategory } from "@/types.ts";
 import { Fragment, useState } from "react";
 

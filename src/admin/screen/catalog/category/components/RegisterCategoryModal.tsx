@@ -1,6 +1,6 @@
-import ManageEntryModal from "@/admin/screen/ManageEntryModal/ManageEntryModal.tsx";
 import CategoryActionButton from "@/admin/screen/catalog/category/components/CategoryActionButton.tsx";
 import CategoryName from "@/admin/screen/catalog/category/components/CategoryName.tsx";
+import ManageEntryModal from "@/admin/screen/modal/manageEntryModal/ManageEntryModal.tsx";
 import { Fragment, useState } from "react";
 
 type CategoryRegisterModalProps = {
@@ -20,7 +20,7 @@ function RegisterCategoryModal({
         modalTitle={"新規登録"}
         toggleModal={toggleModal}
         closeHandler={() => setToggleModal(false)}
-        editParts={
+        parts={
           <Fragment>
             <CategoryName
               categoryName={categoryName}

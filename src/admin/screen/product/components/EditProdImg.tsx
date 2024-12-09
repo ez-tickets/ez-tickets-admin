@@ -1,6 +1,5 @@
 import InputContainer from "@/parts/InputContainer.tsx";
 import InputImg from "@/parts/InputImg.tsx";
-import { Fragment } from "react";
 
 type EditImageProps = {
   editImgPath: string;
@@ -16,20 +15,18 @@ function EditProdImg({
   setImage,
 }: EditImageProps) {
   return (
-    <Fragment>
-      <InputContainer
-        title={"画像"}
-        inputElement={
-          <InputImg
-            imgPath={editImgPath}
-            setImgPath={setEditImgPath}
-            image={image}
-            setImage={setImage}
-            required={true}
-          />
-        }
-      />
-    </Fragment>
+    <InputContainer
+      title={"画像"}
+      inputElement={
+        <InputImg
+          imgPath={editImgPath}
+          setImgPath={setEditImgPath}
+          image={image}
+          setImage={setImage}
+          required={true}
+        />
+      }
+    />
   );
 }
 

@@ -1,9 +1,9 @@
 import {
   confirmModalContainer,
   confirmModalStyle,
-} from "@/admin/screen/confirmModal/ConfirmModal.css.ts";
+} from "@/admin/screen/modal/confirmModal/ConfirmModal.css.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
-import { executeButtonStyle } from "@/parts/style/executeButton.css.ts";
+import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
 import { Fragment } from "react";
 import Modal from "react-modal";
 
@@ -22,10 +22,6 @@ function ConfirmModal({
   setModalView,
   setEditModal,
 }: ConfirmModalProps) {
-  const cancelHandler = () => {
-    setModalView(false);
-  };
-
   const yesHandler = () => {
     // biome-ignore lint/complexity/useOptionalChain: <explanation>
     executeHandler && executeHandler();
@@ -37,7 +33,11 @@ function ConfirmModal({
   return (
     <Fragment>
       {/*@ts-ignore react version incompatible*/}
-      <Modal isOpen={modalView} style={confirmModalContainer}>
+      <Modal
+        isOpen={modalView}
+        style={confirmModalContainer}
+        onRequestClose={() => setModalView(false)}
+      >
         <p className={confirmModalStyle.text}>
           {taskType}してもよろしいですか？
         </p>
@@ -45,7 +45,7 @@ function ConfirmModal({
           <ExecuteButton
             name={"キャンセル"}
             style={executeButtonStyle.confirmModalCancel}
-            executeHandler={cancelHandler}
+            executeHandler={() => setModalView(false)}
           />
 
           <ExecuteButton

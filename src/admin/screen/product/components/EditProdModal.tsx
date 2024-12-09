@@ -1,4 +1,4 @@
-import ManageEntryModal from "@/admin/screen/ManageEntryModal/ManageEntryModal.tsx";
+import ManageEntryModal from "@/admin/screen/modal/manageEntryModal/ManageEntryModal.tsx";
 import EditProdActionButton from "@/admin/screen/product/components/EditProdActionButton.tsx";
 import EditProdImg from "@/admin/screen/product/components/EditProdImg.tsx";
 import EditProdName from "@/admin/screen/product/components/EditProdName.tsx";
@@ -25,34 +25,32 @@ function EditProdModal({ editModal, setEditModal }: ProdEditModalProps) {
   };
 
   return (
-    <Fragment>
-      <ManageEntryModal
-        modalTitle={"編集モード"}
-        toggleModal={editModal}
-        closeHandler={closeHandler}
-        editParts={
-          <Fragment>
-            <EditProdName editName={editName} setEditName={setEditName} />
-            <EditProdImg
-              editImgPath={editImgPath}
-              setEditImgPath={setEditImgPath}
-              image={image}
-              setImage={setImage}
-            />
+    <ManageEntryModal
+      modalTitle={"編集モード"}
+      toggleModal={editModal}
+      closeHandler={closeHandler}
+      parts={
+        <Fragment>
+          <EditProdName editName={editName} setEditName={setEditName} />
+          <EditProdImg
+            editImgPath={editImgPath}
+            setEditImgPath={setEditImgPath}
+            image={image}
+            setImage={setImage}
+          />
 
-            <EditProdActionButton
-              editProd={editProd}
-              editName={editName}
-              editImgPath={editImgPath}
-              setEditName={setEditName}
-              setEditImgPath={setEditImgPath}
-              setImage={setImage}
-              setEditModal={setEditModal}
-            />
-          </Fragment>
-        }
-      />
-    </Fragment>
+          <EditProdActionButton
+            editProd={editProd}
+            editName={editName}
+            editImgPath={editImgPath}
+            setEditName={setEditName}
+            setEditImgPath={setEditImgPath}
+            setImage={setImage}
+            setEditModal={setEditModal}
+          />
+        </Fragment>
+      }
+    />
   );
 }
 

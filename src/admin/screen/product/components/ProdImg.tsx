@@ -1,6 +1,5 @@
 import InputContainer from "@/parts/InputContainer.tsx";
 import InputImg from "@/parts/InputImg.tsx";
-import { Fragment } from "react";
 
 type ProdImgProps = {
   prodImgPath: string;
@@ -16,20 +15,18 @@ function ProdImg({
   setImage,
 }: ProdImgProps) {
   return (
-    <Fragment>
-      <InputContainer
-        title={"画像"}
-        inputElement={
-          <InputImg
-            required={true}
-            imgPath={prodImgPath}
-            setImgPath={setProdImgPath}
-            image={image}
-            setImage={setImage}
-          />
-        }
-      />
-    </Fragment>
+    <InputContainer
+      title={"画像"}
+      inputElement={
+        <InputImg
+          required={true}
+          imgPath={prodImgPath}
+          setImgPath={setProdImgPath}
+          image={image}
+          setImage={setImage}
+        />
+      }
+    />
   );
 }
 
