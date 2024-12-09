@@ -118,9 +118,7 @@ function CatalogMain({ main, setMain }: CatalogMainProps) {
               );
 
               return (
-                <div key={prod.id}
-                     className={catalogMainStyle.item}
-                >
+                <div key={prod.id} className={catalogMainStyle.item}>
                   {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
                   <p
                     className={catalogMainStyle.itemName}
