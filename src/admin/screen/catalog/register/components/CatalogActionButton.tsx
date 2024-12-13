@@ -20,6 +20,7 @@ type CatalogActionButtonProps = {
   setImgPath: (path: string) => void;
   setImage: (image: string) => void;
   setMain: (main: RegisterItem) => void;
+  setToggleModal: (flag: boolean) => void;
 };
 
 function CatalogActionButton({
@@ -34,6 +35,7 @@ function CatalogActionButton({
   setImgPath,
   setImage,
   setMain,
+  setToggleModal,
 }: CatalogActionButtonProps) {
   const { catalogRegisterDispatcher } = useCatalogRegistrationStore();
   const [modalView, setModalView] = useState<boolean>(false);
@@ -78,6 +80,7 @@ function CatalogActionButton({
     setImage("");
     setMain({ id: "0", name: "" });
     setModalView(false);
+    setToggleModal(false);
   };
 
   return (
