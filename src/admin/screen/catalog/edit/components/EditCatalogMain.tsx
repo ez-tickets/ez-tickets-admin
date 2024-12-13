@@ -1,10 +1,10 @@
-import { catalogMainStyle } from "@/admin/screen/catalog/register/components/style/CatalogMain.css.ts";
 import SelectModal from "@/admin/screen/modal/selectModal/SelectModal.tsx";
 import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import InputContainer from "@/parts/InputContainer.tsx";
 import type { RegisterItem, RegisterProd } from "@/types.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment, useState } from "react";
+import {editCatalogMainStyle} from "@/admin/screen/catalog/edit/components/style/EditCatalogMain.css.ts";
 
 type CatalogMainProps = {
   main: RegisterItem;
@@ -36,18 +36,18 @@ function EditCatalogMain({
         title={"メイン商品"}
         inputElement={
           <Fragment>
-            <div className={catalogMainStyle.container}>
-              <div className={catalogMainStyle.selectContainer}>
-                <p className={catalogMainStyle.require}>（必須）</p>
+            <div className={editCatalogMainStyle.container}>
+              <div className={editCatalogMainStyle.selectContainer}>
+                <p className={editCatalogMainStyle.require}>（必須）</p>
                 <button
                   type={"button"}
-                  className={catalogMainStyle.selectButton}
+                  className={editCatalogMainStyle.selectButton}
                   onClick={() => setToggleModal(true)}
                 >
                   メイン商品選択
                 </button>
               </div>
-              <div className={catalogMainStyle.selectedMain}>{main.name}</div>
+              <div className={editCatalogMainStyle.selectedMain}>{main.name}</div>
             </div>
           </Fragment>
         }
@@ -64,7 +64,7 @@ function EditCatalogMain({
                 // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
                 <div
                   key={prod.id}
-                  className={catalogMainStyle.item}
+                  className={editCatalogMainStyle.item}
                   onClick={() => registerHandler(prod)}
                 >
                   {prod.name}
