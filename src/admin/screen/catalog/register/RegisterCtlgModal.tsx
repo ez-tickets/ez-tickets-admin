@@ -40,10 +40,10 @@ function RegisterCtlgModal({
               setImage={setImage}
             />
             <CatalogImg
-                imgPath={imgPath}
-                setImgPath={setImgPath}
-                image={image}
-                setImage={setImage}
+              imgPath={imgPath}
+              setImgPath={setImgPath}
+              image={image}
+              setImage={setImage}
             />
             <CatalogPrice price={price} setPrice={setPrice} />
             <CatalogDesc desc={desc} setDesc={setDesc} />

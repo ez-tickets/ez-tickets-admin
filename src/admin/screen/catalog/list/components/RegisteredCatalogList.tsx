@@ -1,3 +1,4 @@
+import EditCtlgModal from "@/admin/screen/catalog/edit/EditCtlgModal.tsx";
 import RegisteredCatalogs from "@/admin/screen/catalog/list/components/RegisteredCatalogs.tsx";
 import { registeredCatalogListStyle } from "@/admin/screen/catalog/list/components/style/RegisteredCatalogList.css.ts";
 import RegisterCtlgModal from "@/admin/screen/catalog/register/RegisterCtlgModal.tsx";
@@ -7,7 +8,6 @@ import ListContainer from "@/parts/ListContainer.tsx";
 import ListHeader from "@/parts/ListHeader.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
 import { Fragment, useState } from "react";
-import EditCtlgModal from "@/admin/screen/catalog/edit/EditCtlgModal.tsx";
 
 function RegisteredCatalogList() {
   const [toggleModal, setToggleModal] = useState<boolean>(false);

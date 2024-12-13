@@ -9,7 +9,12 @@ type CatalogImgProps = {
   setImage: (image: string) => void;
 };
 
-function EditCatalogImg({ imgPath, image, setImgPath, setImage }: CatalogImgProps) {
+function EditCatalogImg({
+  imgPath,
+  image,
+  setImgPath,
+  setImage,
+}: CatalogImgProps) {
   return (
     <Fragment>
       <InputContainer

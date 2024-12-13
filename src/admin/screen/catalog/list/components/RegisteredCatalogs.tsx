@@ -4,9 +4,9 @@ import { Fragment } from "react";
 
 type RegisteredCatalogsProps = {
   setEditModal: (flag: boolean) => void;
-}
+};
 
-function RegisteredCatalogs({setEditModal}: RegisteredCatalogsProps) {
+function RegisteredCatalogs({ setEditModal }: RegisteredCatalogsProps) {
   const { catalogRegisterQuery } = useCatalogRegistrationStore();
 
   return (

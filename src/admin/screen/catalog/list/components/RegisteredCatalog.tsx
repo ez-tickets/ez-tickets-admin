@@ -1,10 +1,10 @@
 import { registeredCatalogStyle } from "@/admin/screen/catalog/list/components/style/RegisteredCatalog.css.ts";
+import { useEditCatalogStore } from "@/admin/store/RegisteredEditStore.ts";
+import { useCatalogRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import ListItem from "@/parts/ListItem.tsx";
 import type { RegisterItem } from "@/types.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment } from "react";
-import { useCatalogRegistrationStore } from "@/admin/store/RegistrationStore.ts";
-import { useEditCatalogStore } from "@/admin/store/RegisteredEditStore.ts";
 
 type RegisteredCatalogProps = {
   id: string;

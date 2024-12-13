@@ -35,7 +35,7 @@ function CatalogActionButton({
   setImgPath,
   setImage,
   setMain,
-  setToggleModal
+  setToggleModal,
 }: CatalogActionButtonProps) {
   const { catalogRegisterDispatcher } = useCatalogRegistrationStore();
   const [modalView, setModalView] = useState<boolean>(false);

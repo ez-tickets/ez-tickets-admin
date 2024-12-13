@@ -1,14 +1,14 @@
-import { Fragment, useState } from "react";
-import ManageEntryModal from "@/admin/screen/modal/manageEntryModal/ManageEntryModal.tsx";
-import type { RegisterItem } from "@/types.ts";
-import EditCatalogName from "@/admin/screen/catalog/edit/components/EditCatalogName.tsx";
+import EditCatalogActionButton from "@/admin/screen/catalog/edit/components/EditCatalogActionButton.tsx";
 import EditCatalogDesc from "@/admin/screen/catalog/edit/components/EditCatalogDesc.tsx";
-import EditCatalogPrice from "@/admin/screen/catalog/edit/components/EditCatalogPrice.tsx";
 import EditCatalogImg from "@/admin/screen/catalog/edit/components/EditCatalogImg.tsx";
 import EditCatalogMain from "@/admin/screen/catalog/edit/components/EditCatalogMain.tsx";
-import EditCatalogActionButton from "@/admin/screen/catalog/edit/components/EditCatalogActionButton.tsx";
+import EditCatalogName from "@/admin/screen/catalog/edit/components/EditCatalogName.tsx";
+import EditCatalogPrice from "@/admin/screen/catalog/edit/components/EditCatalogPrice.tsx";
+import ManageEntryModal from "@/admin/screen/modal/manageEntryModal/ManageEntryModal.tsx";
 import { useEditCatalogStore } from "@/admin/store/RegisteredEditStore.ts";
+import type { RegisterItem } from "@/types.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
+import { Fragment, useState } from "react";
 
 type EditCtlgModalProps = {
   editModal: boolean;
@@ -48,7 +48,6 @@ function EditCtlgModal({ editModal, setEditModal }: EditCtlgModalProps) {
           />
           <EditCatalogPrice price={price} setPrice={setPrice} />
           <EditCatalogDesc desc={desc} setDesc={setDesc} />
-
 
           <EditCatalogActionButton
             editCatalog={editCatalog}

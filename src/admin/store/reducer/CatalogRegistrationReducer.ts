@@ -39,7 +39,7 @@ export const catalogReducer = (
           desc: "厳選された素材と伝統の技法で作り上げた、心温まる一杯。醤油の深い旨味と香りが際立つ、懐かしさと新しさを融合させたラーメンです。",
           price: 950,
           img: "",
-          main: { id: "1", name: "醤油ラーメン"},
+          main: { id: "1", name: "醤油ラーメン" },
         },
       ];
     default: {

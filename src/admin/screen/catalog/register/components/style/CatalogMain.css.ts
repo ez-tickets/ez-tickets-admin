@@ -14,7 +14,7 @@ export const catalogMainStyle = {
   }),
 
   require: style({
-    color: "red"
+    color: "red",
   }),
 
   selectButton: style({

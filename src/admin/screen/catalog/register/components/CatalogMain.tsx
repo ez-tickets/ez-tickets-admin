@@ -3,8 +3,8 @@ import SelectModal from "@/admin/screen/modal/selectModal/SelectModal.tsx";
 import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import InputContainer from "@/parts/InputContainer.tsx";
 import type { RegisterItem, RegisterProd } from "@/types.ts";
+import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment, useState } from "react";
-import {convertFileSrc} from "@tauri-apps/api/core";
 
 type CatalogMainProps = {
   main: RegisterItem;
@@ -13,7 +13,12 @@ type CatalogMainProps = {
   setImage: (image: string) => void;
 };
 
-function CatalogMain({ main, setMain, setImgPath, setImage }: CatalogMainProps) {
+function CatalogMain({
+  main,
+  setMain,
+  setImgPath,
+  setImage,
+}: CatalogMainProps) {
   const { prodRegisterQuery } = useProdRegistrationStore();
   const [toggleModal, setToggleModal] = useState<boolean>(false);
 
