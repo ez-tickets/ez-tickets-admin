@@ -33,19 +33,20 @@ function RegisterCtlgModal({
         parts={
           <Fragment>
             <CatalogName name={name} setName={setName} />
-            <CatalogDesc desc={desc} setDesc={setDesc} />
-            <CatalogPrice price={price} setPrice={setPrice} />
-            <CatalogImg
-              imgPath={imgPath}
-              setImgPath={setImgPath}
-              image={image}
-              setImage={setImage}
-            />
             <CatalogMain
               main={main}
               setMain={setMain}
               setImgPath={setImgPath}
+              setImage={setImage}
             />
+            <CatalogImg
+                imgPath={imgPath}
+                setImgPath={setImgPath}
+                image={image}
+                setImage={setImage}
+            />
+            <CatalogPrice price={price} setPrice={setPrice} />
+            <CatalogDesc desc={desc} setDesc={setDesc} />
 
             <CatalogActionButton
               name={name}
@@ -59,6 +60,7 @@ function RegisterCtlgModal({
               setImgPath={setImgPath}
               setImage={setImage}
               setMain={setMain}
+              setToggleModal={setToggleModal}
             />
           </Fragment>
         }

@@ -1,4 +1,4 @@
-import type { RegisterCategory, RegisterProd } from "@/types.ts";
+import type {RegisterCatalog, RegisterCategory, RegisterProd} from "@/types.ts";
 import { create } from "zustand/react";
 
 type ProdEditState = {
@@ -24,3 +24,15 @@ export const useEditCategoryStore = create<CategoryEditState>((set) => ({
   setEditCategory: (value) => set({ editCategory: value }),
   resetEditCategory: () => set({ editCategory: null }),
 }));
+
+type CatalogEditState = {
+  editCatalog: RegisterCatalog | null;
+  setEditCatalog: (value: RegisterCatalog) => void;
+  resetEditCatalog: () => void;
+}
+
+export const useEditCatalogStore = create<CatalogEditState>((set) => ({
+  editCatalog: null,
+  setEditCatalog: (value) => set({ editCatalog: value }),
+  resetEditCatalog: () => set({ editCatalog: null }),
+}))

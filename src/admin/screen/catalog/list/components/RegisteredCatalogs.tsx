@@ -2,7 +2,11 @@ import RegisteredCatalog from "@/admin/screen/catalog/list/components/Registered
 import { useCatalogRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import { Fragment } from "react";
 
-function RegisteredCatalogs() {
+type RegisteredCatalogsProps = {
+  setEditModal: (flag: boolean) => void;
+}
+
+function RegisteredCatalogs({setEditModal}: RegisteredCatalogsProps) {
   const { catalogRegisterQuery } = useCatalogRegistrationStore();
 
   return (
@@ -10,11 +14,13 @@ function RegisteredCatalogs() {
       {catalogRegisterQuery.map((catalog) => (
         <RegisteredCatalog
           key={catalog.id}
+          id={catalog.id}
           name={catalog.name}
           desc={catalog.desc}
           price={catalog.price}
           img={catalog.img}
           main={catalog.main}
+          setEditModal={setEditModal}
         />
       ))}
     </Fragment>

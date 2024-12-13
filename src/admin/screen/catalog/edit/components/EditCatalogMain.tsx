@@ -13,15 +13,15 @@ type CatalogMainProps = {
   setImage: (image: string) => void;
 };
 
-function CatalogMain({ main, setMain, setImgPath, setImage }: CatalogMainProps) {
+function EditCatalogMain({ main, setMain, setImgPath, setImage }: CatalogMainProps) {
   const { prodRegisterQuery } = useProdRegistrationStore();
   const [toggleModal, setToggleModal] = useState<boolean>(false);
 
   const registerHandler = (prod: RegisterProd) => {
     const registerValue = { id: prod.id, name: prod.name };
-    setMain(registerValue);
     setImgPath(prod.img);
     setImage(convertFileSrc(prod.img));
+    setMain(registerValue);
     setToggleModal(false);
   };
 
@@ -49,7 +49,7 @@ function CatalogMain({ main, setMain, setImgPath, setImage }: CatalogMainProps) 
       />
 
       <SelectModal
-        modalTitle={"メイン商品を選択"}
+        modalTitle={"メイン商品を編集"}
         toggleModal={toggleModal}
         closeHandler={() => setToggleModal(false)}
         parts={
@@ -73,4 +73,4 @@ function CatalogMain({ main, setMain, setImgPath, setImage }: CatalogMainProps) 
   );
 }
 
-export default CatalogMain;
+export default EditCatalogMain;
