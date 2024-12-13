@@ -1,10 +1,10 @@
+import { editCatalogMainStyle } from "@/admin/screen/catalog/edit/components/style/EditCatalogMain.css.ts";
 import SelectModal from "@/admin/screen/modal/selectModal/SelectModal.tsx";
 import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import InputContainer from "@/parts/InputContainer.tsx";
 import type { RegisterItem, RegisterProd } from "@/types.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment, useState } from "react";
-import {editCatalogMainStyle} from "@/admin/screen/catalog/edit/components/style/EditCatalogMain.css.ts";
 
 type CatalogMainProps = {
   main: RegisterItem;
@@ -47,7 +47,9 @@ function EditCatalogMain({
                   メイン商品選択
                 </button>
               </div>
-              <div className={editCatalogMainStyle.selectedMain}>{main.name}</div>
+              <div className={editCatalogMainStyle.selectedMain}>
+                {main.name}
+              </div>
             </div>
           </Fragment>
         }
