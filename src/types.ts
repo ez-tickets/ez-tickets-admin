@@ -37,7 +37,6 @@ export type RegisterCategory = {
 export interface RegisterItem {
   id: string;
   name: string;
-  price: number;
 }
 
 export interface InputCatalog {
@@ -45,9 +44,7 @@ export interface InputCatalog {
   desc: string;
   price: number;
   img: string;
-  main: RegisterItem[];
-  sub: RegisterItem[];
-  options: RegisterItem[];
+  main: RegisterItem;
 }
 
 export interface RegisterCatalog {
@@ -56,7 +53,5 @@ export interface RegisterCatalog {
   desc: string;
   price: number;
   img: string;
-  main: RegisterItem[];
-  sub: RegisterItem[];
-  options: RegisterItem[];
+  main: RegisterItem;
 }

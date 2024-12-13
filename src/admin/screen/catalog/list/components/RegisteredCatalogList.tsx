@@ -1,7 +1,7 @@
+import EditCtlgModal from "@/admin/screen/catalog/edit/EditCtlgModal.tsx";
 import RegisteredCatalogs from "@/admin/screen/catalog/list/components/RegisteredCatalogs.tsx";
 import { registeredCatalogListStyle } from "@/admin/screen/catalog/list/components/style/RegisteredCatalogList.css.ts";
 import RegisterCtlgModal from "@/admin/screen/catalog/register/RegisterCtlgModal.tsx";
-import EditProdModal from "@/admin/screen/product/components/EditProdModal.tsx";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
 import ListContainer from "@/parts/ListContainer.tsx";
@@ -41,17 +41,13 @@ function RegisteredCatalogList() {
                 <div className={registeredCatalogListStyle.main}>
                   メイン商品
                 </div>
-                <div className={registeredCatalogListStyle.sub}>サブ商品</div>
-                <div className={registeredCatalogListStyle.option}>
-                  オプション
-                </div>
                 <div className={registeredCatalogListStyle.desc}>説明</div>
                 <div className={registeredCatalogListStyle.price}>価格</div>
               </Fragment>
             }
           />
         }
-        lists={<RegisteredCatalogs />}
+        lists={<RegisteredCatalogs setEditModal={setEditModal} />}
       />
 
       <RegisterCtlgModal
@@ -60,7 +56,7 @@ function RegisteredCatalogList() {
       />
 
       {editModal ? (
-        <EditProdModal editModal={editModal} setEditModal={setEditModal} />
+        <EditCtlgModal editModal={editModal} setEditModal={setEditModal} />
       ) : (
         ""
       )}

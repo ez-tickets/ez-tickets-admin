@@ -5,6 +5,7 @@ import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
+import type { RegisterItem } from "@/types.ts";
 import { Fragment, useState } from "react";
 
 type CatalogActionButtonProps = {
@@ -12,18 +13,14 @@ type CatalogActionButtonProps = {
   desc: string;
   price: number;
   imgPath: string;
-  image: string;
-  main: string;
-  sub: string;
-  options: string;
+  main: RegisterItem;
   setName: (name: string) => void;
   setDesc: (desc: string) => void;
   setPrice: (price: number) => void;
   setImgPath: (path: string) => void;
   setImage: (image: string) => void;
-  setMain: (main: string) => void;
-  setSub: (sub: string) => void;
-  setOptions: (options: string) => void;
+  setMain: (main: RegisterItem) => void;
+  setToggleModal: (flag: boolean) => void;
 };
 
 function CatalogActionButton({
@@ -31,18 +28,14 @@ function CatalogActionButton({
   desc,
   price,
   imgPath,
-  image,
   main,
-  sub,
-  options,
   setName,
   setDesc,
   setPrice,
   setImgPath,
   setImage,
   setMain,
-  setSub,
-  setOptions,
+  setToggleModal,
 }: CatalogActionButtonProps) {
   const { catalogRegisterDispatcher } = useCatalogRegistrationStore();
   const [modalView, setModalView] = useState<boolean>(false);
@@ -53,13 +46,20 @@ function CatalogActionButton({
     setPrice(0);
     setImgPath("");
     setImage("");
-    setMain("");
-    setSub("");
-    setOptions("");
+    setMain({ id: "0", name: "" });
   };
 
   const openModalHandler = () => {
-    setModalView(true);
+    if (
+      name !== "" &&
+      desc !== "" &&
+      price !== 0 &&
+      imgPath !== "" &&
+      main.id !== "" &&
+      main.name !== ""
+    ) {
+      setModalView(true);
+    }
   };
 
   const executeHandler = () => {
@@ -67,11 +67,10 @@ function CatalogActionButton({
       name: name,
       desc: desc,
       price: price,
-      imgPath: imgPath,
+      img: imgPath,
       main: main,
-      sub: sub,
-      options: options,
     };
+    //登録
     catalogRegisterDispatcher(registration(registerCatalogValue));
 
     setName("");
@@ -79,10 +78,9 @@ function CatalogActionButton({
     setPrice(0);
     setImgPath("");
     setImage("");
-    setMain("");
-    setSub("");
-    setOptions("");
+    setMain({ id: "0", name: "" });
     setModalView(false);
+    setToggleModal(false);
   };
 
   return (
