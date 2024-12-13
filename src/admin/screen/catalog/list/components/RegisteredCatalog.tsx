@@ -1,29 +1,42 @@
 import { registeredCatalogStyle } from "@/admin/screen/catalog/list/components/style/RegisteredCatalog.css.ts";
-import { registeredCatalogListStyle } from "@/admin/screen/catalog/list/components/style/RegisteredCatalogList.css.ts";
+import { useEditCatalogStore } from "@/admin/store/RegisteredEditStore.ts";
+import { useCatalogRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import ListItem from "@/parts/ListItem.tsx";
-import type { RegisterProd } from "@/types.ts";
+import type { RegisterItem } from "@/types.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment } from "react";
 
 type RegisteredCatalogProps = {
+  id: string;
   name: string;
   desc: string;
   price: number;
   img: string;
-  main: RegisterProd[];
-  sub: RegisterProd[];
-  options: RegisterProd[];
+  main: RegisterItem;
+  setEditModal: (flag: boolean) => void;
 };
 
 function RegisteredCatalog({
+  id,
   name,
   desc,
   price,
   img,
   main,
-  sub,
-  options,
+  setEditModal,
 }: RegisteredCatalogProps) {
+  const { catalogRegisterQuery } = useCatalogRegistrationStore();
+  const { setEditCatalog } = useEditCatalogStore();
+
+  const openEditModalHandler = (id: string) => {
+    for (const catalog of catalogRegisterQuery.filter(
+      (catalog) => catalog.id === id,
+    )) {
+      setEditCatalog(catalog);
+    }
+    setEditModal(true);
+  };
+
   return (
     <Fragment>
       <ListItem
@@ -40,23 +53,15 @@ function RegisteredCatalog({
                 <div className={registeredCatalogStyle.img} />
               )}
             </div>
-            <div className={registeredCatalogListStyle.name}>{name}</div>
-            <div className={registeredCatalogListStyle.main}>
-              {main.map((item) => (
-                <span key={item.id}>{item.name}</span>
-              ))}
-            </div>
-            <div className={registeredCatalogListStyle.sub}>{sub.length}件</div>
-            <div className={registeredCatalogListStyle.option}>
-              {options.length}件
-            </div>
-            <div className={registeredCatalogListStyle.desc}>{desc}</div>
-            <div className={registeredCatalogListStyle.price}>
+            <div className={registeredCatalogStyle.name}>{name}</div>
+            <div className={registeredCatalogStyle.main}>{main.name}</div>
+            <div className={registeredCatalogStyle.desc}>{desc}</div>
+            <div className={registeredCatalogStyle.price}>
               {price.toLocaleString()}
             </div>
           </Fragment>
         }
-        executeHandler={() => {}}
+        executeHandler={() => openEditModalHandler(id)}
       />
     </Fragment>
   );

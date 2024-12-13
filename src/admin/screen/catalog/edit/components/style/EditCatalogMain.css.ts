@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
-export const catalogMainStyle = {
+export const editCatalogMainStyle = {
   container: style({
     display: "flex",
     alignItems: "center",

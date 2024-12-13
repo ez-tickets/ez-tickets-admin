@@ -1,4 +1,4 @@
-import { catalogMainStyle } from "@/admin/screen/catalog/register/components/style/CatalogMain.css.ts";
+import { editCatalogMainStyle } from "@/admin/screen/catalog/edit/components/style/EditCatalogMain.css.ts";
 import SelectModal from "@/admin/screen/modal/selectModal/SelectModal.tsx";
 import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import InputContainer from "@/parts/InputContainer.tsx";
@@ -13,7 +13,7 @@ type CatalogMainProps = {
   setImage: (image: string) => void;
 };
 
-function CatalogMain({
+function EditCatalogMain({
   main,
   setMain,
   setImgPath,
@@ -24,9 +24,9 @@ function CatalogMain({
 
   const registerHandler = (prod: RegisterProd) => {
     const registerValue = { id: prod.id, name: prod.name };
-    setMain(registerValue);
     setImgPath(prod.img);
     setImage(convertFileSrc(prod.img));
+    setMain(registerValue);
     setToggleModal(false);
   };
 
@@ -36,25 +36,27 @@ function CatalogMain({
         title={"メイン商品"}
         inputElement={
           <Fragment>
-            <div className={catalogMainStyle.container}>
-              <div className={catalogMainStyle.selectContainer}>
-                <p className={catalogMainStyle.require}>（必須）</p>
+            <div className={editCatalogMainStyle.container}>
+              <div className={editCatalogMainStyle.selectContainer}>
+                <p className={editCatalogMainStyle.require}>（必須）</p>
                 <button
                   type={"button"}
-                  className={catalogMainStyle.selectButton}
+                  className={editCatalogMainStyle.selectButton}
                   onClick={() => setToggleModal(true)}
                 >
                   メイン商品選択
                 </button>
               </div>
-              <div className={catalogMainStyle.selectedMain}>{main.name}</div>
+              <div className={editCatalogMainStyle.selectedMain}>
+                {main.name}
+              </div>
             </div>
           </Fragment>
         }
       />
 
       <SelectModal
-        modalTitle={"メイン商品を選択"}
+        modalTitle={"メイン商品を編集"}
         toggleModal={toggleModal}
         closeHandler={() => setToggleModal(false)}
         parts={
@@ -64,7 +66,7 @@ function CatalogMain({
                 // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
                 <div
                   key={prod.id}
-                  className={catalogMainStyle.item}
+                  className={editCatalogMainStyle.item}
                   onClick={() => registerHandler(prod)}
                 >
                   {prod.name}
@@ -78,4 +80,4 @@ function CatalogMain({
   );
 }
 
-export default CatalogMain;
+export default EditCatalogMain;

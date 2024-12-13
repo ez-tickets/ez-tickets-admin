@@ -37,7 +37,7 @@ export const executeButtonStyle = {
 
   //edit manageEntryModal --------------------------------------------
   editModalUpdate: style({
-    margin: "5rem 1rem 0",
+    margin: "5rem 1rem",
     padding: "10px 20px",
     display: "block",
     border: "1px solid rgba(0,0,0,0.4)",
@@ -49,7 +49,7 @@ export const executeButtonStyle = {
   }),
 
   editModalReset: style({
-    margin: "5rem 1rem 0",
+    margin: "5rem 1rem",
     padding: "10px 20px",
     display: "block",
     border: "1px solid rgba(0,0,0,0.4)",
@@ -61,7 +61,7 @@ export const executeButtonStyle = {
   }),
 
   editModalDelete: style({
-    margin: "5rem 1rem 0",
+    margin: "5rem 1rem",
     padding: "10px 20px",
     display: "block",
     border: "1px solid rgba(0,0,0,0.4)",
