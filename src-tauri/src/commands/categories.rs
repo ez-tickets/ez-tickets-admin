@@ -36,7 +36,7 @@ impl Ord for Category {
 
 #[tauri::command]
 pub async fn categories(client: State<'_, HttpClient>) -> Result<BTreeSet<Category>, FailRequest> {
-    client.get("http://localhost:3650/categories").send().await
+    client.get("http://100.77.238.23:3650/categories").send().await
         .map_err(|e| {
             eprintln!("Error: {:?}", e);
             FailRequest {}

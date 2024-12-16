@@ -23,7 +23,7 @@ function RegisteredProducts({ setEditModal }: RegisteredProductsProps) {
           key={product.id}
           id={product.id}
           name={product.name}
-          path={`http://localhost:3650/contents?id=${product.id}`}
+          path={`http://100.77.238.23:3650/contents?id=${product.id}`}
           setEditModal={setEditModal}
         />
       ))}

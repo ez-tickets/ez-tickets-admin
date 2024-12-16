@@ -3,7 +3,6 @@ import EditProdActionButton from "@/admin/screen/product/components/EditProdActi
 import EditProdImg from "@/admin/screen/product/components/EditProdImg.tsx";
 import EditProdName from "@/admin/screen/product/components/EditProdName.tsx";
 import { useEditProductStore } from "@/admin/store/RegisteredEditStore.ts";
-import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment, useState } from "react";
 
 type ProdEditModalProps = {
@@ -16,8 +15,10 @@ function EditProdModal({ editModal, setEditModal }: ProdEditModalProps) {
   if (!editProd) throw new Error("list not found.");
 
   const [editName, setEditName] = useState<string>(editProd.name);
-  const [editImgPath, setEditImgPath] = useState<string>(editProd.img);
-  const [image, setImage] = useState<string>(convertFileSrc(editImgPath));
+  const [editImgPath, setEditImgPath] = useState<string>("");
+  const [image, setImage] = useState<string>(
+    `http://100.77.238.23:3650/contents?id=${editProd.id}`,
+  );
 
   const closeHandler = () => {
     setEditModal(false);
