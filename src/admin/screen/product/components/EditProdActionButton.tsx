@@ -9,7 +9,6 @@ import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
 import type { RegisterProd } from "@/types.ts";
-import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment, useState } from "react";
 
 type ProdEditActionButtonProps = {
@@ -38,8 +37,8 @@ function EditProdActionButton({
 
   const resetHandler = () => {
     setEditName(editProd.name);
-    setEditImgPath(editProd.img);
-    setImage(convertFileSrc(editProd.img));
+    setEditImgPath("");
+    setImage(`http://100.77.238.23:3650/contents?id=${editProd.id}`);
   };
 
   const updateHandler = () => {

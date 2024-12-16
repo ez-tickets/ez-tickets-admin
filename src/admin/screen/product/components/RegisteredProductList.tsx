@@ -33,7 +33,12 @@ function RegisteredProductList() {
             }
           />
         }
-        lists={<RegisteredProducts setEditModal={setEditModal} />}
+        lists={
+          <RegisteredProducts
+            setEditModal={setEditModal}
+            toggleModal={toggleModal}
+          />
+        }
       />
 
       <RegisterProdModal

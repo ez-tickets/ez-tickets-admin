@@ -5,6 +5,7 @@ import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
 import { Fragment, useState } from "react";
+import { toast } from "react-toastify";
 
 type ProdActiveButtonProps = {
   prodName: string;
@@ -32,9 +33,11 @@ function ProdActiveButton({
   };
 
   const openModalHandler = () => {
-    if (prodName !== "" && prodImgPath !== "") {
-      setModalView(true);
+    if (prodName === "" && prodImgPath === "") {
+      toast.error("必須項目を入力してください");
+      return;
     }
+    setModalView(true);
   };
 
   const executeHandler = async () => {
@@ -45,6 +48,7 @@ function ProdActiveButton({
     setImage("");
     setModalView(false);
     setToggleModal(false);
+    toast.success("登録完了しました");
   };
 
   return (

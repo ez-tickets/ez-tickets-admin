@@ -13,7 +13,7 @@ pub struct Product {
 
 #[tauri::command]
 pub async fn products(client: State<'_, HttpClient>) -> Result<Vec<Product>, FailRequest> {
-    let res = client.get("http://localhost:3650/products")
+    let res = client.get("http://100.77.238.23:3650/products")
         .send()
         .await
         .map_err(|e| {
@@ -46,7 +46,7 @@ pub async fn register_product(register: RegisterProduct, client: State<'_, HttpC
             eprintln!("{:?}", e);
             FailRequest {}
         })?;
-    let _res = client.post("http://localhost:3650/products")
+    let _res = client.post("http://100.77.238.23:3650/products")
         .multipart(form)
         .send()
         .await
