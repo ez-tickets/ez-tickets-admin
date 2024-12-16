@@ -9,10 +9,23 @@ import RegisteredProd from "@/admin/screen/product/RegisteredProd.tsx";
 import TitleBar from "@/application/TitleBar.tsx";
 import Login from "@/login/Login.tsx";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { Bounce, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <MemoryRouter>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        draggable
+        theme="light"
+        transition={Bounce}
+      />
       <TitleBar />
       <Routes>
         <Route path="/" element={<Login />} />
