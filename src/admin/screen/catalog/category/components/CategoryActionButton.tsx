@@ -1,11 +1,10 @@
 import ConfirmModal from "@/admin/screen/modal/confirmModal/ConfirmModal.tsx";
-import { useCategoryRegistrationStore } from "@/admin/store/RegistrationStore.ts";
-import { registration } from "@/admin/store/action/CategoryRegistrationAction.ts";
 import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
 import { Fragment, useState } from "react";
+import {registerCategory} from "@/cmds/categories.ts";
 
 type CategoryActionButtonProps = {
   categoryName: string;
@@ -18,7 +17,6 @@ function CategoryActionButton({
   setCategoryName,
   setToggleModal,
 }: CategoryActionButtonProps) {
-  const { categoryRegisterDispatcher } = useCategoryRegistrationStore();
   const [modalView, setModalView] = useState<boolean>(false);
 
   const openModalHandler = () => {
@@ -27,9 +25,8 @@ function CategoryActionButton({
     }
   };
 
-  const executeHandler = () => {
-    const categoryRegisterValue = { category: categoryName };
-    categoryRegisterDispatcher(registration(categoryRegisterValue));
+  const executeHandler = async () => {
+    await registerCategory({ name: categoryName });
 
     setCategoryName("");
     setModalView(false);

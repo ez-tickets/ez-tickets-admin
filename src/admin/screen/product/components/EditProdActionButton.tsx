@@ -1,15 +1,11 @@
 import ConfirmModal from "@/admin/screen/modal/confirmModal/ConfirmModal.tsx";
-import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
-import {
-  deleteProduct,
-  replaceEditedProduct,
-} from "@/admin/store/action/ProdRegistrationAction.ts";
 import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
 import type { RegisterProd } from "@/types.ts";
 import { Fragment, useState } from "react";
+import {deleteProduct, updateProduct} from "@/cmds/products.ts";
 
 type ProdEditActionButtonProps = {
   editProd: RegisterProd;
@@ -30,7 +26,6 @@ function EditProdActionButton({
   setImage,
   setEditModal,
 }: ProdEditActionButtonProps) {
-  const { prodRegisterDispatcher } = useProdRegistrationStore();
   const [modalView, setModalView] = useState<boolean>(false);
   const [taskType, setTaskType] = useState<string>("");
   const [executeHandler, setExecuteHandler] = useState<() => void>();
@@ -41,17 +36,12 @@ function EditProdActionButton({
     setImage(`http://100.77.238.23:3650/contents?id=${editProd.id}`);
   };
 
-  const updateHandler = () => {
-    const editedProd = {
-      id: editProd.id,
-      name: editName,
-      img: editImgPath,
-    };
-    prodRegisterDispatcher(replaceEditedProduct(editedProd));
+  const updateHandler = async () => {
+    await updateProduct(editProd.id, { name: editProd.name, path: editProd.img });
   };
 
-  const deleteHandler = () => {
-    prodRegisterDispatcher(deleteProduct(editProd.id));
+  const deleteHandler = async () => {
+    await deleteProduct(editProd.id);
   };
 
   const openModalHandler = (type: string) => {

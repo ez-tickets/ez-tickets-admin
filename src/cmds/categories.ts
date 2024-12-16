@@ -12,7 +12,6 @@ export const fetchCategories = async (): Promise<Category[]> => {
 
 export type RegisterCategory = {
   name: string;
-  order: number;
 };
 
 export const registerCategory = async (
@@ -29,5 +28,9 @@ export const updateCategoryName = async (
   id: string,
   input: UpdateCategoryName,
 ): Promise<void> => {
-  await invoke<void>("update_category_name", { id: id, update: input });
+  await invoke<void>("update_category", { id: id, update: input });
+};
+
+export const deleteCategory = async (id: string): Promise<void> => {
+  await invoke<void>("delete_category", { id: id });
 };
