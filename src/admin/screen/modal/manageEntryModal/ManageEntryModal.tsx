@@ -26,17 +26,17 @@ function ManageEntryModal({
     <Fragment>
       {/*@ts-ignore react version incompatible*/}
       <Modal isOpen={toggleModal} style={manageEntryModalContainer} onRequestClose={closeHandler}>
-        <div>
+        <div className={manageEntryModal.content}>
           <div className={manageEntryModal.headerContainer}>
             <h1 className={manageEntryModal.title}>{modalTitle}</h1>
             {headerElement}
             <IconX
               type={"button"}
-              className={manageEntryModal.closeIcon}
+              className={manageEntryModal.delete}
               onClick={closeHandler}
             />
           </div>
-          <div>{parts}</div>
+          {parts}
         </div>
       </Modal>
     </Fragment>
