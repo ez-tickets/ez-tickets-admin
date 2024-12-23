@@ -1,10 +1,10 @@
 import ConfirmModal from "@/admin/screen/modal/confirmModal/ConfirmModal.tsx";
+import { registerCategory } from "@/cmds/categories.ts";
 import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
 import { Fragment, useState } from "react";
-import {registerCategory} from "@/cmds/categories.ts";
 
 type CategoryActionButtonProps = {
   categoryName: string;

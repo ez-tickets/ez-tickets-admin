@@ -1,9 +1,9 @@
 import SideBarLabel from "@/admin/components/SideBarLabel.tsx";
 import { sideBarStyle } from "@/admin/components/styles/SideBar.css.ts";
 import RegisterCategoryModal from "@/admin/screen/catalog/category/components/RegisterCategoryModal.tsx";
-import {Fragment, useEffect, useState} from "react";
-import { Link } from "react-router-dom";
 import { type Category, fetchCategories } from "@/cmds/categories.ts";
+import { Fragment, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function SideBar() {
   const [toggleModal, setToggleModal] = useState<boolean>(false);
@@ -15,7 +15,7 @@ function SideBar() {
       const categories = await fetchCategories();
       categories.sort((a, b) => a.order - b.order);
       setCategories(categories);
-    })()
+    })();
   }, []);
 
   return (

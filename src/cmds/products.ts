@@ -28,11 +28,11 @@ export type UpdateProduct = {
 };
 
 export const updateProduct = async (
-    id: string,
-    input: UpdateProduct,
+  id: string,
+  input: UpdateProduct,
 ): Promise<void> => {
   await invoke<void>("update_product", { id: id, update: input });
-}
+};
 
 export const deleteProduct = async (id: string): Promise<void> => {
   await invoke<void>("delete_product", { id: id });

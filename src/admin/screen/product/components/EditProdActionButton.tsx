@@ -1,11 +1,11 @@
 import ConfirmModal from "@/admin/screen/modal/confirmModal/ConfirmModal.tsx";
+import { deleteProduct, updateProduct } from "@/cmds/products.ts";
 import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
 import type { RegisterProd } from "@/types.ts";
 import { Fragment, useState } from "react";
-import {deleteProduct, updateProduct} from "@/cmds/products.ts";
 
 type ProdEditActionButtonProps = {
   editProd: RegisterProd;
@@ -37,7 +37,10 @@ function EditProdActionButton({
   };
 
   const updateHandler = async () => {
-    await updateProduct(editProd.id, { name: editProd.name, path: editProd.img });
+    await updateProduct(editProd.id, {
+      name: editProd.name,
+      path: editProd.img,
+    });
   };
 
   const deleteHandler = async () => {
