@@ -12,6 +12,7 @@ function RegisteredCategories({
   toggleModal,
 }: RegisteredCategoriesProps) {
   const [categories, setCategories] = useState<Category[] | null>(null);
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     (async () => {
       const categories = await fetchCategories();
