@@ -14,7 +14,11 @@ pub fn run() {
         .plugin(tauri_plugin_dialog::init())
         .invoke_handler(tauri::generate_handler![
             products,
-            register_product
+            register_product,
+            update_product,
+            delete_product,
+            categories,
+            register_category,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

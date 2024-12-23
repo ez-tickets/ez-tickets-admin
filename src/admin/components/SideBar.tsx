@@ -1,13 +1,22 @@
 import SideBarLabel from "@/admin/components/SideBarLabel.tsx";
 import { sideBarStyle } from "@/admin/components/styles/SideBar.css.ts";
 import RegisterCategoryModal from "@/admin/screen/catalog/category/components/RegisterCategoryModal.tsx";
-import { useCategoryRegistrationStore } from "@/admin/store/RegistrationStore.ts";
-import { Fragment, useState } from "react";
+import { type Category, fetchCategories } from "@/cmds/categories.ts";
+import { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function SideBar() {
-  const { categoryRegisterQuery } = useCategoryRegistrationStore();
   const [toggleModal, setToggleModal] = useState<boolean>(false);
+
+  const [categories, setCategories] = useState<Category[] | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const categories = await fetchCategories();
+      categories.sort((a, b) => a.order - b.order);
+      setCategories(categories);
+    })();
+  }, []);
 
   return (
     <Fragment>
@@ -30,13 +39,13 @@ function SideBar() {
               <Fragment>
                 <Link to={"registeredCategory"}>カテゴリー詳細</Link>
 
-                {categoryRegisterQuery.map((category) => (
+                {categories?.map((category) => (
                   <Link
                     to="registeredCatalog"
                     key={category.id}
-                    state={{ title: category.category }}
+                    state={{ title: category.name }}
                   >
-                    {category.category}
+                    {category.name}
                   </Link>
                 ))}
               </Fragment>

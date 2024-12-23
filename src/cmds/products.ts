@@ -21,3 +21,19 @@ export const registerProduct = async (
 ): Promise<void> => {
   await invoke<void>("register_product", { register: input });
 };
+
+export type UpdateProduct = {
+  name: string;
+  path?: string;
+};
+
+export const updateProduct = async (
+  id: string,
+  input: UpdateProduct,
+): Promise<void> => {
+  await invoke<void>("update_product", { id: id, update: input });
+};
+
+export const deleteProduct = async (id: string): Promise<void> => {
+  await invoke<void>("delete_product", { id: id });
+};
