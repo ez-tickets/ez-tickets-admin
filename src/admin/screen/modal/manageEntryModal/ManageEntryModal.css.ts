@@ -44,7 +44,7 @@ export const manageEntryModal = {
     scale: 1.5,
     border: "1px solid rgba(0,0,0,0.1)",
     boxShadow: "1px 2px 5px lightgray",
-    borderRadius: "5px"
+    borderRadius: "5px",
   }),
 };
 
