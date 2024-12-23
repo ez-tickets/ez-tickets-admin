@@ -44,6 +44,7 @@ function EditProdModal({ editModal, setEditModal }: ProdEditModalProps) {
             editProd={editProd}
             editName={editName}
             editImgPath={editImgPath}
+            image={image}
             setEditName={setEditName}
             setEditImgPath={setEditImgPath}
             setImage={setImage}

@@ -11,6 +11,7 @@ type ProdEditActionButtonProps = {
   editProd: RegisterProd;
   editName: string;
   editImgPath: string;
+  image: string;
   setEditName: (name: string) => void;
   setEditImgPath: (path: string) => void;
   setImage: (img: string) => void;
@@ -21,6 +22,7 @@ function EditProdActionButton({
   editProd,
   editName,
   editImgPath,
+  image,
   setEditName,
   setEditImgPath,
   setImage,
@@ -38,8 +40,8 @@ function EditProdActionButton({
 
   const updateHandler = async () => {
     await updateProduct(editProd.id, {
-      name: editProd.name,
-      path: editProd.img,
+      name: editName,
+      path: editImgPath,
     });
   };
 
@@ -48,7 +50,10 @@ function EditProdActionButton({
   };
 
   const openModalHandler = (type: string) => {
-    if (editName !== "" && editImgPath !== "") {
+    if (
+      (editName !== "" && editImgPath !== "") ||
+      (editName !== "" && image !== "")
+    ) {
       switch (type) {
         case confirmAction.UPDATE:
           setTaskType(confirmAction.UPDATE);
