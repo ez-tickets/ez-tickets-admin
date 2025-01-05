@@ -5,6 +5,7 @@ import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
 import { Fragment, useState } from "react";
+import { toast } from "react-toastify";
 
 type CategoryActionButtonProps = {
   categoryName: string;
@@ -20,9 +21,11 @@ function CategoryActionButton({
   const [modalView, setModalView] = useState<boolean>(false);
 
   const openModalHandler = () => {
-    if (categoryName !== "") {
-      setModalView(true);
+    if (categoryName === "") {
+      toast.error("必須項目を入力してください");
+      return;
     }
+    setModalView(true);
   };
 
   const executeHandler = async () => {
@@ -31,6 +34,7 @@ function CategoryActionButton({
     setCategoryName("");
     setModalView(false);
     setToggleModal(false);
+    toast.success("登録完了しました");
   };
 
   return (

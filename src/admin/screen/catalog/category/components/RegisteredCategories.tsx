@@ -4,13 +4,9 @@ import { Fragment, useEffect, useState } from "react";
 
 type RegisteredCategoriesProps = {
   setEditModal: (flag: boolean) => void;
-  toggleModal: boolean;
 };
 
-function RegisteredCategories({
-  setEditModal,
-  toggleModal,
-}: RegisteredCategoriesProps) {
+function RegisteredCategories({ setEditModal }: RegisteredCategoriesProps) {
   const [categories, setCategories] = useState<Category[] | null>(null);
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
@@ -19,7 +15,7 @@ function RegisteredCategories({
       categories.sort((a, b) => a.order - b.order);
       setCategories(categories);
     })();
-  }, [toggleModal]);
+  }, [categories]);
 
   return (
     <Fragment>
@@ -27,7 +23,7 @@ function RegisteredCategories({
         <RegisteredCategory
           key={category.id}
           id={category.id}
-          category={category.name}
+          name={category.name}
           setEditModal={setEditModal}
         />
       ))}

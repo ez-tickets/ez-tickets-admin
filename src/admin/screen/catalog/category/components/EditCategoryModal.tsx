@@ -14,7 +14,7 @@ function EditCategoryModal({ editModal, setEditModal }: CategoryModalProps) {
   if (!editCategory) throw new Error("category not found.");
 
   const [editCategorise, setEditCategorise] = useState<string>(
-    editCategory.category,
+    editCategory.name,
   );
 
   const closeHandler = () => {

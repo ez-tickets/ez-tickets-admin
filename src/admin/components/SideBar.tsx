@@ -10,13 +10,14 @@ function SideBar() {
 
   const [categories, setCategories] = useState<Category[] | null>(null);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     (async () => {
       const categories = await fetchCategories();
       categories.sort((a, b) => a.order - b.order);
       setCategories(categories);
     })();
-  }, []);
+  }, [categories]);
 
   return (
     <Fragment>

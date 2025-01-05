@@ -32,7 +32,7 @@ export const categoryReducer = (
         ...state,
         {
           id: (categoryID++).toString(),
-          category: `カタログ${(categoryID).toString()}`,
+          name: `カタログ${(categoryID).toString()}`,
         },
       ];
     default: {

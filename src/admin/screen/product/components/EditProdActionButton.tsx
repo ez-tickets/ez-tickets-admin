@@ -6,6 +6,7 @@ import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
 import type { RegisterProd } from "@/types.ts";
 import { Fragment, useState } from "react";
+import { toast } from "react-toastify";
 
 type ProdEditActionButtonProps = {
   editProd: RegisterProd;
@@ -43,10 +44,12 @@ function EditProdActionButton({
       name: editName,
       path: editImgPath,
     });
+    toast.success("更新しました");
   };
 
   const deleteHandler = async () => {
     await deleteProduct(editProd.id);
+    toast.success("削除しました");
   };
 
   const openModalHandler = (type: string) => {
