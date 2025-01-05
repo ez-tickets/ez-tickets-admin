@@ -30,13 +30,13 @@ function EditCategoryActionButton({
   const [executeHandler, setExecuteHandler] = useState<() => void>();
 
   const resetHandler = () => {
-    setEditCategorise(editCategory.category);
+    setEditCategorise(editCategory.name);
   };
 
   const updateHandler = () => {
     const editedCategory = {
       id: editCategory.id,
-      category: editCategorise,
+      name: editCategorise,
     };
     categoryRegisterDispatcher(replaceEditCategory(editedCategory));
   };

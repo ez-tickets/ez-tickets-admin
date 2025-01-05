@@ -104,10 +104,10 @@ function CatalogActionButton({
       />
 
       <ConfirmModal
-        taskType={confirmAction.REGISTRATION} //タイプ
-        executeHandler={executeHandler} //はい　handler()
-        modalView={modalView} //モーダルvisibility
-        setModalView={setModalView} //モーダル切り替え
+        taskType={confirmAction.REGISTRATION}
+        executeHandler={executeHandler}
+        modalView={modalView}
+        setModalView={setModalView}
       />
     </Fragment>
   );

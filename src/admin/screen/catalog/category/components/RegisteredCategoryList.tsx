@@ -32,12 +32,7 @@ function RegisteredCategoryList() {
             }
           />
         }
-        lists={
-          <RegisteredCategories
-            setEditModal={setEditModal}
-            toggleModal={toggleModal}
-          />
-        }
+        lists={<RegisteredCategories setEditModal={setEditModal} />}
       />
 
       <RegisterCategoryModal
