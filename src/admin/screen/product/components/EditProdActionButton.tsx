@@ -1,21 +1,18 @@
 import ConfirmModal from "@/admin/screen/modal/confirmModal/ConfirmModal.tsx";
-import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
-import {
-  deleteProduct,
-  replaceEditedProduct,
-} from "@/admin/store/action/ProdRegistrationAction.ts";
+import { deleteProduct, updateProduct } from "@/cmds/products.ts";
 import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
 import type { RegisterProd } from "@/types.ts";
-import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment, useState } from "react";
+import { toast } from "react-toastify";
 
 type ProdEditActionButtonProps = {
   editProd: RegisterProd;
   editName: string;
   editImgPath: string;
+  image: string;
   setEditName: (name: string) => void;
   setEditImgPath: (path: string) => void;
   setImage: (img: string) => void;
@@ -26,37 +23,40 @@ function EditProdActionButton({
   editProd,
   editName,
   editImgPath,
+  image,
   setEditName,
   setEditImgPath,
   setImage,
   setEditModal,
 }: ProdEditActionButtonProps) {
-  const { prodRegisterDispatcher } = useProdRegistrationStore();
   const [modalView, setModalView] = useState<boolean>(false);
   const [taskType, setTaskType] = useState<string>("");
   const [executeHandler, setExecuteHandler] = useState<() => void>();
 
   const resetHandler = () => {
     setEditName(editProd.name);
-    setEditImgPath(editProd.img);
-    setImage(convertFileSrc(editProd.img));
+    setEditImgPath("");
+    setImage(`http://100.77.238.23:3650/contents?id=${editProd.id}`);
   };
 
-  const updateHandler = () => {
-    const editedProd = {
-      id: editProd.id,
+  const updateHandler = async () => {
+    await updateProduct(editProd.id, {
       name: editName,
-      img: editImgPath,
-    };
-    prodRegisterDispatcher(replaceEditedProduct(editedProd));
+      path: editImgPath,
+    });
+    toast.success("更新しました");
   };
 
-  const deleteHandler = () => {
-    prodRegisterDispatcher(deleteProduct(editProd.id));
+  const deleteHandler = async () => {
+    await deleteProduct(editProd.id);
+    toast.success("削除しました");
   };
 
   const openModalHandler = (type: string) => {
-    if (editName !== "" && editImgPath !== "") {
+    if (
+      (editName !== "" && editImgPath !== "") ||
+      (editName !== "" && image !== "")
+    ) {
       switch (type) {
         case confirmAction.UPDATE:
           setTaskType(confirmAction.UPDATE);

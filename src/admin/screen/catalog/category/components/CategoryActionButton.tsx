@@ -1,11 +1,11 @@
 import ConfirmModal from "@/admin/screen/modal/confirmModal/ConfirmModal.tsx";
-import { useCategoryRegistrationStore } from "@/admin/store/RegistrationStore.ts";
-import { registration } from "@/admin/store/action/CategoryRegistrationAction.ts";
+import { registerCategory } from "@/cmds/categories.ts";
 import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
 import { Fragment, useState } from "react";
+import { toast } from "react-toastify";
 
 type CategoryActionButtonProps = {
   categoryName: string;
@@ -18,22 +18,23 @@ function CategoryActionButton({
   setCategoryName,
   setToggleModal,
 }: CategoryActionButtonProps) {
-  const { categoryRegisterDispatcher } = useCategoryRegistrationStore();
   const [modalView, setModalView] = useState<boolean>(false);
 
   const openModalHandler = () => {
-    if (categoryName !== "") {
-      setModalView(true);
+    if (categoryName === "") {
+      toast.error("必須項目を入力してください");
+      return;
     }
+    setModalView(true);
   };
 
-  const executeHandler = () => {
-    const categoryRegisterValue = { category: categoryName };
-    categoryRegisterDispatcher(registration(categoryRegisterValue));
+  const executeHandler = async () => {
+    await registerCategory({ name: categoryName });
 
     setCategoryName("");
     setModalView(false);
     setToggleModal(false);
+    toast.success("登録完了しました");
   };
 
   return (

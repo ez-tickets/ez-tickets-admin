@@ -25,12 +25,12 @@ export interface RegisterProd {
 
 //カテゴリー登録 -------------------------------------------
 export type InputCategoryRegister = {
-  category: string;
+  name: string;
 };
 
 export type RegisterCategory = {
   id: string;
-  category: string;
+  name: string;
 };
 
 //カタログ登録情報 ---------------------------------------------

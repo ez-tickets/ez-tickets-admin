@@ -47,7 +47,7 @@ function InputImg({
 
         <div>
           <p>プレビュー</p>
-          {imgPath !== "" ? (
+          {imgPath !== undefined ? (
             <img src={image} alt={imgPath} className={inputImgStyle.img} />
           ) : (
             <div className={inputImgStyle.img} />

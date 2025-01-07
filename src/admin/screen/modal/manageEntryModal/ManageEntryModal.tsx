@@ -14,6 +14,7 @@ type EditModalProps = {
   parts: JSX.Element;
 };
 
+// biome-ignore format: enable ts-ignore.
 function ManageEntryModal({
   modalTitle,
   headerElement,
@@ -24,21 +25,19 @@ function ManageEntryModal({
   return (
     <Fragment>
       {/*@ts-ignore react version incompatible*/}
-      <Modal
-        isOpen={toggleModal}
-        style={manageEntryModalContainer}
-        onRequestClose={closeHandler}
-      >
-        <div className={manageEntryModal.headerContainer}>
-          <h1 className={manageEntryModal.title}>{modalTitle}</h1>
-          {headerElement}
+      <Modal isOpen={toggleModal} style={manageEntryModalContainer} onRequestClose={closeHandler}>
+        <div className={manageEntryModal.content}>
+          <div className={manageEntryModal.headerContainer}>
+            <h1 className={manageEntryModal.title}>{modalTitle}</h1>
+            {headerElement}
+            <IconX
+              type={"button"}
+              className={manageEntryModal.delete}
+              onClick={closeHandler}
+            />
+          </div>
+          {parts}
         </div>
-        <IconX
-          type={"button"}
-          className={manageEntryModal.closeIcon}
-          onClick={closeHandler}
-        />
-        {parts}
       </Modal>
     </Fragment>
   );

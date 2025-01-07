@@ -1,40 +1,53 @@
 import { registeredCategoryStyle } from "@/admin/screen/catalog/category/components/style/RegisteredCategory.css.ts";
 import { useEditCategoryStore } from "@/admin/store/RegisteredEditStore.ts";
-import { useCategoryRegistrationStore } from "@/admin/store/RegistrationStore.ts";
-import ListItem from "@/parts/ListItem.tsx";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import { Fragment } from "react";
 
 type RegisteredCategoryProps = {
   id: string;
-  category: string;
+  name: string;
   setEditModal: (flag: boolean) => void;
 };
 
 function RegisteredCategory({
   id,
-  category,
+  name,
   setEditModal,
 }: RegisteredCategoryProps) {
-  const { categoryRegisterQuery } = useCategoryRegistrationStore();
   const { setEditCategory } = useEditCategoryStore();
 
-  const openEditModalHandler = (id: string) => {
-    for (const category of categoryRegisterQuery.filter(
-      (category) => category.id === id,
-    )) {
-      setEditCategory(category);
-    }
+  const openEditModalHandler = (id: string, name: string) => {
+    setEditCategory({ id: id, name: name });
     setEditModal(true);
+  };
+
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
   };
 
   return (
     <Fragment>
-      <ListItem
-        block={
-          <div className={registeredCategoryStyle.category}>{category}</div>
-        }
-        executeHandler={() => openEditModalHandler(id)}
-      />
+      {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
+      <div
+        className={registeredCategoryStyle.list}
+        style={style}
+        ref={setNodeRef}
+        onClick={() => openEditModalHandler(id, name)}
+      >
+        <span
+          className={registeredCategoryStyle.congruent}
+          {...listeners}
+          {...attributes}
+        >
+          ≡
+        </span>
+        <span>{name}</span>
+      </div>
     </Fragment>
   );
 }
