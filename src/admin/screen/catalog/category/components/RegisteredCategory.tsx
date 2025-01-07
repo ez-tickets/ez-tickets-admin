@@ -1,6 +1,7 @@
 import { registeredCategoryStyle } from "@/admin/screen/catalog/category/components/style/RegisteredCategory.css.ts";
 import { useEditCategoryStore } from "@/admin/store/RegisteredEditStore.ts";
-import ListItem from "@/parts/ListItem.tsx";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import { Fragment } from "react";
 
 type RegisteredCategoryProps = {
@@ -21,12 +22,32 @@ function RegisteredCategory({
     setEditModal(true);
   };
 
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
   return (
     <Fragment>
-      <ListItem
-        block={<div className={registeredCategoryStyle.category}>{name}</div>}
-        executeHandler={() => openEditModalHandler(id, name)}
-      />
+      {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
+      <div
+        className={registeredCategoryStyle.list}
+        style={style}
+        ref={setNodeRef}
+        onClick={() => openEditModalHandler(id, name)}
+      >
+        <span
+          className={registeredCategoryStyle.congruent}
+          {...listeners}
+          {...attributes}
+        >
+          ≡
+        </span>
+        <span>{name}</span>
+      </div>
     </Fragment>
   );
 }
