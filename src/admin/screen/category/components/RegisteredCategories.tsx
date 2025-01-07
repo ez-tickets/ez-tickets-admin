@@ -1,4 +1,4 @@
-import RegisteredCategory from "@/admin/screen/catalog/category/components/RegisteredCategory.tsx";
+import RegisteredCategory from "@/admin/screen/category/components/RegisteredCategory.tsx";
 import { type Category, fetchCategories } from "@/cmds/categories.ts";
 import {
   DndContext,

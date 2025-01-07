@@ -1,4 +1,4 @@
-import { registeredCatalogStyle } from "@/admin/screen/catalog/list/components/style/RegisteredCatalog.css.ts";
+import { registeredCatalogStyle } from "@/admin/screen/category/catalog/list/components/style/RegisteredCatalog.css.ts";
 import { useEditCatalogStore } from "@/admin/store/RegisteredEditStore.ts";
 import { useCatalogRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import ListItem from "@/parts/ListItem.tsx";

@@ -1,4 +1,4 @@
-import { catalogMainStyle } from "@/admin/screen/catalog/register/components/style/CatalogMain.css.ts";
+import { catalogMainStyle } from "@/admin/screen/category/catalog/register/components/style/CatalogMain.css.ts";
 import SelectModal from "@/admin/screen/modal/selectModal/SelectModal.tsx";
 import { useProdRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import InputContainer from "@/parts/InputContainer.tsx";

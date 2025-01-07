@@ -1,4 +1,4 @@
-import RegisteredCategoryList from "@/admin/screen/catalog/category/components/RegisteredCategoryList.tsx";
+import RegisteredCategoryList from "@/admin/screen/category/components/RegisteredCategoryList.tsx";
 import Header from "@/parts/Header.tsx";
 import { Fragment } from "react";
 

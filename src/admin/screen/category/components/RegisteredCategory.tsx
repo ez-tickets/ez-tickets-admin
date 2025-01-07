@@ -1,4 +1,4 @@
-import { registeredCategoryStyle } from "@/admin/screen/catalog/category/components/style/RegisteredCategory.css.ts";
+import { registeredCategoryStyle } from "@/admin/screen/category/components/style/RegisteredCategory.css.ts";
 import { useEditCategoryStore } from "@/admin/store/RegisteredEditStore.ts";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";

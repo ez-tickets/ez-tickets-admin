@@ -1,5 +1,5 @@
-import EditCategoryActionButton from "@/admin/screen/catalog/category/components/EditCategoryActionButton.tsx";
-import EditCategoryName from "@/admin/screen/catalog/category/components/EditCategoryName.tsx";
+import EditCategoryActionButton from "@/admin/screen/category/components/EditCategoryActionButton.tsx";
+import EditCategoryName from "@/admin/screen/category/components/EditCategoryName.tsx";
 import ManageEntryModal from "@/admin/screen/modal/manageEntryModal/ManageEntryModal.tsx";
 import { useEditCategoryStore } from "@/admin/store/RegisteredEditStore.ts";
 import { Fragment, useState } from "react";

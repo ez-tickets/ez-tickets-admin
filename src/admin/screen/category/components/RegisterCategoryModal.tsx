@@ -1,5 +1,5 @@
-import CategoryActionButton from "@/admin/screen/catalog/category/components/CategoryActionButton.tsx";
-import CategoryName from "@/admin/screen/catalog/category/components/CategoryName.tsx";
+import CategoryActionButton from "@/admin/screen/category/components/CategoryActionButton.tsx";
+import CategoryName from "@/admin/screen/category/components/CategoryName.tsx";
 import ManageEntryModal from "@/admin/screen/modal/manageEntryModal/ManageEntryModal.tsx";
 import { Fragment, useState } from "react";
 

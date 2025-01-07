@@ -15,6 +15,7 @@ type ConfirmModalProps = {
   setEditModal?: (flag: boolean) => void;
 };
 
+// biome-ignore format: enable ts-ignore.
 function ConfirmModal({
   taskType,
   executeHandler,
@@ -33,11 +34,7 @@ function ConfirmModal({
   return (
     <Fragment>
       {/*@ts-ignore react version incompatible*/}
-      <Modal
-        isOpen={modalView}
-        style={confirmModalContainer}
-        onRequestClose={() => setModalView(false)}
-      >
+      <Modal isOpen={modalView} style={confirmModalContainer} onRequestClose={() => setModalView(false)}>
         <p className={confirmModalStyle.text}>
           {taskType}してもよろしいですか？
         </p>

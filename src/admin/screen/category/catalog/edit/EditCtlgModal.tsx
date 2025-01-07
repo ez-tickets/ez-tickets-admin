@@ -1,9 +1,9 @@
-import EditCatalogActionButton from "@/admin/screen/catalog/edit/components/EditCatalogActionButton.tsx";
-import EditCatalogDesc from "@/admin/screen/catalog/edit/components/EditCatalogDesc.tsx";
-import EditCatalogImg from "@/admin/screen/catalog/edit/components/EditCatalogImg.tsx";
-import EditCatalogMain from "@/admin/screen/catalog/edit/components/EditCatalogMain.tsx";
-import EditCatalogName from "@/admin/screen/catalog/edit/components/EditCatalogName.tsx";
-import EditCatalogPrice from "@/admin/screen/catalog/edit/components/EditCatalogPrice.tsx";
+import EditCatalogActionButton from "@/admin/screen/category/catalog/edit/components/EditCatalogActionButton.tsx";
+import EditCatalogDesc from "@/admin/screen/category/catalog/edit/components/EditCatalogDesc.tsx";
+import EditCatalogImg from "@/admin/screen/category/catalog/edit/components/EditCatalogImg.tsx";
+import EditCatalogMain from "@/admin/screen/category/catalog/edit/components/EditCatalogMain.tsx";
+import EditCatalogName from "@/admin/screen/category/catalog/edit/components/EditCatalogName.tsx";
+import EditCatalogPrice from "@/admin/screen/category/catalog/edit/components/EditCatalogPrice.tsx";
 import ManageEntryModal from "@/admin/screen/modal/manageEntryModal/ManageEntryModal.tsx";
 import { useEditCatalogStore } from "@/admin/store/RegisteredEditStore.ts";
 import type { RegisterItem } from "@/types.ts";

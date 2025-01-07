@@ -1,4 +1,4 @@
-import RegisteredCatalogList from "@/admin/screen/catalog/list/components/RegisteredCatalogList.tsx";
+import RegisteredCatalogList from "@/admin/screen/category/catalog/list/components/RegisteredCatalogList.tsx";
 import { useCatalogRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import { debug } from "@/admin/store/action/ProdRegistrationAction.ts";
 import Header from "@/parts/Header.tsx";

@@ -14,6 +14,7 @@ type SelectModalProps = {
   parts: JSX.Element;
 };
 
+// biome-ignore format: enable ts-ignore.
 function SelectModal({
   modalTitle,
   headerElement,
@@ -24,11 +25,7 @@ function SelectModal({
   return (
     <Fragment>
       {/*@ts-ignore react version incompatible*/}
-      <Modal
-        isOpen={toggleModal}
-        style={selectModal}
-        onRequestClose={closeHandler}
-      >
+      <Modal isOpen={toggleModal} style={selectModal} onRequestClose={closeHandler}>
         <div className={selectModalStyle.headerContainer}>
           <h4 className={selectModalStyle.title}>{modalTitle}</h4>
           {headerElement}

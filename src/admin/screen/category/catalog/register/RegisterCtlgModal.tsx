@@ -1,9 +1,9 @@
-import CatalogActionButton from "@/admin/screen/catalog/register/components/CatalogActionButton.tsx";
-import CatalogDesc from "@/admin/screen/catalog/register/components/CatalogDesc.tsx";
-import CatalogImg from "@/admin/screen/catalog/register/components/CatalogImg.tsx";
-import CatalogMain from "@/admin/screen/catalog/register/components/CatalogMain.tsx";
-import CatalogName from "@/admin/screen/catalog/register/components/CatalogName.tsx";
-import CatalogPrice from "@/admin/screen/catalog/register/components/CatalogPrice.tsx";
+import CatalogActionButton from "@/admin/screen/category/catalog/register/components/CatalogActionButton.tsx";
+import CatalogDesc from "@/admin/screen/category/catalog/register/components/CatalogDesc.tsx";
+import CatalogImg from "@/admin/screen/category/catalog/register/components/CatalogImg.tsx";
+import CatalogMain from "@/admin/screen/category/catalog/register/components/CatalogMain.tsx";
+import CatalogName from "@/admin/screen/category/catalog/register/components/CatalogName.tsx";
+import CatalogPrice from "@/admin/screen/category/catalog/register/components/CatalogPrice.tsx";
 import ManageEntryModal from "@/admin/screen/modal/manageEntryModal/ManageEntryModal.tsx";
 import type { RegisterItem } from "@/types.ts";
 import { Fragment, useState } from "react";

@@ -1,7 +1,7 @@
-import EditCategoryModal from "@/admin/screen/catalog/category/components/EditCategoryModal.tsx";
-import RegisterCategoryModal from "@/admin/screen/catalog/category/components/RegisterCategoryModal.tsx";
-import RegisteredCategories from "@/admin/screen/catalog/category/components/RegisteredCategories.tsx";
-import { registeredCategoryListStyle } from "@/admin/screen/catalog/category/components/style/RegisteredCategoryList.css.ts";
+import EditCategoryModal from "@/admin/screen/category/components/EditCategoryModal.tsx";
+import RegisterCategoryModal from "@/admin/screen/category/components/RegisterCategoryModal.tsx";
+import RegisteredCategories from "@/admin/screen/category/components/RegisteredCategories.tsx";
+import { registeredCategoryListStyle } from "@/admin/screen/category/components/style/RegisteredCategoryList.css.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ListContainer from "@/parts/ListContainer.tsx";
 import ListHeader from "@/parts/ListHeader.tsx";

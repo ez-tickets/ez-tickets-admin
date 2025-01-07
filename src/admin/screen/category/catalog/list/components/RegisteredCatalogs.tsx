@@ -1,4 +1,4 @@
-import RegisteredCatalog from "@/admin/screen/catalog/list/components/RegisteredCatalog.tsx";
+import RegisteredCatalog from "@/admin/screen/category/catalog/list/components/RegisteredCatalog.tsx";
 import { useCatalogRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import { Fragment } from "react";
 

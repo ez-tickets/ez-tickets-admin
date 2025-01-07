@@ -1,7 +1,7 @@
-import EditCtlgModal from "@/admin/screen/catalog/edit/EditCtlgModal.tsx";
-import RegisteredCatalogs from "@/admin/screen/catalog/list/components/RegisteredCatalogs.tsx";
-import { registeredCatalogListStyle } from "@/admin/screen/catalog/list/components/style/RegisteredCatalogList.css.ts";
-import RegisterCtlgModal from "@/admin/screen/catalog/register/RegisterCtlgModal.tsx";
+import EditCtlgModal from "@/admin/screen/category/catalog/edit/EditCtlgModal.tsx";
+import RegisteredCatalogs from "@/admin/screen/category/catalog/list/components/RegisteredCatalogs.tsx";
+import { registeredCatalogListStyle } from "@/admin/screen/category/catalog/list/components/style/RegisteredCatalogList.css.ts";
+import RegisterCtlgModal from "@/admin/screen/category/catalog/register/RegisterCtlgModal.tsx";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
 import ListContainer from "@/parts/ListContainer.tsx";

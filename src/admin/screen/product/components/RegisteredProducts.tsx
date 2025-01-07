@@ -11,7 +11,7 @@ function RegisteredProducts({
   setEditModal,
   toggleModal,
 }: RegisteredProductsProps) {
-  const [products, setProducts] = useState<Product[] | null>(null);
+  const [products, setProducts] = useState<Product[]>([]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
@@ -23,7 +23,7 @@ function RegisteredProducts({
 
   return (
     <Fragment>
-      {products?.map((product) => (
+      {products.map((product) => (
         <RegisteredProduct
           key={product.id}
           id={product.id}
