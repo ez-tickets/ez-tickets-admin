@@ -1,5 +1,20 @@
 import RegisteredCategory from "@/admin/screen/catalog/category/components/RegisteredCategory.tsx";
 import { type Category, fetchCategories } from "@/cmds/categories.ts";
+import {
+  DndContext,
+  type DragEndEvent,
+  KeyboardSensor,
+  PointerSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import {
+  SortableContext,
+  arrayMove,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 import { Fragment, useEffect, useState } from "react";
 
 type RegisteredCategoriesProps = {
@@ -7,7 +22,7 @@ type RegisteredCategoriesProps = {
 };
 
 function RegisteredCategories({ setEditModal }: RegisteredCategoriesProps) {
-  const [categories, setCategories] = useState<Category[] | null>(null);
+  const [categories, setCategories] = useState<Category[]>([]);
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     (async () => {
@@ -17,16 +32,48 @@ function RegisteredCategories({ setEditModal }: RegisteredCategoriesProps) {
     })();
   }, [categories]);
 
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  );
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (!over) return;
+
+    if (active.id !== over.id) {
+      const oldIndex = categories.findIndex((v) => v.id === active.id);
+      const newIndex = categories.findIndex((v) => v.id === over.id);
+      const updatedCategories = arrayMove(categories, oldIndex, newIndex);
+      setCategories(updatedCategories);
+      //並べ替え後のデータをサーバーに送る処理 --> categories
+    }
+  };
+
   return (
     <Fragment>
-      {categories?.map((category) => (
-        <RegisteredCategory
-          key={category.id}
-          id={category.id}
-          name={category.name}
-          setEditModal={setEditModal}
-        />
-      ))}
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+      >
+        <SortableContext
+          items={categories}
+          strategy={verticalListSortingStrategy}
+        >
+          {categories.map((category) => (
+            <RegisteredCategory
+              key={category.id}
+              id={category.id}
+              name={category.name}
+              setEditModal={setEditModal}
+            />
+          ))}
+        </SortableContext>
+      </DndContext>
     </Fragment>
   );
 }
