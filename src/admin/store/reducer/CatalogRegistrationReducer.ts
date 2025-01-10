@@ -5,13 +5,13 @@ import {
   REGISTRATION,
   REPLACE_EDIT_CATALOG,
 } from "@/admin/store/action/CatalogRegistrationAction.ts";
-import type { RegisterCatalog } from "@/types.ts";
+import type { EditProduct } from "@/types.ts";
 
 let catalogID = 1;
 
 export const catalogReducer = (
   action: CatalogRegistrationAction,
-  prev: RegisterCatalog[],
+  prev: EditProduct[],
 ) => {
   const state = prev;
 
@@ -23,7 +23,7 @@ export const catalogReducer = (
         { id: (catalogID++).toString(), ...action.payload },
       ];
     case REPLACE_EDIT_CATALOG: {
-      const payload = <RegisterCatalog>action.payload;
+      const payload = <EditProduct>action.payload;
       return state.map((catalog) =>
         catalog.id === payload.id ? { catalog, ...payload } : catalog,
       );

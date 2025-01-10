@@ -2,7 +2,7 @@ import InputContainer from "@/parts/InputContainer.tsx";
 import InputImg from "@/parts/InputImg.tsx";
 import { Fragment } from "react";
 
-type CatalogImgProps = {
+type EditCatalogImgProps = {
   imgPath: string;
   image: string;
   setImgPath: (path: string) => void;
@@ -14,7 +14,7 @@ function EditCatalogImg({
   image,
   setImgPath,
   setImage,
-}: CatalogImgProps) {
+}: EditCatalogImgProps) {
   return (
     <Fragment>
       <InputContainer

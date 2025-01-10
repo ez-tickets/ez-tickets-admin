@@ -1,86 +1,79 @@
 import ConfirmModal from "@/admin/screen/modal/confirmModal/ConfirmModal.tsx";
-import { useCatalogRegistrationStore } from "@/admin/store/RegistrationStore.ts";
-import { registration } from "@/admin/store/action/CatalogRegistrationAction.ts";
 import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
-import type { RegisterItem } from "@/types.ts";
 import { Fragment, useState } from "react";
+import { toast } from "react-toastify";
 
 type CatalogActionButtonProps = {
   name: string;
+  category: string;
   desc: string;
   price: number;
   imgPath: string;
-  main: RegisterItem;
   setName: (name: string) => void;
+  setCategory: (category: string) => void;
   setDesc: (desc: string) => void;
   setPrice: (price: number) => void;
   setImgPath: (path: string) => void;
   setImage: (image: string) => void;
-  setMain: (main: RegisterItem) => void;
   setToggleModal: (flag: boolean) => void;
 };
 
 function CatalogActionButton({
   name,
+  category,
   desc,
   price,
   imgPath,
-  main,
   setName,
+  setCategory,
   setDesc,
   setPrice,
   setImgPath,
   setImage,
-  setMain,
   setToggleModal,
 }: CatalogActionButtonProps) {
-  const { catalogRegisterDispatcher } = useCatalogRegistrationStore();
   const [modalView, setModalView] = useState<boolean>(false);
 
   const resetHandler = () => {
     setName("");
+    setCategory("");
     setDesc("");
     setPrice(0);
     setImgPath("");
     setImage("");
-    setMain({ id: "0", name: "" });
   };
 
   const openModalHandler = () => {
     if (
-      name !== "" &&
-      desc !== "" &&
-      price !== 0 &&
-      imgPath !== "" &&
-      main.id !== "" &&
-      main.name !== ""
+      name === "" ||
+      category === "" ||
+      desc === "" ||
+      price === 0 ||
+      imgPath === ""
     ) {
-      setModalView(true);
+      toast.error("必須項目を入力してください");
+      return;
     }
+    setModalView(true);
   };
 
   const executeHandler = () => {
-    const registerCatalogValue = {
+    //todo: サーバーに送信するデータ
+    const registerCatalog = {
       name: name,
+      category: category,
       desc: desc,
       price: price,
       img: imgPath,
-      main: main,
     };
-    //登録
-    catalogRegisterDispatcher(registration(registerCatalogValue));
 
-    setName("");
-    setDesc("");
-    setPrice(0);
-    setImgPath("");
-    setImage("");
-    setMain({ id: "0", name: "" });
+    resetHandler();
     setModalView(false);
     setToggleModal(false);
+    toast.success("登録が完了しました");
   };
 
   return (

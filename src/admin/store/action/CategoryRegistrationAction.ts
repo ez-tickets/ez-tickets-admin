@@ -1,13 +1,13 @@
-import type { InputCategoryRegister, RegisterCategory } from "@/types.ts";
+import type { ReNameCategory, RegisterCategory } from "@/types.ts";
 
 export const REGISTRATION = "registration" as const;
-export const registration = (category: InputCategoryRegister) => ({
+export const registration = (category: RegisterCategory) => ({
   type: REGISTRATION,
   payload: category,
 });
 
 export const REPLACE_EDIT_CATEGORY = "replace-edit-category" as const;
-export const replaceEditCategory = (category: RegisterCategory) => ({
+export const replaceEditCategory = (category: ReNameCategory) => ({
   type: REPLACE_EDIT_CATEGORY,
   payload: category,
 });

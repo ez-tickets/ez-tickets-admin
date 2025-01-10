@@ -1,57 +1,40 @@
 //login --------------------------------------------------
-export interface User {
+export type User = {
   id: string;
   password: string;
-}
+};
 
 //confirmModal ActionType --------------------------------------
-export interface ConfirmActionType {
+export type ConfirmActionType = {
   REGISTRATION: string;
   UPDATE: string;
   DELETE: string;
-}
-
-//登録商品 ------------------------------------------------
-export interface InputProdRegister {
-  name: string;
-  img: string;
-}
-
-export interface RegisterProd {
-  id: string;
-  name: string;
-  img: string;
-}
+};
 
 //カテゴリー登録 -------------------------------------------
-export type InputCategoryRegister = {
-  name: string;
-};
-
 export type RegisterCategory = {
+  name: string;
+};
+
+export type ReNameCategory = {
   id: string;
   name: string;
 };
 
-//カタログ登録情報 ---------------------------------------------
-export interface RegisterItem {
-  id: string;
+//商品登録情報 ---------------------------------------------
+export type RegisterProduct = {
   name: string;
-}
-
-export interface InputCatalog {
-  name: string;
+  category: string | null;
   desc: string;
   price: number;
-  img: string;
-  main: RegisterItem;
-}
+  path: string;
+};
 
-export interface RegisterCatalog {
+export type EditProduct = {
   id: string;
   name: string;
+  category: string | null;
   desc: string;
   price: number;
-  img: string;
-  main: RegisterItem;
-}
+  path: string;
+};

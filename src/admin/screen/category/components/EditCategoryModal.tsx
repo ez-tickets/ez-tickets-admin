@@ -13,7 +13,7 @@ function EditCategoryModal({ editModal, setEditModal }: CategoryModalProps) {
   const { editCategory, resetEditCategory } = useEditCategoryStore();
   if (!editCategory) throw new Error("category not found.");
 
-  const [editCategorise, setEditCategorise] = useState<string>(
+  const [editCategoryName, setEditCategoryName] = useState<string>(
     editCategory.name,
   );
 
@@ -31,13 +31,13 @@ function EditCategoryModal({ editModal, setEditModal }: CategoryModalProps) {
         parts={
           <Fragment>
             <EditCategoryName
-              editCategorise={editCategorise}
-              setEditCategorise={setEditCategorise}
+              editCategoryName={editCategoryName}
+              setEditCategoryName={setEditCategoryName}
             />
             <EditCategoryActionButton
               editCategory={editCategory}
-              editCategorise={editCategorise}
-              setEditCategorise={setEditCategorise}
+              editCategoryName={editCategoryName}
+              setEditCategoryName={setEditCategoryName}
               setEditModal={setEditModal}
             />
           </Fragment>

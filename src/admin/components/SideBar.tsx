@@ -6,9 +6,8 @@ import { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function SideBar() {
+  const [categories, setCategories] = useState<Category[]>([]);
   const [toggleModal, setToggleModal] = useState<boolean>(false);
-
-  const [categories, setCategories] = useState<Category[] | null>(null);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
@@ -30,17 +29,13 @@ function SideBar() {
 
         <div className={sideBarStyle.contentsContainer}>
           <SideBarLabel
-            title={"商品管理"}
-            element={<Link to={"registeredProd"}>商品詳細</Link>}
-          />
-
-          <SideBarLabel
             title={"カタログ"}
             element={
               <Fragment>
                 <Link to={"registeredCategory"}>カテゴリー詳細</Link>
 
-                {categories?.map((category) => (
+                {/* todo: Catalog追加する空の配列がいる */}
+                {categories.map((category) => (
                   <Link
                     to="registeredCatalog"
                     key={category.id}

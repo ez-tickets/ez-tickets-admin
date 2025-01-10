@@ -1,46 +1,43 @@
 import ConfirmModal from "@/admin/screen/modal/confirmModal/ConfirmModal.tsx";
 import { useCatalogRegistrationStore } from "@/admin/store/RegistrationStore.ts";
-import {
-  deleteCatalog,
-  replaceEditCatalog,
-} from "@/admin/store/action/CatalogRegistrationAction.ts";
+import { deleteCatalog } from "@/admin/store/action/CatalogRegistrationAction.ts";
 import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
-import type { RegisterCatalog, RegisterItem } from "@/types.ts";
+import type { EditProduct } from "@/types.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment, useState } from "react";
 
 type CatalogActionButtonProps = {
-  editCatalog: RegisterCatalog;
+  editCatalog: EditProduct;
   name: string;
+  category: string | null;
   desc: string;
   price: number;
   imgPath: string;
-  main: RegisterItem;
   setName: (name: string) => void;
+  setCategory: (category: string) => void;
   setDesc: (desc: string) => void;
   setPrice: (price: number) => void;
   setImgPath: (path: string) => void;
   setImage: (image: string) => void;
-  setMain: (main: RegisterItem) => void;
   setEditModal: (flag: boolean) => void;
 };
 
 function EditCatalogActionButton({
   editCatalog,
   name,
+  category,
   desc,
   price,
   imgPath,
-  main,
   setName,
+  setCategory,
   setDesc,
   setPrice,
   setImgPath,
   setImage,
-  setMain,
   setEditModal,
 }: CatalogActionButtonProps) {
   const { catalogRegisterDispatcher } = useCatalogRegistrationStore();
@@ -50,35 +47,34 @@ function EditCatalogActionButton({
 
   const resetHandler = () => {
     setName(editCatalog.name);
+    setCategory(""); //todo: 初期値を入力※型が違うからまだ処理できない
     setDesc(editCatalog.desc);
     setPrice(editCatalog.price);
-    setImgPath(editCatalog.img);
-    setImage(convertFileSrc(editCatalog.img));
-    setMain(editCatalog.main);
+    setImgPath(editCatalog.path);
+    setImage(convertFileSrc(editCatalog.path));
   };
 
   const deleteHandler = () => {
+    //todo: データ削除API
     catalogRegisterDispatcher(deleteCatalog(editCatalog.id));
   };
 
   const updateHandler = () => {
+    //todo: データ更新API
     const registerCatalogValue = {
-      id: editCatalog.id,
       name: name,
+      category: category,
       desc: desc,
       price: price,
       img: imgPath,
-      main: main,
     };
-    //登録
-    catalogRegisterDispatcher(replaceEditCatalog(registerCatalogValue));
 
     setName("");
+    setCategory("");
     setDesc("");
     setPrice(0);
     setImgPath("");
     setImage("");
-    setMain({ id: "0", name: "" });
     setModalView(false);
     setEditModal(false);
   };
@@ -86,11 +82,10 @@ function EditCatalogActionButton({
   const openModalHandler = (type: string) => {
     if (
       name !== "" &&
+      category !== "" &&
       desc !== "" &&
       price !== 0 &&
-      imgPath !== "" &&
-      main.id !== "" &&
-      main.name !== ""
+      imgPath !== ""
     ) {
       switch (type) {
         case confirmAction.UPDATE:

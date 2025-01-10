@@ -1,11 +1,10 @@
 import CatalogActionButton from "@/admin/screen/category/catalog/register/components/CatalogActionButton.tsx";
+import CatalogCategory from "@/admin/screen/category/catalog/register/components/CatalogCategory.tsx";
 import CatalogDesc from "@/admin/screen/category/catalog/register/components/CatalogDesc.tsx";
 import CatalogImg from "@/admin/screen/category/catalog/register/components/CatalogImg.tsx";
-import CatalogMain from "@/admin/screen/category/catalog/register/components/CatalogMain.tsx";
 import CatalogName from "@/admin/screen/category/catalog/register/components/CatalogName.tsx";
 import CatalogPrice from "@/admin/screen/category/catalog/register/components/CatalogPrice.tsx";
 import ManageEntryModal from "@/admin/screen/modal/manageEntryModal/ManageEntryModal.tsx";
-import type { RegisterItem } from "@/types.ts";
 import { Fragment, useState } from "react";
 
 type RegisterCtlgModalProps = {
@@ -18,11 +17,11 @@ function RegisterCtlgModal({
   setToggleModal,
 }: RegisterCtlgModalProps) {
   const [name, setName] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
   const [desc, setDesc] = useState<string>("");
   const [price, setPrice] = useState<number>(0);
   const [imgPath, setImgPath] = useState<string>("");
   const [image, setImage] = useState<string>("");
-  const [main, setMain] = useState<RegisterItem>({ id: "", name: "" });
 
   return (
     <Fragment>
@@ -33,33 +32,28 @@ function RegisterCtlgModal({
         parts={
           <Fragment>
             <CatalogName name={name} setName={setName} />
-            <CatalogMain
-              main={main}
-              setMain={setMain}
-              setImgPath={setImgPath}
-              setImage={setImage}
-            />
+            <CatalogCategory category={category} setCategory={setCategory} />
+            <CatalogPrice price={price} setPrice={setPrice} />
+            <CatalogDesc desc={desc} setDesc={setDesc} />
             <CatalogImg
               imgPath={imgPath}
               setImgPath={setImgPath}
               image={image}
               setImage={setImage}
             />
-            <CatalogPrice price={price} setPrice={setPrice} />
-            <CatalogDesc desc={desc} setDesc={setDesc} />
 
             <CatalogActionButton
               name={name}
+              category={category}
               desc={desc}
               price={price}
               imgPath={imgPath}
-              main={main}
               setName={setName}
+              setCategory={setCategory}
               setDesc={setDesc}
               setPrice={setPrice}
               setImgPath={setImgPath}
               setImage={setImage}
-              setMain={setMain}
               setToggleModal={setToggleModal}
             />
           </Fragment>

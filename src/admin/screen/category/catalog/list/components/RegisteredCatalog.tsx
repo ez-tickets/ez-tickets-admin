@@ -2,17 +2,16 @@ import { registeredCatalogStyle } from "@/admin/screen/category/catalog/list/com
 import { useEditCatalogStore } from "@/admin/store/RegisteredEditStore.ts";
 import { useCatalogRegistrationStore } from "@/admin/store/RegistrationStore.ts";
 import ListItem from "@/parts/ListItem.tsx";
-import type { RegisterItem } from "@/types.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment } from "react";
 
 type RegisteredCatalogProps = {
+  //todo: 構造
   id: string;
   name: string;
   desc: string;
   price: number;
-  img: string;
-  main: RegisterItem;
+  path: string;
   setEditModal: (flag: boolean) => void;
 };
 
@@ -21,13 +20,13 @@ function RegisteredCatalog({
   name,
   desc,
   price,
-  img,
-  main,
+  path,
   setEditModal,
 }: RegisteredCatalogProps) {
   const { catalogRegisterQuery } = useCatalogRegistrationStore();
   const { setEditCatalog } = useEditCatalogStore();
 
+  //todo: データ取得・編集
   const openEditModalHandler = (id: string) => {
     for (const catalog of catalogRegisterQuery.filter(
       (catalog) => catalog.id === id,
@@ -43,10 +42,10 @@ function RegisteredCatalog({
         block={
           <Fragment>
             <div className={registeredCatalogStyle.imgContainer}>
-              {img !== "" ? (
+              {path !== "" ? (
                 <img
-                  src={convertFileSrc(img)}
-                  alt={img}
+                  src={convertFileSrc(path)}
+                  alt={path}
                   className={registeredCatalogStyle.img}
                 />
               ) : (
@@ -54,7 +53,6 @@ function RegisteredCatalog({
               )}
             </div>
             <div className={registeredCatalogStyle.name}>{name}</div>
-            <div className={registeredCatalogStyle.main}>{main.name}</div>
             <div className={registeredCatalogStyle.desc}>{desc}</div>
             <div className={registeredCatalogStyle.price}>
               {price.toLocaleString()}

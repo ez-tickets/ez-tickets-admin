@@ -1,13 +1,13 @@
-import type { InputCatalog, RegisterCatalog } from "@/types.ts";
+import type { EditProduct, RegisterProduct } from "@/types.ts";
 
 export const REGISTRATION = "registration" as const;
-export const registration = (catalog: InputCatalog) => ({
+export const registration = (catalog: RegisterProduct) => ({
   type: REGISTRATION,
   payload: catalog,
 });
 
 export const REPLACE_EDIT_CATALOG = "replace-edit-catalog";
-export const replaceEditCatalog = (catalog: RegisterCatalog) => ({
+export const replaceEditCatalog = (catalog: EditProduct) => ({
   type: REPLACE_EDIT_CATALOG,
   payload: catalog,
 });

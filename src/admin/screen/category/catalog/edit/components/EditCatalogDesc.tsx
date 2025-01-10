@@ -2,12 +2,12 @@ import Input from "@/parts/Input.tsx";
 import InputContainer from "@/parts/InputContainer.tsx";
 import { Fragment } from "react";
 
-type CatalogDescProps = {
+type EditCatalogDescProps = {
   desc: string;
   setDesc: (desc: string) => void;
 };
 
-function EditCatalogDesc({ desc, setDesc }: CatalogDescProps) {
+function EditCatalogDesc({ desc, setDesc }: EditCatalogDescProps) {
   return (
     <Fragment>
       <InputContainer

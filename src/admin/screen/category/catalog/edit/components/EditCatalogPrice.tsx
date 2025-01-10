@@ -2,12 +2,12 @@ import Input from "@/parts/Input.tsx";
 import InputContainer from "@/parts/InputContainer.tsx";
 import { Fragment } from "react";
 
-type CatalogPriceProps = {
+type EditCatalogPriceProps = {
   price: number;
   setPrice: (price: number) => void;
 };
 
-function EditCatalogPrice({ price, setPrice }: CatalogPriceProps) {
+function EditCatalogPrice({ price, setPrice }: EditCatalogPriceProps) {
   const inputPriceHandler = (e: string) => {
     const value = Number(e);
     // biome-ignore lint/suspicious/noGlobalIsNan: <explanation>

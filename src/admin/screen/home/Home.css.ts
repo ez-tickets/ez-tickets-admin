@@ -3,17 +3,16 @@ import { style } from "@vanilla-extract/css";
 export const homeStyle = {
   homeContainer: style({
     position: "relative",
-    width: "95%",
-    margin: "30px auto 60px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    margin: "0 40px",
+    paddingBottom: "2rem",
   }),
 
   gridContainer: style({
-    display: "grid",
-    gridTemplateColumns: "250px 250px 250px",
-    placeItems: "center",
-    gap: "15px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexWrap: "wrap",
+    padding: "1rem",
+    gap: "1rem",
   }),
 };

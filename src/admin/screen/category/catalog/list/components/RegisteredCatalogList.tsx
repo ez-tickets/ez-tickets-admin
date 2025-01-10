@@ -38,9 +38,6 @@ function RegisteredCatalogList() {
                 <div className={registeredCatalogListStyle.name}>
                   カタログ名
                 </div>
-                <div className={registeredCatalogListStyle.main}>
-                  メイン商品
-                </div>
                 <div className={registeredCatalogListStyle.desc}>説明</div>
                 <div className={registeredCatalogListStyle.price}>価格</div>
               </Fragment>

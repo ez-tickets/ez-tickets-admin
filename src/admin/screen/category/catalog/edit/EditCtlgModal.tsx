@@ -1,12 +1,11 @@
 import EditCatalogActionButton from "@/admin/screen/category/catalog/edit/components/EditCatalogActionButton.tsx";
+import EditCatalogCategory from "@/admin/screen/category/catalog/edit/components/EditCatalogCategory.tsx";
 import EditCatalogDesc from "@/admin/screen/category/catalog/edit/components/EditCatalogDesc.tsx";
 import EditCatalogImg from "@/admin/screen/category/catalog/edit/components/EditCatalogImg.tsx";
-import EditCatalogMain from "@/admin/screen/category/catalog/edit/components/EditCatalogMain.tsx";
 import EditCatalogName from "@/admin/screen/category/catalog/edit/components/EditCatalogName.tsx";
 import EditCatalogPrice from "@/admin/screen/category/catalog/edit/components/EditCatalogPrice.tsx";
 import ManageEntryModal from "@/admin/screen/modal/manageEntryModal/ManageEntryModal.tsx";
 import { useEditCatalogStore } from "@/admin/store/RegisteredEditStore.ts";
-import type { RegisterItem } from "@/types.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment, useState } from "react";
 
@@ -20,11 +19,11 @@ function EditCtlgModal({ editModal, setEditModal }: EditCtlgModalProps) {
   if (!editCatalog) return;
 
   const [name, setName] = useState<string>(editCatalog.name);
+  const [category, setCategory] = useState<string | null>(editCatalog.category);
   const [desc, setDesc] = useState<string>(editCatalog.desc);
   const [price, setPrice] = useState<number>(editCatalog.price);
-  const [imgPath, setImgPath] = useState<string>(editCatalog.img);
+  const [imgPath, setImgPath] = useState<string>(editCatalog.path);
   const [image, setImage] = useState<string>(convertFileSrc(imgPath));
-  const [main, setMain] = useState<RegisterItem>(editCatalog.main);
 
   return (
     <ManageEntryModal
@@ -34,12 +33,7 @@ function EditCtlgModal({ editModal, setEditModal }: EditCtlgModalProps) {
       parts={
         <Fragment>
           <EditCatalogName name={name} setName={setName} />
-          <EditCatalogMain
-            main={main}
-            setMain={setMain}
-            setImgPath={setImgPath}
-            setImage={setImage}
-          />
+          <EditCatalogCategory category={category} setCategory={setCategory} />
           <EditCatalogImg
             imgPath={imgPath}
             setImgPath={setImgPath}
@@ -52,16 +46,16 @@ function EditCtlgModal({ editModal, setEditModal }: EditCtlgModalProps) {
           <EditCatalogActionButton
             editCatalog={editCatalog}
             name={name}
+            category={category}
             desc={desc}
             price={price}
             imgPath={imgPath}
-            main={main}
             setName={setName}
+            setCategory={setCategory}
             setDesc={setDesc}
             setPrice={setPrice}
             setImgPath={setImgPath}
             setImage={setImage}
-            setMain={setMain}
             setEditModal={setEditModal}
           />
         </Fragment>

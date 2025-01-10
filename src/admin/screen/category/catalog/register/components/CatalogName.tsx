@@ -2,12 +2,12 @@ import Input from "@/parts/Input.tsx";
 import InputContainer from "@/parts/InputContainer.tsx";
 import { Fragment } from "react";
 
-type CatalogName = {
+type CatalogNameProps = {
   name: string;
   setName: (name: string) => void;
 };
 
-function CatalogName({ name, setName }: CatalogName) {
+function CatalogName({ name, setName }: CatalogNameProps) {
   return (
     <Fragment>
       <InputContainer

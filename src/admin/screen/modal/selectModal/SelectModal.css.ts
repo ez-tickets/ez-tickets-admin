@@ -14,7 +14,7 @@ export const selectModalStyle = {
   closeIcon: style({
     position: "absolute",
     top: "0.5rem",
-    right: "1rem",
+    right: "0.5rem",
     color: "red",
   }),
 };
@@ -36,5 +36,6 @@ export const selectModal = {
     height: "40%",
     padding: "0",
     backgroundColor: "#fff",
+    overflow: "hidden",
   },
 };

@@ -1,25 +1,9 @@
-import type {
-  RegisterCatalog,
-  RegisterCategory,
-  RegisterProd,
-} from "@/types.ts";
+import type { EditProduct, ReNameCategory } from "@/types.ts";
 import { create } from "zustand/react";
 
-type ProdEditState = {
-  editProd: RegisterProd | null;
-  setEditProd: (value: RegisterProd) => void;
-  resetEditProd: () => void;
-};
-
-export const useEditProductStore = create<ProdEditState>((set) => ({
-  editProd: null,
-  setEditProd: (value) => set({ editProd: value }),
-  resetEditProd: () => set({ editProd: null }),
-}));
-
 type CategoryEditState = {
-  editCategory: RegisterCategory | null;
-  setEditCategory: (value: RegisterCategory) => void;
+  editCategory: ReNameCategory | null;
+  setEditCategory: (value: ReNameCategory) => void;
   resetEditCategory: () => void;
 };
 
@@ -30,8 +14,8 @@ export const useEditCategoryStore = create<CategoryEditState>((set) => ({
 }));
 
 type CatalogEditState = {
-  editCatalog: RegisterCatalog | null;
-  setEditCatalog: (value: RegisterCatalog) => void;
+  editCatalog: EditProduct | null;
+  setEditCatalog: (value: EditProduct) => void;
   resetEditCatalog: () => void;
 };
 

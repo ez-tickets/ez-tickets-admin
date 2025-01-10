@@ -23,6 +23,7 @@ type RegisteredCategoriesProps = {
 
 function RegisteredCategories({ setEditModal }: RegisteredCategoriesProps) {
   const [categories, setCategories] = useState<Category[]>([]);
+
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     (async () => {
@@ -49,7 +50,7 @@ function RegisteredCategories({ setEditModal }: RegisteredCategoriesProps) {
       const newIndex = categories.findIndex((v) => v.id === over.id);
       const updatedCategories = arrayMove(categories, oldIndex, newIndex);
       setCategories(updatedCategories);
-      //並べ替え後のデータをサーバーに送る処理 --> categories
+      //todo 並べ替え後のデータをサーバーに送る処理 --> categories
     }
   };
 

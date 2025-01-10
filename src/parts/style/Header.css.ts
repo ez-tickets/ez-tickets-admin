@@ -1,4 +1,4 @@
-import { globalStyle, style } from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 
 export const headerStyle = {
   header: style({
@@ -15,7 +15,3 @@ export const headerStyle = {
     zIndex: 100,
   }),
 };
-
-globalStyle(`${headerStyle.header} h1`, {
-  width: "20%",
-});

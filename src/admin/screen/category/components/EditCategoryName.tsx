@@ -3,13 +3,13 @@ import InputContainer from "@/parts/InputContainer.tsx";
 import { Fragment } from "react";
 
 type EditCategoryProps = {
-  editCategorise: string;
-  setEditCategorise: (name: string) => void;
+  editCategoryName: string;
+  setEditCategoryName: (name: string) => void;
 };
 
 function EditCategoryName({
-  editCategorise,
-  setEditCategorise,
+  editCategoryName,
+  setEditCategoryName,
 }: EditCategoryProps) {
   return (
     <Fragment>
@@ -21,8 +21,8 @@ function EditCategoryName({
             guide={"カテゴリー名を編集"}
             type={"text"}
             label={"category"}
-            value={editCategorise}
-            executeHandler={setEditCategorise}
+            value={editCategoryName}
+            executeHandler={setEditCategoryName}
           />
         }
       />

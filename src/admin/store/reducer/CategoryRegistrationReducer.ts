@@ -5,14 +5,14 @@ import {
   REGISTRATION,
   REPLACE_EDIT_CATEGORY,
 } from "@/admin/store/action/CategoryRegistrationAction.ts";
-import type { RegisterCategory } from "@/types.ts";
+import type { ReNameCategory } from "@/types.ts";
 
 let categoryID = 1;
 
 export const categoryReducer = (
   action: CategoryRegistrationAction,
-  prev: RegisterCategory[],
-): RegisterCategory[] => {
+  prev: ReNameCategory[],
+): ReNameCategory[] => {
   const state = prev;
 
   switch (action.type) {
@@ -20,7 +20,7 @@ export const categoryReducer = (
       // @ts-ignore wtf
       return [...state, { id: (categoryID++).toString(), ...action.payload }];
     case REPLACE_EDIT_CATEGORY: {
-      const payload = <RegisterCategory>action.payload;
+      const payload = <ReNameCategory>action.payload;
       return state.map((category) =>
         category.id === payload.id ? { ...category, ...payload } : category,
       );

@@ -7,6 +7,7 @@ type RegisteredCatalogsProps = {
 };
 
 function RegisteredCatalogs({ setEditModal }: RegisteredCatalogsProps) {
+  //todo: カタログのデータ取得API
   const { catalogRegisterQuery } = useCatalogRegistrationStore();
 
   return (
@@ -18,8 +19,7 @@ function RegisteredCatalogs({ setEditModal }: RegisteredCatalogsProps) {
           name={catalog.name}
           desc={catalog.desc}
           price={catalog.price}
-          img={catalog.img}
-          main={catalog.main}
+          path={catalog.path}
           setEditModal={setEditModal}
         />
       ))}
