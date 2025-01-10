@@ -1,6 +1,6 @@
 import SideBarLabel from "@/admin/components/SideBarLabel.tsx";
 import { sideBarStyle } from "@/admin/components/styles/SideBar.css.ts";
-import RegisterCategoryModal from "@/admin/screen/category/components/RegisterCategoryModal.tsx";
+import RegisterCategoryModal from "@/admin/screen/category/components/register/RegisterCategoryModal.tsx";
 import { type Category, fetchCategories } from "@/cmds/categories.ts";
 import { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";

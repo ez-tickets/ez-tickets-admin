@@ -6,13 +6,13 @@ export const registration = (catalog: RegisterProduct) => ({
   payload: catalog,
 });
 
-export const REPLACE_EDIT_CATALOG = "replace-edit-catalog";
+export const REPLACE_EDIT_CATALOG = "replace-edit-product";
 export const replaceEditCatalog = (catalog: EditProduct) => ({
   type: REPLACE_EDIT_CATALOG,
   payload: catalog,
 });
 
-export const DELETE_CATALOG = "delete-catalog";
+export const DELETE_CATALOG = "delete-product";
 export const deleteCatalog = (id: string) => ({
   type: DELETE_CATALOG,
   payload: id,

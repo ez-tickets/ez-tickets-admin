@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "@/global.css";
 import Admin from "@/admin/Admin.tsx";
-import RegisteredCat from "@/admin/screen/category/RegisteredCat.tsx";
-import RegisteredCtlg from "@/admin/screen/category/catalog/list/RegisteredCtlg.tsx";
+import Category from "@/admin/screen/category/Category.tsx";
+import RegisteredProd from "@/admin/screen/category/product/list/RegisteredProd.tsx";
 import Home from "@/admin/screen/home/Home.tsx";
 import TitleBar from "@/application/TitleBar.tsx";
 import Login from "@/login/Login.tsx";
@@ -31,8 +31,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 
         <Route path="admin" element={<Admin />}>
           <Route index element={<Home />} />
-          <Route path="registeredCategory" element={<RegisteredCat />} />
-          <Route path="registeredCatalog" element={<RegisteredCtlg />} />
+          <Route path="registeredCategory" element={<Category />} />
+          <Route path="registeredCatalog" element={<RegisteredProd />} />
         </Route>
       </Routes>
     </MemoryRouter>
