@@ -32,5 +32,5 @@ export const updateCategoryName = async (
 };
 
 export const deleteCategory = async (id: string): Promise<void> => {
-  await invoke<void>("delete_category", { id: id });
+  await invoke<void>("delete_category", { delete: { id: id } });
 };
