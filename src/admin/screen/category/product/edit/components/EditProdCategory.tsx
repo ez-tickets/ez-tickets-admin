@@ -40,7 +40,6 @@ function EditProdCategory({ category, setCategory }: EditProdCategoryProps) {
           <Fragment>
             <div className={productCategoryStyle.container}>
               <div className={productCategoryStyle.selectContainer}>
-                <p className={productCategoryStyle.require}>（必須）</p>
                 <button
                   type={"button"}
                   className={productCategoryStyle.selectButton}

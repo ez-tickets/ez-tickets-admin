@@ -50,7 +50,7 @@ function RegisteredCategories({ setEditModal }: RegisteredCategoriesProps) {
       const newIndex = categories.findIndex((v) => v.id === over.id);
       const updatedCategories = arrayMove(categories, oldIndex, newIndex);
       setCategories(updatedCategories);
-      //todo 並べ替え後のデータをサーバーに送る処理 --> categories
+      //todo 並べ替え後のデータをサーバーに送る処理 --> {id, order}
     }
   };
 

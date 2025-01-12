@@ -13,10 +13,6 @@ export const productCategoryStyle = {
     padding: "3rem 0",
   }),
 
-  require: style({
-    color: "red",
-  }),
-
   modalContainer: style({
     width: "100%",
     height: "100%",
@@ -38,14 +34,15 @@ export const productCategoryStyle = {
   }),
 
   selectButton: style({
-    padding: "10px 20px",
+    padding: "10px 15px",
+    fontSize: "0.9rem",
     border: "1px solid lightgray",
     borderRadius: "5px",
     boxShadow: "1px 2px 3px lightgray",
   }),
 
   selectedCategory: style({
-    marginLeft: "10.5rem",
+    marginLeft: "5rem",
   }),
 
   item: style({

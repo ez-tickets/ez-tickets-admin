@@ -35,21 +35,23 @@ function ConfirmModal({
     <Fragment>
       {/*@ts-ignore react version incompatible*/}
       <Modal isOpen={modalView} style={confirmModalContainer} onRequestClose={() => setModalView(false)}>
-        <p className={confirmModalStyle.text}>
-          {taskType}してもよろしいですか？
-        </p>
-        <div className={confirmModalStyle.buttonContainer}>
-          <ExecuteButton
-            name={"キャンセル"}
-            style={executeButtonStyle.confirmModalCancel}
-            executeHandler={() => setModalView(false)}
-          />
+        <div className={confirmModalStyle.container}>
+          <p className={confirmModalStyle.text}>
+            {taskType}してもよろしいですか？
+          </p>
+          <div className={confirmModalStyle.buttonContainer}>
+            <ExecuteButton
+              name={"キャンセル"}
+              style={executeButtonStyle.confirmModalCancel}
+              executeHandler={() => setModalView(false)}
+            />
 
-          <ExecuteButton
-            name={"はい"}
-            style={executeButtonStyle.confirmModalYes}
-            executeHandler={yesHandler}
-          />
+            <ExecuteButton
+              name={"はい"}
+              style={executeButtonStyle.confirmModalYes}
+              executeHandler={yesHandler}
+            />
+          </div>
         </div>
       </Modal>
     </Fragment>

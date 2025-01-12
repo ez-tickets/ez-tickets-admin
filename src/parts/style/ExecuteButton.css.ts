@@ -4,6 +4,7 @@ export const executeButtonStyle = {
   default: style({
     padding: "10px 20px",
     display: "block",
+    backgroundColor: "#fff",
     border: "1px solid rgba(0,0,0,0.4)",
     borderRadius: "5px",
     ":hover": {
@@ -12,7 +13,7 @@ export const executeButtonStyle = {
   }),
 
   run: style({
-    margin: "7rem 1rem",
+    margin: "0 1rem",
     padding: "10px 20px",
     display: "block",
     border: "1px solid rgba(0,0,0,0.4)",
@@ -24,7 +25,7 @@ export const executeButtonStyle = {
   }),
 
   reset: style({
-    margin: "7rem 1rem",
+    margin: "0 1rem",
     padding: "10px 20px",
     display: "block",
     border: "1px solid rgba(0,0,0,0.4)",
@@ -37,7 +38,7 @@ export const executeButtonStyle = {
 
   //edit manageEntryModal --------------------------------------------
   editModalUpdate: style({
-    margin: "5rem 1rem",
+    margin: "0 1rem",
     padding: "10px 20px",
     display: "block",
     border: "1px solid rgba(0,0,0,0.4)",
@@ -49,7 +50,7 @@ export const executeButtonStyle = {
   }),
 
   editModalReset: style({
-    margin: "5rem 1rem",
+    margin: "0 1rem",
     padding: "10px 20px",
     display: "block",
     border: "1px solid rgba(0,0,0,0.4)",
@@ -61,7 +62,7 @@ export const executeButtonStyle = {
   }),
 
   editModalDelete: style({
-    margin: "5rem 1rem",
+    margin: "0 1rem",
     padding: "10px 20px",
     display: "block",
     border: "1px solid rgba(0,0,0,0.4)",

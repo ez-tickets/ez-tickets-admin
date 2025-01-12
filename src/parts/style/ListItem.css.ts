@@ -6,6 +6,7 @@ export const listItemStyle = {
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
+    backgroundColor: "#fff",
     border: "1px solid lightgray",
     ":hover": {
       border: "1px solid rgba(41,255,223,1)",

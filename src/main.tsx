@@ -32,7 +32,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <Route path="admin" element={<Admin />}>
           <Route index element={<Home />} />
           <Route path="registeredCategory" element={<Category />} />
-          <Route path="registeredCatalog" element={<RegisteredProd />} />
+          <Route path="registeredProduct" element={<RegisteredProd />} />
         </Route>
       </Routes>
     </MemoryRouter>

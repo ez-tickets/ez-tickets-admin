@@ -13,14 +13,14 @@ export const useEditCategoryStore = create<CategoryEditState>((set) => ({
   resetEditCategory: () => set({ editCategory: null }),
 }));
 
-type CatalogEditState = {
-  editCatalog: EditProduct | null;
-  setEditCatalog: (value: EditProduct) => void;
-  resetEditCatalog: () => void;
+type ProductEditState = {
+  editProduct: EditProduct | null;
+  setEditProduct: (value: EditProduct) => void;
+  resetEditProduct: () => void;
 };
 
-export const useEditCatalogStore = create<CatalogEditState>((set) => ({
-  editCatalog: null,
-  setEditCatalog: (value) => set({ editCatalog: value }),
-  resetEditCatalog: () => set({ editCatalog: null }),
+export const useEditProductStore = create<ProductEditState>((set) => ({
+  editProduct: null,
+  setEditProduct: (value) => set({ editProduct: value }),
+  resetEditProduct: () => set({ editProduct: null }),
 }));

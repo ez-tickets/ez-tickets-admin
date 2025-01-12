@@ -4,14 +4,22 @@ export const inputImgStyle = {
   inputImg: style({
     position: "relative",
     width: "60%",
+    padding: "0.5rem 0",
     display: "flex",
     alignItems: "center",
+  }),
+
+  imgContainer: style({
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    marginLeft: "5rem",
   }),
 
   img: style({
     width: "9rem",
     height: "7rem",
-    margin: "0 10rem",
     border: "1px dotted lightgray",
     boxShadow: "1px 2px 3px lightgray",
   }),
@@ -23,7 +31,8 @@ export const inputImgStyle = {
 };
 
 globalStyle(`${inputImgStyle.inputImg} button`, {
-  padding: "10px 20px",
+  padding: "10px 15px",
+  fontSize: "0.9rem",
   border: "1px solid lightgray",
   borderRadius: "5px",
   boxShadow: "1px 2px 3px lightgray",

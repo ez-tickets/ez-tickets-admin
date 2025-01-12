@@ -14,12 +14,17 @@ function RegisterCategoryModal({
 }: CategoryRegisterModalProps) {
   const [categoryName, setCategoryName] = useState<string>("");
 
+  const closeHandler = () => {
+    setCategoryName("");
+    setToggleModal(false);
+  };
+
   return (
     <Fragment>
       <ManageEntryModal
         modalTitle={"新規登録"}
         toggleModal={toggleModal}
-        closeHandler={() => setToggleModal(false)}
+        closeHandler={closeHandler}
         parts={
           <Fragment>
             <CategoryName

@@ -1,6 +1,5 @@
 import ConfirmModal from "@/admin/screen/modal/confirmModal/ConfirmModal.tsx";
-import { deleteCategory } from "@/admin/store/action/CategoryRegistrationAction.ts";
-import { updateCategoryName } from "@/cmds/categories.ts";
+import { deleteCategory, updateCategoryName } from "@/cmds/categories.ts";
 import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
@@ -31,14 +30,12 @@ function EditCategoryActionButton({
   };
 
   const updateHandler = async () => {
-    //todo 更新API
     await updateCategoryName(editCategory.id, { name: editCategoryName });
     toast.success("更新しました");
   };
 
-  const deleteHandler = () => {
-    //todo 削除API
-    deleteCategory(editCategory.id);
+  const deleteHandler = async () => {
+    await deleteCategory(editCategory.id);
     toast.success("削除しました");
   };
 

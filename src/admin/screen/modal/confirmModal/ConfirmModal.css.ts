@@ -1,8 +1,13 @@
 import { style } from "@vanilla-extract/css";
 
 export const confirmModalStyle = {
+  container: style({
+    minWidth: "40%",
+    minHeight: "30%",
+  }),
+
   text: style({
-    margin: "3.5rem 0",
+    margin: "1.5rem 0",
     fontSize: "1.25rem",
     textAlign: "center",
   }),
@@ -23,12 +28,15 @@ export const confirmModalContainer = {
     zIndex: 100,
   },
   content: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
+    position: "relative",
+    top: "52%",
+    left: "60%",
     transform: "translate(-50%, -50%)",
-    width: "40rem",
-    height: "20rem",
+    width: "45%",
+    height: "35%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#fff",
     borderRadius: "1rem",
   },

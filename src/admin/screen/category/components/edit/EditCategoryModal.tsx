@@ -10,24 +10,19 @@ type CategoryModalProps = {
 };
 
 function EditCategoryModal({ editModal, setEditModal }: CategoryModalProps) {
-  const { editCategory, resetEditCategory } = useEditCategoryStore();
+  const { editCategory } = useEditCategoryStore();
   if (!editCategory) throw new Error("category not found.");
 
   const [editCategoryName, setEditCategoryName] = useState<string>(
     editCategory.name,
   );
 
-  const closeHandler = () => {
-    setEditModal(false);
-    resetEditCategory();
-  };
-
   return (
     <Fragment>
       <ManageEntryModal
         modalTitle={"編集モード"}
         toggleModal={editModal}
-        closeHandler={closeHandler}
+        closeHandler={() => setEditModal(false)}
         parts={
           <Fragment>
             <EditCategoryName

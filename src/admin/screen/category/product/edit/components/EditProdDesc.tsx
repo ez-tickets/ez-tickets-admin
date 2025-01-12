@@ -1,5 +1,5 @@
-import Input from "@/parts/Input.tsx";
 import InputContainer from "@/parts/InputContainer.tsx";
+import TextArea from "@/parts/TextArea.tsx";
 import { Fragment } from "react";
 
 type EditProdDescProps = {
@@ -14,11 +14,9 @@ function EditProdDesc({ desc, setDesc }: EditProdDescProps) {
         label={"desc"}
         title={"説明"}
         inputElement={
-          <Input
+          <TextArea
             guide={"説明を編集"}
-            type={"text"}
             label={"desc"}
-            required={true}
             value={desc}
             executeHandler={setDesc}
           />

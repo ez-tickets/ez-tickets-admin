@@ -20,7 +20,7 @@ globalStyle(`${inputStyle.input} p`, {
 
 globalStyle(`${inputStyle.input} input`, {
   width: "80%",
-  padding: "1rem",
+  padding: "0.7rem 1rem",
   backgroundColor: "#fff",
   border: "1px solid rgba(0,0,0,0.3)",
   borderRadius: "5px",

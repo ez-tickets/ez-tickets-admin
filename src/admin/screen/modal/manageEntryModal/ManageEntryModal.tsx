@@ -6,7 +6,7 @@ import { IconX } from "@tabler/icons-react";
 import { Fragment, type JSX } from "react";
 import Modal from "react-modal";
 
-type EditModalProps = {
+type ManageEntryModalProps = {
   modalTitle: string;
   headerElement?: JSX.Element;
   toggleModal: boolean;
@@ -21,7 +21,7 @@ function ManageEntryModal({
   toggleModal,
   parts,
   closeHandler,
-}: EditModalProps) {
+}: ManageEntryModalProps) {
   return (
     <Fragment>
       {/*@ts-ignore react version incompatible*/}
