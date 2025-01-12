@@ -29,17 +29,19 @@ function SideBar() {
 
         <div className={sideBarStyle.contentsContainer}>
           <SideBarLabel
-            title={"カタログ"}
+            title={"カテゴリー"}
             element={
               <Fragment>
                 <Link to={"registeredCategory"}>カテゴリー詳細</Link>
 
-                {/* todo: Catalog追加する空の配列がいる */}
                 {categories.map((category) => (
                   <Link
-                    to="registeredCatalog"
+                    to="registeredProduct"
                     key={category.id}
-                    state={{ title: category.name }}
+                    state={{
+                      id: category.id,
+                      name: category.name,
+                    }}
                   >
                     {category.name}
                   </Link>

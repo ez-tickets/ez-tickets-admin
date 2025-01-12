@@ -32,7 +32,6 @@ function CategoryActionButton({
     await registerCategory({ name: categoryName });
 
     setCategoryName("");
-    setModalView(false);
     setToggleModal(false);
     toast.success("登録完了しました");
   };

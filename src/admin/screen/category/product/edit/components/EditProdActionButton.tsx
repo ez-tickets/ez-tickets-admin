@@ -1,6 +1,5 @@
 import ConfirmModal from "@/admin/screen/modal/confirmModal/ConfirmModal.tsx";
-import { useCatalogRegistrationStore } from "@/admin/store/RegistrationStore.ts";
-import { deleteCatalog } from "@/admin/store/action/CatalogRegistrationAction.ts";
+import { deleteProduct, updateProduct } from "@/cmds/products.ts";
 import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
@@ -8,16 +7,17 @@ import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
 import type { EditProduct } from "@/types.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment, useState } from "react";
+import { toast } from "react-toastify";
 
 type EditProdActionButtonProps = {
-  editCatalog: EditProduct; //todo
+  editProduct: EditProduct;
   name: string;
   category: string | null;
   desc: string;
   price: number;
   imgPath: string;
   setName: (name: string) => void;
-  setCategory: (category: string) => void;
+  setCategory: (category: string | null) => void;
   setDesc: (desc: string) => void;
   setPrice: (price: number) => void;
   setImgPath: (path: string) => void;
@@ -26,7 +26,7 @@ type EditProdActionButtonProps = {
 };
 
 function EditProdActionButton({
-  editCatalog,
+  editProduct,
   name,
   category,
   desc,
@@ -40,65 +40,57 @@ function EditProdActionButton({
   setImage,
   setEditModal,
 }: EditProdActionButtonProps) {
-  const { catalogRegisterDispatcher } = useCatalogRegistrationStore();
   const [modalView, setModalView] = useState<boolean>(false);
   const [taskType, setTaskType] = useState<string>("");
   const [executeHandler, setExecuteHandler] = useState<() => void>();
 
   const resetHandler = () => {
-    setName(editCatalog.name);
-    setCategory(""); //todo: 初期値を入力※型が違うからまだ処理できない
-    setDesc(editCatalog.desc);
-    setPrice(editCatalog.price);
-    setImgPath(editCatalog.path);
-    setImage(convertFileSrc(editCatalog.path));
+    setName(editProduct.name);
+    setCategory(editProduct.category);
+    setDesc(editProduct.desc);
+    setPrice(editProduct.price);
+    setImgPath(editProduct.path);
+    setImage(convertFileSrc(editProduct.path));
   };
 
-  const deleteHandler = () => {
-    //todo: データ削除API
-    catalogRegisterDispatcher(deleteCatalog(editCatalog.id));
-  };
-
-  const updateHandler = () => {
-    //todo: データ更新API
-    const registerCatalogValue = {
+  const updateHandler = async () => {
+    await updateProduct(editProduct.id, {
       name: name,
       category: category,
       desc: desc,
       price: price,
-      img: imgPath,
-    };
+      path: imgPath,
+    });
+    toast.success("更新しました");
+  };
 
-    setName("");
-    setCategory("");
-    setDesc("");
-    setPrice(0);
-    setImgPath("");
-    setImage("");
-    setModalView(false);
-    setEditModal(false);
+  const deleteHandler = async () => {
+    await deleteProduct(editProduct.id);
+    toast.success("削除しました");
   };
 
   const openModalHandler = (type: string) => {
-    if (
-      name !== "" &&
-      category !== "" &&
-      desc !== "" &&
-      price !== 0 &&
-      imgPath !== ""
-    ) {
-      switch (type) {
-        case confirmAction.UPDATE:
-          setTaskType(confirmAction.UPDATE);
-          setExecuteHandler(() => updateHandler);
-          break;
-        case confirmAction.DELETE:
-          setTaskType(confirmAction.DELETE);
-          setExecuteHandler(() => deleteHandler);
-          break;
-      }
-      setModalView(true);
+    switch (type) {
+      case confirmAction.UPDATE:
+        if (
+          name === "" ||
+          category === "" ||
+          desc === "" ||
+          price < 0 ||
+          imgPath === ""
+        ) {
+          toast.error("必須項目を入力してください");
+          return;
+        }
+        setTaskType(confirmAction.UPDATE);
+        setExecuteHandler(() => updateHandler);
+        break;
+      case confirmAction.DELETE:
+        setTaskType(confirmAction.DELETE);
+        setExecuteHandler(() => deleteHandler);
+        break;
     }
+    setModalView(true);
   };
 
   return (

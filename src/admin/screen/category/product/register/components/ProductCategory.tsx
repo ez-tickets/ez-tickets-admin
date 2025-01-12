@@ -24,11 +24,8 @@ function ProductCategory({ category, setCategory }: ProductCategoryProps) {
     })();
   }, [categories]);
 
-  const registerHandler = (id: string) => {
-    const selectedCategory = categories.find((category) => category.id === id);
-    if (selectedCategory) {
-      setCategory(selectedCategory.name);
-    }
+  const registerHandler = (name: string) => {
+    setCategory(name);
     setToggleModal(false);
   };
 
@@ -40,13 +37,12 @@ function ProductCategory({ category, setCategory }: ProductCategoryProps) {
           <Fragment>
             <div className={productCategoryStyle.container}>
               <div className={productCategoryStyle.selectContainer}>
-                <p className={productCategoryStyle.require}>（必須）</p>
                 <button
                   type={"button"}
                   className={productCategoryStyle.selectButton}
                   onClick={() => setToggleModal(true)}
                 >
-                  カテゴリー選択
+                  カテゴリー変更
                 </button>
               </div>
               <div className={productCategoryStyle.selectedCategory}>
@@ -69,7 +65,7 @@ function ProductCategory({ category, setCategory }: ProductCategoryProps) {
                 <div
                   key={category.id}
                   className={productCategoryStyle.item}
-                  onClick={() => registerHandler(category.id)}
+                  onClick={() => registerHandler(category.name)}
                 >
                   {category.name}
                 </div>

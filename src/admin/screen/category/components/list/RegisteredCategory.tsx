@@ -17,7 +17,7 @@ function RegisteredCategory({
 }: RegisteredCategoryProps) {
   const { setEditCategory } = useEditCategoryStore();
 
-  const openEditModalHandler = (id: string, name: string) => {
+  const openEditModalHandler = () => {
     setEditCategory({ id: id, name: name });
     setEditModal(true);
   };
@@ -37,7 +37,7 @@ function RegisteredCategory({
         className={registeredCategoryStyle.list}
         style={style}
         ref={setNodeRef}
-        onClick={() => openEditModalHandler(id, name)}
+        onClick={openEditModalHandler}
       >
         <span
           className={registeredCategoryStyle.congruent}

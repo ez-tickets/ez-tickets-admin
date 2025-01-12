@@ -1,4 +1,5 @@
 import ConfirmModal from "@/admin/screen/modal/confirmModal/ConfirmModal.tsx";
+import { registerProduct } from "@/cmds/products.ts";
 import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
@@ -7,8 +8,9 @@ import { Fragment, useState } from "react";
 import { toast } from "react-toastify";
 
 type ProductActionButtonProps = {
+  categoryName: string;
   name: string;
-  category: string | null;
+  category: string;
   desc: string;
   price: number;
   imgPath: string;
@@ -22,6 +24,7 @@ type ProductActionButtonProps = {
 };
 
 function ProductActionButton({
+  categoryName,
   name,
   category,
   desc,
@@ -39,7 +42,7 @@ function ProductActionButton({
 
   const resetHandler = () => {
     setName("");
-    setCategory("");
+    setCategory(categoryName);
     setDesc("");
     setPrice(0);
     setImgPath("");
@@ -51,7 +54,7 @@ function ProductActionButton({
       name === "" ||
       category === "" ||
       desc === "" ||
-      price === 0 ||
+      price < 0 ||
       imgPath === ""
     ) {
       toast.error("必須項目を入力してください");
@@ -60,18 +63,16 @@ function ProductActionButton({
     setModalView(true);
   };
 
-  const executeHandler = () => {
-    //todo: サーバーに送信するデータ
-    const registerCatalog = {
+  const executeHandler = async () => {
+    await registerProduct({
       name: name,
       category: category,
       desc: desc,
       price: price,
-      img: imgPath,
-    };
+      path: imgPath,
+    });
 
     resetHandler();
-    setModalView(false);
     setToggleModal(false);
     toast.success("登録が完了しました");
   };

@@ -13,7 +13,7 @@ export const registeredCategoryStyle = {
   }),
 
   congruent: style({
-    marginRight: "2rem",
+    marginRight: "1rem",
     cursor: "grab",
     padding: "1rem",
   }),

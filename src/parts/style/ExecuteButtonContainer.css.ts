@@ -5,5 +5,6 @@ export const executeButtonContainerStyle = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    margin: "4rem 0",
   }),
 };

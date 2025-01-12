@@ -1,20 +1,27 @@
 import RegisteredProdList from "@/admin/screen/category/product/list/components/RegisteredProdList.tsx";
 import Header from "@/parts/Header.tsx";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-//todo: カテゴリーに属した商品の配列を追加することになる
-type State = {
-  title: string;
+type CategoryState = {
+  id: string;
+  name: string;
 };
 
 function RegisteredProd() {
-  const { title } = useLocation().state as State;
+  const { id, name } = useLocation().state as CategoryState;
+  const [categoryID, setCategoryID] = useState<string>(id);
+  const [categoryName, setCategoryName] = useState<string>(name);
+
+  useEffect(() => {
+    setCategoryID(id);
+    setCategoryName(name);
+  }, [id, name]);
 
   return (
     <Fragment>
-      <Header title={title} />
-      <RegisteredProdList />
+      <Header title={categoryName} />
+      <RegisteredProdList categoryID={categoryID} categoryName={categoryName} />
     </Fragment>
   );
 }
