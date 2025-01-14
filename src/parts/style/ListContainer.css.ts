@@ -10,10 +10,9 @@ export const listContainerStyle = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    margin: "0 1rem",
   }),
 
   title: style({
-    margin: "0.5rem 0",
+    margin: "0.5rem 1rem",
   }),
 };

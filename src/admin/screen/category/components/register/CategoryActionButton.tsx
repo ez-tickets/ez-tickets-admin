@@ -33,7 +33,13 @@ function CategoryActionButton({
 
     setCategoryName("");
     setToggleModal(false);
-    toast.success("登録完了しました");
+    toast.success(
+      <Fragment>
+        カテゴリ「{categoryName}」が
+        <br />
+        正常に登録されました！
+      </Fragment>,
+    );
   };
 
   return (

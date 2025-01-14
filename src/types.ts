@@ -25,4 +25,5 @@ export type EditProduct = {
   desc: string;
   price: number;
   path: string;
+  available: boolean;
 };

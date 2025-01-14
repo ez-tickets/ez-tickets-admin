@@ -5,7 +5,7 @@ import { Fragment } from "react";
 function Category() {
   return (
     <Fragment>
-      <Header title={"登録カテゴリー"} />
+      <Header title={"カテゴリー詳細"} />
       <RegisteredCategoryList />
     </Fragment>
   );

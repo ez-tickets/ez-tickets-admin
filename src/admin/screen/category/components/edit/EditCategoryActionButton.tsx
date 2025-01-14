@@ -31,12 +31,24 @@ function EditCategoryActionButton({
 
   const updateHandler = async () => {
     await updateCategoryName(editCategory.id, { name: editCategoryName });
-    toast.success("更新しました");
+    toast.success(
+      <Fragment>
+        カテゴリ「{editCategoryName}」へ
+        <br />
+        正常に更新しました！
+      </Fragment>,
+    );
   };
 
   const deleteHandler = async () => {
     await deleteCategory(editCategory.id);
-    toast.success("削除しました");
+    toast.success(
+      <Fragment>
+        カテゴリ「{editCategory.name}」を
+        <br />
+        正常に削除しました！
+      </Fragment>,
+    );
   };
 
   const openModalHandler = (type: string) => {

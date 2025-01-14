@@ -66,4 +66,10 @@ export const productCategoryStyle = {
       backgroundColor: "gold",
     },
   }),
+
+  x: style({
+    marginLeft: "1rem",
+    strokeWidth: 1.5,
+    color: "red",
+  }),
 };

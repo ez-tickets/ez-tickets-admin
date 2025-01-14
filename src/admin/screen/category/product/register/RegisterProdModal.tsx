@@ -1,4 +1,5 @@
 import ProductActionButton from "@/admin/screen/category/product/register/components/ProductActionButton.tsx";
+import ProductAvailable from "@/admin/screen/category/product/register/components/ProductAvailable.tsx";
 import ProductCategory from "@/admin/screen/category/product/register/components/ProductCategory.tsx";
 import ProductDesc from "@/admin/screen/category/product/register/components/ProductDesc.tsx";
 import ProductImg from "@/admin/screen/category/product/register/components/ProductImg.tsx";
@@ -10,7 +11,7 @@ import { Fragment, useEffect, useState } from "react";
 type RegisterProdModalProps = {
   toggleModal: boolean;
   setToggleModal: (flag: boolean) => void;
-  categoryName: string;
+  categoryName?: string;
 };
 
 function RegisterProdModal({
@@ -18,24 +19,26 @@ function RegisterProdModal({
   setToggleModal,
   categoryName,
 }: RegisterProdModalProps) {
-  const [category, setCategory] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [imgPath, setImgPath] = useState<string>("");
   const [image, setImage] = useState<string>("");
   const [price, setPrice] = useState<number>(0);
   const [desc, setDesc] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [available, setAvailable] = useState<boolean>(false);
 
   useEffect(() => {
-    setCategory(categoryName);
+    categoryName && setCategory(categoryName);
   }, [categoryName]);
 
   const closeHandler = () => {
-    setCategory(categoryName);
+    categoryName && setCategory(categoryName);
     setName("");
     setImgPath("");
     setImage("");
     setPrice(0);
     setDesc("");
+    setAvailable(false);
     setToggleModal(false);
   };
 
@@ -47,7 +50,6 @@ function RegisterProdModal({
         closeHandler={closeHandler}
         parts={
           <Fragment>
-            <ProductCategory category={category} setCategory={setCategory} />
             <ProductName name={name} setName={setName} />
             <ProductImg
               imgPath={imgPath}
@@ -57,6 +59,15 @@ function RegisterProdModal({
             />
             <ProductPrice price={price} setPrice={setPrice} />
             <ProductDesc desc={desc} setDesc={setDesc} />
+            <ProductCategory category={category} setCategory={setCategory} />
+            {category ? (
+              <ProductAvailable
+                available={available}
+                setAvailable={setAvailable}
+              />
+            ) : (
+              ""
+            )}
 
             <ProductActionButton
               categoryName={categoryName}
@@ -65,12 +76,14 @@ function RegisterProdModal({
               desc={desc}
               price={price}
               imgPath={imgPath}
+              available={available}
               setName={setName}
               setCategory={setCategory}
               setDesc={setDesc}
               setPrice={setPrice}
               setImgPath={setImgPath}
               setImage={setImage}
+              setAvailable={setAvailable}
               setToggleModal={setToggleModal}
             />
           </Fragment>

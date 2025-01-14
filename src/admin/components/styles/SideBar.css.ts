@@ -52,13 +52,13 @@ export const sideBarStyle = {
     marginRight: "10px",
   }),
 
-  addButton: style({
+  button: style({
     width: "1.5rem",
     padding: "10px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: "5px",
+    // borderRadius: "5px",
     ":hover": {
       backgroundColor: "rgba(255,255,255,0.46)",
     },

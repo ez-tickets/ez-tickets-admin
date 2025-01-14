@@ -12,6 +12,9 @@ type RegisteredProdProps = {
   desc: string;
   price: number;
   path: string;
+  available: boolean;
+  isAvailableToggle: boolean;
+  setIsAvailableToggle: (flag: boolean) => void;
   setEditModal: (flag: boolean) => void;
 };
 
@@ -22,6 +25,9 @@ function RegisteredProd({
   desc,
   price,
   path,
+  available,
+  isAvailableToggle,
+  setIsAvailableToggle,
   setEditModal,
 }: RegisteredProdProps) {
   const { setEditProduct } = useEditProductStore();
@@ -34,6 +40,7 @@ function RegisteredProd({
       desc: desc,
       price: price,
       path: path,
+      available: available,
     });
     setEditModal(true);
   };
@@ -45,6 +52,8 @@ function RegisteredProd({
     transform: CSS.Transform.toString(transform),
     transition,
   };
+
+  const changeAvailableHandler = (id: string) => {};
 
   return (
     <Fragment>
@@ -75,9 +84,24 @@ function RegisteredProd({
         </div>
         <div className={registeredProdStyle.name}>{name}</div>
         <div className={registeredProdStyle.desc}>{desc}</div>
-        {/*todo: データが取得できるようになったら差し替え*/}
         <div className={registeredProdStyle.price}>{price}</div>
-        {/*<div className={registeredProdStyle.price}>{price.toLocaleString()}</div>*/}
+        <div className={registeredProdStyle.saleState}>
+          {isAvailableToggle ? (
+            <input
+              type="checkbox"
+              className={registeredProdStyle.saleState}
+              onChange={() => changeAvailableHandler(id)}
+            />
+          ) : (
+            ""
+          )}
+
+          {available ? (
+            <span className={registeredProdStyle.textSell}>販売中</span>
+          ) : (
+            <span className={registeredProdStyle.textNotSell}>休止中</span>
+          )}
+        </div>
       </div>
     </Fragment>
   );

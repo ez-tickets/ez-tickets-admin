@@ -1,20 +1,30 @@
 import { sideBarStyle } from "@/admin/components/styles/SideBar.css.ts";
+import { IconPlus, IconSettings } from "@tabler/icons-react";
 import { Fragment, type JSX, useState } from "react";
+import type { MouseEvent } from "react";
 
 type SideBarLabelProps = {
   title: string;
   element: JSX.Element;
-  addButton?: boolean;
-  executeHandler?: () => void;
+  addHandler?: () => void;
+  configHandler?: () => void;
 };
 
 function SideBarLabel({
   title,
   element,
-  addButton,
-  executeHandler,
+  addHandler,
+  configHandler,
 }: SideBarLabelProps) {
   const [expand, setExpand] = useState<boolean>(false);
+
+  const clickHandler = (
+    e: MouseEvent<SVGSVGElement>,
+    handler?: (() => void) | undefined,
+  ) => {
+    e.preventDefault();
+    if (handler) handler();
+  };
 
   return (
     <Fragment>
@@ -28,14 +38,19 @@ function SideBarLabel({
             <p className={sideBarStyle.arrow}>{expand ? "▼" : "▶"}</p>
             {title}
           </div>
-          {addButton && (
-            <button
-              type={"button"}
-              className={sideBarStyle.addButton}
-              onClick={executeHandler}
-            >
-              +
-            </button>
+
+          {configHandler && (
+            <IconSettings
+              onClick={(e) => clickHandler(e, addHandler)}
+              className={sideBarStyle.button}
+            />
+          )}
+
+          {addHandler && (
+            <IconPlus
+              onClick={(e) => clickHandler(e, configHandler)}
+              className={sideBarStyle.button}
+            />
           )}
         </summary>
         <div>{element}</div>

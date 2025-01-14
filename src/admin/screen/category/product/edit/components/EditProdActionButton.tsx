@@ -16,12 +16,14 @@ type EditProdActionButtonProps = {
   desc: string;
   price: number;
   imgPath: string;
+  available: boolean;
   setName: (name: string) => void;
   setCategory: (category: string | null) => void;
   setDesc: (desc: string) => void;
   setPrice: (price: number) => void;
   setImgPath: (path: string) => void;
   setImage: (image: string) => void;
+  setAvailable: (flag: boolean) => void;
   setEditModal: (flag: boolean) => void;
 };
 
@@ -32,12 +34,14 @@ function EditProdActionButton({
   desc,
   price,
   imgPath,
+  available,
   setName,
   setCategory,
   setDesc,
   setPrice,
   setImgPath,
   setImage,
+  setAvailable,
   setEditModal,
 }: EditProdActionButtonProps) {
   const [modalView, setModalView] = useState<boolean>(false);
@@ -51,6 +55,7 @@ function EditProdActionButton({
     setPrice(editProduct.price);
     setImgPath(editProduct.path);
     setImage(convertFileSrc(editProduct.path));
+    setAvailable(editProduct.available);
   };
 
   const updateHandler = async () => {
@@ -60,25 +65,32 @@ function EditProdActionButton({
       desc: desc,
       price: price,
       path: imgPath,
+      available: available,
     });
-    toast.success("更新しました");
+    toast.success(
+      <Fragment>
+        商品「{editProduct.name}」の情報を
+        <br />
+        正常に更新しました！
+      </Fragment>,
+    );
   };
 
   const deleteHandler = async () => {
     await deleteProduct(editProduct.id);
-    toast.success("削除しました");
+    toast.success(
+      <Fragment>
+        商品「{editProduct.name}」を
+        <br />
+        正常に削除しました！
+      </Fragment>,
+    );
   };
 
   const openModalHandler = (type: string) => {
     switch (type) {
       case confirmAction.UPDATE:
-        if (
-          name === "" ||
-          category === "" ||
-          desc === "" ||
-          price < 0 ||
-          imgPath === ""
-        ) {
+        if (name === "" || desc === "" || price < 0 || imgPath === "") {
           toast.error("必須項目を入力してください");
           return;
         }

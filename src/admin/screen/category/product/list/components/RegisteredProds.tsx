@@ -20,9 +20,16 @@ import { Fragment, useEffect, useState } from "react";
 type RegisteredProdsProps = {
   setEditModal: (flag: boolean) => void;
   categoryID: string;
+  isAvailableToggle: boolean;
+  setIsAvailableToggle: (flag: boolean) => void;
 };
 
-function RegisteredProds({ setEditModal, categoryID }: RegisteredProdsProps) {
+function RegisteredProds({
+  setEditModal,
+  categoryID,
+  isAvailableToggle,
+  setIsAvailableToggle,
+}: RegisteredProdsProps) {
   const [products, setProducts] = useState<Product[]>([]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
@@ -76,6 +83,9 @@ function RegisteredProds({ setEditModal, categoryID }: RegisteredProdsProps) {
               desc={prod.desc}
               price={prod.price}
               path={prod.path}
+              available={prod.available}
+              isAvailableToggle={isAvailableToggle}
+              setIsAvailableToggle={setIsAvailableToggle}
               setEditModal={setEditModal}
             />
           ))}

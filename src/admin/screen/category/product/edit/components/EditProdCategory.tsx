@@ -3,6 +3,7 @@ import { productCategoryStyle } from "@/admin/screen/category/product/register/c
 import SelectModal from "@/admin/screen/modal/selectModal/SelectModal.tsx";
 import { type Category, fetchCategories } from "@/cmds/categories.ts";
 import InputContainer from "@/parts/InputContainer.tsx";
+import { IconX } from "@tabler/icons-react";
 import { Fragment, useEffect, useState } from "react";
 
 type EditProdCategoryProps = {
@@ -51,6 +52,14 @@ function EditProdCategory({ category, setCategory }: EditProdCategoryProps) {
               <div className={productCategoryStyle.selectedCategory}>
                 {category}
               </div>
+              {category ? (
+                <IconX
+                  className={productCategoryStyle.x}
+                  onClick={() => setCategory("")}
+                />
+              ) : (
+                ""
+              )}
             </div>
           </Fragment>
         }

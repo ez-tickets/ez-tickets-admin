@@ -1,5 +1,5 @@
 import { homeStyle } from "@/admin/screen/home/Home.css.ts";
-import Items from "@/admin/screen/home/components/Items.tsx";
+import Contents from "@/admin/screen/home/components/contents.tsx";
 import { Fragment } from "react";
 
 function Home() {
@@ -7,7 +7,7 @@ function Home() {
     <Fragment>
       <div className={homeStyle.homeContainer}>
         <div className={homeStyle.gridContainer}>
-          <Items />
+          <Contents />
         </div>
       </div>
     </Fragment>
