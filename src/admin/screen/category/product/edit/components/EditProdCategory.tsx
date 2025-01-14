@@ -3,8 +3,8 @@ import { productCategoryStyle } from "@/admin/screen/category/product/register/c
 import SelectModal from "@/admin/screen/modal/selectModal/SelectModal.tsx";
 import { type Category, fetchCategories } from "@/cmds/categories.ts";
 import InputContainer from "@/parts/InputContainer.tsx";
-import { Fragment, useEffect, useState } from "react";
 import { IconX } from "@tabler/icons-react";
+import { Fragment, useEffect, useState } from "react";
 
 type EditProdCategoryProps = {
   category: string | null;

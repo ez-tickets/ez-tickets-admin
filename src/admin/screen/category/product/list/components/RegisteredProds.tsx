@@ -24,7 +24,12 @@ type RegisteredProdsProps = {
   setIsAvailableToggle: (flag: boolean) => void;
 };
 
-function RegisteredProds({ setEditModal, categoryID, isAvailableToggle, setIsAvailableToggle }: RegisteredProdsProps) {
+function RegisteredProds({
+  setEditModal,
+  categoryID,
+  isAvailableToggle,
+  setIsAvailableToggle,
+}: RegisteredProdsProps) {
   const [products, setProducts] = useState<Product[]>([]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>

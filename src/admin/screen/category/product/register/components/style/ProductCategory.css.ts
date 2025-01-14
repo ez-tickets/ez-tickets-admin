@@ -71,5 +71,5 @@ export const productCategoryStyle = {
     marginLeft: "1rem",
     strokeWidth: 1.5,
     color: "red",
-  })
+  }),
 };

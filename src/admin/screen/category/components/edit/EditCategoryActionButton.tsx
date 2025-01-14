@@ -33,9 +33,10 @@ function EditCategoryActionButton({
     await updateCategoryName(editCategory.id, { name: editCategoryName });
     toast.success(
       <Fragment>
-        カテゴリ「{editCategoryName}」へ<br/>
+        カテゴリ「{editCategoryName}」へ
+        <br />
         正常に更新しました！
-      </Fragment>
+      </Fragment>,
     );
   };
 
@@ -43,9 +44,10 @@ function EditCategoryActionButton({
     await deleteCategory(editCategory.id);
     toast.success(
       <Fragment>
-        カテゴリ「{editCategory.name}」を<br/>
+        カテゴリ「{editCategory.name}」を
+        <br />
         正常に削除しました！
-      </Fragment>
+      </Fragment>,
     );
   };
 

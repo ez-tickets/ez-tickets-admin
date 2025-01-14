@@ -1,6 +1,6 @@
-import { Fragment } from "react";
 import { checkBoxStyle } from "@/parts/style/CheckBox.css.ts";
 import { IconSquare, IconSquareCheck } from "@tabler/icons-react";
+import { Fragment } from "react";
 
 type CheckBoxProps = {
   check: boolean;

@@ -1,6 +1,6 @@
-import { Fragment } from "react";
-import InputContainer from "@/parts/InputContainer.tsx";
 import CheckBox from "@/parts/CheckBox.tsx";
+import InputContainer from "@/parts/InputContainer.tsx";
+import { Fragment } from "react";
 
 type ProductAvailableProps = {
   available: boolean;

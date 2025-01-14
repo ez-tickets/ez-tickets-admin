@@ -1,4 +1,5 @@
 import ProductActionButton from "@/admin/screen/category/product/register/components/ProductActionButton.tsx";
+import ProductAvailable from "@/admin/screen/category/product/register/components/ProductAvailable.tsx";
 import ProductCategory from "@/admin/screen/category/product/register/components/ProductCategory.tsx";
 import ProductDesc from "@/admin/screen/category/product/register/components/ProductDesc.tsx";
 import ProductImg from "@/admin/screen/category/product/register/components/ProductImg.tsx";
@@ -6,7 +7,6 @@ import ProductName from "@/admin/screen/category/product/register/components/Pro
 import ProductPrice from "@/admin/screen/category/product/register/components/ProductPrice.tsx";
 import ManageEntryModal from "@/admin/screen/modal/manageEntryModal/ManageEntryModal.tsx";
 import { Fragment, useEffect, useState } from "react";
-import ProductAvailable from "@/admin/screen/category/product/register/components/ProductAvailable.tsx";
 
 type RegisterProdModalProps = {
   toggleModal: boolean;

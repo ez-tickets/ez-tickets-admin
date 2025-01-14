@@ -13,8 +13,8 @@ export const registeredProdStyle = {
     "@media": {
       "screen and (max-width: 950px)": {
         fontSize: "0.75rem",
-      }
-    }
+      },
+    },
   }),
 
   congruent: style({
@@ -22,10 +22,10 @@ export const registeredProdStyle = {
     cursor: "grab",
     padding: "1rem",
     "@media": {
-        "screen and (max-width: 950px)": {
-            padding: "0.5rem",
-        }
-    }
+      "screen and (max-width: 950px)": {
+        padding: "0.5rem",
+      },
+    },
   }),
 
   imgContainer: style({

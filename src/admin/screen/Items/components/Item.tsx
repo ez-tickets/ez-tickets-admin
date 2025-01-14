@@ -1,7 +1,7 @@
+import { itemStyle } from "@/admin/screen/Items/components/style/Item.css.ts";
+import { useEditProductStore } from "@/admin/store/RegisteredEditStore.ts";
+import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment } from "react";
-import {convertFileSrc} from "@tauri-apps/api/core";
-import {useEditProductStore} from "@/admin/store/RegisteredEditStore.ts";
-import {itemStyle} from "@/admin/screen/Items/components/style/Item.css.ts";
 
 type ItemProps = {
   id: string;
@@ -40,10 +40,7 @@ function Item({
   return (
     <Fragment>
       {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
-      <div
-        className={itemStyle.list}
-        onClick={openEditModalHandler}
-      >
+      <div className={itemStyle.list} onClick={openEditModalHandler}>
         <div className={itemStyle.imgContainer}>
           {path !== "" ? (
             <img
@@ -52,7 +49,7 @@ function Item({
               className={itemStyle.img}
             />
           ) : (
-            <div className={itemStyle.img}/>
+            <div className={itemStyle.img} />
           )}
         </div>
         <div className={itemStyle.name}>{name}</div>

@@ -1,4 +1,4 @@
-import {style} from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 
 export const itemStyle = {
   list: style({
@@ -13,8 +13,8 @@ export const itemStyle = {
     "@media": {
       "screen and (max-width: 950px)": {
         fontSize: "0.8rem",
-      }
-    }
+      },
+    },
   }),
 
   imgContainer: style({
@@ -59,5 +59,5 @@ export const itemStyle = {
     width: "15%",
     padding: "1rem",
     fontSize: "0.9rem",
-  })
-}
+  }),
+};

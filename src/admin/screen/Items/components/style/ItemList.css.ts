@@ -1,4 +1,4 @@
-import {style} from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 
 export const itemListStyle = {
   img: style({
@@ -9,8 +9,8 @@ export const itemListStyle = {
     "@media": {
       "screen and (max-width: 950px)": {
         fontSize: "0.75rem",
-      }
-    }
+      },
+    },
   }),
 
   name: style({
@@ -21,8 +21,8 @@ export const itemListStyle = {
     "@media": {
       "screen and (max-width: 950px)": {
         fontSize: "0.75rem",
-      }
-    }
+      },
+    },
   }),
 
   desc: style({
@@ -33,8 +33,8 @@ export const itemListStyle = {
     "@media": {
       "screen and (max-width: 950px)": {
         fontSize: "0.75rem",
-      }
-    }
+      },
+    },
   }),
 
   price: style({
@@ -45,8 +45,8 @@ export const itemListStyle = {
     "@media": {
       "screen and (max-width: 950px)": {
         fontSize: "0.75rem",
-      }
-    }
+      },
+    },
   }),
 
   category: style({
@@ -57,7 +57,7 @@ export const itemListStyle = {
     "@media": {
       "screen and (max-width: 950px)": {
         fontSize: "0.75rem",
-      }
-    }
-  })
-}
+      },
+    },
+  }),
+};

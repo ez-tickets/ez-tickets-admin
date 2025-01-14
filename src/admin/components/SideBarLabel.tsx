@@ -1,6 +1,6 @@
 import { sideBarStyle } from "@/admin/components/styles/SideBar.css.ts";
-import { Fragment, type JSX, useState } from "react";
 import { IconPlus, IconSettings } from "@tabler/icons-react";
+import { Fragment, type JSX, useState } from "react";
 import type { MouseEvent } from "react";
 
 type SideBarLabelProps = {

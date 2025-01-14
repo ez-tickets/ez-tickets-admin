@@ -69,9 +69,10 @@ function EditProdActionButton({
     });
     toast.success(
       <Fragment>
-        商品「{editProduct.name}」の情報を<br/>
+        商品「{editProduct.name}」の情報を
+        <br />
         正常に更新しました！
-      </Fragment>
+      </Fragment>,
     );
   };
 
@@ -79,21 +80,17 @@ function EditProdActionButton({
     await deleteProduct(editProduct.id);
     toast.success(
       <Fragment>
-        商品「{editProduct.name}」を<br/>
+        商品「{editProduct.name}」を
+        <br />
         正常に削除しました！
-      </Fragment>
+      </Fragment>,
     );
   };
 
   const openModalHandler = (type: string) => {
     switch (type) {
       case confirmAction.UPDATE:
-        if (
-          name === "" ||
-          desc === "" ||
-          price < 0 ||
-          imgPath === ""
-        ) {
+        if (name === "" || desc === "" || price < 0 || imgPath === "") {
           toast.error("必須項目を入力してください");
           return;
         }

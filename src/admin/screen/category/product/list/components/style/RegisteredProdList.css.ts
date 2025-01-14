@@ -11,13 +11,13 @@ export const registeredProdListStyle = {
     textIndent: "2.5rem",
     fontSize: "0.9rem",
     // backgroundColor: "yellow",
-  "@media": {
+    "@media": {
       "screen and (max-width: 950px)": {
         textIndent: "0",
         fontSize: "0.75rem",
         textAlign: "center",
-      }
-    }
+      },
+    },
   }),
 
   name: style({
@@ -25,11 +25,11 @@ export const registeredProdListStyle = {
     padding: "1rem",
     fontSize: "0.9rem",
     // backgroundColor: "green",
-  "@media": {
+    "@media": {
       "screen and (max-width: 950px)": {
         fontSize: "0.75rem",
-      }
-    }
+      },
+    },
   }),
 
   desc: style({
@@ -37,11 +37,11 @@ export const registeredProdListStyle = {
     padding: "1rem",
     fontSize: "0.9rem",
     // backgroundColor: "blue",
-  "@media": {
+    "@media": {
       "screen and (max-width: 950px)": {
         fontSize: "0.75rem",
-      }
-    }
+      },
+    },
   }),
 
   price: style({
@@ -49,11 +49,11 @@ export const registeredProdListStyle = {
     padding: "1rem",
     fontSize: "0.9rem",
     // backgroundColor: "red",
-  "@media": {
+    "@media": {
       "screen and (max-width: 950px)": {
         fontSize: "0.75rem",
-      }
-    }
+      },
+    },
   }),
 
   saleState: style({
@@ -66,7 +66,7 @@ export const registeredProdListStyle = {
       "screen and (max-width: 950px)": {
         fontSize: "0.75rem",
         padding: "1rem 0.5rem",
-      }
-    }
+      },
+    },
   }),
 };

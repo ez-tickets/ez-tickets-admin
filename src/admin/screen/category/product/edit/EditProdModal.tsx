@@ -4,11 +4,11 @@ import EditProdDesc from "@/admin/screen/category/product/edit/components/EditPr
 import EditProdImg from "@/admin/screen/category/product/edit/components/EditProdImg.tsx";
 import EditCatalogName from "@/admin/screen/category/product/edit/components/EditProdName.tsx";
 import EditProdPrice from "@/admin/screen/category/product/edit/components/EditProdPrice.tsx";
+import ProductAvailable from "@/admin/screen/category/product/register/components/ProductAvailable.tsx";
 import ManageEntryModal from "@/admin/screen/modal/manageEntryModal/ManageEntryModal.tsx";
 import { useEditProductStore } from "@/admin/store/RegisteredEditStore.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment, useState } from "react";
-import ProductAvailable from "@/admin/screen/category/product/register/components/ProductAvailable.tsx";
 
 type EditProdModalProps = {
   editModal: boolean;
