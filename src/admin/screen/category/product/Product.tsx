@@ -8,7 +8,7 @@ type CategoryState = {
   name: string;
 };
 
-function RegisteredProd() {
+function Product() {
   const { id, name } = useLocation().state as CategoryState;
   const [categoryID, setCategoryID] = useState<string>(id);
   const [categoryName, setCategoryName] = useState<string>(name);
@@ -26,4 +26,4 @@ function RegisteredProd() {
   );
 }
 
-export default RegisteredProd;
+export default Product;

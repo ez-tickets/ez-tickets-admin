@@ -1,21 +1,14 @@
-import { style } from "@vanilla-extract/css";
+import {style} from "@vanilla-extract/css";
 
-export const registeredProdListStyle = {
-  buttonContainer: style({
-    display: "flex",
-  }),
-
+export const itemListStyle = {
   img: style({
-    width: "20%",
+    width: "15%",
     padding: "1rem",
-    textIndent: "2.5rem",
     fontSize: "0.9rem",
-    // backgroundColor: "yellow",
-  "@media": {
+    // backgroundColor: "yellow"
+    "@media": {
       "screen and (max-width: 950px)": {
-        textIndent: "0",
         fontSize: "0.75rem",
-        textAlign: "center",
       }
     }
   }),
@@ -24,8 +17,8 @@ export const registeredProdListStyle = {
     width: "25%",
     padding: "1rem",
     fontSize: "0.9rem",
-    // backgroundColor: "green",
-  "@media": {
+    // backgroundColor: "green"
+    "@media": {
       "screen and (max-width: 950px)": {
         fontSize: "0.75rem",
       }
@@ -36,8 +29,8 @@ export const registeredProdListStyle = {
     width: "30%",
     padding: "1rem",
     fontSize: "0.9rem",
-    // backgroundColor: "blue",
-  "@media": {
+    // backgroundColor: "blue"
+    "@media": {
       "screen and (max-width: 950px)": {
         fontSize: "0.75rem",
       }
@@ -48,25 +41,23 @@ export const registeredProdListStyle = {
     width: "15%",
     padding: "1rem",
     fontSize: "0.9rem",
-    // backgroundColor: "red",
-  "@media": {
+    // backgroundColor: "red"
+    "@media": {
       "screen and (max-width: 950px)": {
         fontSize: "0.75rem",
       }
     }
   }),
 
-  saleState: style({
-    width: "10%",
+  category: style({
+    width: "15%",
     padding: "1rem",
     fontSize: "0.9rem",
-    textAlign: "center",
-    // backgroundColor: "purple",
+    // backgroundColor: "pink"
     "@media": {
       "screen and (max-width: 950px)": {
         fontSize: "0.75rem",
-        padding: "1rem 0.5rem",
       }
     }
-  }),
-};
+  })
+}

@@ -19,17 +19,34 @@ function RegisteredProdList({
 }: RegisteredProdListProps) {
   const [toggleModal, setToggleModal] = useState<boolean>(false);
   const [editModal, setEditModal] = useState<boolean>(false);
+  const [isAvailableToggle, setIsAvailableToggle] = useState<boolean>(false);
 
   return (
     <Fragment>
       <ListContainer
-        title={"商品一覧"}
+        title={"登録商品"}
         buttonElement={
-          <ExecuteButton
-            name={"新規登録"}
-            style={executeButtonStyle.default}
-            executeHandler={() => setToggleModal(true)}
-          />
+          <div className={registeredProdListStyle.buttonContainer}>
+            {isAvailableToggle ? (
+              <ExecuteButton
+                name={"確定する"}
+                style={executeButtonStyle.default}
+                executeHandler={() => setIsAvailableToggle(!isAvailableToggle)}
+              />
+            ) : (
+              <ExecuteButton
+                name={"販売状況"}
+                style={executeButtonStyle.default}
+                executeHandler={() => setIsAvailableToggle(!isAvailableToggle)}
+              />
+            )}
+
+            <ExecuteButton
+              name={"新規登録"}
+              style={executeButtonStyle.default}
+              executeHandler={() => setToggleModal(true)}
+            />
+          </div>
         }
         headerContainer={
           <ListHeader
@@ -39,6 +56,7 @@ function RegisteredProdList({
                 <div className={registeredProdListStyle.name}>商品名</div>
                 <div className={registeredProdListStyle.desc}>説明</div>
                 <div className={registeredProdListStyle.price}>価格</div>
+                <div className={registeredProdListStyle.saleState}>状態</div>
               </Fragment>
             }
           />
@@ -47,6 +65,8 @@ function RegisteredProdList({
           <RegisteredProds
             setEditModal={setEditModal}
             categoryID={categoryID}
+            isAvailableToggle={isAvailableToggle}
+            setIsAvailableToggle={setIsAvailableToggle}
           />
         }
       />

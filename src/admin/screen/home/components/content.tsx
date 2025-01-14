@@ -1,4 +1,4 @@
-import { itemStyle } from "@/admin/screen/home/components/style/Item.css.ts";
+import { contentStyle } from "@/admin/screen/home/components/style/content.css.ts";
 import { Fragment, type JSX } from "react";
 import { Link } from "react-router-dom";
 
@@ -8,11 +8,11 @@ type LabelProps = {
   icon: JSX.Element;
 };
 
-function Item({ path, labelName, icon }: LabelProps) {
+function Content({ path, labelName, icon }: LabelProps) {
   return (
     <Fragment>
       <Link to={path}>
-        <div className={itemStyle.item}>
+        <div className={contentStyle.item}>
           <p>{labelName}</p>
           {icon}
         </div>
@@ -21,4 +21,4 @@ function Item({ path, labelName, icon }: LabelProps) {
   );
 }
 
-export default Item;
+export default Content;

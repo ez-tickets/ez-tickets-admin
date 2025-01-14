@@ -9,6 +9,7 @@ export type Product = {
   desc: string;
   price: number;
   path: string;
+  available: boolean;
   order: number;
 };
 
@@ -23,6 +24,7 @@ export type RegisterProduct = {
   desc: string;
   price: number;
   path: string;
+  available: boolean;
 };
 
 export const registerProduct = async (
@@ -31,13 +33,13 @@ export const registerProduct = async (
   await invoke<void>("register_product", { register: input });
 };
 
-//todo: pathははてなでいいのか？
 export type UpdateProduct = {
   name: string;
   category: string | null;
   desc: string;
   price: number;
   path?: string;
+  available: boolean;
 };
 
 export const updateProduct = async (

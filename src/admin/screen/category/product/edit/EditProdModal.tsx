@@ -8,6 +8,7 @@ import ManageEntryModal from "@/admin/screen/modal/manageEntryModal/ManageEntryM
 import { useEditProductStore } from "@/admin/store/RegisteredEditStore.ts";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment, useState } from "react";
+import ProductAvailable from "@/admin/screen/category/product/register/components/ProductAvailable.tsx";
 
 type EditProdModalProps = {
   editModal: boolean;
@@ -18,12 +19,13 @@ function EditProdModal({ editModal, setEditModal }: EditProdModalProps) {
   const { editProduct } = useEditProductStore();
   if (!editProduct) throw new Error("product not found.");
 
-  const [category, setCategory] = useState<string | null>(editProduct.category);
   const [name, setName] = useState<string>(editProduct.name);
   const [imgPath, setImgPath] = useState<string>(editProduct.path);
   const [image, setImage] = useState<string>(convertFileSrc(imgPath));
   const [price, setPrice] = useState<number>(editProduct.price);
   const [desc, setDesc] = useState<string>(editProduct.desc);
+  const [category, setCategory] = useState<string | null>(editProduct.category);
+  const [available, setAvailable] = useState<boolean>(editProduct.available);
 
   return (
     <ManageEntryModal
@@ -32,7 +34,6 @@ function EditProdModal({ editModal, setEditModal }: EditProdModalProps) {
       closeHandler={() => setEditModal(false)}
       parts={
         <Fragment>
-          <EditProdCategory category={category} setCategory={setCategory} />
           <EditCatalogName name={name} setName={setName} />
           <EditProdImg
             imgPath={imgPath}
@@ -42,6 +43,15 @@ function EditProdModal({ editModal, setEditModal }: EditProdModalProps) {
           />
           <EditProdPrice price={price} setPrice={setPrice} />
           <EditProdDesc desc={desc} setDesc={setDesc} />
+          <EditProdCategory category={category} setCategory={setCategory} />
+          {category ? (
+            <ProductAvailable
+              available={available}
+              setAvailable={setAvailable}
+            />
+          ) : (
+            ""
+          )}
 
           <EditProdActionButton
             editProduct={editProduct}
@@ -50,12 +60,14 @@ function EditProdModal({ editModal, setEditModal }: EditProdModalProps) {
             desc={desc}
             price={price}
             imgPath={imgPath}
+            available={available}
             setName={setName}
             setCategory={setCategory}
             setDesc={setDesc}
             setPrice={setPrice}
             setImgPath={setImgPath}
             setImage={setImage}
+            setAvailable={setAvailable}
             setEditModal={setEditModal}
           />
         </Fragment>

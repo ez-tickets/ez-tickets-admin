@@ -25,7 +25,7 @@ function InputImg({
       filters: [
         {
           name: "Image",
-          extensions: ["png"],
+          extensions: ["png", "jpeg"],
         },
       ],
     });

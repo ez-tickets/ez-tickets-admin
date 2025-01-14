@@ -3,11 +3,12 @@ import { sideBarStyle } from "@/admin/components/styles/SideBar.css.ts";
 import RegisterCategoryModal from "@/admin/screen/category/components/register/RegisterCategoryModal.tsx";
 import { type Category, fetchCategories } from "@/cmds/categories.ts";
 import { Fragment, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SideBar() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [toggleModal, setToggleModal] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
@@ -17,6 +18,8 @@ function SideBar() {
       setCategories(categories);
     })();
   }, [categories]);
+
+  const configHandler = () => navigate("registeredCategory");
 
   return (
     <Fragment>
@@ -28,12 +31,12 @@ function SideBar() {
         </div>
 
         <div className={sideBarStyle.contentsContainer}>
+          <Link to="allItems">商品一覧</Link>
+
           <SideBarLabel
             title={"カテゴリー"}
             element={
               <Fragment>
-                <Link to={"registeredCategory"}>カテゴリー詳細</Link>
-
                 {categories.map((category) => (
                   <Link
                     to="registeredProduct"
@@ -48,8 +51,8 @@ function SideBar() {
                 ))}
               </Fragment>
             }
-            addButton={true}
-            executeHandler={() => setToggleModal(true)}
+            addHandler={() => setToggleModal(true)}
+            configHandler={configHandler}
           />
         </div>
       </div>
