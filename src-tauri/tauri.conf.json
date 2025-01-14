@@ -14,8 +14,8 @@
     "windows": [
       {
         "title": "ez-tickets-admin",
-        "width": 800,
-        "height": 600,
+        "minWidth": 1123,
+        "minHeight": 720,
         "decorations": false
       }
     ],
