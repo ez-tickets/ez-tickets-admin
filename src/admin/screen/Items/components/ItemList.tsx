@@ -31,7 +31,6 @@ function ItemList() {
                 <div className={itemListStyle.name}>商品名</div>
                 <div className={itemListStyle.desc}>説明</div>
                 <div className={itemListStyle.price}>価格</div>
-                <div className={itemListStyle.category}>カテゴリー</div>
               </Fragment>
             }
           />

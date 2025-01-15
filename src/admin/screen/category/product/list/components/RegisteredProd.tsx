@@ -56,8 +56,8 @@ function RegisteredProd({
           ...updateProducts,
           { ...product, available: changedState },
         ];
-        setProdAvailableState(changedState);
         setUpdateProducts(updatedProduct);
+        setProdAvailableState(changedState);
       }
     }
   };

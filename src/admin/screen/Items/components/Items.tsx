@@ -14,7 +14,7 @@ function Items({ setEditModal }: ItemsProps) {
     (async () => {
       //todo: APIから商品情報を取得する処理変更
       const items = await fetchProducts();
-      items.sort((a, b) => a.order - b.order);
+      items.sort((a, b) => a.name.localeCompare(b.name, "ja"));
       setAllItems(items);
     })();
   }, [allItems]);

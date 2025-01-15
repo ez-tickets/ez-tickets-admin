@@ -41,23 +41,21 @@ export const itemStyle = {
   }),
 
   desc: style({
-    width: "30%",
+    width: "45%",
     padding: "1rem",
     textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
     overflow: "hidden",
   }),
 
   price: style({
     width: "15%",
     padding: "1rem",
-    ":after": {
-      content: " '円'",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    ":before": {
+      content: "¥",
     },
-  }),
-
-  category: style({
-    width: "15%",
-    padding: "1rem",
-    fontSize: "0.9rem",
   }),
 };
