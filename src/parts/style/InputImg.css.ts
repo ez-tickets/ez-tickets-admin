@@ -18,8 +18,9 @@ export const inputImgStyle = {
   }),
 
   img: style({
-    width: "9rem",
-    height: "7rem",
+    width: "160px",
+    height: "120px",
+    aspectRatio: "4/3",
     border: "1px dotted lightgray",
     boxShadow: "1px 2px 3px lightgray",
   }),
