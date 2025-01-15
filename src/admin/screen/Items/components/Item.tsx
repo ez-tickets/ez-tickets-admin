@@ -57,7 +57,6 @@ function Item({
         {/*todo: データが取得できるようになったら差し替え*/}
         <div className={itemStyle.price}>{price}</div>
         {/*<div className={itemStyle.price}>{price.toLocaleString()}</div>*/}
-        <div className={itemStyle.category}>{category}</div>
       </div>
     </Fragment>
   );

@@ -76,8 +76,8 @@ export const registeredProdStyle = {
     width: "15%",
     padding: "1rem",
     // backgroundColor: "red",
-    ":after": {
-      content: " '円'",
+    ":before": {
+      content: "¥",
     },
   }),
 
