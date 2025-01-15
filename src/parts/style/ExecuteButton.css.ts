@@ -36,6 +36,17 @@ export const executeButtonStyle = {
     },
   }),
 
+  decision: style({
+    padding: "10px 20px",
+    display: "block",
+    backgroundColor: "#fff",
+    border: "1px solid rgba(0,0,0,0.4)",
+    borderRadius: "5px",
+    ":hover": {
+      backgroundColor: "#76fcb9",
+    },
+  }),
+
   //edit manageEntryModal --------------------------------------------
   editModalUpdate: style({
     margin: "0 1rem",
@@ -96,22 +107,5 @@ export const executeButtonStyle = {
     ":hover": {
       backgroundColor: "lightgray",
     },
-  }),
-
-  //selectModal --------------------------------------------------
-  selectModalReset: style({
-    margin: "20px 10px",
-    border: "1px solid lightgray",
-    borderRadius: "5px",
-    padding: "5px 20px",
-    backgroundColor: "#89f5f5",
-  }),
-
-  selectModalRun: style({
-    margin: "20px 10px",
-    border: "1px solid lightgray",
-    borderRadius: "5px",
-    padding: "5px 20px",
-    backgroundColor: "gold",
   }),
 };

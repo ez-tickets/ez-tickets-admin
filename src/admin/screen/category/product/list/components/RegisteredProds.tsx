@@ -1,5 +1,5 @@
 import RegisteredProd from "@/admin/screen/category/product/list/components/RegisteredProd.tsx";
-import { type Product, fetchProducts } from "@/cmds/products.ts";
+import type { Product } from "@/cmds/products.ts";
 import {
   DndContext,
   type DragEndEvent,
@@ -15,33 +15,27 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 
 type RegisteredProdsProps = {
-  setEditModal: (flag: boolean) => void;
   categoryID: string;
+  products: Product[];
+  updateProducts: Product[];
   isAvailableToggle: boolean;
-  setIsAvailableToggle: (flag: boolean) => void;
+  setProducts: (prod: Product[]) => void;
+  setUpdateProducts: (prod: Product[]) => void;
+  setEditModal: (flag: boolean) => void;
 };
 
 function RegisteredProds({
-  setEditModal,
   categoryID,
+  products,
+  updateProducts,
   isAvailableToggle,
-  setIsAvailableToggle,
+  setProducts,
+  setUpdateProducts,
+  setEditModal,
 }: RegisteredProdsProps) {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  useEffect(() => {
-    (async () => {
-      //todo: categoryIDを使ってfetchProductsを呼び出す
-      const products = await fetchProducts();
-      products.sort((a, b) => a.order - b.order);
-      setProducts(products);
-    })();
-  }, [products]);
-
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -77,15 +71,10 @@ function RegisteredProds({
           {products.map((prod) => (
             <RegisteredProd
               key={prod.id}
-              id={prod.id}
-              name={prod.name}
-              category={prod.category}
-              desc={prod.desc}
-              price={prod.price}
-              path={prod.path}
-              available={prod.available}
+              prod={prod}
+              updateProducts={updateProducts}
               isAvailableToggle={isAvailableToggle}
-              setIsAvailableToggle={setIsAvailableToggle}
+              setUpdateProducts={setUpdateProducts}
               setEditModal={setEditModal}
             />
           ))}

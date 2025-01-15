@@ -41,14 +41,14 @@ function SideBarLabel({
 
           {configHandler && (
             <IconSettings
-              onClick={(e) => clickHandler(e, addHandler)}
+              onClick={(e) => clickHandler(e, configHandler)}
               className={sideBarStyle.button}
             />
           )}
 
           {addHandler && (
             <IconPlus
-              onClick={(e) => clickHandler(e, configHandler)}
+              onClick={(e) => clickHandler(e, addHandler)}
               className={sideBarStyle.button}
             />
           )}

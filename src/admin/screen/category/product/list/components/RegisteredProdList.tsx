@@ -2,11 +2,12 @@ import EditProdModal from "@/admin/screen/category/product/edit/EditProdModal.ts
 import RegisteredProds from "@/admin/screen/category/product/list/components/RegisteredProds.tsx";
 import { registeredProdListStyle } from "@/admin/screen/category/product/list/components/style/RegisteredProdList.css.ts";
 import RegisterProdModal from "@/admin/screen/category/product/register/RegisterProdModal.tsx";
+import { type Product, fetchProducts } from "@/cmds/products.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ListContainer from "@/parts/ListContainer.tsx";
 import ListHeader from "@/parts/ListHeader.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 type RegisteredProdListProps = {
   categoryID: string;
@@ -19,7 +20,19 @@ function RegisteredProdList({
 }: RegisteredProdListProps) {
   const [toggleModal, setToggleModal] = useState<boolean>(false);
   const [editModal, setEditModal] = useState<boolean>(false);
-  const [isAvailableToggle, setIsAvailableToggle] = useState<boolean>(false);
+  const [isAvailableToggle, setIsAvailableToggle] = useState<boolean>(false); //button切り替え
+  const [products, setProducts] = useState<Product[]>([]); //取得商品を格納するstate
+  const [updateProducts, setUpdateProducts] = useState<Product[]>(products); //商品のavailableを管理するstate
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    (async () => {
+      //todo: categoryIDを使ってfetchProductsを呼び出す
+      const products = await fetchProducts();
+      products.sort((a, b) => a.order - b.order);
+      setProducts(products);
+    })();
+  }, [products]);
 
   return (
     <Fragment>
@@ -30,8 +43,12 @@ function RegisteredProdList({
             {isAvailableToggle ? (
               <ExecuteButton
                 name={"確定する"}
-                style={executeButtonStyle.default}
-                executeHandler={() => setIsAvailableToggle(!isAvailableToggle)}
+                style={executeButtonStyle.decision}
+                executeHandler={() => {
+                  //todo: updatedProductsをサーバーに渡してデータを再取得する (API待ち)
+                  // setProducts(updateProducts);
+                  setIsAvailableToggle(!isAvailableToggle);
+                }}
               />
             ) : (
               <ExecuteButton
@@ -63,10 +80,13 @@ function RegisteredProdList({
         }
         lists={
           <RegisteredProds
-            setEditModal={setEditModal}
             categoryID={categoryID}
+            products={products}
+            updateProducts={updateProducts}
             isAvailableToggle={isAvailableToggle}
-            setIsAvailableToggle={setIsAvailableToggle}
+            setProducts={setProducts}
+            setUpdateProducts={setUpdateProducts}
+            setEditModal={setEditModal}
           />
         }
       />

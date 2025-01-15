@@ -28,6 +28,16 @@ export const registeredProdStyle = {
     },
   }),
 
+  notCongruent: style({
+    width: "3%",
+    padding: "1rem",
+    "@media": {
+      "screen and (max-width: 950px)": {
+        padding: "0.5rem",
+      },
+    },
+  }),
+
   imgContainer: style({
     width: "17%",
     padding: "0.5rem 1rem",
@@ -73,7 +83,9 @@ export const registeredProdStyle = {
 
   saleState: style({
     width: "10%",
-    textAlign: "center",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     // backgroundColor: "purple"
   }),
 
@@ -83,5 +95,12 @@ export const registeredProdStyle = {
 
   textNotSell: style({
     color: "#fc2727",
+  }),
+
+  checkBox: style({
+    width: "1rem",
+    height: "1rem",
+    marginRight: "10px",
+    accentColor: "#0ec268",
   }),
 };
