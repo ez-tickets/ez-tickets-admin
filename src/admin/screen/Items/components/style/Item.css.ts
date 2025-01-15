@@ -23,16 +23,11 @@ export const itemStyle = {
   }),
 
   img: style({
-    width: "6rem",
-    height: "4rem",
+    width: "80px",
+    height: "60px",
+    aspectRatio: "4/3",
     border: "1px dotted lightgray",
     boxShadow: "1px 1px 2px lightgray",
-    "@media": {
-      "screen and (max-width: 950px)": {
-        width: "4rem",
-        height: "2.5rem",
-      },
-    },
   }),
 
   name: style({
