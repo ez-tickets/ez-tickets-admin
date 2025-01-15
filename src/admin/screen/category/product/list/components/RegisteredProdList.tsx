@@ -8,6 +8,7 @@ import ListContainer from "@/parts/ListContainer.tsx";
 import ListHeader from "@/parts/ListHeader.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
 import { Fragment, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 type RegisteredProdListProps = {
   categoryID: string;
@@ -34,6 +35,14 @@ function RegisteredProdList({
     })();
   }, [products]);
 
+  const changedAvailableUpdateHandler = async () => {
+    //todo: updatedProductsをサーバーに渡してデータを再取得する (API待ち)
+    // const updatedProducts = await;
+    // setProducts(updatedProducts);
+    setIsAvailableToggle(!isAvailableToggle);
+    toast.success("販売状態が更新されました。");
+  };
+
   return (
     <Fragment>
       <ListContainer
@@ -44,11 +53,7 @@ function RegisteredProdList({
               <ExecuteButton
                 name={"確定する"}
                 style={executeButtonStyle.decision}
-                executeHandler={() => {
-                  //todo: updatedProductsをサーバーに渡してデータを再取得する (API待ち)
-                  // setProducts(updateProducts);
-                  setIsAvailableToggle(!isAvailableToggle);
-                }}
+                executeHandler={changedAvailableUpdateHandler}
               />
             ) : (
               <ExecuteButton
