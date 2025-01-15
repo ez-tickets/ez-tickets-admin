@@ -5,15 +5,26 @@ import { invoke } from "@tauri-apps/api/core";
 export type Product = {
   id: string;
   name: string;
+  category: string | null;
+  desc: string;
+  price: number;
+  path: string;
+  available: boolean;
+  order: number;
 };
 
+//todo: categoryIDを使ってfetchProductsを呼び出す
 export const fetchProducts = async (): Promise<Product[]> => {
   return await invoke<Product[]>("products");
 };
 
 export type RegisterProduct = {
   name: string;
+  category: string | null;
+  desc: string;
+  price: number;
   path: string;
+  available: boolean;
 };
 
 export const registerProduct = async (
@@ -24,7 +35,11 @@ export const registerProduct = async (
 
 export type UpdateProduct = {
   name: string;
+  category: string | null;
+  desc: string;
+  price: number;
   path?: string;
+  available: boolean;
 };
 
 export const updateProduct = async (

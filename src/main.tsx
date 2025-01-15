@@ -2,22 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "@/global.css";
 import Admin from "@/admin/Admin.tsx";
-import RegisteredCat from "@/admin/screen/category/RegisteredCat.tsx";
-import RegisteredCtlg from "@/admin/screen/category/catalog/list/RegisteredCtlg.tsx";
+import Category from "@/admin/screen/category/Category.tsx";
+import Product from "@/admin/screen/category/product/Product.tsx";
 import Home from "@/admin/screen/home/Home.tsx";
-import RegisteredProd from "@/admin/screen/product/RegisteredProd.tsx";
 import TitleBar from "@/application/TitleBar.tsx";
 import Login from "@/login/Login.tsx";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AllItems from "@/admin/screen/Items/AllItems.tsx";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <MemoryRouter>
       <ToastContainer
         position="bottom-right"
-        autoClose={2000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -32,9 +32,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 
         <Route path="admin" element={<Admin />}>
           <Route index element={<Home />} />
-          <Route path="registeredProd" element={<RegisteredProd />} />
-          <Route path="registeredCategory" element={<RegisteredCat />} />
-          <Route path="registeredCatalog" element={<RegisteredCtlg />} />
+          <Route path="allItems" element={<AllItems />} />
+          <Route path="registeredCategory" element={<Category />} />
+          <Route path="registeredProduct" element={<Product />} />
         </Route>
       </Routes>
     </MemoryRouter>

@@ -25,7 +25,7 @@ function InputImg({
       filters: [
         {
           name: "Image",
-          extensions: ["png"],
+          extensions: ["png", "jpeg"],
         },
       ],
     });
@@ -41,13 +41,13 @@ function InputImg({
         <div className={inputImgStyle.selectContainer}>
           <span>{required ? "(必須)" : ""}</span>
           <button type={"button"} onClick={selectImgHandler}>
-            ファイルを選択
+            ファイル選択
           </button>
         </div>
 
-        <div>
+        <div className={inputImgStyle.imgContainer}>
           <p>プレビュー</p>
-          {imgPath !== undefined ? (
+          {imgPath !== "" ? (
             <img src={image} alt={imgPath} className={inputImgStyle.img} />
           ) : (
             <div className={inputImgStyle.img} />

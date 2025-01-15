@@ -69,3 +69,23 @@ pub async fn register_category(
     Ok(())
 }
 
+#[derive(Deserialize, Serialize)]
+pub struct DeleteCategory {
+    id: Uuid
+}
+
+#[tauri::command]
+pub async fn delete_category(
+    delete: DeleteCategory,
+    client: State<'_, HttpClient>
+) -> Result<(), FailRequest> {
+    client.delete("http://100.77.238.23:3650/categories")
+        .query(&delete)
+        .send()
+        .await
+        .map_err(|e| {
+            eprintln!("Error: {:?}", e);
+            FailRequest {}
+        })?;
+    Ok(())
+}

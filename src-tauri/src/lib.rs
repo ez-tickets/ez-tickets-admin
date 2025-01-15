@@ -19,6 +19,7 @@ pub fn run() {
             delete_product,
             categories,
             register_category,
+            delete_category,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
