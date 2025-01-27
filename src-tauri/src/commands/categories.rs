@@ -10,7 +10,7 @@ use crate::models::products::{OrderedProduct, OrderedProductWithName, ProductId}
 // noinspection DuplicatedCode
 #[tauri::command]
 pub async fn get_categories(client: State<'_, HttpClient>) -> Result<BTreeSet<Category>, FailRequest> {
-    match client.get("http://localhost:3650/categories")
+    match client.get("http://100.77.238.23:3650/categories")
         .send()
         .await
     {
@@ -44,7 +44,7 @@ pub async fn create_category(
     create: CreateCategory,
     client: State<'_, HttpClient>
 ) -> Result<(), FailRequest> {
-    match client.post("http://localhost:3650/categories")
+    match client.post("http://100.77.238.23:3650/categories")
         .json(&create)
         .send()
         .await
@@ -74,7 +74,7 @@ pub async fn update_category(
     update: UpdateCategory,
     client: State<'_, HttpClient>
 ) -> Result<(), FailRequest> {
-    match client.patch(format!("htt[://localhost:3650/categories/{id}"))
+    match client.patch(format!("htt[://100.77.238.23:3650/categories/{id}"))
         .json(&update)
         .send()
         .await
@@ -103,7 +103,7 @@ pub async fn change_ordering_categories(
     new: ChangeOrdering,
     client: State<'_, HttpClient>
 ) -> Result<(), FailRequest> {
-    match client.put("http://localhost:3650/categories")
+    match client.put("http://100.77.238.23:3650/categories")
         .json(&new)
         .send()
         .await
@@ -133,7 +133,7 @@ pub async fn delete_category(
     delete: CategoryId,
     client: State<'_, HttpClient>
 ) -> Result<(), FailRequest> {
-    match client.delete(format!("http://localhost:3650/categories/{delete}"))
+    match client.delete(format!("http://100.77.238.23:3650/categories/{delete}"))
         .send()
         .await
     {
@@ -161,7 +161,7 @@ pub async fn get_products_in_category(
     id: CategoryId,
     client: State<'_, HttpClient>
 ) -> Result<BTreeSet<OrderedProductWithName>, FailRequest> {
-    match client.get(format!("http://localhost:3650/categories/{id}"))
+    match client.get(format!("http://100.77.238.23:3650/categories/{id}"))
         .send()
         .await
     {
@@ -196,7 +196,7 @@ pub async fn add_product_to_category(
     product: OrderedProduct,
     client: State<'_, HttpClient>
 ) -> Result<(), FailRequest> {
-    match client.post(format!("http://localhost:3650/categories/{id}"))
+    match client.post(format!("http://100.77.238.23:3650/categories/{id}"))
         .json(&product)
         .send()
         .await
@@ -226,7 +226,7 @@ pub async fn remove_product_from_category(
     product: ProductId,
     client: State<'_, HttpClient>
 ) -> Result<(), FailRequest> {
-    match client.delete(format!("http://localhost:3650/categories/{id}/{product}"))
+    match client.delete(format!("http://100.77.238.23:3650/categories/{id}/{product}"))
         .send()
         .await
     {
@@ -255,7 +255,7 @@ pub async fn change_ordering_product_in_category(
     new: ChangeOrderingProduct,
     client: State<'_, HttpClient>
 ) -> Result<(), FailRequest> {
-    match client.put(format!("http://localhost:3650/categories/{id}"))
+    match client.put(format!("http://100.77.238.23:3650/categories/{id}"))
         .json(&new)
         .send()
         .await

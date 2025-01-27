@@ -17,7 +17,7 @@ export type CreateCategory = {
 export const registerCategory = async (
   input: CreateCategory,
 ): Promise<void> => {
-  await invoke<void>("create_category", { register: input });
+  await invoke<void>("create_category", { create: input });
 };
 
 export type UpdateCategoryName = {

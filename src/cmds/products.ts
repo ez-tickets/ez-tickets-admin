@@ -21,7 +21,7 @@ export type ProductInCategory = {
 export const fetchProductsInCategory = async (
   id: string,
 ): Promise<ProductInCategory[]> => {
-  return await invoke<ProductInCategory[]>("get_product_in_category", {
+  return await invoke<ProductInCategory[]>("get_products_in_category", {
     id: id,
   });
 };

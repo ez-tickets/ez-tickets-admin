@@ -15,23 +15,22 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
+import {useQuery} from "@tanstack/react-query";
 
 type RegisteredCategoriesProps = {
   setEditModal: (flag: boolean) => void;
 };
 
 function RegisteredCategories({ setEditModal }: RegisteredCategoriesProps) {
-  const [categories, setCategories] = useState<Category[]>([]);
+  const { isLoading, error, data } =  useQuery({
+    queryKey: ["categories"],
+    queryFn: fetchCategories,
+  });
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  useEffect(() => {
-    (async () => {
-      const categories = await fetchCategories();
-      categories.sort((a, b) => a.order - b.order);
-      setCategories(categories);
-    })();
-  }, [categories]);
+  if (isLoading) return (<div>Loading...</div>);
+
+  const [categories, setCategories] = useState<Category[]>(data!);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -44,11 +43,12 @@ function RegisteredCategories({ setEditModal }: RegisteredCategoriesProps) {
     const { active, over } = event;
 
     if (!over) return;
+    if (!data) return;
 
     if (active.id !== over.id) {
-      const oldIndex = categories.findIndex((v) => v.id === active.id);
-      const newIndex = categories.findIndex((v) => v.id === over.id);
-      const updatedCategories = arrayMove(categories, oldIndex, newIndex);
+      const oldIndex = data.findIndex((v) => v.id === active.id);
+      const newIndex = data.findIndex((v) => v.id === over.id);
+      const updatedCategories = arrayMove(data, oldIndex, newIndex);
       setCategories(updatedCategories);
       //todo 並べ替え後のデータをサーバーに送る処理 --> {id, order}
     }

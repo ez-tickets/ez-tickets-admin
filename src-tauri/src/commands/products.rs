@@ -8,7 +8,7 @@ use crate::models::products::{Product, ProductDetails, ProductId};
 //noinspection DuplicatedCode
 #[tauri::command]
 pub async fn get_products(client: State<'_, HttpClient>) -> Result<Vec<Product>, FailRequest> {
-    match client.get("http://localhost:3650/products")
+    match client.get("http://100.77.238.23:3650/products")
         .send()
         .await
     {
@@ -39,7 +39,7 @@ pub async fn get_products(client: State<'_, HttpClient>) -> Result<Vec<Product>,
 //noinspection DuplicatedCode
 #[tauri::command]
 pub async fn get_product_details(id: ProductId, client: State<'_, HttpClient>) -> Result<ProductDetails, FailRequest> {
-    match client.get(format!("http://localhost:3650/products/{id}"))
+    match client.get(format!("http://100.77.238.23:3650/products/{id}"))
         .send()
         .await
     {
@@ -79,7 +79,7 @@ pub async fn register_product(register: RegisterProduct, client: State<'_, HttpC
         }
     };
     
-    match client.post("http://localhost:3650/products")
+    match client.post("http://100.77.238.23:3650/products")
         .multipart(form)
         .send()
         .await
@@ -114,7 +114,7 @@ pub async fn update_product(id: ProductId, update: UpdateProduct, client: State<
         }
     };
     
-    match client.patch(format!("http://localhost:3650/products/{id}"))
+    match client.patch(format!("http://100.77.238.23:3650/products/{id}"))
         .multipart(form)
         .send()
         .await
@@ -143,7 +143,7 @@ pub async fn delete_product(
     id: ProductId, 
     client: State<'_, HttpClient>
 ) -> Result<(), FailRequest> {
-    match client.delete(format!("http://localhost:3650/products/{id}"))
+    match client.delete(format!("http://100.77.238.23:3650/products/{id}"))
         .send()
         .await
     {

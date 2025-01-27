@@ -2,13 +2,14 @@ import EditProdModal from "@/admin/screen/category/product/edit/EditProdModal.ts
 import RegisteredProds from "@/admin/screen/category/product/list/components/RegisteredProds.tsx";
 import { registeredProdListStyle } from "@/admin/screen/category/product/list/components/style/RegisteredProdList.css.ts";
 import RegisterProdModal from "@/admin/screen/category/product/register/RegisterProdModal.tsx";
-import { type Product, fetchProducts } from "@/cmds/products.ts";
+import {fetchProductsInCategory, type ProductInCategory} from "@/cmds/products.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ListContainer from "@/parts/ListContainer.tsx";
 import ListHeader from "@/parts/ListHeader.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
 import { Fragment, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import {useQuery} from "@tanstack/react-query";
 
 type RegisteredProdListProps = {
   categoryID: string;
@@ -19,21 +20,29 @@ function RegisteredProdList({
   categoryID,
   categoryName,
 }: RegisteredProdListProps) {
+  const { isLoading, data: filtered } = useQuery({
+    queryKey: ["products_in_category", categoryID],
+    queryFn: async () => await fetchProductsInCategory(categoryID),
+  });
+
+  if (isLoading) return (<div>Loading...</div>);
+  if (!filtered) return (<div>データがありません</div>);
+
   const [toggleModal, setToggleModal] = useState<boolean>(false);
   const [editModal, setEditModal] = useState<boolean>(false);
   const [isAvailableToggle, setIsAvailableToggle] = useState<boolean>(false); //button切り替え
-  const [products, setProducts] = useState<Product[]>([]); //取得商品を格納するstate
-  const [updateProducts, setUpdateProducts] = useState<Product[]>(products); //商品のavailableを管理するstate
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  useEffect(() => {
-    (async () => {
-      //todo: categoryIDを使ってfetchProductsを呼び出す
-      const products = await fetchProducts();
-      products.sort((a, b) => a.order - b.order);
-      setProducts(products);
-    })();
-  }, [products]);
+  // const [products, setProducts] = useState<ProductInCategory[]>(); //取得商品を格納するstate
+
+  // // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // useEffect(() => {
+  //   (async () => {
+  //     //todo: categoryIDを使ってfetchProductsを呼び出す
+  //     const products = await fetchProducts();
+  //     products.sort((a, b) => a.order - b.order);
+  //     setProducts(products);
+  //   })();
+  // }, [products]);
 
   const changedAvailableUpdateHandler = async () => {
     //todo: updatedProductsをサーバーに渡してデータを再取得する (API待ち)
@@ -86,7 +95,7 @@ function RegisteredProdList({
         lists={
           <RegisteredProds
             categoryID={categoryID}
-            products={products}
+            products={filtered}
             updateProducts={updateProducts}
             isAvailableToggle={isAvailableToggle}
             setProducts={setProducts}

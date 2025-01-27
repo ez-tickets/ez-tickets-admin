@@ -1,5 +1,5 @@
 import RegisteredProd from "@/admin/screen/category/product/list/components/RegisteredProd.tsx";
-import type { Product } from "@/cmds/products.ts";
+import type { ProductInCategory } from "@/cmds/products.ts";
 import {
   DndContext,
   type DragEndEvent,
@@ -19,10 +19,10 @@ import { Fragment } from "react";
 
 type RegisteredProdsProps = {
   categoryID: string;
-  products: Product[];
-  updateProducts: Product[];
+  products: ProductInCategory[];
+  updateProducts: ProductInCategory[];
   isAvailableToggle: boolean;
-  setProducts: (prod: Product[]) => void;
+  setProducts: (prod: ProductInCategory[]) => void;
   setUpdateProducts: (prod: Product[]) => void;
   setEditModal: (flag: boolean) => void;
 };

@@ -14,6 +14,7 @@ function Product() {
   const [categoryName, setCategoryName] = useState<string>(name);
 
   useEffect(() => {
+    console.log(id);
     setCategoryID(id);
     setCategoryName(name);
   }, [id, name]);

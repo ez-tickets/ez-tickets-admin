@@ -1,10 +1,11 @@
 import RegisterCategoryModal from "@/admin/screen/category/components/register/RegisterCategoryModal.tsx";
 import { productCategoryStyle } from "@/admin/screen/category/product/register/components/style/ProductCategory.css.ts";
 import SelectModal from "@/admin/screen/modal/selectModal/SelectModal.tsx";
-import { type Category, fetchCategories } from "@/cmds/categories.ts";
+import { fetchCategories } from "@/cmds/categories.ts";
 import InputContainer from "@/parts/InputContainer.tsx";
 import { IconX } from "@tabler/icons-react";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
+import {useQuery} from "@tanstack/react-query";
 
 type ProductCategoryProps = {
   category: string | null;
@@ -14,16 +15,11 @@ type ProductCategoryProps = {
 function ProductCategory({ category, setCategory }: ProductCategoryProps) {
   const [toggleModal, setToggleModal] = useState<boolean>(false);
   const [categoryModal, setCategoryModal] = useState<boolean>(false);
-  const [categories, setCategories] = useState<Category[]>([]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  useEffect(() => {
-    (async () => {
-      const categories = await fetchCategories();
-      categories.sort((a, b) => a.order - b.order);
-      setCategories(categories);
-    })();
-  }, [categories]);
+  const { isLoading, error, data: categories } =  useQuery({
+    queryKey: ["categories"],
+    queryFn: fetchCategories,
+  });
 
   const registerHandler = (name: string) => {
     setCategory(name);
@@ -68,7 +64,7 @@ function ProductCategory({ category, setCategory }: ProductCategoryProps) {
         closeHandler={() => setToggleModal(false)}
         parts={
           <div className={productCategoryStyle.modalContainer}>
-            {categories.map((category) => {
+            {categories?.map((category) => {
               return (
                 // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
                 <div

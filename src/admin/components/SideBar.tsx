@@ -4,20 +4,26 @@ import RegisterCategoryModal from "@/admin/screen/category/components/register/R
 import { type Category, fetchCategories } from "@/cmds/categories.ts";
 import { Fragment, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {useQuery} from "@tanstack/react-query";
 
 function SideBar() {
-  const [categories, setCategories] = useState<Category[]>([]);
+  // const [categories, setCategories] = useState<Category[]>([]);
   const [toggleModal, setToggleModal] = useState<boolean>(false);
   const navigate = useNavigate();
 
+  const { isLoading, error, data } =  useQuery({
+    queryKey: ["categories"],
+    queryFn: fetchCategories,
+  });
+
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  useEffect(() => {
-    (async () => {
-      const categories = await fetchCategories();
-      categories.sort((a, b) => a.order - b.order);
-      setCategories(categories);
-    })();
-  }, [categories]);
+  // useEffect(() => {
+  //   (async () => {
+  //     const categories = await fetchCategories();
+  //     categories.sort((a, b) => a.order - b.order);
+  //     setCategories(categories);
+  //   })();
+  // }, [categories]);
 
   const configHandler = () => navigate("registeredCategory");
 
@@ -37,7 +43,7 @@ function SideBar() {
             title={"カテゴリー"}
             element={
               <Fragment>
-                {categories.map((category) => (
+                {data?.map((category) => (
                   <Link
                     to="registeredProduct"
                     key={category.id}

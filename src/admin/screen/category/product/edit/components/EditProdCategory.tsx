@@ -4,7 +4,8 @@ import SelectModal from "@/admin/screen/modal/selectModal/SelectModal.tsx";
 import { type Category, fetchCategories } from "@/cmds/categories.ts";
 import InputContainer from "@/parts/InputContainer.tsx";
 import { IconX } from "@tabler/icons-react";
-import { Fragment, useEffect, useState } from "react";
+import {Fragment, Suspense, useEffect, useState} from "react";
+import {useQuery} from "@tanstack/react-query";
 
 type EditProdCategoryProps = {
   category: string | null;
@@ -14,24 +15,19 @@ type EditProdCategoryProps = {
 function EditProdCategory({ category, setCategory }: EditProdCategoryProps) {
   const [toggleModal, setToggleModal] = useState<boolean>(false);
   const [categoryModal, setCategoryModal] = useState<boolean>(false);
-  const [categories, setCategories] = useState<Category[]>([]);
+
+  const { isLoading, error, data: categories } =  useQuery({
+    queryKey: ["categories"],
+    queryFn: fetchCategories,
+  });
 
   const registerHandler = (id: string) => {
-    const selectedCategory = categories.find((category) => category.id === id);
+    const selectedCategory = categories?.find((category) => category.id === id);
     if (selectedCategory) {
       setCategory(selectedCategory.name);
     }
     setToggleModal(false);
   };
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  useEffect(() => {
-    (async () => {
-      const categories = await fetchCategories();
-      categories.sort((a, b) => a.order - b.order);
-      setCategories(categories);
-    })();
-  }, [categories]);
 
   return (
     <Fragment>
@@ -71,7 +67,7 @@ function EditProdCategory({ category, setCategory }: EditProdCategoryProps) {
         closeHandler={() => setToggleModal(false)}
         parts={
           <div className={productCategoryStyle.modalContainer}>
-            {categories.map((category) => {
+            {categories?.map((category) => {
               return (
                 // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
                 <div
