@@ -3,21 +3,21 @@ import { invoke } from "@tauri-apps/api/core";
 export type Category = {
   id: string;
   name: string;
-  order: number;
+  ordering: number;
 };
 
 export const fetchCategories = async (): Promise<Category[]> => {
-  return await invoke<Category[]>("categories");
+  return await invoke<Category[]>("get_categories");
 };
 
-export type RegisterCategory = {
+export type CreateCategory = {
   name: string;
 };
 
 export const registerCategory = async (
-  input: RegisterCategory,
+  input: CreateCategory,
 ): Promise<void> => {
-  await invoke<void>("register_category", { register: input });
+  await invoke<void>("create_category", { register: input });
 };
 
 export type UpdateCategoryName = {
@@ -32,5 +32,16 @@ export const updateCategoryName = async (
 };
 
 export const deleteCategory = async (id: string): Promise<void> => {
-  await invoke<void>("delete_category", { delete: { id: id } });
+  await invoke<void>("delete_category", { delete: id });
+};
+
+export type OrderedCategory = {
+  id: string;
+  ordering: number;
+};
+
+export const reorderCategories = async (
+  reorder: OrderedCategory[],
+): Promise<void> => {
+  await invoke<void>("change_ordering_categories", { new: reorder });
 };

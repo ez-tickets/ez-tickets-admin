@@ -1,91 +1,279 @@
-use std::cmp::Ordering;
 use std::collections::BTreeSet;
-use serde::{Deserialize, Serialize};
 use tauri::State;
-use uuid::Uuid;
+
 use crate::client::HttpClient;
 use crate::errors::FailRequest;
+use crate::models::categories::{Category, CategoryId};
+use crate::models::categories::commands::{ChangeOrdering, ChangeOrderingProduct, CreateCategory, UpdateCategory};
+use crate::models::products::{OrderedProduct, OrderedProductWithName, ProductId};
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
-pub struct Category {
-    id: Uuid,
-    name: String,
-    #[serde(rename = "ordering")]
-    order: i32,
-}
-
-impl Eq for Category {}
-
-impl PartialEq<Self> for Category {
-    fn eq(&self, other: &Self) -> bool {
-        self.id == other.id
-    }
-}
-
-impl PartialOrd<Self> for Category {
-    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        Some(self.cmp(other))
-    }
-}
-
-impl Ord for Category {
-    fn cmp(&self, other: &Self) -> Ordering {
-        self.order.cmp(&other.order)
-            .then_with(|| self.name.cmp(&other.name))
-    }
-}
-
+// noinspection DuplicatedCode
 #[tauri::command]
-pub async fn categories(client: State<'_, HttpClient>) -> Result<BTreeSet<Category>, FailRequest> {
-    client.get("http://100.77.238.23:3650/categories").send().await
-        .map_err(|e| {
-            eprintln!("Error: {:?}", e);
-            FailRequest {}
-        })?
-        .json::<BTreeSet<Category>>().await
-        .map_err(|e| {
-            eprintln!("Error: {:?}", e);
-            FailRequest {}
-        })
-}
-
-#[derive(Deserialize, Serialize)]
-pub struct RegisterCategory {
-    name: String
-}
-
-#[tauri::command]
-pub async fn register_category(
-    register: RegisterCategory,
-    client: State<'_, HttpClient>
-) -> Result<(), FailRequest> {
-    client.post("http://100.77.238.23:3650/categories")
-        .json(&register)
-        .send().await
-        .map_err(|e| {
-            eprintln!("Error: {:?}", e);
-            FailRequest {}
-        })?;
-    Ok(())
-}
-
-#[derive(Deserialize, Serialize)]
-pub struct DeleteCategory {
-    id: Uuid
-}
-
-#[tauri::command]
-pub async fn delete_category(
-    delete: DeleteCategory,
-    client: State<'_, HttpClient>
-) -> Result<(), FailRequest> {
-    client.delete("http://100.77.238.23:3650/categories")
-        .query(&delete)
+pub async fn get_categories(client: State<'_, HttpClient>) -> Result<BTreeSet<Category>, FailRequest> {
+    match client.get("http://localhost:3650/categories")
         .send()
         .await
-        .map_err(|e| {
-            eprintln!("Error: {:?}", e);
-            FailRequest {}
-        })?;
-    Ok(())
+    {
+        Ok(res) => {
+            if res.status().is_client_error() {
+                tracing::error!("Data was successfully sent to the server, but the data format, etc. may be incorrect.");
+                return Err(FailRequest);
+            } else if res.status().is_server_error() {
+                tracing::error!("The server encountered an error while processing the data.");
+                return Err(FailRequest);
+            }
+            
+            match res.json::<BTreeSet<Category>>().await {
+                Ok(categories) => Ok(categories),
+                Err(e) => {
+                    tracing::error!("{e:?}");
+                    Err(FailRequest)
+                }
+            }
+        }
+        Err(e) => {
+            tracing::error!("{e:?}");
+            Err(FailRequest)
+        }
+    }
+}
+
+// noinspection DuplicatedCode
+#[tauri::command]
+pub async fn create_category(
+    create: CreateCategory,
+    client: State<'_, HttpClient>
+) -> Result<(), FailRequest> {
+    match client.post("http://localhost:3650/categories")
+        .json(&create)
+        .send()
+        .await
+    {
+        Ok(res) => {
+            if res.status().is_client_error() {
+                tracing::error!("Data was successfully sent to the server, but the data format, etc. may be incorrect.");
+                return Err(FailRequest);
+            } else if res.status().is_server_error() {
+                tracing::error!("The server encountered an error while processing the data.");
+                return Err(FailRequest);
+            }
+            
+            Ok(())
+        }
+        Err(e) => {
+            tracing::error!("{e:?}");
+            Err(FailRequest)
+        }
+    }
+}
+
+// noinspection DuplicatedCode
+#[tauri::command]
+pub async fn update_category(
+    id: CategoryId,
+    update: UpdateCategory,
+    client: State<'_, HttpClient>
+) -> Result<(), FailRequest> {
+    match client.patch(format!("htt[://localhost:3650/categories/{id}"))
+        .json(&update)
+        .send()
+        .await
+    {
+        Ok(res) => {
+            if res.status().is_client_error() {
+                tracing::error!("Data was successfully sent to the server, but the data format, etc. may be incorrect.");
+                return Err(FailRequest);
+            } else if res.status().is_server_error() {
+                tracing::error!("The server encountered an error while processing the data.");
+                return Err(FailRequest);
+            }
+            
+            Ok(())
+        }
+        Err(e) => {
+            tracing::error!("{e:?}");
+            Err(FailRequest)
+        }
+    }
+}
+
+// noinspection DuplicatedCode
+#[tauri::command]
+pub async fn change_ordering_categories(
+    new: ChangeOrdering,
+    client: State<'_, HttpClient>
+) -> Result<(), FailRequest> {
+    match client.put("http://localhost:3650/categories")
+        .json(&new)
+        .send()
+        .await
+    {
+        Ok(res) => {
+            if res.status().is_client_error() {
+                tracing::error!("Data was successfully sent to the server, but the data format, etc. may be incorrect.");
+                return Err(FailRequest);
+            } else if res.status().is_server_error() {
+                tracing::error!("The server encountered an error while processing the data.");
+                return Err(FailRequest);
+            }
+            
+            Ok(())
+        }
+        Err(e) => {
+            tracing::error!("{e:?}");
+            Err(FailRequest)
+        }
+    }
+
+}
+
+// noinspection DuplicatedCode
+#[tauri::command]
+pub async fn delete_category(
+    delete: CategoryId,
+    client: State<'_, HttpClient>
+) -> Result<(), FailRequest> {
+    match client.delete(format!("http://localhost:3650/categories/{delete}"))
+        .send()
+        .await
+    {
+        Ok(res) => {
+            if res.status().is_client_error() {
+                tracing::error!("Data was successfully sent to the server, but the data format, etc. may be incorrect.");
+                return Err(FailRequest);
+            } else if res.status().is_server_error() {
+                tracing::error!("The server encountered an error while processing the data.");
+                return Err(FailRequest);
+            }
+            
+            Ok(())
+        }
+        Err(e) => {
+            tracing::error!("{e:?}");
+            Err(FailRequest)
+        }
+    }
+}
+
+// noinspection DuplicatedCode
+#[tauri::command]
+pub async fn get_products_in_category(
+    id: CategoryId,
+    client: State<'_, HttpClient>
+) -> Result<BTreeSet<OrderedProductWithName>, FailRequest> {
+    match client.get(format!("http://localhost:3650/categories/{id}"))
+        .send()
+        .await
+    {
+        Ok(res) => {
+            if res.status().is_client_error() {
+                tracing::error!("Data was successfully sent to the server, but the data format, etc. may be incorrect.");
+                return Err(FailRequest);
+            } else if res.status().is_server_error() {
+                tracing::error!("The server encountered an error while processing the data.");
+                return Err(FailRequest);
+            }
+            
+            match res.json::<BTreeSet<OrderedProductWithName>>().await {
+                Ok(products) => Ok(products),
+                Err(e) => {
+                    tracing::error!("{e:?}");
+                    Err(FailRequest)
+                }
+            }
+        }
+        Err(e) => {
+            tracing::error!("{e:?}");
+            Err(FailRequest)
+        }
+    }
+}
+
+// noinspection DuplicatedCode
+#[tauri::command]
+pub async fn add_product_to_category(
+    id: CategoryId,
+    product: OrderedProduct,
+    client: State<'_, HttpClient>
+) -> Result<(), FailRequest> {
+    match client.post(format!("http://localhost:3650/categories/{id}"))
+        .json(&product)
+        .send()
+        .await
+    {
+        Ok(res) => {
+            if res.status().is_client_error() {
+                tracing::error!("Data was successfully sent to the server, but the data format, etc. may be incorrect.");
+                return Err(FailRequest);
+            } else if res.status().is_server_error() {
+                tracing::error!("The server encountered an error while processing the data.");
+                return Err(FailRequest);
+            }
+            
+            Ok(())
+        }
+        Err(e) => {
+            tracing::error!("{e:?}");
+            Err(FailRequest)
+        }
+    }
+}
+
+// noinspection DuplicatedCode
+#[tauri::command]
+pub async fn remove_product_from_category(
+    id: CategoryId,
+    product: ProductId,
+    client: State<'_, HttpClient>
+) -> Result<(), FailRequest> {
+    match client.delete(format!("http://localhost:3650/categories/{id}/{product}"))
+        .send()
+        .await
+    {
+        Ok(res) => {
+            if res.status().is_client_error() {
+                tracing::error!("Data was successfully sent to the server, but the data format, etc. may be incorrect.");
+                return Err(FailRequest);
+            } else if res.status().is_server_error() {
+                tracing::error!("The server encountered an error while processing the data.");
+                return Err(FailRequest);
+            }
+            
+            Ok(())
+        }
+        Err(e) => {
+            tracing::error!("{e:?}");
+            Err(FailRequest)
+        }
+    }
+}
+
+// noinspection DuplicatedCode
+#[tauri::command]
+pub async fn change_ordering_product_in_category(
+    id: CategoryId,
+    new: ChangeOrderingProduct,
+    client: State<'_, HttpClient>
+) -> Result<(), FailRequest> {
+    match client.put(format!("http://localhost:3650/categories/{id}"))
+        .json(&new)
+        .send()
+        .await
+    {
+        Ok(res) => {
+            if res.status().is_client_error() {
+                tracing::error!("Data was successfully sent to the server, but the data format, etc. may be incorrect.");
+                return Err(FailRequest);
+            } else if res.status().is_server_error() {
+                tracing::error!("The server encountered an error while processing the data.");
+                return Err(FailRequest);
+            }
+            
+            Ok(())
+        }
+        Err(e) => {
+            tracing::error!("{e:?}");
+            Err(FailRequest)
+        }
+    }
 }
