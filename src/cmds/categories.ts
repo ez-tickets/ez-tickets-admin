@@ -38,8 +38,10 @@ export const deleteCategory = async (id: string): Promise<void> => {
 export type OrderedCategory = {
   id: string;
   ordering: number;
-}
+};
 
-export const reorderCategories = async (reorder: OrderedCategory[]): Promise<void> => {
+export const reorderCategories = async (
+  reorder: OrderedCategory[],
+): Promise<void> => {
   await invoke<void>("change_ordering_categories", { new: reorder });
-}
+};
