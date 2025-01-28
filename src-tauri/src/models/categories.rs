@@ -83,9 +83,7 @@ pub mod commands {
     }
     
     #[derive(Debug, Clone, Deserialize, Serialize)]
-    pub struct ChangeOrdering {
-        new: BTreeSet<OrderedCategory>
-    }
+    pub struct ChangeOrdering(BTreeSet<OrderedCategory>);
     
     #[derive(Debug, Clone, Deserialize, Serialize)]
     pub struct AddProduct {
@@ -98,7 +96,5 @@ pub mod commands {
     }
     
     #[derive(Debug, Clone, Deserialize, Serialize)]
-    pub struct ChangeOrderingProduct {
-        new: BTreeSet<OrderedProduct>
-    }
+    pub struct ChangeOrderingProduct(BTreeSet<OrderedProduct>);
 }
