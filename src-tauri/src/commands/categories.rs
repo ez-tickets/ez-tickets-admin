@@ -74,7 +74,7 @@ pub async fn update_category(
     update: UpdateCategory,
     client: State<'_, HttpClient>
 ) -> Result<(), FailRequest> {
-    match client.patch(format!("htt[://100.77.238.23:3650/categories/{id}"))
+    match client.patch(format!("http://100.77.238.23:3650/categories/{id}"))
         .json(&update)
         .send()
         .await
