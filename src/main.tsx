@@ -11,7 +11,7 @@ import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AllItems from "@/admin/screen/Items/AllItems.tsx";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const client = new QueryClient();
 

@@ -20,15 +20,19 @@ export const registerCategory = async (
   await invoke<void>("create_category", { create: input });
 };
 
+export type UpdateCategory = {
+  id: string;
+  ctx: UpdateCategoryName;
+};
+
 export type UpdateCategoryName = {
   name: string;
 };
 
 export const updateCategoryName = async (
-  id: string,
-  input: UpdateCategoryName,
+  update: UpdateCategory,
 ): Promise<void> => {
-  await invoke<void>("update_category", { id: id, update: input });
+  await invoke<void>("update_category", { id: update.id, update: update.ctx });
 };
 
 export const deleteCategory = async (id: string): Promise<void> => {

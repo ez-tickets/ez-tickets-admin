@@ -1,16 +1,14 @@
-import EditCategoryModal from "@/admin/screen/category/components/edit/EditCategoryModal.tsx";
 import RegisteredCategories from "@/admin/screen/category/components/list/RegisteredCategories.tsx";
 import { registeredCategoryListStyle } from "@/admin/screen/category/components/list/style/RegisteredCategoryList.css.ts";
-import RegisterCategoryModal from "@/admin/screen/category/components/register/RegisterCategoryModal.tsx";
+import { useCategoryModalStateStore } from "@/admin/store/ModalStateStore.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ListContainer from "@/parts/ListContainer.tsx";
 import ListHeader from "@/parts/ListHeader.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 
 function RegisteredCategoryList() {
-  const [toggleModal, setToggleModal] = useState<boolean>(false);
-  const [editModal, setEditModal] = useState<boolean>(false);
+  const { changeRegisterModalFlag } = useCategoryModalStateStore();
 
   return (
     <Fragment>
@@ -20,7 +18,7 @@ function RegisteredCategoryList() {
           <ExecuteButton
             name={"新規登録"}
             style={executeButtonStyle.default}
-            executeHandler={() => setToggleModal(true)}
+            executeHandler={() => changeRegisterModalFlag(true)}
           />
         }
         headerContainer={
@@ -32,19 +30,8 @@ function RegisteredCategoryList() {
             }
           />
         }
-        lists={<RegisteredCategories setEditModal={setEditModal} />}
+        lists={<RegisteredCategories />}
       />
-
-      <RegisterCategoryModal
-        toggleModal={toggleModal}
-        setToggleModal={setToggleModal}
-      />
-
-      {editModal ? (
-        <EditCategoryModal editModal={editModal} setEditModal={setEditModal} />
-      ) : (
-        ""
-      )}
     </Fragment>
   );
 }

@@ -1,4 +1,5 @@
 import { registeredCategoryStyle } from "@/admin/screen/category/components/list/style/RegisteredCategory.css.ts";
+import { useCategoryModalStateStore } from "@/admin/store/ModalStateStore.ts";
 import { useEditCategoryStore } from "@/admin/store/RegisteredEditStore.ts";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -7,19 +8,15 @@ import { Fragment } from "react";
 type RegisteredCategoryProps = {
   id: string;
   name: string;
-  setEditModal: (flag: boolean) => void;
 };
 
-function RegisteredCategory({
-  id,
-  name,
-  setEditModal,
-}: RegisteredCategoryProps) {
+function RegisteredCategory({ id, name }: RegisteredCategoryProps) {
   const { setEditCategory } = useEditCategoryStore();
+  const { changeEditModalFlag } = useCategoryModalStateStore();
 
   const openEditModalHandler = () => {
     setEditCategory({ id: id, name: name });
-    setEditModal(true);
+    changeEditModalFlag(true);
   };
 
   const { attributes, listeners, setNodeRef, transform, transition } =

@@ -132,8 +132,8 @@ function EditProdActionButton({
       <ConfirmModal
         taskType={taskType}
         executeHandler={executeHandler}
-        modalView={modalView}
-        setModalView={setModalView}
+        confirmModalView={modalView}
+        setConfirmModalView={setModalView}
         setEditModal={setEditModal}
       />
     </Fragment>

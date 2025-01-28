@@ -1,5 +1,10 @@
 import RegisteredCategory from "@/admin/screen/category/components/list/RegisteredCategory.tsx";
-import { type Category, fetchCategories } from "@/cmds/categories.ts";
+import { useCategoryModalStateStore } from "@/admin/store/ModalStateStore.ts";
+import {
+  type OrderedCategory,
+  fetchCategories,
+  reorderCategories,
+} from "@/cmds/categories.ts";
 import {
   DndContext,
   type DragEndEvent,
@@ -15,22 +20,21 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { Fragment, useState } from "react";
-import {useQuery} from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+import { Fragment, useEffect, useState } from "react";
 
-type RegisteredCategoriesProps = {
-  setEditModal: (flag: boolean) => void;
-};
+function RegisteredCategories() {
+  const { registerModalFlag, editModalFlag } = useCategoryModalStateStore();
 
-function RegisteredCategories({ setEditModal }: RegisteredCategoriesProps) {
-  const { isLoading, error, data } =  useQuery({
+  const { isLoading, error, data, refetch } = useQuery({
     queryKey: ["categories"],
     queryFn: fetchCategories,
   });
 
-  if (isLoading) return (<div>Loading...</div>);
+  if (isLoading) return <div>Loading...</div>;
 
-  const [categories, setCategories] = useState<Category[]>(data!);
+  // biome-ignore lint/style/noNonNullAssertion: <explanation>
+  const [categories, setCategories] = useState<OrderedCategory[]>(data!);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -39,7 +43,7 @@ function RegisteredCategories({ setEditModal }: RegisteredCategoriesProps) {
     }),
   );
 
-  const handleDragEnd = (event: DragEndEvent) => {
+  const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
 
     if (!over) return;
@@ -48,9 +52,18 @@ function RegisteredCategories({ setEditModal }: RegisteredCategoriesProps) {
     if (active.id !== over.id) {
       const oldIndex = data.findIndex((v) => v.id === active.id);
       const newIndex = data.findIndex((v) => v.id === over.id);
+
       const updatedCategories = arrayMove(data, oldIndex, newIndex);
-      setCategories(updatedCategories);
-      //todo 並べ替え後のデータをサーバーに送る処理 --> {id, order}
+      const reOrdered: OrderedCategory[] = [];
+      updatedCategories.forEach((category, index) => {
+        category.ordering = index;
+        reOrdered.push(category);
+      });
+
+      await reorderCategories(reOrdered);
+      await refetch();
+
+      setCategories(reOrdered);
     }
   };
 
@@ -65,12 +78,11 @@ function RegisteredCategories({ setEditModal }: RegisteredCategoriesProps) {
           items={categories}
           strategy={verticalListSortingStrategy}
         >
-          {categories.map((category) => (
+          {data?.map((category) => (
             <RegisteredCategory
               key={category.id}
               id={category.id}
               name={category.name}
-              setEditModal={setEditModal}
             />
           ))}
         </SortableContext>

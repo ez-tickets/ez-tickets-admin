@@ -106,8 +106,8 @@ function ProductActionButton({
       <ConfirmModal
         taskType={confirmAction.REGISTRATION}
         executeHandler={executeHandler}
-        modalView={modalView}
-        setModalView={setModalView}
+        confirmModalView={modalView}
+        setConfirmModalView={setModalView}
       />
     </Fragment>
   );

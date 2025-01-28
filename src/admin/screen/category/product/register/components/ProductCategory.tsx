@@ -4,8 +4,8 @@ import SelectModal from "@/admin/screen/modal/selectModal/SelectModal.tsx";
 import { fetchCategories } from "@/cmds/categories.ts";
 import InputContainer from "@/parts/InputContainer.tsx";
 import { IconX } from "@tabler/icons-react";
+import { useQuery } from "@tanstack/react-query";
 import { Fragment, useState } from "react";
-import {useQuery} from "@tanstack/react-query";
 
 type ProductCategoryProps = {
   category: string | null;
@@ -16,7 +16,11 @@ function ProductCategory({ category, setCategory }: ProductCategoryProps) {
   const [toggleModal, setToggleModal] = useState<boolean>(false);
   const [categoryModal, setCategoryModal] = useState<boolean>(false);
 
-  const { isLoading, error, data: categories } =  useQuery({
+  const {
+    isLoading,
+    error,
+    data: categories,
+  } = useQuery({
     queryKey: ["categories"],
     queryFn: fetchCategories,
   });

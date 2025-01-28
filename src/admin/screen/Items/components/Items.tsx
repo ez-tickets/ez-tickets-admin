@@ -1,7 +1,7 @@
 import Item from "@/admin/screen/Items/components/Item.tsx";
 import { fetchProducts } from "@/cmds/products.ts";
+import { useQuery } from "@tanstack/react-query";
 import { Fragment } from "react";
-import {useQuery} from "@tanstack/react-query";
 
 type ItemsProps = {
   setEditModal: (flag: boolean) => void;
@@ -11,7 +11,7 @@ function Items({ setEditModal }: ItemsProps) {
   const { data: products } = useQuery({
     queryKey: ["products"],
     queryFn: fetchProducts,
-  })
+  });
 
   return (
     <Fragment>
