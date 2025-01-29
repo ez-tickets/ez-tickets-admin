@@ -6,17 +6,9 @@ import ProductName from "@/admin/screen/category/product/register/components/Pro
 import ProductPrice from "@/admin/screen/category/product/register/components/ProductPrice.tsx";
 import ManageEntryModal from "@/admin/screen/modal/manageEntryModal/ManageEntryModal.tsx";
 import { useProductModalStateStore } from "@/admin/store/ModalStateStore.ts";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 
-type RegisterProdModalProps = {
-  categoryID: string;
-  categoryName: string;
-};
-
-function RegisterProdModal({
-  categoryID,
-  categoryName,
-}: RegisterProdModalProps) {
+function RegisterProdModalFromAllItems() {
   const { registerModalFlag, changeRegisterModalFlag } =
     useProductModalStateStore();
   const [name, setName] = useState<string>("");
@@ -26,12 +18,8 @@ function RegisterProdModal({
   const [desc, setDesc] = useState<string>("");
   const [category, setCategory] = useState<string>("");
 
-  useEffect(() => {
-    setCategory(categoryName);
-  }, [categoryName]);
-
   const closeHandler = () => {
-    setCategory(categoryName);
+    setCategory("");
     setName("");
     setImgPath("");
     setImage("");
@@ -59,8 +47,6 @@ function RegisterProdModal({
             <ProductPrice price={price} setPrice={setPrice} />
             <ProductDesc desc={desc} setDesc={setDesc} />
             <ProductActionButton
-              categoryID={categoryID}
-              categoryName={categoryName}
               name={name}
               desc={desc}
               price={price}
@@ -80,4 +66,4 @@ function RegisterProdModal({
   );
 }
 
-export default RegisterProdModal;
+export default RegisterProdModalFromAllItems;

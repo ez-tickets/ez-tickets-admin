@@ -1,44 +1,26 @@
 import { registeredProdStyle } from "@/admin/screen/category/product/list/components/style/RegisteredProd.css.ts";
+import { useProductModalStateStore } from "@/admin/store/ModalStateStore.ts";
 import { useEditProductStore } from "@/admin/store/RegisteredEditStore.ts";
-import type { Product } from "@/cmds/products.ts";
+import {
+  type ProductInCategory,
+  fetchProductDetails,
+} from "@/cmds/products.ts";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { convertFileSrc } from "@tauri-apps/api/core";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 
 type RegisteredProdProps = {
-  prod: Product;
-  updateProducts: Product[];
-  isAvailableToggle: boolean;
-  setUpdateProducts: (prod: Product[]) => void;
-  setEditModal: (flag: boolean) => void;
+  prod: ProductInCategory;
 };
 
-function RegisteredProd({
-  prod,
-  updateProducts,
-  isAvailableToggle,
-  setUpdateProducts,
-  setEditModal,
-}: RegisteredProdProps) {
+function RegisteredProd({ prod }: RegisteredProdProps) {
   const { setEditProduct } = useEditProductStore();
-  const [prodAvailableState, setProdAvailableState] = useState<boolean>(
-    prod.available,
-  );
+  const { changeEditModalFlag } = useProductModalStateStore();
 
-  const openEditModalHandler = () => {
-    if (isAvailableToggle) return;
-
-    setEditProduct({
-      id: prod.id,
-      name: prod.name,
-      category: prod.category,
-      desc: prod.desc,
-      price: prod.price,
-      path: prod.path,
-      available: prod.available,
-    });
-    setEditModal(true);
+  const openEditModalHandler = async () => {
+    const editProduct = await fetchProductDetails(prod.id);
+    setEditProduct(editProduct);
+    changeEditModalFlag(true);
   };
 
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -47,19 +29,6 @@ function RegisteredProd({
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-  };
-
-  const availableChangeStateHandler = (id: string, changedState: boolean) => {
-    for (const product of updateProducts) {
-      if (product.id === id) {
-        const updatedProduct = [
-          ...updateProducts,
-          { ...product, available: changedState },
-        ];
-        setUpdateProducts(updatedProduct);
-        setProdAvailableState(changedState);
-      }
-    }
   };
 
   return (
@@ -71,57 +40,23 @@ function RegisteredProd({
         ref={setNodeRef}
         onClick={openEditModalHandler}
       >
-        {isAvailableToggle ? (
-          <div className={registeredProdStyle.notCongruent} />
-        ) : (
-          <div
-            className={registeredProdStyle.congruent}
-            {...(isAvailableToggle ? {} : { ...listeners, ...attributes })}
-          >
-            ≡
-          </div>
-        )}
+        <div
+          className={registeredProdStyle.congruent}
+          {...listeners}
+          {...attributes}
+        >
+          ≡
+        </div>
         <div className={registeredProdStyle.imgContainer}>
-          {prod.path !== "" ? (
-            <img
-              src={convertFileSrc(prod.path)}
-              alt={prod.path}
-              className={registeredProdStyle.img}
-            />
-          ) : (
-            <div className={registeredProdStyle.img} />
-          )}
+          <img
+            src={`http://100.77.238.23:3650/images/${prod.id}`}
+            alt={""}
+            className={registeredProdStyle.img}
+          />
         </div>
         <div className={registeredProdStyle.name}>{prod.name}</div>
-        <div className={registeredProdStyle.desc}>{prod.desc}</div>
-        <div className={registeredProdStyle.price}>{prod.price}</div>
-        <div className={registeredProdStyle.saleState}>
-          {isAvailableToggle ? (
-            <input
-              type="checkbox"
-              id={prod.id}
-              className={registeredProdStyle.checkBox}
-              checked={prod.available}
-              onChange={() =>
-                availableChangeStateHandler(prod.id, !prodAvailableState)
-              }
-            />
-          ) : (
-            ""
-          )}
-
-          {prodAvailableState ? (
-            <label htmlFor={prod.id} className={registeredProdStyle.textSell}>
-              販売中
-            </label>
-          ) : (
-            <label
-              htmlFor={prod.id}
-              className={registeredProdStyle.textNotSell}
-            >
-              休止中
-            </label>
-          )}
+        <div className={registeredProdStyle.price}>
+          {(1000).toLocaleString()}
         </div>
       </div>
     </Fragment>

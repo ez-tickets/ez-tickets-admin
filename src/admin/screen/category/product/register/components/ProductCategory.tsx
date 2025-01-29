@@ -1,6 +1,7 @@
 import RegisterCategoryModal from "@/admin/screen/category/components/register/RegisterCategoryModal.tsx";
 import { productCategoryStyle } from "@/admin/screen/category/product/register/components/style/ProductCategory.css.ts";
 import SelectModal from "@/admin/screen/modal/selectModal/SelectModal.tsx";
+import { useCategoryModalStateStore } from "@/admin/store/ModalStateStore.ts";
 import { fetchCategories } from "@/cmds/categories.ts";
 import InputContainer from "@/parts/InputContainer.tsx";
 import { IconX } from "@tabler/icons-react";
@@ -8,19 +9,15 @@ import { useQuery } from "@tanstack/react-query";
 import { Fragment, useState } from "react";
 
 type ProductCategoryProps = {
-  category: string | null;
+  category: string;
   setCategory: (category: string) => void;
 };
 
 function ProductCategory({ category, setCategory }: ProductCategoryProps) {
+  const { changeRegisterModalFlag } = useCategoryModalStateStore();
   const [toggleModal, setToggleModal] = useState<boolean>(false);
-  const [categoryModal, setCategoryModal] = useState<boolean>(false);
 
-  const {
-    isLoading,
-    error,
-    data: categories,
-  } = useQuery({
+  const { data: categories } = useQuery({
     queryKey: ["categories"],
     queryFn: fetchCategories,
   });
@@ -83,7 +80,7 @@ function ProductCategory({ category, setCategory }: ProductCategoryProps) {
             {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
             <div
               className={productCategoryStyle.add}
-              onClick={() => setCategoryModal(true)}
+              onClick={() => changeRegisterModalFlag(true)}
             >
               追加 +
             </div>
@@ -91,10 +88,7 @@ function ProductCategory({ category, setCategory }: ProductCategoryProps) {
         }
       />
 
-      <RegisterCategoryModal
-        toggleModal={categoryModal}
-        setToggleModal={setCategoryModal}
-      />
+      <RegisterCategoryModal />
     </Fragment>
   );
 }

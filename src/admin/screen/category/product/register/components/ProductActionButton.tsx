@@ -1,57 +1,56 @@
 import ConfirmModal from "@/admin/screen/modal/confirmModal/ConfirmModal.tsx";
-import { registerProduct } from "@/cmds/products.ts";
+import { useProductModalStateStore } from "@/admin/store/ModalStateStore.ts";
+import { addProductToCategory } from "@/cmds/categories.ts";
+import { type RegisterProduct, registerProduct } from "@/cmds/products.ts";
 import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Fragment, useState } from "react";
 import { toast } from "react-toastify";
 
 type ProductActionButtonProps = {
+  categoryID?: string;
   categoryName?: string;
   name: string;
-  category: string;
   desc: string;
   price: number;
+  category: string;
   imgPath: string;
-  available: boolean;
   setName: (name: string) => void;
-  setCategory: (category: string) => void;
   setDesc: (desc: string) => void;
   setPrice: (price: number) => void;
+  setCategory: (category: string) => void;
   setImgPath: (path: string) => void;
   setImage: (image: string) => void;
-  setAvailable: (flag: boolean) => void;
-  setToggleModal: (flag: boolean) => void;
 };
 
 function ProductActionButton({
+  categoryID,
   categoryName,
   name,
-  category,
   desc,
   price,
+  category,
   imgPath,
-  available,
   setName,
-  setCategory,
   setDesc,
   setPrice,
+  setCategory,
   setImgPath,
   setImage,
-  setAvailable,
-  setToggleModal,
 }: ProductActionButtonProps) {
-  const [modalView, setModalView] = useState<boolean>(false);
+  const { changeRegisterModalFlag } = useProductModalStateStore();
+  const [confirmModalView, setConfirmModalView] = useState<boolean>(false);
 
   const resetHandler = () => {
-    categoryName && setCategory(categoryName);
     setName("");
     setDesc("");
     setPrice(0);
+    categoryName ? setCategory(categoryName) : setCategory("");
     setImgPath("");
     setImage("");
-    setAvailable(false);
   };
 
   const openModalHandler = () => {
@@ -59,29 +58,76 @@ function ProductActionButton({
       toast.error("必須項目を入力してください");
       return;
     }
-    setModalView(true);
+    setConfirmModalView(true);
   };
 
-  const executeHandler = async () => {
-    await registerProduct({
-      name: name,
-      category: category,
-      desc: desc,
-      price: price,
-      path: imgPath,
-      available: available,
-    });
-
-    resetHandler();
-    setToggleModal(false);
-    toast.success(
-      <Fragment>
-        商品「{name}」が
-        <br />
-        正常に登録されました！
-      </Fragment>,
-    );
+  const handler = async () => {
+    if (category !== "") {
+      await registerProductToCategoryHandler.mutateAsync({
+        name: name,
+        category: category,
+        desc: desc,
+        price: price,
+        path: imgPath,
+      });
+    } else {
+      await registerProductHandler.mutateAsync({
+        name: name,
+        category: category,
+        desc: desc,
+        price: price,
+        path: imgPath,
+      });
+    }
   };
+
+  const client = useQueryClient();
+  const registerProductToCategoryHandler = useMutation({
+    mutationFn: async (create: RegisterProduct) => {
+      //todo: 商品全体とカテゴリーの中に商品登録するapi
+      await registerProduct(create);
+    },
+
+    onSuccess: async (_, variables) => {
+      resetHandler();
+      changeRegisterModalFlag(false);
+      toast.success(
+        <Fragment>
+          商品「{variables.name}」が
+          <br />
+          正常に登録されました！
+        </Fragment>,
+      );
+    },
+
+    onSettled: async () => {
+      await client.invalidateQueries({
+        queryKey: ["products_in_category"],
+      });
+    },
+  });
+
+  const registerProductHandler = useMutation({
+    mutationFn: async (create: RegisterProduct) =>
+      //todo: 商品全体に登録するapi
+      await registerProduct(create),
+    onSuccess: async (_, variables) => {
+      resetHandler();
+      changeRegisterModalFlag(false);
+      toast.success(
+        <Fragment>
+          商品「{variables.name}」が
+          <br />
+          正常に登録されました！
+        </Fragment>,
+      );
+    },
+    onSettled: async () => {
+      await client.invalidateQueries({
+        queryKey: ["products_in_category"],
+      });
+    },
+  });
 
   return (
     <Fragment>
@@ -105,9 +151,9 @@ function ProductActionButton({
 
       <ConfirmModal
         taskType={confirmAction.REGISTRATION}
-        executeHandler={executeHandler}
-        confirmModalView={modalView}
-        setConfirmModalView={setModalView}
+        executeHandler={handler}
+        confirmModalView={confirmModalView}
+        setConfirmModalView={setConfirmModalView}
       />
     </Fragment>
   );

@@ -1,5 +1,4 @@
 import RegisteredCategory from "@/admin/screen/category/components/list/RegisteredCategory.tsx";
-import { useCategoryModalStateStore } from "@/admin/store/ModalStateStore.ts";
 import {
   type OrderedCategory,
   fetchCategories,
@@ -8,7 +7,6 @@ import {
 import {
   DndContext,
   type DragEndEvent,
-  KeyboardSensor,
   PointerSensor,
   closestCenter,
   useSensor,
@@ -17,16 +15,13 @@ import {
 import {
   SortableContext,
   arrayMove,
-  sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useQuery } from "@tanstack/react-query";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 
 function RegisteredCategories() {
-  const { registerModalFlag, editModalFlag } = useCategoryModalStateStore();
-
-  const { isLoading, error, data, refetch } = useQuery({
+  const { isLoading, data, refetch } = useQuery({
     queryKey: ["categories"],
     queryFn: fetchCategories,
   });
@@ -36,12 +31,7 @@ function RegisteredCategories() {
   // biome-ignore lint/style/noNonNullAssertion: <explanation>
   const [categories, setCategories] = useState<OrderedCategory[]>(data!);
 
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    }),
-  );
+  const sensors = useSensors(useSensor(PointerSensor));
 
   const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;

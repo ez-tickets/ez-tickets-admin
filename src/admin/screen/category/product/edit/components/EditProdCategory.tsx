@@ -1,11 +1,12 @@
 import RegisterCategoryModal from "@/admin/screen/category/components/register/RegisterCategoryModal.tsx";
 import { productCategoryStyle } from "@/admin/screen/category/product/register/components/style/ProductCategory.css.ts";
 import SelectModal from "@/admin/screen/modal/selectModal/SelectModal.tsx";
-import { type Category, fetchCategories } from "@/cmds/categories.ts";
+import { useCategoryModalStateStore } from "@/admin/store/ModalStateStore.ts";
+import { fetchCategories } from "@/cmds/categories.ts";
 import InputContainer from "@/parts/InputContainer.tsx";
 import { IconX } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
-import { Fragment, Suspense, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 
 type EditProdCategoryProps = {
   category: string | null;
@@ -13,14 +14,10 @@ type EditProdCategoryProps = {
 };
 
 function EditProdCategory({ category, setCategory }: EditProdCategoryProps) {
+  const { changeEditModalFlag } = useCategoryModalStateStore();
   const [toggleModal, setToggleModal] = useState<boolean>(false);
-  const [categoryModal, setCategoryModal] = useState<boolean>(false);
 
-  const {
-    isLoading,
-    error,
-    data: categories,
-  } = useQuery({
+  const { data: categories } = useQuery({
     queryKey: ["categories"],
     queryFn: fetchCategories,
   });
@@ -86,7 +83,7 @@ function EditProdCategory({ category, setCategory }: EditProdCategoryProps) {
             {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
             <div
               className={productCategoryStyle.add}
-              onClick={() => setCategoryModal(true)}
+              onClick={() => changeEditModalFlag(true)}
             >
               追加 +
             </div>
@@ -94,10 +91,7 @@ function EditProdCategory({ category, setCategory }: EditProdCategoryProps) {
         }
       />
 
-      <RegisterCategoryModal
-        toggleModal={categoryModal}
-        setToggleModal={setCategoryModal}
-      />
+      <RegisterCategoryModal />
     </Fragment>
   );
 }

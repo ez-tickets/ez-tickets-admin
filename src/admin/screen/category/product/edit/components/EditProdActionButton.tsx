@@ -1,4 +1,5 @@
 import ConfirmModal from "@/admin/screen/modal/confirmModal/ConfirmModal.tsx";
+import { useCategoryModalStateStore } from "@/admin/store/ModalStateStore.ts";
 import { deleteProduct, updateProduct } from "@/cmds/products.ts";
 import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
@@ -12,60 +13,47 @@ import { toast } from "react-toastify";
 type EditProdActionButtonProps = {
   editProduct: EditProduct;
   name: string;
-  category: string | null;
   desc: string;
   price: number;
   imgPath: string;
-  available: boolean;
   setName: (name: string) => void;
-  setCategory: (category: string | null) => void;
   setDesc: (desc: string) => void;
   setPrice: (price: number) => void;
   setImgPath: (path: string) => void;
   setImage: (image: string) => void;
-  setAvailable: (flag: boolean) => void;
-  setEditModal: (flag: boolean) => void;
 };
 
 function EditProdActionButton({
   editProduct,
   name,
-  category,
   desc,
   price,
   imgPath,
-  available,
   setName,
-  setCategory,
   setDesc,
   setPrice,
   setImgPath,
   setImage,
-  setAvailable,
-  setEditModal,
 }: EditProdActionButtonProps) {
-  const [modalView, setModalView] = useState<boolean>(false);
+  const { changeEditModalFlag } = useCategoryModalStateStore();
+  const [confirmModalView, setConfirmModalView] = useState<boolean>(false);
   const [taskType, setTaskType] = useState<string>("");
   const [executeHandler, setExecuteHandler] = useState<() => void>();
 
   const resetHandler = () => {
     setName(editProduct.name);
-    setCategory(editProduct.category);
     setDesc(editProduct.desc);
     setPrice(editProduct.price);
-    setImgPath(editProduct.path);
-    setImage(convertFileSrc(editProduct.path));
-    setAvailable(editProduct.available);
+    setImgPath("");
+    setImage(convertFileSrc(""));
   };
 
   const updateHandler = async () => {
     await updateProduct(editProduct.id, {
       name: name,
-      category: category,
       desc: desc,
       price: price,
       path: imgPath,
-      available: available,
     });
     toast.success(
       <Fragment>
@@ -102,7 +90,7 @@ function EditProdActionButton({
         setExecuteHandler(() => deleteHandler);
         break;
     }
-    setModalView(true);
+    setConfirmModalView(true);
   };
 
   return (
@@ -132,9 +120,9 @@ function EditProdActionButton({
       <ConfirmModal
         taskType={taskType}
         executeHandler={executeHandler}
-        confirmModalView={modalView}
-        setConfirmModalView={setModalView}
-        setEditModal={setEditModal}
+        confirmModalView={confirmModalView}
+        setConfirmModalView={setConfirmModalView}
+        setEditModal={changeEditModalFlag}
       />
     </Fragment>
   );

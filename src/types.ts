@@ -21,9 +21,7 @@ export type ReNameCategory = {
 export type EditProduct = {
   id: string;
   name: string;
-  category: string | null;
+  category: string;
   desc: string;
   price: number;
-  path: string;
-  available: boolean;
 };
