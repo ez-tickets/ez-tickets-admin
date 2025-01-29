@@ -22,8 +22,8 @@ function ProductCategory({ category, setCategory }: ProductCategoryProps) {
     queryFn: fetchCategories,
   });
 
-  const registerHandler = (name: string) => {
-    setCategory(name);
+  const registerHandler = (id: string) => {
+    setCategory(id);
     setToggleModal(false);
   };
 
@@ -71,7 +71,7 @@ function ProductCategory({ category, setCategory }: ProductCategoryProps) {
                 <div
                   key={category.id}
                   className={productCategoryStyle.item}
-                  onClick={() => registerHandler(category.name)}
+                  onClick={() => registerHandler(category.id)}
                 >
                   {category.name}
                 </div>

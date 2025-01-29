@@ -55,7 +55,7 @@ export type RegisterProduct = {
 export const registerProduct = async (
   input: RegisterProduct,
 ): Promise<void> => {
-  await invoke<void>("register_product", { register: input });
+  await invoke<void>("register_product", { register: input, category: input.category });
 };
 
 export type UpdateProduct = {

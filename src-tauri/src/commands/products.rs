@@ -2,7 +2,8 @@ use tauri::State;
 
 use crate::client::HttpClient;
 use crate::errors::FailRequest;
-use crate::models::products::commands::{RegisterProduct, UpdateProduct};
+use crate::models::categories::CategoryId;
+use crate::models::products::commands::{RegisterProduct, RegisterWithCategory, UpdateProduct};
 use crate::models::products::{Product, ProductDetails, ProductId};
 
 //noinspection DuplicatedCode
@@ -70,7 +71,7 @@ pub async fn get_product_details(id: ProductId, client: State<'_, HttpClient>) -
 
 //noinspection DuplicatedCode
 #[tauri::command]
-pub async fn register_product(register: RegisterProduct, client: State<'_, HttpClient>) -> Result<(), FailRequest> {
+pub async fn register_product(register: RegisterProduct, category: Option<CategoryId>, client: State<'_, HttpClient>) -> Result<(), FailRequest> {
     let form = match register.into_form().await {
         Ok(form) => form,
         Err(e) => {
@@ -80,6 +81,7 @@ pub async fn register_product(register: RegisterProduct, client: State<'_, HttpC
     };
     
     match client.post("http://100.77.238.23:3650/products")
+        .query(&RegisterWithCategory { category })
         .multipart(form)
         .send()
         .await
