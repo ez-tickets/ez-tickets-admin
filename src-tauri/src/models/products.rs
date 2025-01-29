@@ -28,27 +28,28 @@ pub struct ProductDetails {
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
-pub struct OrderedProductWithName {
+pub struct OrderedProductDetails {
+    ordering: i64,
     id: ProductId,
     name: String,
-    ordering: i64,
+    price: i64,
 }
 
-impl Eq for OrderedProductWithName {}
+impl Eq for OrderedProductDetails {}
 
-impl PartialEq for OrderedProductWithName {
+impl PartialEq for OrderedProductDetails {
     fn eq(&self, other: &Self) -> bool {
         self.id.eq(&other.id)
     }
 }
 
-impl Ord for OrderedProductWithName {
+impl Ord for OrderedProductDetails {
     fn cmp(&self, other: &Self) -> Ordering {
         self.ordering.cmp(&other.ordering)
     }
 }
 
-impl PartialOrd for OrderedProductWithName {
+impl PartialOrd for OrderedProductDetails {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
         Some(self.cmp(other))
     }

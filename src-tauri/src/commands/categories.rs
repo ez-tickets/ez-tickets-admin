@@ -5,7 +5,7 @@ use crate::client::HttpClient;
 use crate::errors::FailRequest;
 use crate::models::categories::{Category, CategoryId};
 use crate::models::categories::commands::{ChangeOrdering, ChangeOrderingProduct, CreateCategory, UpdateCategory};
-use crate::models::products::{OrderedProduct, OrderedProductWithName, ProductId};
+use crate::models::products::{OrderedProduct, OrderedProductDetails, ProductId};
 
 // noinspection DuplicatedCode
 #[tauri::command]
@@ -160,7 +160,7 @@ pub async fn delete_category(
 pub async fn get_products_in_category(
     id: CategoryId,
     client: State<'_, HttpClient>
-) -> Result<BTreeSet<OrderedProductWithName>, FailRequest> {
+) -> Result<BTreeSet<OrderedProductDetails>, FailRequest> {
     match client.get(format!("http://100.77.238.23:3650/categories/{id}"))
         .send()
         .await
@@ -174,7 +174,7 @@ pub async fn get_products_in_category(
                 return Err(FailRequest);
             }
             
-            match res.json::<BTreeSet<OrderedProductWithName>>().await {
+            match res.json::<BTreeSet<OrderedProductDetails>>().await {
                 Ok(products) => Ok(products),
                 Err(e) => {
                     tracing::error!("{e:?}");

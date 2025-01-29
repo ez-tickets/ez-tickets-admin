@@ -13,9 +13,10 @@ export const fetchProducts = async (): Promise<Product[]> => {
 };
 
 export type ProductInCategory = {
+  ordering: number;
   id: string;
   name: string;
-  ordering: number;
+  price: number;
 };
 
 export const fetchProductsInCategory = async (
