@@ -19,7 +19,7 @@ function EditProdCategory({
   setCategory,
   setCategoryId,
 }: EditProdCategoryProps) {
-  const { changeEditModalFlag } = useCategoryModalStateStore();
+  const { changeRegisterModalFlag } = useCategoryModalStateStore();
   const [toggleModal, setToggleModal] = useState<boolean>(false);
 
   const { data: categories } = useQuery({
@@ -86,7 +86,7 @@ function EditProdCategory({
             {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
             <div
               className={productCategoryStyle.add}
-              onClick={() => changeEditModalFlag(true)}
+              onClick={() => changeRegisterModalFlag(true)}
             >
               追加 +
             </div>
