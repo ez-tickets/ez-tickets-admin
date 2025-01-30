@@ -1,35 +1,35 @@
 import RegisterCategoryModal from "@/admin/screen/category/components/register/RegisterCategoryModal.tsx";
 import { productCategoryStyle } from "@/admin/screen/category/product/register/components/style/ProductCategory.css.ts";
 import SelectModal from "@/admin/screen/modal/selectModal/SelectModal.tsx";
-import { type Category, fetchCategories } from "@/cmds/categories.ts";
+import { useCategoryModalStateStore } from "@/admin/store/ModalStateStore.ts";
+import { fetchCategories } from "@/cmds/categories.ts";
 import InputContainer from "@/parts/InputContainer.tsx";
 import { IconX } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
-import { Fragment, Suspense, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 
 type EditProdCategoryProps = {
-  category: string | null;
+  category: string;
   setCategory: (category: string) => void;
+  setCategoryId: (id: string) => void;
 };
 
-function EditProdCategory({ category, setCategory }: EditProdCategoryProps) {
+function EditProdCategory({
+  category,
+  setCategory,
+  setCategoryId,
+}: EditProdCategoryProps) {
+  const { changeEditModalFlag } = useCategoryModalStateStore();
   const [toggleModal, setToggleModal] = useState<boolean>(false);
-  const [categoryModal, setCategoryModal] = useState<boolean>(false);
 
-  const {
-    isLoading,
-    error,
-    data: categories,
-  } = useQuery({
+  const { data: categories } = useQuery({
     queryKey: ["categories"],
     queryFn: fetchCategories,
   });
 
-  const registerHandler = (id: string) => {
-    const selectedCategory = categories?.find((category) => category.id === id);
-    if (selectedCategory) {
-      setCategory(selectedCategory.name);
-    }
+  const registerHandler = (id: string, name: string) => {
+    setCategoryId(id);
+    setCategory(name);
     setToggleModal(false);
   };
 
@@ -77,7 +77,7 @@ function EditProdCategory({ category, setCategory }: EditProdCategoryProps) {
                 <div
                   key={category.id}
                   className={productCategoryStyle.item}
-                  onClick={() => registerHandler(category.id)}
+                  onClick={() => registerHandler(category.id, category.name)}
                 >
                   {category.name}
                 </div>
@@ -86,7 +86,7 @@ function EditProdCategory({ category, setCategory }: EditProdCategoryProps) {
             {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
             <div
               className={productCategoryStyle.add}
-              onClick={() => setCategoryModal(true)}
+              onClick={() => changeEditModalFlag(true)}
             >
               追加 +
             </div>
@@ -94,10 +94,7 @@ function EditProdCategory({ category, setCategory }: EditProdCategoryProps) {
         }
       />
 
-      <RegisterCategoryModal
-        toggleModal={categoryModal}
-        setToggleModal={setCategoryModal}
-      />
+      <RegisterCategoryModal />
     </Fragment>
   );
 }

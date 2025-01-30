@@ -86,7 +86,13 @@ pub mod commands {
     use reqwest::multipart::Form;
     use serde::{Deserialize, Serialize};
     use crate::errors::FailedReadFile;
-    
+    use crate::models::categories::CategoryId;
+
+    #[derive(Debug, Clone, Deserialize, Serialize)]
+    pub struct RegisterWithCategory {
+        pub category: Option<CategoryId>
+    }
+
     #[derive(Debug, Clone, Deserialize, Serialize)]
     pub struct RegisterProduct {
         name: String,

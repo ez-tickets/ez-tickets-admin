@@ -3,11 +3,7 @@ import { fetchProducts } from "@/cmds/products.ts";
 import { useQuery } from "@tanstack/react-query";
 import { Fragment } from "react";
 
-type ItemsProps = {
-  setEditModal: (flag: boolean) => void;
-};
-
-function Items({ setEditModal }: ItemsProps) {
+function Items() {
   const { data: products } = useQuery({
     queryKey: ["products"],
     queryFn: fetchProducts,
@@ -16,16 +12,7 @@ function Items({ setEditModal }: ItemsProps) {
   return (
     <Fragment>
       {products?.map((item) => (
-        <Item
-          key={item.id}
-          id={item.id}
-          name={item.name}
-          category={item.category}
-          desc={item.desc}
-          price={item.price}
-          path={item.path}
-          setEditModal={setEditModal}
-        />
+        <Item key={item.id} item={item} />
       ))}
     </Fragment>
   );

@@ -39,7 +39,7 @@ export const registeredProdStyle = {
   }),
 
   imgContainer: style({
-    width: "17%",
+    width: "37%",
     padding: "0.5rem 1rem",
     // backgroundColor: "yellow"
   }),
@@ -53,7 +53,7 @@ export const registeredProdStyle = {
   }),
 
   name: style({
-    width: "25%",
+    width: "30%",
     padding: "1rem",
     // backgroundColor: "green"
   }),
@@ -68,7 +68,7 @@ export const registeredProdStyle = {
   }),
 
   price: style({
-    width: "15%",
+    width: "30%",
     padding: "1rem",
     // backgroundColor: "red",
     ":before": {

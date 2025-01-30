@@ -1,5 +1,4 @@
 import RegisteredCategory from "@/admin/screen/category/components/list/RegisteredCategory.tsx";
-import { useCategoryModalStateStore } from "@/admin/store/ModalStateStore.ts";
 import {
   type OrderedCategory,
   fetchCategories,
@@ -8,7 +7,6 @@ import {
 import {
   DndContext,
   type DragEndEvent,
-  KeyboardSensor,
   PointerSensor,
   closestCenter,
   useSensor,
@@ -17,16 +15,15 @@ import {
 import {
   SortableContext,
   arrayMove,
-  sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useQuery } from "@tanstack/react-query";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 
 function RegisteredCategories() {
-  const { registerModalFlag, editModalFlag } = useCategoryModalStateStore();
+  const sensors = useSensors(useSensor(PointerSensor));
 
-  const { isLoading, error, data, refetch } = useQuery({
+  const { isLoading, data, refetch } = useQuery({
     queryKey: ["categories"],
     queryFn: fetchCategories,
   });
@@ -34,14 +31,7 @@ function RegisteredCategories() {
   if (isLoading) return <div>Loading...</div>;
 
   // biome-ignore lint/style/noNonNullAssertion: <explanation>
-  const [categories, setCategories] = useState<OrderedCategory[]>(data!);
-
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    }),
-  );
+  const [categories, setCategories] = useState<OrderedCategory[]>(data!); //並び替える用のstate
 
   const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
@@ -79,11 +69,7 @@ function RegisteredCategories() {
           strategy={verticalListSortingStrategy}
         >
           {data?.map((category) => (
-            <RegisteredCategory
-              key={category.id}
-              id={category.id}
-              name={category.name}
-            />
+            <RegisteredCategory key={category.id} category={category} />
           ))}
         </SortableContext>
       </DndContext>

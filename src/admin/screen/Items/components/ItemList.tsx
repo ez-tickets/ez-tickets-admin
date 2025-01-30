@@ -1,16 +1,14 @@
 import Items from "@/admin/screen/Items/components/Items.tsx";
 import { itemListStyle } from "@/admin/screen/Items/components/style/ItemList.css.ts";
-import EditProdModal from "@/admin/screen/category/product/edit/EditProdModal.tsx";
-import RegisterProdModal from "@/admin/screen/category/product/register/RegisterProdModal.tsx";
+import { useProductModalStateStore } from "@/admin/store/ModalStateStore.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ListContainer from "@/parts/ListContainer.tsx";
 import ListHeader from "@/parts/ListHeader.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 
 function ItemList() {
-  const [toggleModal, setToggleModal] = useState<boolean>(false);
-  const [editModal, setEditModal] = useState<boolean>(false);
+  const { changeRegisterModalFlag } = useProductModalStateStore();
 
   return (
     <Fragment>
@@ -20,7 +18,7 @@ function ItemList() {
           <ExecuteButton
             name={"新規登録"}
             style={executeButtonStyle.default}
-            executeHandler={() => setToggleModal(true)}
+            executeHandler={() => changeRegisterModalFlag(true)}
           />
         }
         headerContainer={
@@ -29,25 +27,13 @@ function ItemList() {
               <Fragment>
                 <div className={itemListStyle.img}>画像</div>
                 <div className={itemListStyle.name}>商品名</div>
-                <div className={itemListStyle.desc}>説明</div>
                 <div className={itemListStyle.price}>価格</div>
               </Fragment>
             }
           />
         }
-        lists={<Items setEditModal={setEditModal} />}
+        lists={<Items />}
       />
-
-      <RegisterProdModal
-        toggleModal={toggleModal}
-        setToggleModal={setToggleModal}
-      />
-
-      {editModal ? (
-        <EditProdModal editModal={editModal} setEditModal={setEditModal} />
-      ) : (
-        ""
-      )}
     </Fragment>
   );
 }

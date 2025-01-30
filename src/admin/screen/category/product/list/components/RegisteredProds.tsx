@@ -1,9 +1,12 @@
 import RegisteredProd from "@/admin/screen/category/product/list/components/RegisteredProd.tsx";
-import type { ProductInCategory } from "@/cmds/products.ts";
+import {
+  type ProductInCategory,
+  fetchProductsInCategory,
+  reorderProducts,
+} from "@/cmds/products.ts";
 import {
   DndContext,
   type DragEndEvent,
-  KeyboardSensor,
   PointerSensor,
   closestCenter,
   useSensor,
@@ -12,48 +15,60 @@ import {
 import {
   SortableContext,
   arrayMove,
-  sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { Fragment } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Fragment, useState } from "react";
 
 type RegisteredProdsProps = {
   categoryID: string;
-  products: ProductInCategory[];
-  updateProducts: ProductInCategory[];
-  isAvailableToggle: boolean;
-  setProducts: (prod: ProductInCategory[]) => void;
-  setUpdateProducts: (prod: Product[]) => void;
-  setEditModal: (flag: boolean) => void;
 };
 
-function RegisteredProds({
-  categoryID,
-  products,
-  updateProducts,
-  isAvailableToggle,
-  setProducts,
-  setUpdateProducts,
-  setEditModal,
-}: RegisteredProdsProps) {
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    }),
-  );
+export type RegisteredProdsInImgState = {
+  id: string;
+  name: string;
+  price: number;
+  imgUrl: string;
+  ordering: number;
+};
 
-  const handleDragEnd = (event: DragEndEvent) => {
+function RegisteredProds({ categoryID }: RegisteredProdsProps) {
+  const sensors = useSensors(useSensor(PointerSensor));
+  const [products, setProducts] = useState<RegisteredProdsInImgState[]>([]);
+
+  const { isLoading, refetch } = useQuery({
+    queryKey: ["products_in_category", categoryID],
+    queryFn: async () => {
+      const products = await fetchProductsInCategory(categoryID);
+      const imgInProducts = products.map((product) => ({
+        ...product,
+        imgUrl: `http://100.77.238.23:3650/images/${product.id}?t=${new Date().getTime()}`,
+      }));
+      setProducts(imgInProducts);
+    },
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+  if (!products) return;
+
+  const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
 
     if (!over) return;
+    if (!products) return;
 
     if (active.id !== over.id) {
       const oldIndex = products.findIndex((v) => v.id === active.id);
       const newIndex = products.findIndex((v) => v.id === over.id);
       const updatedProducts = arrayMove(products, oldIndex, newIndex);
-      setProducts(updatedProducts);
-      //todo 並べ替え後のデータをサーバーに送る処理 --> {categoryID: categoryID, products: updatedProducts}
+      const reordered: ProductInCategory[] = [];
+      updatedProducts.map((product, index) => {
+        product.ordering = index;
+        reordered.push(product);
+      });
+
+      await reorderProducts(categoryID, reordered);
+      await refetch();
     }
   };
 
@@ -68,15 +83,8 @@ function RegisteredProds({
           items={products}
           strategy={verticalListSortingStrategy}
         >
-          {products.map((prod) => (
-            <RegisteredProd
-              key={prod.id}
-              prod={prod}
-              updateProducts={updateProducts}
-              isAvailableToggle={isAvailableToggle}
-              setUpdateProducts={setUpdateProducts}
-              setEditModal={setEditModal}
-            />
+          {products?.map((prod) => (
+            <RegisteredProd key={prod.id} prod={prod} />
           ))}
         </SortableContext>
       </DndContext>

@@ -4,15 +4,14 @@ import RegisterCategoryModal from "@/admin/screen/category/components/register/R
 import { useCategoryModalStateStore } from "@/admin/store/ModalStateStore.ts";
 import { fetchCategories } from "@/cmds/categories.ts";
 import { useQuery } from "@tanstack/react-query";
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function SideBar() {
   const navigate = useNavigate();
-  const { registerModalFlag, editModalFlag, changeRegisterModalFlag } =
-    useCategoryModalStateStore();
+  const { changeRegisterModalFlag } = useCategoryModalStateStore();
 
-  const { isLoading, error, data, refetch } = useQuery({
+  const { data } = useQuery({
     queryKey: ["categories"],
     queryFn: fetchCategories,
   });

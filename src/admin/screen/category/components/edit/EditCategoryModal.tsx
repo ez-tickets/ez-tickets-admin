@@ -6,8 +6,8 @@ import { useEditCategoryStore } from "@/admin/store/RegisteredEditStore.ts";
 import { Fragment, useState } from "react";
 
 function EditCategoryModal() {
-  const { editModalFlag, changeEditModalFlag } = useCategoryModalStateStore();
   const { editCategory } = useEditCategoryStore();
+  const { editModalFlag, changeEditModalFlag } = useCategoryModalStateStore();
 
   if (!editCategory) throw new Error("category not found.");
 

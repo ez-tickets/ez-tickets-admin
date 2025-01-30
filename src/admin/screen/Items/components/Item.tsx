@@ -1,40 +1,21 @@
 import { itemStyle } from "@/admin/screen/Items/components/style/Item.css.ts";
+import { useProductModalStateStore } from "@/admin/store/ModalStateStore.ts";
 import { useEditProductStore } from "@/admin/store/RegisteredEditStore.ts";
-import { convertFileSrc } from "@tauri-apps/api/core";
+import { type Product, fetchProductDetails } from "@/cmds/products.ts";
 import { Fragment } from "react";
 
 type ItemProps = {
-  id: string;
-  name: string;
-  category: string | null;
-  desc: string;
-  price: number;
-  path: string;
-  setEditModal: (flag: boolean) => void;
+  item: Product;
 };
 
-function Item({
-  id,
-  name,
-  category,
-  desc,
-  price,
-  path,
-  setEditModal,
-}: ItemProps) {
+function Item({ item }: ItemProps) {
   const { setEditProduct } = useEditProductStore();
+  const { changeEditModalFlag } = useProductModalStateStore();
 
-  const openEditModalHandler = () => {
-    setEditProduct({
-      id: id,
-      name: name,
-      category: category,
-      desc: desc,
-      price: price,
-      path: path,
-      available: false,
-    });
-    setEditModal(true);
+  const openEditModalHandler = async () => {
+    const editItem = await fetchProductDetails(item.id);
+    setEditProduct(editItem);
+    changeEditModalFlag(true);
   };
 
   return (
@@ -42,21 +23,14 @@ function Item({
       {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
       <div className={itemStyle.list} onClick={openEditModalHandler}>
         <div className={itemStyle.imgContainer}>
-          {path !== "" ? (
-            <img
-              src={convertFileSrc(path)}
-              alt={path}
-              className={itemStyle.img}
-            />
-          ) : (
-            <div className={itemStyle.img} />
-          )}
+          <img
+            src={`http://100.77.238.23:3650/images/${item.id}`}
+            alt={""}
+            className={itemStyle.img}
+          />
         </div>
-        <div className={itemStyle.name}>{name}</div>
-        <div className={itemStyle.desc}>{desc}</div>
-        {/*todo: データが取得できるようになったら差し替え*/}
-        <div className={itemStyle.price}>{price}</div>
-        {/*<div className={itemStyle.price}>{price.toLocaleString()}</div>*/}
+        <div className={itemStyle.name}>{item.name}</div>
+        <div className={itemStyle.price}>{item.price.toLocaleString()}</div>
       </div>
     </Fragment>
   );

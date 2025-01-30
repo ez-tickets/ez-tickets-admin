@@ -4,8 +4,8 @@ import { open } from "@tauri-apps/plugin-dialog";
 import { Fragment } from "react";
 
 type InputImgProps = {
-  imgPath: string;
-  image: string;
+  imgPath: string; //画像パス
+  image: string; //画像url
   setImgPath: (path: string) => void;
   setImage: (image: string) => void;
   required?: boolean;

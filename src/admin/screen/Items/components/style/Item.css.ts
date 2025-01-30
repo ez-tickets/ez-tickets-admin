@@ -18,7 +18,7 @@ export const itemStyle = {
   }),
 
   imgContainer: style({
-    width: "15%",
+    width: "40%",
     padding: "0.5rem 1rem",
   }),
 
@@ -31,7 +31,7 @@ export const itemStyle = {
   }),
 
   name: style({
-    width: "25%",
+    width: "30%",
     padding: "1rem",
   }),
 
@@ -44,7 +44,7 @@ export const itemStyle = {
   }),
 
   price: style({
-    width: "15%",
+    width: "30%",
     padding: "1rem",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",

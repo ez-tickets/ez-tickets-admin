@@ -8,6 +8,7 @@ export type Product = {
   price: number;
 };
 
+//全部の商品を返すapi
 export const fetchProducts = async (): Promise<Product[]> => {
   return await invoke<Product[]>("get_products");
 };
@@ -19,6 +20,7 @@ export type ProductInCategory = {
   price: number;
 };
 
+//カテゴリーに属す商品を返すapi
 export const fetchProductsInCategory = async (
   id: string,
 ): Promise<ProductInCategory[]> => {
@@ -32,8 +34,10 @@ type ProductDetails = {
   name: string;
   desc: string;
   price: number;
+  category?: string;
 };
 
+//商品詳細を取得するapi
 export const fetchProductDetails = async (
   id: string,
 ): Promise<ProductDetails> => {
@@ -42,15 +46,20 @@ export const fetchProductDetails = async (
 
 export type RegisterProduct = {
   name: string;
+  category?: string;
   desc: string;
   price: number;
   path: string;
 };
 
+//商品を登録するapi
 export const registerProduct = async (
   input: RegisterProduct,
 ): Promise<void> => {
-  await invoke<void>("register_product", { register: input });
+  await invoke<void>("register_product", {
+    register: input,
+    category: input.category,
+  });
 };
 
 export type UpdateProduct = {
@@ -60,6 +69,7 @@ export type UpdateProduct = {
   path?: string;
 };
 
+//商品情報を更新するapi
 export const updateProduct = async (
   id: string,
   input: UpdateProduct,
@@ -67,6 +77,7 @@ export const updateProduct = async (
   await invoke<void>("update_product", { id: id, update: input });
 };
 
+//商品を削除するapi
 export const deleteProduct = async (id: string): Promise<void> => {
   await invoke<void>("delete_product", { id: id });
 };
@@ -76,6 +87,7 @@ export type OrderedProduct = {
   ordering: number;
 };
 
+//商品の並び順を変更するapi
 export const reorderProducts = async (
   category_id: string,
   reorder: OrderedProduct[],
