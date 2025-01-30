@@ -20,6 +20,9 @@ importers:
       '@tabler/icons-react':
         specifier: ^3.22.0
         version: 3.22.0(react@18.3.1)
+      '@tanstack/react-query':
+        specifier: ^5.64.2
+        version: 5.64.2(react@18.3.1)
       '@tauri-apps/api':
         specifier: '>=2.0.0'
         version: 2.1.0
@@ -512,6 +515,14 @@ packages:
 
   '@tabler/icons@3.22.0':
     resolution: {integrity: sha512-IfgGzhFph5OBr2wTieWL/hyAs0FThnq9O155a6kfGYxqx7h5LQw91wnRswhEaGhXCcfmR7ZVDUr9H+x4b9Pb8g==}
+
+  '@tanstack/query-core@5.64.2':
+    resolution: {integrity: sha512-hdO8SZpWXoADNTWXV9We8CwTkXU88OVWRBcsiFrk7xJQnhm6WRlweDzMD+uH+GnuieTBVSML6xFa17C2cNV8+g==}
+
+  '@tanstack/react-query@5.64.2':
+    resolution: {integrity: sha512-3pakNscZNm8KJkxmovvtZ4RaXLyiYYobwleTMvpIGUoKRa8j8VlrQKNl5W8VUEfVfZKkikvXVddLuWMbcSCA1Q==}
+    peerDependencies:
+      react: ^18 || ^19
 
   '@tauri-apps/api@2.1.0':
     resolution: {integrity: sha512-1w/JygZOiUtdOU7qart78MaB4/qayZ2heB793KhbZRS7I9q4sxXcXaB7He6uFlprD8w5TI9P8HCuEByCvWRtfw==}
@@ -1308,6 +1319,13 @@ snapshots:
       react: 18.3.1
 
   '@tabler/icons@3.22.0': {}
+
+  '@tanstack/query-core@5.64.2': {}
+
+  '@tanstack/react-query@5.64.2(react@18.3.1)':
+    dependencies:
+      '@tanstack/query-core': 5.64.2
+      react: 18.3.1
 
   '@tauri-apps/api@2.1.0': {}
 

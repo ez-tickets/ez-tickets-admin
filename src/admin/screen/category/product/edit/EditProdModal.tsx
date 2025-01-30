@@ -4,37 +4,47 @@ import EditProdDesc from "@/admin/screen/category/product/edit/components/EditPr
 import EditProdImg from "@/admin/screen/category/product/edit/components/EditProdImg.tsx";
 import EditCatalogName from "@/admin/screen/category/product/edit/components/EditProdName.tsx";
 import EditProdPrice from "@/admin/screen/category/product/edit/components/EditProdPrice.tsx";
-import ProductAvailable from "@/admin/screen/category/product/register/components/ProductAvailable.tsx";
 import ManageEntryModal from "@/admin/screen/modal/manageEntryModal/ManageEntryModal.tsx";
+import { useProductModalStateStore } from "@/admin/store/ModalStateStore.ts";
 import { useEditProductStore } from "@/admin/store/RegisteredEditStore.ts";
-import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment, useState } from "react";
 
 type EditProdModalProps = {
-  editModal: boolean;
-  setEditModal: (flag: boolean) => void;
+  categoryID?: string;
+  categoryName?: string;
 };
 
-function EditProdModal({ editModal, setEditModal }: EditProdModalProps) {
+function EditProdModal({ categoryID, categoryName }: EditProdModalProps) {
   const { editProduct } = useEditProductStore();
+  const { editModalFlag, changeEditModalFlag } = useProductModalStateStore();
+
   if (!editProduct) throw new Error("product not found.");
 
   const [name, setName] = useState<string>(editProduct.name);
-  const [imgPath, setImgPath] = useState<string>(editProduct.path);
-  const [image, setImage] = useState<string>(convertFileSrc(imgPath));
+  const [category, setCategory] = useState<string>(
+    categoryName ? categoryName : "",
+  );
+  const [categoryId, setCategoryId] = useState<string>(
+    categoryID ? categoryID : "",
+  );
+  const [imgPath, setImgPath] = useState<string>(editProduct.imgUrl);
+  const [image, setImage] = useState<string>(editProduct.imgUrl);
   const [price, setPrice] = useState<number>(editProduct.price);
   const [desc, setDesc] = useState<string>(editProduct.desc);
-  const [category, setCategory] = useState<string | null>(editProduct.category);
-  const [available, setAvailable] = useState<boolean>(editProduct.available);
 
   return (
     <ManageEntryModal
       modalTitle={"編集モード"}
-      toggleModal={editModal}
-      closeHandler={() => setEditModal(false)}
+      toggleModal={editModalFlag}
+      closeHandler={() => changeEditModalFlag(false)}
       parts={
         <Fragment>
           <EditCatalogName name={name} setName={setName} />
+          <EditProdCategory
+            category={category}
+            setCategory={setCategory}
+            setCategoryId={setCategoryId}
+          />
           <EditProdImg
             imgPath={imgPath}
             setImgPath={setImgPath}
@@ -43,32 +53,23 @@ function EditProdModal({ editModal, setEditModal }: EditProdModalProps) {
           />
           <EditProdPrice price={price} setPrice={setPrice} />
           <EditProdDesc desc={desc} setDesc={setDesc} />
-          <EditProdCategory category={category} setCategory={setCategory} />
-          {category ? (
-            <ProductAvailable
-              available={available}
-              setAvailable={setAvailable}
-            />
-          ) : (
-            ""
-          )}
 
           <EditProdActionButton
+            categoryID={categoryID}
+            categoryName={categoryName}
             editProduct={editProduct}
             name={name}
-            category={category}
             desc={desc}
             price={price}
             imgPath={imgPath}
-            available={available}
+            categoryId={categoryId}
             setName={setName}
-            setCategory={setCategory}
             setDesc={setDesc}
             setPrice={setPrice}
             setImgPath={setImgPath}
             setImage={setImage}
-            setAvailable={setAvailable}
-            setEditModal={setEditModal}
+            setCategory={setCategory}
+            setCategoryId={setCategoryId}
           />
         </Fragment>
       }

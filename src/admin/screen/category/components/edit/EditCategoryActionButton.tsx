@@ -1,10 +1,16 @@
 import ConfirmModal from "@/admin/screen/modal/confirmModal/ConfirmModal.tsx";
-import { deleteCategory, updateCategoryName } from "@/cmds/categories.ts";
+import { useCategoryModalStateStore } from "@/admin/store/ModalStateStore.ts";
+import {
+  type UpdateCategory,
+  deleteCategory,
+  updateCategoryName,
+} from "@/cmds/categories.ts";
 import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
 import type { ReNameCategory } from "@/types.ts";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Fragment, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -12,44 +18,17 @@ type CategoryEditActionButtonProps = {
   editCategory: ReNameCategory;
   editCategoryName: string;
   setEditCategoryName: (name: string) => void;
-  setEditModal: (flag: boolean) => void;
 };
 
 function EditCategoryActionButton({
   editCategory,
   editCategoryName,
   setEditCategoryName,
-  setEditModal,
 }: CategoryEditActionButtonProps) {
-  const [modalView, setModalView] = useState<boolean>(false);
+  const { changeEditModalFlag } = useCategoryModalStateStore();
+  const [confirmModalView, setConfirmModalView] = useState<boolean>(false);
   const [taskType, setTaskType] = useState<string>("");
   const [executeHandler, setExecuteHandler] = useState<() => void>();
-
-  const resetHandler = () => {
-    setEditCategoryName(editCategory.name);
-  };
-
-  const updateHandler = async () => {
-    await updateCategoryName(editCategory.id, { name: editCategoryName });
-    toast.success(
-      <Fragment>
-        カテゴリ「{editCategoryName}」へ
-        <br />
-        正常に更新しました！
-      </Fragment>,
-    );
-  };
-
-  const deleteHandler = async () => {
-    await deleteCategory(editCategory.id);
-    toast.success(
-      <Fragment>
-        カテゴリ「{editCategory.name}」を
-        <br />
-        正常に削除しました！
-      </Fragment>,
-    );
-  };
 
   const openModalHandler = (type: string) => {
     switch (type) {
@@ -66,7 +45,62 @@ function EditCategoryActionButton({
         setExecuteHandler(() => deleteHandler);
         break;
     }
-    setModalView(true);
+    setConfirmModalView(true);
+  };
+
+  const updateHandler = async () => {
+    await updateExecHandler.mutateAsync({
+      id: editCategory.id,
+      ctx: { name: editCategoryName },
+    });
+  };
+
+  const deleteHandler = async () => {
+    await deleteExecHandler.mutateAsync(editCategory.id);
+  };
+
+  const client = useQueryClient();
+  const updateExecHandler = useMutation({
+    mutationFn: async (update: UpdateCategory) =>
+      await updateCategoryName(update),
+    onSuccess: (_, update) => {
+      changeEditModalFlag(false);
+      toast.success(
+        <Fragment>
+          カテゴリ「{update.ctx.name}」へ
+          <br />
+          正常に更新しました！
+        </Fragment>,
+      );
+    },
+    onSettled: async () => {
+      await client.invalidateQueries({
+        queryKey: ["categories"],
+      });
+    },
+  });
+
+  const deleteExecHandler = useMutation({
+    mutationFn: async (id: string) => await deleteCategory(id),
+    onSuccess: () => {
+      changeEditModalFlag(false);
+      toast.success(
+        <Fragment>
+          カテゴリ「{editCategory.name}」を
+          <br />
+          正常に削除しました！
+        </Fragment>,
+      );
+    },
+    onSettled: async () => {
+      await client.invalidateQueries({
+        queryKey: ["categories"],
+      });
+    },
+  });
+
+  const resetHandler = () => {
+    setEditCategoryName(editCategory.name);
   };
 
   return (
@@ -96,9 +130,8 @@ function EditCategoryActionButton({
       <ConfirmModal
         taskType={taskType}
         executeHandler={executeHandler}
-        modalView={modalView}
-        setModalView={setModalView}
-        setEditModal={setEditModal}
+        confirmModalView={confirmModalView}
+        setConfirmModalView={setConfirmModalView}
       />
     </Fragment>
   );

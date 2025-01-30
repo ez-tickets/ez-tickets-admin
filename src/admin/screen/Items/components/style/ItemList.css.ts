@@ -2,7 +2,7 @@ import { style } from "@vanilla-extract/css";
 
 export const itemListStyle = {
   img: style({
-    width: "15%",
+    width: "40%",
     padding: "1rem",
     fontSize: "0.9rem",
     // backgroundColor: "yellow"
@@ -14,7 +14,7 @@ export const itemListStyle = {
   }),
 
   name: style({
-    width: "25%",
+    width: "30%",
     padding: "1rem",
     fontSize: "0.9rem",
     // backgroundColor: "green"
@@ -38,7 +38,7 @@ export const itemListStyle = {
   }),
 
   price: style({
-    width: "15%",
+    width: "30%",
     padding: "1rem",
     fontSize: "0.9rem",
     // backgroundColor: "red"

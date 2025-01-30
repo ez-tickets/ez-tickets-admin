@@ -1,31 +1,34 @@
 import RegisterCategoryModal from "@/admin/screen/category/components/register/RegisterCategoryModal.tsx";
 import { productCategoryStyle } from "@/admin/screen/category/product/register/components/style/ProductCategory.css.ts";
 import SelectModal from "@/admin/screen/modal/selectModal/SelectModal.tsx";
-import { type Category, fetchCategories } from "@/cmds/categories.ts";
+import { useCategoryModalStateStore } from "@/admin/store/ModalStateStore.ts";
+import { fetchCategories } from "@/cmds/categories.ts";
 import InputContainer from "@/parts/InputContainer.tsx";
 import { IconX } from "@tabler/icons-react";
-import { Fragment, useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Fragment, useState } from "react";
 
 type ProductCategoryProps = {
-  category: string | null;
+  category: string;
   setCategory: (category: string) => void;
+  setCategoryId: (id: string) => void;
 };
 
-function ProductCategory({ category, setCategory }: ProductCategoryProps) {
+function ProductCategory({
+  category,
+  setCategory,
+  setCategoryId,
+}: ProductCategoryProps) {
+  const { changeRegisterModalFlag } = useCategoryModalStateStore();
   const [toggleModal, setToggleModal] = useState<boolean>(false);
-  const [categoryModal, setCategoryModal] = useState<boolean>(false);
-  const [categories, setCategories] = useState<Category[]>([]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  useEffect(() => {
-    (async () => {
-      const categories = await fetchCategories();
-      categories.sort((a, b) => a.order - b.order);
-      setCategories(categories);
-    })();
-  }, [categories]);
+  const { data: categories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: fetchCategories,
+  });
 
-  const registerHandler = (name: string) => {
+  const registerHandler = (id: string, name: string) => {
+    setCategoryId(id);
     setCategory(name);
     setToggleModal(false);
   };
@@ -68,13 +71,13 @@ function ProductCategory({ category, setCategory }: ProductCategoryProps) {
         closeHandler={() => setToggleModal(false)}
         parts={
           <div className={productCategoryStyle.modalContainer}>
-            {categories.map((category) => {
+            {categories?.map((category) => {
               return (
                 // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
                 <div
                   key={category.id}
                   className={productCategoryStyle.item}
-                  onClick={() => registerHandler(category.name)}
+                  onClick={() => registerHandler(category.id, category.name)}
                 >
                   {category.name}
                 </div>
@@ -83,7 +86,7 @@ function ProductCategory({ category, setCategory }: ProductCategoryProps) {
             {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
             <div
               className={productCategoryStyle.add}
-              onClick={() => setCategoryModal(true)}
+              onClick={() => changeRegisterModalFlag(true)}
             >
               追加 +
             </div>
@@ -91,10 +94,7 @@ function ProductCategory({ category, setCategory }: ProductCategoryProps) {
         }
       />
 
-      <RegisterCategoryModal
-        toggleModal={categoryModal}
-        setToggleModal={setCategoryModal}
-      />
+      <RegisterCategoryModal />
     </Fragment>
   );
 }

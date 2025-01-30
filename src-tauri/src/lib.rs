@@ -2,6 +2,7 @@ mod client;
 
 mod commands;
 mod errors;
+mod models;
 
 use crate::commands::*;
 use crate::client::HttpClient;
@@ -13,13 +14,20 @@ pub fn run() {
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_dialog::init())
         .invoke_handler(tauri::generate_handler![
-            products,
+            get_products,
+            get_product_details,
+            get_products_in_category,
             register_product,
             update_product,
             delete_product,
-            categories,
-            register_category,
+            get_categories,
+            create_category,
+            update_category,
             delete_category,
+            change_ordering_categories,
+            add_product_to_category,
+            remove_product_from_category,
+            change_ordering_product_in_category
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -1,37 +1,34 @@
 import Item from "@/admin/screen/Items/components/Item.tsx";
-import { type Product, fetchProducts } from "@/cmds/products.ts";
-import { Fragment, useEffect, useState } from "react";
+import { fetchProducts } from "@/cmds/products.ts";
+import { useQuery } from "@tanstack/react-query";
+import { Fragment, useState } from "react";
 
-type ItemsProps = {
-  setEditModal: (flag: boolean) => void;
+export type RegisteredItemsInImgState = {
+  id: string;
+  name: string;
+  price: number;
+  imgUrl: string;
 };
 
-function Items({ setEditModal }: ItemsProps) {
-  const [allItems, setAllItems] = useState<Product[]>([]);
+function Items() {
+  const [items, setItems] = useState<RegisteredItemsInImgState[]>([]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  useEffect(() => {
-    (async () => {
-      //todo: APIから商品情報を取得する処理変更
+  useQuery({
+    queryKey: ["products_in_category"],
+    queryFn: async () => {
       const items = await fetchProducts();
-      items.sort((a, b) => a.name.localeCompare(b.name, "ja"));
-      setAllItems(items);
-    })();
-  }, [allItems]);
+      const imgInItems = items.map((item) => ({
+        ...item,
+        imgUrl: `http://100.77.238.23:3650/images/${item.id}?t=${new Date().getTime()}`,
+      }));
+      setItems(imgInItems);
+    },
+  });
 
   return (
     <Fragment>
-      {allItems.map((item) => (
-        <Item
-          key={item.id}
-          id={item.id}
-          name={item.name}
-          category={item.category}
-          desc={item.desc}
-          price={item.price}
-          path={item.path}
-          setEditModal={setEditModal}
-        />
+      {items?.map((item) => (
+        <Item key={item.id} item={item} />
       ))}
     </Fragment>
   );

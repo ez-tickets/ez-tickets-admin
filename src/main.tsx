@@ -11,6 +11,9 @@ import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AllItems from "@/admin/screen/Items/AllItems.tsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const client = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -27,16 +30,18 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         transition={Bounce}
       />
       <TitleBar />
-      <Routes>
-        <Route path="/" element={<Login />} />
+      <QueryClientProvider client={client}>
+        <Routes>
+          <Route path="/" element={<Login />} />
 
-        <Route path="admin" element={<Admin />}>
-          <Route index element={<Home />} />
-          <Route path="allItems" element={<AllItems />} />
-          <Route path="registeredCategory" element={<Category />} />
-          <Route path="registeredProduct" element={<Product />} />
-        </Route>
-      </Routes>
+          <Route path="admin" element={<Admin />}>
+            <Route index element={<Home />} />
+            <Route path="allItems" element={<AllItems />} />
+            <Route path="registeredCategory" element={<Category />} />
+            <Route path="registeredProduct" element={<Product />} />
+          </Route>
+        </Routes>
+      </QueryClientProvider>
     </MemoryRouter>
   </React.StrictMode>,
 );

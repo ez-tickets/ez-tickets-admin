@@ -1,23 +1,20 @@
 import SideBarLabel from "@/admin/components/SideBarLabel.tsx";
 import { sideBarStyle } from "@/admin/components/styles/SideBar.css.ts";
 import RegisterCategoryModal from "@/admin/screen/category/components/register/RegisterCategoryModal.tsx";
-import { type Category, fetchCategories } from "@/cmds/categories.ts";
-import { Fragment, useEffect, useState } from "react";
+import { useCategoryModalStateStore } from "@/admin/store/ModalStateStore.ts";
+import { fetchCategories } from "@/cmds/categories.ts";
+import { useQuery } from "@tanstack/react-query";
+import { Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function SideBar() {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [toggleModal, setToggleModal] = useState<boolean>(false);
   const navigate = useNavigate();
+  const { changeRegisterModalFlag } = useCategoryModalStateStore();
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  useEffect(() => {
-    (async () => {
-      const categories = await fetchCategories();
-      categories.sort((a, b) => a.order - b.order);
-      setCategories(categories);
-    })();
-  }, [categories]);
+  const { data } = useQuery({
+    queryKey: ["categories"],
+    queryFn: fetchCategories,
+  });
 
   const configHandler = () => navigate("registeredCategory");
 
@@ -37,7 +34,7 @@ function SideBar() {
             title={"カテゴリー"}
             element={
               <Fragment>
-                {categories.map((category) => (
+                {data?.map((category) => (
                   <Link
                     to="registeredProduct"
                     key={category.id}
@@ -51,16 +48,15 @@ function SideBar() {
                 ))}
               </Fragment>
             }
-            addHandler={() => setToggleModal(true)}
+            addHandler={() => {
+              changeRegisterModalFlag(true);
+            }}
             configHandler={configHandler}
           />
         </div>
       </div>
 
-      <RegisterCategoryModal
-        toggleModal={toggleModal}
-        setToggleModal={setToggleModal}
-      />
+      <RegisterCategoryModal />
     </Fragment>
   );
 }

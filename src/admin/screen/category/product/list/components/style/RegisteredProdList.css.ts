@@ -6,7 +6,7 @@ export const registeredProdListStyle = {
   }),
 
   img: style({
-    width: "20%",
+    width: "40%",
     padding: "1rem",
     textIndent: "2.5rem",
     fontSize: "0.9rem",
@@ -21,7 +21,7 @@ export const registeredProdListStyle = {
   }),
 
   name: style({
-    width: "25%",
+    width: "30%",
     padding: "1rem",
     fontSize: "0.9rem",
     // backgroundColor: "green",
@@ -45,7 +45,7 @@ export const registeredProdListStyle = {
   }),
 
   price: style({
-    width: "15%",
+    width: "30%",
     padding: "1rem",
     fontSize: "0.9rem",
     // backgroundColor: "red",

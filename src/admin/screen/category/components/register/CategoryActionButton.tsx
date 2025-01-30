@@ -1,46 +1,59 @@
 import ConfirmModal from "@/admin/screen/modal/confirmModal/ConfirmModal.tsx";
-import { registerCategory } from "@/cmds/categories.ts";
+import { useCategoryModalStateStore } from "@/admin/store/ModalStateStore.ts";
+import { type CreateCategory, registerCategory } from "@/cmds/categories.ts";
 import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
 import ExecuteButtonContainer from "@/parts/ExecuteButtonContainer.tsx";
 import { executeButtonStyle } from "@/parts/style/ExecuteButton.css.ts";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Fragment, useState } from "react";
 import { toast } from "react-toastify";
 
 type CategoryActionButtonProps = {
   categoryName: string;
   setCategoryName: (name: string) => void;
-  setToggleModal: (flag: boolean) => void;
 };
 
 function CategoryActionButton({
   categoryName,
   setCategoryName,
-  setToggleModal,
 }: CategoryActionButtonProps) {
-  const [modalView, setModalView] = useState<boolean>(false);
+  const { changeRegisterModalFlag } = useCategoryModalStateStore();
+  const [confirmModalView, setConfirmModalView] = useState<boolean>(false);
 
-  const openModalHandler = () => {
+  const openConfirmModalHandler = () => {
     if (categoryName === "") {
       toast.error("必須項目を入力してください");
       return;
     }
-    setModalView(true);
+    setConfirmModalView(true);
   };
 
-  const executeHandler = async () => {
-    await registerCategory({ name: categoryName });
-
-    setCategoryName("");
-    setToggleModal(false);
-    toast.success(
-      <Fragment>
-        カテゴリ「{categoryName}」が
-        <br />
-        正常に登録されました！
-      </Fragment>,
-    );
+  const handler = async () => {
+    await registerCategoryHandler.mutateAsync({ name: categoryName });
   };
+
+  const client = useQueryClient();
+  const registerCategoryHandler = useMutation({
+    mutationFn: async (create: CreateCategory) =>
+      await registerCategory(create),
+    onSuccess: async (_, variables) => {
+      setCategoryName("");
+      changeRegisterModalFlag(false);
+      toast.success(
+        <Fragment>
+          カテゴリ「{variables.name}」が
+          <br />
+          正常に登録されました！
+        </Fragment>,
+      );
+    },
+    onSettled: async () => {
+      await client.invalidateQueries({
+        queryKey: ["categories"],
+      });
+    },
+  });
 
   return (
     <Fragment>
@@ -56,7 +69,7 @@ function CategoryActionButton({
             <ExecuteButton
               name={"登録する"}
               style={executeButtonStyle.run}
-              executeHandler={openModalHandler}
+              executeHandler={openConfirmModalHandler}
             />
           </Fragment>
         }
@@ -64,9 +77,9 @@ function CategoryActionButton({
 
       <ConfirmModal
         taskType={confirmAction.REGISTRATION}
-        executeHandler={executeHandler}
-        modalView={modalView}
-        setModalView={setModalView}
+        executeHandler={handler}
+        confirmModalView={confirmModalView}
+        setConfirmModalView={setConfirmModalView}
       />
     </Fragment>
   );

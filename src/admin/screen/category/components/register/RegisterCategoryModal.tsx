@@ -1,29 +1,24 @@
 import CategoryActionButton from "@/admin/screen/category/components/register/CategoryActionButton.tsx";
 import CategoryName from "@/admin/screen/category/components/register/CategoryName.tsx";
 import ManageEntryModal from "@/admin/screen/modal/manageEntryModal/ManageEntryModal.tsx";
+import { useCategoryModalStateStore } from "@/admin/store/ModalStateStore.ts";
 import { Fragment, useState } from "react";
 
-type CategoryRegisterModalProps = {
-  toggleModal: boolean;
-  setToggleModal: (flag: boolean) => void;
-};
-
-function RegisterCategoryModal({
-  toggleModal,
-  setToggleModal,
-}: CategoryRegisterModalProps) {
+function RegisterCategoryModal() {
+  const { registerModalFlag, changeRegisterModalFlag } =
+    useCategoryModalStateStore();
   const [categoryName, setCategoryName] = useState<string>("");
 
   const closeHandler = () => {
     setCategoryName("");
-    setToggleModal(false);
+    changeRegisterModalFlag(false);
   };
 
   return (
     <Fragment>
       <ManageEntryModal
         modalTitle={"新規登録"}
-        toggleModal={toggleModal}
+        toggleModal={registerModalFlag}
         closeHandler={closeHandler}
         parts={
           <Fragment>
@@ -34,7 +29,6 @@ function RegisterCategoryModal({
             <CategoryActionButton
               categoryName={categoryName}
               setCategoryName={setCategoryName}
-              setToggleModal={setToggleModal}
             />
           </Fragment>
         }
