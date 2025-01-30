@@ -27,7 +27,11 @@ function Product() {
       <Header title={categoryName} />
       <RegisteredProdList categoryID={categoryID} />
       <RegisterProdModal categoryID={categoryID} categoryName={categoryName} />
-      {editModalFlag ? <EditProdModal /> : ""}
+      {editModalFlag ? (
+        <EditProdModal categoryID={categoryID} categoryName={categoryName} />
+      ) : (
+        ""
+      )}
     </Fragment>
   );
 }

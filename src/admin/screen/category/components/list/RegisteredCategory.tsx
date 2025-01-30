@@ -1,26 +1,26 @@
 import { registeredCategoryStyle } from "@/admin/screen/category/components/list/style/RegisteredCategory.css.ts";
 import { useCategoryModalStateStore } from "@/admin/store/ModalStateStore.ts";
 import { useEditCategoryStore } from "@/admin/store/RegisteredEditStore.ts";
+import type { Category } from "@/cmds/categories.ts";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Fragment } from "react";
 
 type RegisteredCategoryProps = {
-  id: string;
-  name: string;
+  category: Category;
 };
 
-function RegisteredCategory({ id, name }: RegisteredCategoryProps) {
+function RegisteredCategory({ category }: RegisteredCategoryProps) {
   const { setEditCategory } = useEditCategoryStore();
   const { changeEditModalFlag } = useCategoryModalStateStore();
 
   const openEditModalHandler = () => {
-    setEditCategory({ id: id, name: name });
+    setEditCategory({ id: category.id, name: category.name });
     changeEditModalFlag(true);
   };
 
   const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: id });
+    useSortable({ id: category.id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -43,7 +43,7 @@ function RegisteredCategory({ id, name }: RegisteredCategoryProps) {
         >
           ≡
         </span>
-        <span>{name}</span>
+        <span>{category.name}</span>
       </div>
     </Fragment>
   );

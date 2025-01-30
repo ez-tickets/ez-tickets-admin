@@ -17,9 +17,11 @@ function RegisterProdModalFromAllItems() {
   const [price, setPrice] = useState<number>(0);
   const [desc, setDesc] = useState<string>("");
   const [category, setCategory] = useState<string>("");
+  const [categoryId, setCategoryId] = useState<string>("");
 
   const closeHandler = () => {
     setCategory("");
+    setCategoryId("");
     setName("");
     setImgPath("");
     setImage("");
@@ -37,7 +39,11 @@ function RegisterProdModalFromAllItems() {
         parts={
           <Fragment>
             <ProductName name={name} setName={setName} />
-            <ProductCategory category={category} setCategory={setCategory} />
+            <ProductCategory
+              category={category}
+              setCategory={setCategory}
+              setCategoryId={setCategoryId}
+            />
             <ProductImg
               imgPath={imgPath}
               setImgPath={setImgPath}
@@ -50,12 +56,13 @@ function RegisterProdModalFromAllItems() {
               name={name}
               desc={desc}
               price={price}
-              category={category}
               imgPath={imgPath}
+              categoryId={categoryId}
               setName={setName}
               setDesc={setDesc}
               setPrice={setPrice}
               setCategory={setCategory}
+              setCategoryId={setCategoryId}
               setImgPath={setImgPath}
               setImage={setImage}
             />

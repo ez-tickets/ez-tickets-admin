@@ -17,22 +17,26 @@ function RegisterProdModal({
   categoryID,
   categoryName,
 }: RegisterProdModalProps) {
-  const { registerModalFlag, changeRegisterModalFlag } =
-    useProductModalStateStore();
   const [name, setName] = useState<string>("");
+  const [categoryId, setCategoryId] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
   const [imgPath, setImgPath] = useState<string>("");
   const [image, setImage] = useState<string>("");
   const [price, setPrice] = useState<number>(0);
   const [desc, setDesc] = useState<string>("");
-  const [category, setCategory] = useState<string>("");
+
+  const { registerModalFlag, changeRegisterModalFlag } =
+    useProductModalStateStore();
 
   useEffect(() => {
     setCategory(categoryName);
-  }, [categoryName]);
+    setCategoryId(categoryID);
+  }, [categoryName, categoryID]);
 
   const closeHandler = () => {
-    setCategory(categoryName);
     setName("");
+    setCategoryId(categoryID);
+    setCategory(categoryName);
     setImgPath("");
     setImage("");
     setPrice(0);
@@ -49,7 +53,11 @@ function RegisterProdModal({
         parts={
           <Fragment>
             <ProductName name={name} setName={setName} />
-            <ProductCategory category={category} setCategory={setCategory} />
+            <ProductCategory
+              category={category}
+              setCategory={setCategory}
+              setCategoryId={setCategoryId}
+            />
             <ProductImg
               imgPath={imgPath}
               setImgPath={setImgPath}
@@ -64,12 +72,13 @@ function RegisterProdModal({
               name={name}
               desc={desc}
               price={price}
-              category={category}
+              categoryId={categoryId}
               imgPath={imgPath}
               setName={setName}
               setDesc={setDesc}
               setPrice={setPrice}
               setCategory={setCategory}
+              setCategoryId={setCategoryId}
               setImgPath={setImgPath}
               setImage={setImage}
             />

@@ -64,6 +64,7 @@ function EditCategoryActionButton({
     mutationFn: async (update: UpdateCategory) =>
       await updateCategoryName(update),
     onSuccess: (_, update) => {
+      changeEditModalFlag(false);
       toast.success(
         <Fragment>
           カテゴリ「{update.ctx.name}」へ
@@ -71,7 +72,6 @@ function EditCategoryActionButton({
           正常に更新しました！
         </Fragment>,
       );
-      changeEditModalFlag(false);
     },
     onSettled: async () => {
       await client.invalidateQueries({
@@ -83,6 +83,7 @@ function EditCategoryActionButton({
   const deleteExecHandler = useMutation({
     mutationFn: async (id: string) => await deleteCategory(id),
     onSuccess: () => {
+      changeEditModalFlag(false);
       toast.success(
         <Fragment>
           カテゴリ「{editCategory.name}」を
@@ -90,7 +91,6 @@ function EditCategoryActionButton({
           正常に削除しました！
         </Fragment>,
       );
-      changeEditModalFlag(false);
     },
     onSettled: async () => {
       await client.invalidateQueries({

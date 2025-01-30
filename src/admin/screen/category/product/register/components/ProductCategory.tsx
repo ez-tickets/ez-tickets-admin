@@ -11,9 +11,14 @@ import { Fragment, useState } from "react";
 type ProductCategoryProps = {
   category: string;
   setCategory: (category: string) => void;
+  setCategoryId: (id: string) => void;
 };
 
-function ProductCategory({ category, setCategory }: ProductCategoryProps) {
+function ProductCategory({
+  category,
+  setCategory,
+  setCategoryId,
+}: ProductCategoryProps) {
   const { changeRegisterModalFlag } = useCategoryModalStateStore();
   const [toggleModal, setToggleModal] = useState<boolean>(false);
 
@@ -22,8 +27,9 @@ function ProductCategory({ category, setCategory }: ProductCategoryProps) {
     queryFn: fetchCategories,
   });
 
-  const registerHandler = (id: string) => {
-    setCategory(id);
+  const registerHandler = (id: string, name: string) => {
+    setCategoryId(id);
+    setCategory(name);
     setToggleModal(false);
   };
 
@@ -71,7 +77,7 @@ function ProductCategory({ category, setCategory }: ProductCategoryProps) {
                 <div
                   key={category.id}
                   className={productCategoryStyle.item}
-                  onClick={() => registerHandler(category.id)}
+                  onClick={() => registerHandler(category.id, category.name)}
                 >
                   {category.name}
                 </div>

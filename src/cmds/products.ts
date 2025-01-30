@@ -34,6 +34,7 @@ type ProductDetails = {
   name: string;
   desc: string;
   price: number;
+  category?: string;
 };
 
 //商品詳細を取得するapi
@@ -55,7 +56,10 @@ export type RegisterProduct = {
 export const registerProduct = async (
   input: RegisterProduct,
 ): Promise<void> => {
-  await invoke<void>("register_product", { register: input, category: input.category });
+  await invoke<void>("register_product", {
+    register: input,
+    category: input.category,
+  });
 };
 
 export type UpdateProduct = {

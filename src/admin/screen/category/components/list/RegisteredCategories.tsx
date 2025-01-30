@@ -21,6 +21,8 @@ import { useQuery } from "@tanstack/react-query";
 import { Fragment, useState } from "react";
 
 function RegisteredCategories() {
+  const sensors = useSensors(useSensor(PointerSensor));
+
   const { isLoading, data, refetch } = useQuery({
     queryKey: ["categories"],
     queryFn: fetchCategories,
@@ -29,9 +31,7 @@ function RegisteredCategories() {
   if (isLoading) return <div>Loading...</div>;
 
   // biome-ignore lint/style/noNonNullAssertion: <explanation>
-  const [categories, setCategories] = useState<OrderedCategory[]>(data!);
-
-  const sensors = useSensors(useSensor(PointerSensor));
+  const [categories, setCategories] = useState<OrderedCategory[]>(data!); //並び替える用のstate
 
   const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
@@ -69,11 +69,7 @@ function RegisteredCategories() {
           strategy={verticalListSortingStrategy}
         >
           {data?.map((category) => (
-            <RegisteredCategory
-              key={category.id}
-              id={category.id}
-              name={category.name}
-            />
+            <RegisteredCategory key={category.id} category={category} />
           ))}
         </SortableContext>
       </DndContext>

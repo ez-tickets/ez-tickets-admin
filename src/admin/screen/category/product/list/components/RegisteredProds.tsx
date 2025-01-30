@@ -18,33 +18,49 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useQuery } from "@tanstack/react-query";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 
 type RegisteredProdsProps = {
   categoryID: string;
 };
 
+export type RegisteredProdsInImgState = {
+  id: string;
+  name: string;
+  price: number;
+  imgUrl: string;
+  ordering: number;
+};
+
 function RegisteredProds({ categoryID }: RegisteredProdsProps) {
   const sensors = useSensors(useSensor(PointerSensor));
+  const [products, setProducts] = useState<RegisteredProdsInImgState[]>([]);
 
-  const { isLoading, data, refetch } = useQuery({
+  const { isLoading, refetch } = useQuery({
     queryKey: ["products_in_category", categoryID],
-    queryFn: async () => await fetchProductsInCategory(categoryID),
+    queryFn: async () => {
+      const products = await fetchProductsInCategory(categoryID);
+      const imgInProducts = products.map((product) => ({
+        ...product,
+        imgUrl: `http://100.77.238.23:3650/images/${product.id}?t=${new Date().getTime()}`,
+      }));
+      setProducts(imgInProducts);
+    },
   });
 
   if (isLoading) return <div>Loading...</div>;
-  if (!data) return;
+  if (!products) return;
 
   const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
 
     if (!over) return;
-    if (!data) return;
+    if (!products) return;
 
     if (active.id !== over.id) {
-      const oldIndex = data.findIndex((v) => v.id === active.id);
-      const newIndex = data.findIndex((v) => v.id === over.id);
-      const updatedProducts = arrayMove(data, oldIndex, newIndex);
+      const oldIndex = products.findIndex((v) => v.id === active.id);
+      const newIndex = products.findIndex((v) => v.id === over.id);
+      const updatedProducts = arrayMove(products, oldIndex, newIndex);
       const reordered: ProductInCategory[] = [];
       updatedProducts.map((product, index) => {
         product.ordering = index;
@@ -63,8 +79,11 @@ function RegisteredProds({ categoryID }: RegisteredProdsProps) {
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
       >
-        <SortableContext items={data} strategy={verticalListSortingStrategy}>
-          {data?.map((prod) => (
+        <SortableContext
+          items={products}
+          strategy={verticalListSortingStrategy}
+        >
+          {products?.map((prod) => (
             <RegisteredProd key={prod.id} prod={prod} />
           ))}
         </SortableContext>

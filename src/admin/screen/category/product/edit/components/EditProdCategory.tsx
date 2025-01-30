@@ -9,11 +9,16 @@ import { useQuery } from "@tanstack/react-query";
 import { Fragment, useState } from "react";
 
 type EditProdCategoryProps = {
-  category: string | null;
+  category: string;
   setCategory: (category: string) => void;
+  setCategoryId: (id: string) => void;
 };
 
-function EditProdCategory({ category, setCategory }: EditProdCategoryProps) {
+function EditProdCategory({
+  category,
+  setCategory,
+  setCategoryId,
+}: EditProdCategoryProps) {
   const { changeEditModalFlag } = useCategoryModalStateStore();
   const [toggleModal, setToggleModal] = useState<boolean>(false);
 
@@ -22,11 +27,9 @@ function EditProdCategory({ category, setCategory }: EditProdCategoryProps) {
     queryFn: fetchCategories,
   });
 
-  const registerHandler = (id: string) => {
-    const selectedCategory = categories?.find((category) => category.id === id);
-    if (selectedCategory) {
-      setCategory(selectedCategory.name);
-    }
+  const registerHandler = (id: string, name: string) => {
+    setCategoryId(id);
+    setCategory(name);
     setToggleModal(false);
   };
 
@@ -74,7 +77,7 @@ function EditProdCategory({ category, setCategory }: EditProdCategoryProps) {
                 <div
                   key={category.id}
                   className={productCategoryStyle.item}
-                  onClick={() => registerHandler(category.id)}
+                  onClick={() => registerHandler(category.id, category.name)}
                 >
                   {category.name}
                 </div>

@@ -1,16 +1,14 @@
+import type { RegisteredProdsInImgState } from "@/admin/screen/category/product/list/components/RegisteredProds.tsx";
 import { registeredProdStyle } from "@/admin/screen/category/product/list/components/style/RegisteredProd.css.ts";
 import { useProductModalStateStore } from "@/admin/store/ModalStateStore.ts";
 import { useEditProductStore } from "@/admin/store/RegisteredEditStore.ts";
-import {
-  type ProductInCategory,
-  fetchProductDetails,
-} from "@/cmds/products.ts";
+import { fetchProductDetails } from "@/cmds/products.ts";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Fragment } from "react";
 
 type RegisteredProdProps = {
-  prod: ProductInCategory;
+  prod: RegisteredProdsInImgState;
 };
 
 function RegisteredProd({ prod }: RegisteredProdProps) {
@@ -19,7 +17,11 @@ function RegisteredProd({ prod }: RegisteredProdProps) {
 
   const openEditModalHandler = async () => {
     const editProduct = await fetchProductDetails(prod.id);
-    setEditProduct(editProduct);
+    const imgPathInProduct = {
+      ...editProduct,
+      imgUrl: prod.imgUrl,
+    };
+    setEditProduct(imgPathInProduct);
     changeEditModalFlag(true);
   };
 
@@ -48,15 +50,11 @@ function RegisteredProd({ prod }: RegisteredProdProps) {
           ≡
         </div>
         <div className={registeredProdStyle.imgContainer}>
-          <img
-            src={`http://100.77.238.23:3650/images/${prod.id}`}
-            alt={""}
-            className={registeredProdStyle.img}
-          />
+          <img src={prod.imgUrl} alt={""} className={registeredProdStyle.img} />
         </div>
         <div className={registeredProdStyle.name}>{prod.name}</div>
         <div className={registeredProdStyle.price}>
-          {(1000).toLocaleString()}
+          {prod.price.toLocaleString()}円
         </div>
       </div>
     </Fragment>

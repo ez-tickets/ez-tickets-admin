@@ -1,6 +1,5 @@
 import ConfirmModal from "@/admin/screen/modal/confirmModal/ConfirmModal.tsx";
 import { useProductModalStateStore } from "@/admin/store/ModalStateStore.ts";
-import { addProductToCategory } from "@/cmds/categories.ts";
 import { type RegisterProduct, registerProduct } from "@/cmds/products.ts";
 import { confirmAction } from "@/mockData.ts";
 import ExecuteButton from "@/parts/ExecuteButton.tsx";
@@ -16,12 +15,13 @@ type ProductActionButtonProps = {
   name: string;
   desc: string;
   price: number;
-  category: string;
+  categoryId: string;
   imgPath: string;
   setName: (name: string) => void;
   setDesc: (desc: string) => void;
   setPrice: (price: number) => void;
   setCategory: (category: string) => void;
+  setCategoryId: (categoryId: string) => void;
   setImgPath: (path: string) => void;
   setImage: (image: string) => void;
 };
@@ -32,12 +32,13 @@ function ProductActionButton({
   name,
   desc,
   price,
-  category,
+  categoryId,
   imgPath,
   setName,
   setDesc,
   setPrice,
   setCategory,
+  setCategoryId,
   setImgPath,
   setImage,
 }: ProductActionButtonProps) {
@@ -46,11 +47,12 @@ function ProductActionButton({
 
   const resetHandler = () => {
     setName("");
-    setDesc("");
-    setPrice(0);
+    categoryID ? setCategoryId(categoryID) : setCategoryId("");
     categoryName ? setCategory(categoryName) : setCategory("");
     setImgPath("");
     setImage("");
+    setPrice(0);
+    setDesc("");
   };
 
   const openModalHandler = () => {
@@ -62,18 +64,17 @@ function ProductActionButton({
   };
 
   const handler = async () => {
-    if (category !== "") {
+    if (categoryId !== "") {
       await registerProductToCategoryHandler.mutateAsync({
         name: name,
-        category: category,
         desc: desc,
         price: price,
         path: imgPath,
+        category: categoryId,
       });
     } else {
       await registerProductHandler.mutateAsync({
         name: name,
-        category: category,
         desc: desc,
         price: price,
         path: imgPath,
@@ -83,11 +84,9 @@ function ProductActionButton({
 
   const client = useQueryClient();
   const registerProductToCategoryHandler = useMutation({
-    mutationFn: async (create: RegisterProduct) => {
-      //todo: 商品全体とカテゴリーの中に商品登録するapi
-      await registerProduct(create);
+    mutationFn: async (register: RegisterProduct) => {
+      await registerProduct(register);
     },
-
     onSuccess: async (_, variables) => {
       resetHandler();
       changeRegisterModalFlag(false);
@@ -99,17 +98,15 @@ function ProductActionButton({
         </Fragment>,
       );
     },
-
     onSettled: async () => {
       await client.invalidateQueries({
-        queryKey: ["products_in_category"],
+        queryKey: ["products_in_category", categoryId],
       });
     },
   });
 
   const registerProductHandler = useMutation({
     mutationFn: async (create: RegisterProduct) =>
-      //todo: 商品全体に登録するapi
       await registerProduct(create),
     onSuccess: async (_, variables) => {
       resetHandler();
@@ -124,7 +121,7 @@ function ProductActionButton({
     },
     onSettled: async () => {
       await client.invalidateQueries({
-        queryKey: ["products_in_category"],
+        queryKey: ["products_in_category", categoryId],
       });
     },
   });

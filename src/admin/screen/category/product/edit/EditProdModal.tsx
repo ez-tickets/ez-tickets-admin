@@ -7,22 +7,30 @@ import EditProdPrice from "@/admin/screen/category/product/edit/components/EditP
 import ManageEntryModal from "@/admin/screen/modal/manageEntryModal/ManageEntryModal.tsx";
 import { useProductModalStateStore } from "@/admin/store/ModalStateStore.ts";
 import { useEditProductStore } from "@/admin/store/RegisteredEditStore.ts";
-import { convertFileSrc } from "@tauri-apps/api/core";
 import { Fragment, useState } from "react";
 
-function EditProdModal() {
+type EditProdModalProps = {
+  categoryID?: string;
+  categoryName?: string;
+};
+
+function EditProdModal({ categoryID, categoryName }: EditProdModalProps) {
   const { editProduct } = useEditProductStore();
   const { editModalFlag, changeEditModalFlag } = useProductModalStateStore();
+
   if (!editProduct) throw new Error("product not found.");
 
   const [name, setName] = useState<string>(editProduct.name);
-  const [imgPath, setImgPath] = useState<string>(
-    `http://100.77.238.23:3650/images/${editProduct.id}`,
+  const [category, setCategory] = useState<string>(
+    categoryName ? categoryName : "",
   );
-  const [image, setImage] = useState<string>(convertFileSrc(imgPath));
+  const [categoryId, setCategoryId] = useState<string>(
+    categoryID ? categoryID : "",
+  );
+  const [imgPath, setImgPath] = useState<string>(editProduct.imgUrl);
+  const [image, setImage] = useState<string>(editProduct.imgUrl);
   const [price, setPrice] = useState<number>(editProduct.price);
   const [desc, setDesc] = useState<string>(editProduct.desc);
-  const [category, setCategory] = useState<string>(editProduct.category);
 
   return (
     <ManageEntryModal
@@ -32,7 +40,11 @@ function EditProdModal() {
       parts={
         <Fragment>
           <EditCatalogName name={name} setName={setName} />
-          <EditProdCategory category={category} setCategory={setCategory} />
+          <EditProdCategory
+            category={category}
+            setCategory={setCategory}
+            setCategoryId={setCategoryId}
+          />
           <EditProdImg
             imgPath={imgPath}
             setImgPath={setImgPath}
@@ -43,16 +55,21 @@ function EditProdModal() {
           <EditProdDesc desc={desc} setDesc={setDesc} />
 
           <EditProdActionButton
+            categoryID={categoryID}
+            categoryName={categoryName}
             editProduct={editProduct}
             name={name}
             desc={desc}
             price={price}
             imgPath={imgPath}
+            categoryId={categoryId}
             setName={setName}
             setDesc={setDesc}
             setPrice={setPrice}
             setImgPath={setImgPath}
             setImage={setImage}
+            setCategory={setCategory}
+            setCategoryId={setCategoryId}
           />
         </Fragment>
       }
