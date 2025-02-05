@@ -41,7 +41,7 @@ function RegisteredProds({ categoryID }: RegisteredProdsProps) {
     select: (products) => {
       return products.map((product): RegisteredProdsInImgState => ({
         ...product,
-        imgUrl: `http://100.77.238.23:3650/images/${product.id}?t=${new Date().getTime()}`,
+        imgUrl: `http://100.77.238.23:3650/images/${product.id}?_t=${new Date().getTime()}`,
       }))
     }
   });
