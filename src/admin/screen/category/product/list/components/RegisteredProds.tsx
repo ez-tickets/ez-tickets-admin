@@ -35,15 +35,21 @@ export type RegisteredProdsInImgState = {
 function RegisteredProds({ categoryID }: RegisteredProdsProps) {
   const sensors = useSensors(useSensor(PointerSensor));
 
-  const { data: products, isLoading, refetch } = useQuery({
+  const {
+    data: products,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["products_in_category", categoryID],
     queryFn: () => fetchProductsInCategory(categoryID),
     select: (products) => {
-      return products.map((product): RegisteredProdsInImgState => ({
-        ...product,
-        imgUrl: `http://100.77.238.23:3650/images/${product.id}?_t=${new Date().getTime()}`,
-      }))
-    }
+      return products.map(
+        (product): RegisteredProdsInImgState => ({
+          ...product,
+          imgUrl: `http://100.77.238.23:3650/images/${product.id}?_t=${new Date().getTime()}`,
+        }),
+      );
+    },
   });
 
   if (isLoading) return <div>Loading...</div>;
