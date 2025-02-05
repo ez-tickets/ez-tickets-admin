@@ -18,7 +18,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { useQuery } from "@tanstack/react-query";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 
 type RegisteredProdsProps = {
   categoryID: string;
@@ -34,18 +34,16 @@ export type RegisteredProdsInImgState = {
 
 function RegisteredProds({ categoryID }: RegisteredProdsProps) {
   const sensors = useSensors(useSensor(PointerSensor));
-  const [products, setProducts] = useState<RegisteredProdsInImgState[]>([]);
 
-  const { isLoading, refetch } = useQuery({
+  const { data: products, isLoading, refetch } = useQuery({
     queryKey: ["products_in_category", categoryID],
-    queryFn: async () => {
-      const products = await fetchProductsInCategory(categoryID);
-      const imgInProducts = products.map((product) => ({
+    queryFn: () => fetchProductsInCategory(categoryID),
+    select: (products) => {
+      return products.map((product): RegisteredProdsInImgState => ({
         ...product,
         imgUrl: `http://100.77.238.23:3650/images/${product.id}?t=${new Date().getTime()}`,
-      }));
-      setProducts(imgInProducts);
-    },
+      }))
+    }
   });
 
   if (isLoading) return <div>Loading...</div>;
